@@ -1,1 +1,0 @@
-{"ast":null,"code":"export default ((req, res) => {\n  res.status(200).json({\n    quote: 'Quote.',\n    author: 'Author'\n  });\n});","map":null,"metadata":{},"sourceType":"module"}
