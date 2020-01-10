@@ -1,6 +1,10 @@
+import Button from 'react-bootstrap/Button';
+
 const Index = () => (
 	<div>
-		<p>Hello, world!</p>
+		<Button>
+			<p>Hello, world!</p>
+		</Button>
 	</div>
 );
 
