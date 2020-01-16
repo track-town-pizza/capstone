@@ -24,3 +24,17 @@ Install the project's npm packages using
 then specifically install the next npm package to ensure the server commands will run:
 
 `npm install next`
+
+## Usage
+
+To run the web server and start the application in a development environment, run
+
+`npm run dev`
+
+If you wish to run the application in a production environment, build the application with
+
+`npm run build`
+
+then start the application with
+
+`npm run start`
