@@ -3,12 +3,14 @@ import React from "react"
 const NavBar = props => (
 	<div>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossOrigin="anonymous"></link>
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet"></link>
+
 		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-		
-		<nav className="navbar navbar-expand-lg navbar-green">
-			<a href="#" className="navbar-brand"><img src="tracktownlogo2.png" alt="Track Town Pizza" width="50%" /></a>
+
+		<nav className="navbar navbar-expand-lg navbar-green fixed-top">
+			<a href="#" id="navbar-logo"><img src="tracktownlogo2.png" alt="Track Town Pizza" width="350px" /></a>
 			<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-expanded="false" aria-label="Toggle navigation">
 				<span className="navbar-toggler-icon"></span>
 			</button>
@@ -48,15 +50,23 @@ const NavBar = props => (
 		<style jsx>{`
 			.link {
 				text-transform: uppercase;
-				text-decoration: none;
 				font-family: 'Open Sans Condensed', sans-serif;
-				padding: 10px;
+				font-size: 20px;
+				padding: 0 20px;
 				color: #ffec65;
 			}
 
 			.navbar-green {
 				background-color: #007030;
 				height: 60px;
+			}
+
+			#navbar-logo {
+				margin-right: 15%;
+			}
+
+			.navbar-toggler-icon {
+				background-image: url(data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000…p='round' stroke-miterlimit='10' d='M47h22M4 15h22M423h22'/%3e%3c/svg%3e);
 			}
 		`}</style>
 	</div>
