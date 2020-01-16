@@ -21,7 +21,7 @@ Install the project's npm packages using
 
 `npm install`
 
-then specifically install the next npm package to ensure the server commands will run:
+then specifically install the next npm package to ensure the server commands will run with
 
 `npm install next`
 
