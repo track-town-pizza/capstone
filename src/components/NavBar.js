@@ -10,10 +10,12 @@ const NavBar = props => (
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 		<nav className="navbar navbar-expand-lg navbar-green fixed-top">
-			<a href="#" id="navbar-logo"><img src="tracktownlogo2.png" alt="Track Town Pizza" width="350px" /></a>
-			<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-expanded="false" aria-label="Toggle navigation">
-				<span className="navbar-toggler-icon"></span>
-			</button>
+            <div class="d-inline-flex bd-highlight">
+                <a href="#" id="navbar-logo"><img src="tracktownlogo2.png" alt="Track Town Pizza" width="350px" /></a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+            </div>
 
 			<div className="collapse navbar-collapse" id="navbar-content">
 				<ul className="navbar-nav mr-auto">
