@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import Layout from "../components/Layout"
+=======
+import React from "react"
+>>>>>>> 418d8a7eb9fa22ca8cc3a78779410ffaf3c261c7
 
 /*
 Props used in this page:
