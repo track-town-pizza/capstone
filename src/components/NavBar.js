@@ -1,7 +1,13 @@
+import Link from "next/link"
+
 const NavBar = props => (
 	<nav className="navbar navbar-expand-lg navbar-green fixed-top">
 		<div className="d-inline-flex bd-highlight">
-			<a href="#" id="navbar-logo"><img src="tracktownlogo2.png" alt="Track Town Pizza" width="350px" /></a>
+			<Link href="/">
+				<a id="navbar-logo">
+					<img src="tracktownlogo2.png" alt="Track Town Pizza" width="350px" />
+				</a>
+			</Link>
 			<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-expanded="false" aria-label="Toggle navigation">
 				<span className="navbar-toggler-icon"></span>
 			</button>
@@ -10,30 +16,49 @@ const NavBar = props => (
 		<div className="collapse navbar-collapse" id="navbar-content">
 			<ul className="navbar-nav mr-auto">
 				<li className="nav-item">
-					<a href="#" className="link">Home</a>
+					<Link href="/">
+						<a className="link">Home</a>
+					</Link>
 				</li>
 
 				<li className="nav-item">
-					<a href="/menu" className="link">Menu</a>
+					<Link href="/menu">
+						<a className="link">Menu</a>
+					</Link>
 				</li>
 
 				<li className="nav-item">
-					<a href="/contact" className="link">Contact</a>
+					<Link href="/contact">
+						<a className="link">Contact</a>
+					</Link>
 				</li>
 
 				<li className="nav-item dropdown">
-					<a href="#" className="link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Community
-					</a>
+					<Link href="#">
+						<a className="link dropdown-toggle"
+							id="navbarDropdown"
+							role="button"
+							data-toggle="dropdown"
+							aria-haspopup="true"
+							aria-expanded="false">
+								Community
+						</a>
+					</Link>
 
 					<div className="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a href="/blog" className="dropdown-item">Blog</a>
-						<a href="/events" className="dropdown-item">Events</a>
+						<Link href="/blog">
+							<a className="dropdown-item">Blog</a>
+						</Link>
+						<Link href="/events">
+							<a className="dropdown-item">Events</a>
+						</Link>
 					</div>
 				</li>
 
 				<li className="nav-item">
-					<a href="/about" className="link">About</a>
+					<Link href="/about">
+						<a className="link">About</a>
+					</Link>
 				</li>
 			</ul>
 		</div>
