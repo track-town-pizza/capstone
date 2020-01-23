@@ -1,8 +1,5 @@
-import React from "react"
-
-const Footer = () => {
-    return (
-        <div>
+const Footer = () => (
+    <div>
         <footer className="page-footer bg-dark text-white d-flex flex-wrap justify-content-center">
 
             <p className="text-white mr-3 my-2">© Track Town Pizza</p>
@@ -24,8 +21,7 @@ const Footer = () => {
             }
         `}              
         </style>
-        </div>
-    )
-}
+    </div>
+)
 
 export default Footer
