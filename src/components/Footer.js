@@ -2,7 +2,7 @@ import Link from "next/link"
 
 const Footer = () => (
     <div>
-        <footer className="page-footer bg-dark text-white d-flex flex-wrap justify-content-center">
+        <footer className="mt-2 page-footer bg-dark text-white d-flex flex-wrap justify-content-center">
 
             <p className="text-white mr-3 my-2">© Track Town Pizza</p>
             
