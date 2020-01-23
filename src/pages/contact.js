@@ -1,4 +1,5 @@
 import Layout from "../components/Layout"
+import GoogleMaps from "../components/GoogleMaps"
 
 /*
 Props used in this page:
@@ -31,9 +32,7 @@ const Contact = props => (
 						<p>{props.phone}</p>
 					}
 				</div>
-				<img src="tracktownpizza_map.png" 
-					alt="Track Town Pizza Google Map"
-					className="mw-100 border border-secondary rounded" />
+				<GoogleMaps />
 			</div>
 		</div>
 		
