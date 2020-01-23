@@ -1,15 +1,36 @@
+import Link from "next/link"
+
 const Footer = () => (
     <div>
-        <footer className="page-footer bg-dark text-white d-flex flex-wrap justify-content-center">
+        <footer className="mt-2 page-footer bg-dark text-white d-flex flex-wrap justify-content-center">
 
             <p className="text-white mr-3 my-2">© Track Town Pizza</p>
-            <a href="#" className="text-white mr-3 my-2">Menu</a>
-            <a href="#" className="text-white mr-3 my-2">Contact</a>
-            <a href="#" className="text-white mr-3 my-2">Community</a>
-            <a href="#" className="text-white mr-3 my-2">About</a>
-            <a href="#" className="text-white mr-3 my-2">
-                <i className="fab fa-facebook-square"></i>
-            </a>
+            
+            <Link href="/menu">
+                <a className="text-white mr-3 my-2">Menu</a>
+            </Link>
+
+            <Link href="/contact">
+                <a className="text-white mr-3 my-2">Contact</a>
+            </Link>
+
+            <Link href="/events">
+                <a className="text-white mr-3 my-2">Events</a>
+            </Link>
+
+            <Link href="/blog">
+                <a className="text-white mr-3 my-2">Blog</a>
+            </Link>
+
+            <Link href="/about">
+                <a href="#" className="text-white mr-3 my-2">About</a>
+            </Link>
+
+            <Link href="#">
+                <a href="#" className="text-white mr-3 my-2">
+                    <i className="fab fa-facebook-square"></i>
+                </a>
+            </Link>
 
         </footer>
 
