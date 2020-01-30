@@ -17,7 +17,7 @@ const Layout = props => (
 		<main className="w-50 mx-auto overflow-auto main">
 			{props.children}
 		</main>
-		<Footer />
+		{/* <Footer /> */}
 
 		<style jsx>{`
 			.main {
