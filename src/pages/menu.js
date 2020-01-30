@@ -1,25 +1,44 @@
 import Layout from "../components/Layout"
-import menuInfo from "../../data/menuCategories.json"
-import MenuCategory from "../components/MenuCategory"
 import React from "react"
 
 const Menu = () => {
-    const menuInfoCom = menuInfo.map(menuInfo => (<MenuCategory menuInfo={menuInfo} />))
-
+  
     return (
         <Layout>
-            <h1 className="text-center mb-4">Track Town Menu</h1>
-            <div className="menu-container">
-                {menuInfoCom}
-            </div>
+            <h1 className="text-center">Track Town Menu</h1>
+            <div className="menu-container"> {/* This will be a flex box*/}
+                <div className="menu-item">
+                    <img src="./photos/pepperoni.jpg" alt="Track Town Pizza" />
+                    <div className="green-box">
+                        <p className="p-2 m-0">Pizza</p>
+                    </div>
+                </div>
 
-            <style jsx>{`
-                .menu-container {
-                    display: flex;
-                    flex-flow: row wrap;
-                    justify-content: center;
-                }
-            `}</style>
+                <style jsx>{`
+                    .menu-container {
+                        position: relative;
+                        text-align: center;
+                        width: 40%;
+                    }
+                    img {
+                        width: 100%;
+                        border-radius: 10px;
+                    }
+                    .green-box {
+                        position: absolute;
+                        bottom: 0px;
+                        background: rgb(0, 112, 48, 0.8);
+                        width: 50%;
+                        color: #FFFFFF;
+                        text-align: "center";
+                        border-radius: 10px;
+                    }
+                    p {
+                        font-size:1.5vw;
+                    }
+                `}</style>
+
+            </div>
 
         </Layout>
     )
