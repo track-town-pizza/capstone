@@ -1,9 +1,13 @@
 import Layout from "../components/Layout"
+import Link from "next/link"
 
 const About = () => {
     return (
         <Layout>
             <h1 className="text-center">About Track Town Pizza</h1>
+            <div className="h-50 mx-auto">
+                <img src="./photos/a1.JPG" className="img-fluid" alt="Track Town Pizza" />
+            </div>
             <div className="mx-auto">
                 <p>
                     Located on Franklin Boulevard across from the University of Oregon, Track Town Pizza opened its doors in 1977. The 100-seat restaurant is adorned with photos of the university and many collegiate and Olympic athletes. Many athletes, families, and students have enjoyed eating at the classic pizzeria. 
@@ -18,8 +22,11 @@ const About = () => {
                     Besides making great food, Track Town Pizza supports the Eugene and Springfield community. Every year, thousands of dollars are raised through fundraising programs. Track Town believes in supporting their local community.
                 </p>
             </div>
-            <div className="h-50 mx-auto">
-                <img src="./photos/a1.JPG" className="img-fluid" alt="Track Town Pizza" />
+            <div>
+                <h3 className="text-center">Checkout the rest of Track Town USA</h3>
+                <Link href="./TrackTownUSAMap.pdf">
+                    <a href="./TrackTownUSAMap.pdf" className="text-center">Track Town USA Map</a>
+                </Link>
             </div>
         </Layout>
     )
