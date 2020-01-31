@@ -20,38 +20,8 @@ const Menu = () => {
                     justify-content: center;
                 }
             `}</style>
-            
+
         </Layout>
     )
 }
 export default Menu
-
-
-
-/* <a href="#" className="menu-item">
-                    <img src="./photos/Pepperoni.jpg" alt="Track Town Pizza" />
-                    <div className="green-box">
-                        <p className="p-2 m-0 text-center">Pizza</p>
-                    </div>
-                </a>
-
-                <a href="#" className="menu-item">
-                    <img src="./photos/AllSticks.jpg" alt="Track Town Pizza" />
-                    <div className="green-box">
-                        <p className="p-2 m-0 text-center">Sides</p>
-                    </div>
-                </a>
-
-                <a href="#" className="menu-item">
-                    <img src="./photos/AllSauce.jpg" alt="Track Town Pizza" />
-                    <div className="green-box">
-                        <p className="p-2 m-0 text-center">Sauces</p>
-                    </div>
-                </a>
-
-                <a href="#" className="menu-item">
-                    <img src="./photos/Mug.jpg" alt="Track Town Pizza" />
-                    <div className="green-box">
-                        <p className="p-2 m-0 text-center">Merchandise</p>
-                    </div>
-                </a> */
