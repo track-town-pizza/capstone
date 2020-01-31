@@ -20,7 +20,7 @@ const Menu = () => {
                     justify-content: center;
                 }
             `}</style>
-            
+
         </Layout>
     )
 }
