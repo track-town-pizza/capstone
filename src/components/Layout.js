@@ -25,7 +25,6 @@ const Layout = props => (
 			.main {
 				margin-top: 80px;
 				font-family: "Oswald";
-				font-weight: 500;
 			}
 		`}</style>
 	</div>
