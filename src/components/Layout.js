@@ -1,5 +1,7 @@
 import NavBar from "./NavBar"
 import Footer from "./Footer"
+// import { getBsProps } from "react-bootstrap/lib/utils/bootstrapUtils"
+import React from "react"
 
 const Layout = props => (
 	<div>
@@ -14,7 +16,7 @@ const Layout = props => (
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossOrigin="anonymous"></script>
 
 		<NavBar />
-		<main className="w-50 mx-auto overflow-auto main">
+		<main className="w-75 mx-auto overflow-auto main">
 			{props.children}
 		</main>
 		{/* <Footer /> */}
@@ -23,7 +25,6 @@ const Layout = props => (
 			.main {
 				margin-top: 80px;
 				font-family: "Oswald";
-				font-weight: 500;
 			}
 		`}</style>
 	</div>
