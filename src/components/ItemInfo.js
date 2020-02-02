@@ -44,6 +44,7 @@ function ItemPriceDescription (description, price) {
 }
 
 const ItemInfo = props => {
+    console.log(props.itemInformation)
     const ItemInfoPriceDescriptionComponents = props.itemInformation
     .map(itemInfo => 
         ItemPriceDescription(itemInfo.description, itemInfo.price)
@@ -83,6 +84,7 @@ const ItemInfo = props => {
                     color: #000000;
                     display: table;
                     width: 100%;
+                    height: 35%;
                 }
                 @media only screen and (max-width: 600px) {
                     .description-box {
