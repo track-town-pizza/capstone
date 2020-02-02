@@ -40,6 +40,7 @@ function ItemPriceDescription (description, price) {
             `}</style>
         </div>
     )
+<<<<<<< HEAD
     
 }
 
@@ -75,11 +76,33 @@ const ItemInfo = props => {
     return (
         <div className="description-box">
             {ItemInfoPriceDescriptionComponents}
+=======
+}
+
+const ItemInfo = props => {
+    // console.log(props.itemInformation)
+    const ItemInfoPriceDescriptionComponents = props.itemInformation
+                                                .map(itemInfo => 
+                                                    ItemPriceDescription(itemInfo.description, itemInfo.price)
+                                                )
+    return (
+        <div className="description-box">
+            {ItemInfoPriceDescriptionComponents}
+            {/* <div className="item-price-description">
+                <p className="item-description">Cheesy Garlic Sticks</p>
+                <p className="item-price">$5.50</p>
+            </div>
+            <div className="item-price-description">
+                <p className="item-description">Garlic Sticks</p>
+                <p className="item-price">$5.00</p>
+            </div> */}
+>>>>>>> rough version of items is working with breaking it up into components
             <style jsx>{`
                 .description-box {
                     background: #FFEC65;
                     border-radius: 0px 0px 10px 10px;
                     overflow: auto;
+<<<<<<< HEAD
                     color: #000000;
                     display: table;
                     width: 100%;
@@ -89,10 +112,18 @@ const ItemInfo = props => {
                     .description-box {
                         height: auto;
                     }
+=======
+                    color: #000000
+>>>>>>> rough version of items is working with breaking it up into components
                 }
             `}</style>
         </div>
     )
+<<<<<<< HEAD
     
 }
+=======
+}
+
+>>>>>>> rough version of items is working with breaking it up into components
 export default ItemInfo
