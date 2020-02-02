@@ -2,8 +2,6 @@ import React from "react"
 import ItemInfo from "./ItemInfo"
 
 const MenuItem = props => {
-    // console.log(typeof(props))
-    // const ItemInfoComponents = props.sidesInfo.map(sideInfo => (<ItemInfo sideInfo={sideInfo.sideInformation}/>))
     return (
         <a href="#" className="side-item">
             <img src={props.sidesInfo.imgLink} alt="Track Town Pizza"/>
