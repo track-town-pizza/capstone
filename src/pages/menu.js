@@ -4,7 +4,7 @@ import MenuCategory from "../components/MenuCategory"
 import React from "react"
 
 const Menu = () => {
-    const menuInfoCom = menuInfo.map(menuItem => (<MenuCategory menuInfo={menuItem} />))
+    const menuInfoCom = menuInfo.map(menuInfo => (<MenuCategory menuInfo={menuInfo} />))
 
     return (
         <Layout>
