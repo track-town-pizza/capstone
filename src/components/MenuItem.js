@@ -2,6 +2,7 @@ import React from "react"
 import ItemInfo from "./ItemInfo"
 
 const MenuItem = props => {
+    // console.log(props)
     return (
         <div className="side-item">
             <img src={props.itemInfo.imgLink} alt="Track Town Pizza"/>

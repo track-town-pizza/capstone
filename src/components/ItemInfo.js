@@ -40,6 +40,7 @@ function ItemPriceDescription (description, price) {
             `}</style>
         </div>
     )
+    
 }
 
 const ItemInfo = props => {
