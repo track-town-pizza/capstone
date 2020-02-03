@@ -1,0 +1,57 @@
+[
+    {
+        "key":"ranch",
+        "information": [{"description": "Ranch", "price": "none"}],
+        "imgLink": "./photos/Sauce/Ranch.jpg"
+    },
+    {
+        "key":"bbq",
+        "information": [{"description": "BBQ", "price": "none"}],
+        "imgLink": "./photos/Sauce/BBQ.jpg"
+    },
+    {
+        "key":"hotSauce",
+        "information": [{"description": "Hot Sauce", "price": "none"}],
+        "imgLink": "./photos/Sauce/HotSauce.jpg"
+    },
+    {
+        "key":"blueCheese",
+        "information": [{"description": "Blue Cheese", "price": "none"}],
+        "imgLink": "./photos/Sauce/BlueCheese.jpg"
+    },
+    {
+        "key":"pesto",
+        "information": [{"description": "Pesto", "price": "none"}],
+        "imgLink":"./photos/Sauce/Pesto.jpg"
+    },
+    {
+        "key":"rpp",
+        "information": [{"description": "Roasted Red Pepper Pesto", "price": "none"}],
+        "imgLink": "./photos/Sauce/RPP.jpg"
+    },
+    {
+        "key":"marinara",
+        "information": [{"description": "Marinara", "price": "none"}],
+        "imgLink": "./photos/Sauce/Marinara.jpg"
+    },
+    {
+        "key":"tacoSauce",
+        "information": [{"description": "Sour Cream & Taco Sauce", "price": "none"}],
+        "imgLink": "./photos/Sauce/TacoSauce.jpg"
+    },
+    {
+        "key":"balsamic",
+        "information": [{"description": "Balsamic", "price": "none"}],
+        "imgLink": "./photos/Sauce/Balsamic.jpg"
+    },
+    {
+        "key":"creamyItalian",
+        "information": [{"description": "Creamy Italian", "price": "none"}],
+        "imgLink": "./photos/Sauce/CreamyItalian.jpg"
+    },
+    {
+        "key":"thousandIsland",
+        "information": [{"description": "Thousand Island", "price": "none"}],
+        "imgLink": "./photos/Sauce/ThousandIsland.jpg"
+    }
+]
