@@ -7,7 +7,6 @@
         "imgLink": "./photos/Pizza/Pepperoni.jpg"
     },
     {
-<<<<<<< HEAD
         "key": "cheese",
         "information": [
             {"description": "Cheese","price": "none"}
@@ -15,8 +14,6 @@
         "imgLink": "./photos/Pizza/Cheese.jpg"
     },
     {
-=======
->>>>>>> added photos of pizzas and have pizza elements for pizza page
         "key": "bbqChicken",
         "information": [
             {"description": "BBQ Chicken","price": "none"}
@@ -162,8 +159,6 @@
             {"description": "Triple Jump","price": "none"}
         ],
         "imgLink": "./photos/Pizza/TripleJump.jpg"
-<<<<<<< HEAD
-=======
     },
     {
         "key": "cheese",
@@ -171,6 +166,5 @@
             {"description": "Cheese","price": "none"}
         ],
         "imgLink": "./photos/Pizza/Cheese.jpg"
->>>>>>> added photos of pizzas and have pizza elements for pizza page
     }
 ]
