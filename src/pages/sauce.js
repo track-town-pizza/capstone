@@ -1,19 +1,19 @@
 import Layout from "../components/Layout"
 import React from "react"
 import MenuItems from "../components/MenuItem"
-import sidesInfo from "../../data/sides.json"
+import saucesInfo from "../../data/sauces.json"
 
-const Sides = () => {
-    const MenuItemsComponents = sidesInfo.map(sideInfo => (<MenuItems itemInfo={sideInfo}/>))
+const Sauces = () => {
+    const MenuItemsComponents = saucesInfo.map(sauceInfo => (<MenuItems itemInfo={sauceInfo}/>))
     return (
         <Layout>
-            <h1 className="text-center mb-4">Side Orders</h1>
-            <div className="sides-container">
+            <h1 className="text-center mb-4">Sauces</h1>
+            <div className="sauces-container">
                 {MenuItemsComponents}
             </div>
 
             <style jsx>{`
-                .sides-container {
+                .sauces-container {
                     display: flex;
                     flex-flow: row wrap;
                     justify-content: center;
@@ -23,4 +23,4 @@ const Sides = () => {
         </Layout>
     )
 }
-export default Sides
+export default Sauces

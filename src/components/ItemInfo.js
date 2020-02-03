@@ -1,6 +1,22 @@
 import React from "react"
 
 function ItemPriceDescription (description, price) {
+    if(price === "none") {
+        return (
+            <div className="item-price-description">
+                <p className="item-description">{description}</p>
+                <style jsx>{`
+                    .item-price-description {
+                        overflow: auto;
+                    }
+                    .item-description {
+                        text-align: center;
+                        margin-top: .5rem;
+                    }
+                `}</style>
+            </div>
+        )
+    }
     return (
         <div className="item-price-description">
             <p className="item-description">{description}</p>
@@ -24,10 +40,11 @@ function ItemPriceDescription (description, price) {
             `}</style>
         </div>
     )
+    
 }
 
 const ItemInfo = props => {
-    console.log(props.itemInformation)
+    // console.log(props.itemInformation)
     const ItemInfoPriceDescriptionComponents = props.itemInformation
     .map(itemInfo => 
         ItemPriceDescription(itemInfo.description, itemInfo.price)
