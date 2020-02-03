@@ -11,7 +11,7 @@ function ItemPriceDescription (description, price) {
                     }
                     .item-description {
                         text-align: center;
-                        margin-top: .75rem;
+                        margin-top: .5rem;
                     }
                 `}</style>
             </div>
@@ -44,7 +44,7 @@ function ItemPriceDescription (description, price) {
 }
 
 const ItemInfo = props => {
-    console.log(props.itemInformation)
+    // console.log(props.itemInformation)
     const ItemInfoPriceDescriptionComponents = props.itemInformation
     .map(itemInfo => 
         ItemPriceDescription(itemInfo.description, itemInfo.price)
