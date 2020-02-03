@@ -33,6 +33,10 @@ const Login = () => (
 			.w-40 {
 				width: 40%;
 			}
+			
+			.custom-border {
+				border-radius: 10px;
+			}
 
 			.page-title {
 				font-family: 'Oswald', sans-serif;
