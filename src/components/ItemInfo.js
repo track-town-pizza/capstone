@@ -44,7 +44,6 @@ function ItemPriceDescription (description, price) {
 }
 
 const ItemInfo = props => {
-    // console.log(props.itemInformation)
     const ItemInfoPriceDescriptionComponents = props.itemInformation
     .map(itemInfo => 
         ItemPriceDescription(itemInfo.description, itemInfo.price)
