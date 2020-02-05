@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Link from "next/link"
 import Layout from "../components/Layout"
 import AccountFormHeader from "../components/account/AccountFormHeader"
@@ -34,10 +32,13 @@ const Login = () => (
 		<style jsx>{`
 			.w-40 {
 				width: 40%;
+<<<<<<< HEAD
 			}
 			
 			.custom-border {
 				border-radius: 10px;
+=======
+>>>>>>> Refactor Login & Register pages to share components
 			}
 
 			.page-title {
