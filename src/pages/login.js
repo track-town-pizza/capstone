@@ -1,14 +1,13 @@
 import Link from "next/link"
 import Layout from "../components/Layout"
+import AccountFormHeader from "../components/AccountFormHeader"
+import AccountForm from "../components/AccountForm"
 
 const Login = () => (
 	<Layout>
-		<div className="mx-auto mt-3 w-50">
-			<span className="text-center dark-green-text">
-				<h2 className="text-uppercase page-title">Login</h2>
-				<p>Sign in to edit blog posts, the menu, and more.</p>
-			</span>
-			<form className="border custom-border px-3 pt-3">
+		<div className="mx-auto mt-3 w-40">
+			<AccountFormHeader title="Login" subtitle="Sign in to edit blog posts, the menu, and more." />
+			<AccountForm>
 				<div className="form-group">
 					<label for="email-input">Email</label>
 					<input type="email" className="form-control" id="email-input" aria-describedby="emailHelp" placeholder="Email" />
@@ -20,7 +19,7 @@ const Login = () => (
 				<div className="form-group">
 					<button type="submit" className="btn btn-green w-100">Sign in</button>
 				</div>
-			</form>
+			</AccountForm>
 		</div>
 		<span className="mx-auto mt-2 w-50 d-flex justify-content-between text-center dark-green-text">
 			<Link href="#">
@@ -31,8 +30,8 @@ const Login = () => (
 			</Link>
 		</span>
 		<style jsx>{`
-			.custom-border {
-				border-radius: 10px;
+			.w-40 {
+				width: 40%;
 			}
 
 			.page-title {
