@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-
-=======
->>>>>>> Create Login page UI view
 import Link from "next/link"
 import Layout from "../components/Layout"
 
