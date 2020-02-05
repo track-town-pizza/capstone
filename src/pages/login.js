@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Link from "next/link"
 import Layout from "../components/Layout"
 
@@ -23,7 +25,7 @@ const Login = () => (
 			</form>
 		</div>
 		<span className="mx-auto mt-2 w-50 d-flex justify-content-between text-center dark-green-text">
-			<Link href="/forgot-password">
+			<Link href="#">
 				<a>Forgot your password?</a>
 			</Link>
 			<Link href="/register">
