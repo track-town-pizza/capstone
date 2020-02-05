@@ -1,13 +1,12 @@
 import Layout from "../components/Layout"
+import AccountFormHeader from "../components/AccountFormHeader"
+import AccountForm from "../components/AccountForm"
 
 const Register = () => (
 	<Layout>
 		<div className="mx-auto mt-3 w-50">
-			<span className="text-center dark-green-text">
-				<h2 className="text-uppercase page-title">Register</h2>
-				<p>Sign up to edit blog posts, the menu, and more.</p>
-			</span>
-			<form className="border custom-border px-3 pt-3">
+			<AccountFormHeader title="Register" subtitle="Sign up to edit blog posts, the menu, and more." />
+			<AccountForm>
 				<div className="form-group">
 					<label for="email-input">Email</label>
 					<input type="email" className="form-control" id="email-input" aria-describedby="emailHelp" placeholder="Email" />
@@ -27,7 +26,7 @@ const Register = () => (
 				<div className="form-group">
 					<button type="submit" className="btn btn-green w-100 mt-2 mb-1">Register</button>
 				</div>
-			</form>
+			</AccountForm>
 		</div>
 		<style jsx>{`
 			.custom-border {
