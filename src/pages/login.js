@@ -21,7 +21,7 @@ const Login = () => (
 				</div>
 			</AccountForm>
 		</div>
-		<span className="mx-auto mt-2 w-50 d-flex justify-content-between text-center dark-green-text">
+		<span className="mx-auto mt-2 w-40 d-flex justify-content-between text-center dark-green-text">
 			<Link href="#">
 				<a>Forgot your password?</a>
 			</Link>
