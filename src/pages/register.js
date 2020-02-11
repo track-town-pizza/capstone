@@ -1,6 +1,6 @@
 import Layout from "../components/Layout"
-import AccountFormHeader from "../components/AccountFormHeader"
-import AccountForm from "../components/AccountForm"
+import AccountFormHeader from "../components/account/AccountFormHeader"
+import AccountForm from "../components/account/AccountForm"
 
 const Register = () => (
 	<Layout>
