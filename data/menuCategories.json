@@ -1,0 +1,38 @@
+[
+    {
+        "key": "1",
+        "imgLink": "./photos/MenuItems/Pepperoni.jpg",
+        "item": "Pizza",
+        "linkToPage": "/pizza"
+    },
+    {
+        "key": "2",
+        "imgLink": "./photos/MenuItems/AllSticks.jpg",
+        "item": "Side Orders" ,
+        "linkToPage": "/sides"  
+    },
+    {
+        "key": "3",
+        "imgLink": "./photos/MenuItems/Beverages.jpg",
+        "item": "Beverages",
+        "linkToPage": "/beverages"
+    },
+    {
+        "key": "4",
+        "imgLink": "./photos/MenuItems/Buffet.jpg",
+        "item": "Lunch Buffet",
+        "linkToPage": "/buffet"
+    },
+    {
+        "key": "5",
+        "imgLink": "./photos/MenuItems/AllSauce.jpg",
+        "item": "Side Sauces",
+        "linkToPage": "/sauce"
+    },
+    {
+        "key": "6",
+        "imgLink": "./photos/MenuItems/Mug.jpg",
+        "item": "Merchandise",
+        "linkToPage": "/merchandise"
+    }
+]
