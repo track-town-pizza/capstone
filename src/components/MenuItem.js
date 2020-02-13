@@ -3,9 +3,9 @@ import ItemInfo from "./ItemInfo"
 
 const MenuItem = props => {
     return (
-        <a href="#" className="side-item">
+        <div className="side-item">
             <img src={props.itemInfo.imgLink} alt="Track Town Pizza"/>
-            <ItemInfo itemInformation={props.itemInfo.information}/>
+            <ItemInfo itemInformation={props.itemInfo.information} page={props.page}/>
             <style jsx>{`
                     .side-item {
                         min-width: 200px;
@@ -14,7 +14,6 @@ const MenuItem = props => {
                         margin-bottom:5%;
                         margin-right: 2.5%;
                         margin-left: 2.5%;
-                        text-decoration: none;
                     }
                     img {
                         width: 100%;
@@ -26,7 +25,7 @@ const MenuItem = props => {
                         }
                     }
                 `}</style>
-         </a>
+         </div>
     )
 }
 export default MenuItem

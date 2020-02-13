@@ -11,7 +11,7 @@ function ItemPriceDescription (description, price) {
                     }
                     .item-description {
                         text-align: center;
-                        margin-top: .5rem;
+                        margin-top: .75rem;
                     }
                 `}</style>
             </div>
@@ -48,6 +48,30 @@ const ItemInfo = props => {
     .map(itemInfo => 
         ItemPriceDescription(itemInfo.description, itemInfo.price)
     )
+    if(props.page === "sides") {
+        return (
+            <div className="description-box">
+                {ItemInfoPriceDescriptionComponents}
+                <style jsx>{`
+                    .description-box {
+                        background: #FFEC65;
+                        border-radius: 0px 0px 10px 10px;
+                        overflow: auto;
+                        color: #000000;
+                        display: table;
+                        width: 100%;
+                        height: 35%;
+                    }
+                    @media only screen and (max-width: 600px) {
+                        .description-box {
+                            height: auto;
+                        }
+                    }
+                `}</style>
+            </div>
+        )
+    }
+
     return (
         <div className="description-box">
             {ItemInfoPriceDescriptionComponents}
@@ -59,7 +83,6 @@ const ItemInfo = props => {
                     color: #000000;
                     display: table;
                     width: 100%;
-                    height: 35%;
                 }
                 @media only screen and (max-width: 600px) {
                     .description-box {
@@ -69,5 +92,6 @@ const ItemInfo = props => {
             `}</style>
         </div>
     )
+    
 }
 export default ItemInfo

@@ -4,14 +4,13 @@ import MenuItems from "../components/MenuItem"
 import pizzasInfo from "../../data/pizzas.json"
 
 const Pizzas = () => {
-    const MenuItemsComponents = pizzasInfo.map(pizzaInfo => (<MenuItems itemInfo={pizzaInfo}/>))
+    const MenuItemsComponents = pizzasInfo.map(pizzaInfo => (<MenuItems itemInfo={pizzaInfo} page="pizza"/>))
     return (
         <Layout>
             <div className="text-center">
                 <h1 className="text-center mb-4">Track Town Pizzas</h1>
                 <a href="#" className="build-pizza-link">
-                    <p className="text-decoration-none">Build Your Own</p>
-                    <img className="button-photo" src="./photos/Pizza/Cheese.jpg" alt="Track Town Pizza"/>
+                    <p className="text-center mt-3">Build Your Own</p>
                 </a>
                 <h3 className="text-center mb-4">Or Check Out Our Delicious Menu Pizzas</h3>
             </div>
@@ -38,11 +37,6 @@ const Pizzas = () => {
                     margin-left: auto;
                     margin-bottom: 1.5rem;
                     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
-                }
-                .button-photo {
-                    width: 50%;
-                    margin-bottom: .5rem;
-                    border-radius: 10px;
                 }
             `}</style>
 

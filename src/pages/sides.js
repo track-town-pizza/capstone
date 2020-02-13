@@ -4,7 +4,7 @@ import MenuItems from "../components/MenuItem"
 import sidesInfo from "../../data/sides.json"
 
 const Sides = () => {
-    const MenuItemsComponents = sidesInfo.map(sideInfo => (<MenuItems itemInfo={sideInfo}/>))
+    const MenuItemsComponents = sidesInfo.map(sideInfo => (<MenuItems itemInfo={sideInfo} page="sides"/>))
     return (
         <Layout>
             <h1 className="text-center mb-4">Side Orders</h1>

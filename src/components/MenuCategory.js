@@ -1,19 +1,31 @@
 import React from "react"
+import Link from "next/link"
 
 const MenuCategory = props => (
-    <a href="#" className="menu-item">
-        <img src={props.menuInfo.imgLink} alt="Track Town Pizza" />
-        <div className="green-box">
-            <p className="p-2 m-0 text-center">{props.menuInfo.item}</p>
-        </div>
+    <div className="outer-menu-element">
+        <Link href={props.menuInfo.linkToPage}>
+            <div className="menu-item">
+                <a>
+                    <img src={props.menuInfo.imgLink} alt="Track Town Pizza" />
+                    <div className="green-box">
+                        <p className="p-2 m-0 text-center">{props.menuInfo.item}</p>
+                    </div>
+                </a>
+            </div>
+        </Link>
         <style jsx>{`
-            .menu-item {
-                position: relative;
+            .outer-menu-element {
                 min-width: 200px;
                 width: 25%;
                 margin-bottom:5%;
                 margin-right: 2.5%;
                 margin-left: 2.5%;
+            }
+            .outer-menu-element:hover {
+                cursor: pointer;
+            }
+            .menu-item {
+                position: relative;
             }
             img {
                 width: 100%;
@@ -29,6 +41,6 @@ const MenuCategory = props => (
             }
         `}
         </style>
-    </a>
+    </div>
 )
 export default MenuCategory
