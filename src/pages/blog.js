@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Layout from "../components/Layout"
-import postData from "../../PostData.json"
+import postData from "../../data/PostData.json" // will be removed with backend implementation
 import SinglePost from "../components/SinglePost"
 
 const postRenderLimit = 3;
