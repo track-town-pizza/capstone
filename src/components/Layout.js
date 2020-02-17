@@ -9,6 +9,7 @@ const Layout = props => (
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossOrigin="anonymous"></link>
 		
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet"></link>
+		<link href="https://fonts.googleapis.com/css?family=Oswald:200&display=swap" rel="stylesheet"></link>
 		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300&display=swap" rel="stylesheet"></link>
 		<link href="https://fonts.googleapis.com/css?family=Oswald:200&display=swap" rel="stylesheet"></link>
 
