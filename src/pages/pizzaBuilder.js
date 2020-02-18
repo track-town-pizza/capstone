@@ -1,15 +1,17 @@
 import React from "react"
 import Layout from "../components/Layout"
 import Link from "next/link"
-import pizzaInfo from "../../data/pizzaInfo.json"
+import {sizes, crusts, cheeses, sauces, toppings} from "../../data/pizzaInfo.json"
 import FoodButtonDiv from "../components/FoodButtonDiv"
+import YellowToppingsBox from "../components/YellowToppingsBox"
 
 
 const pizzaBuilder = () => {
-    const sizeComponents = <FoodButtonDiv sizes={pizzaInfo.sizes} />
-    const crustComponents = <FoodButtonDiv crusts={pizzaInfo.crusts} />
-    const cheeseComponents = <FoodButtonDiv cheeses={pizzaInfo.cheeses} />
-    const sauceComponents = <FoodButtonDiv sauces={pizzaInfo.sauces} />
+    const sizeComponents = <FoodButtonDiv sizes={sizes} />
+    const crustComponents = <FoodButtonDiv crusts={crusts} />
+    const cheeseComponents = <FoodButtonDiv cheeses={cheeses} />
+    const sauceComponents = <FoodButtonDiv sauces={sauces} />
+    const yellowBoxComponents = <YellowToppingsBox title="Meats" toppings={toppings.meats}/>
 
 
     return (
@@ -25,7 +27,7 @@ const pizzaBuilder = () => {
             {crustComponents}
             {cheeseComponents}
             {sauceComponents}
-            
+            {yellowBoxComponents}
 
 
 
