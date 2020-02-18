@@ -1,9 +1,17 @@
 import React from "react"
 import Layout from "../components/Layout"
 import Link from "next/link"
+import pizzaInfo from "../../data/pizzaInfo.json"
+import FoodButtonDiv from "../components/FoodButtonDiv"
 
 
 const pizzaBuilder = () => {
+    const sizeComponents = <FoodButtonDiv sizes={pizzaInfo.sizes} />
+    const crustComponents = <FoodButtonDiv crusts={pizzaInfo.crusts} />
+    const cheeseComponents = <FoodButtonDiv cheeses={pizzaInfo.cheeses} />
+    const sauceComponents = <FoodButtonDiv sauces={pizzaInfo.sauces} />
+
+
     return (
         <Layout>
             <div className="text-center">
@@ -13,7 +21,18 @@ const pizzaBuilder = () => {
                     <a className="d-inline">here</a>
                 </Link>
             </div>
-            <div className="text-center mt-2">
+            {sizeComponents}
+            {crustComponents}
+            {cheeseComponents}
+            {sauceComponents}
+            
+
+
+
+
+
+
+            {/* <div className="text-center mt-2">
                 <h2>Size</h2>
                 <button className="options-button-yellow" type="button">Individual</button> 
                 <button className="options-button-yellow" type="button">Small</button> 
@@ -179,7 +198,8 @@ const pizzaBuilder = () => {
                 input[type="checkbox"] {
                     vertical-align: middle;
                     position: relative;
-                    bottom: 1px;                }
+                    bottom: 1px;                
+                }
                 .half-font {
                     font-size: 1.5rem;
                 }
@@ -197,7 +217,7 @@ const pizzaBuilder = () => {
                     color: #FFFFFF;
                 }
                 
-            `}</style>     
+            `}</style>      */}
         </Layout>
 
     )

@@ -1,0 +1,7 @@
+{
+    "sizes": ["Individual", "Small", "Medium", "Large", "Giant"],
+    "crusts": ["White", "Wheat", "Gluten Free"],
+    "cheeses": ["Original", "Low Fat", "Vegan", "None"],
+    "sauces": ["Red", "Olive Oil", "BBQ", "Garlic", "Pesto", "None"],
+    "toppings": [{"meats": ["Pepperoni", "Canadian Bacon", "Salami", "Linguica", "Ground Beef", "Sausage", "BBQ Chicken", "Plain Chicken", "Buffalo Chicken", "Garlic Chicken", "Breakfast Bacon", "Oysters", "Anchovies"]}]
+}
