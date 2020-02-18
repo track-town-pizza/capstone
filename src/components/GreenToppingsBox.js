@@ -1,17 +1,18 @@
 import React from "react"
 import Checkbox from "./Checkbox"
 
-const YellowToppingsBox = (props) => {
+const GreenToppingsBox = (props) => {
     const checkboxComponents = props.toppings.map(topping => <Checkbox name={topping} shownWords={topping}/>)
     return (
         <div className="text-center mt-1">
             <h2>{props.title}</h2>
-            <div className="yellow-box">
+            <div className="green-box">
                 {checkboxComponents}
             </div>
             <style jsx>{`
-                .yellow-box {
-                    background: #FFEC65;
+                .green-box {
+                    background: #007030;
+                    color: #FFFFFF;
                     border-radius: 10px;
                     width: 70%;
                     display: inline-block;
@@ -21,4 +22,4 @@ const YellowToppingsBox = (props) => {
         </div>
     )
 }
-export default YellowToppingsBox
+export default GreenToppingsBox

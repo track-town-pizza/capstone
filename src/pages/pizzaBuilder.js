@@ -4,6 +4,7 @@ import Link from "next/link"
 import {sizes, crusts, cheeses, sauces, toppings} from "../../data/pizzaInfo.json"
 import FoodButtonDiv from "../components/FoodButtonDiv"
 import YellowToppingsBox from "../components/YellowToppingsBox"
+import GreenToppingsBox from "../components/GreenToppingsBox"
 
 
 const pizzaBuilder = () => {
@@ -12,6 +13,7 @@ const pizzaBuilder = () => {
     const cheeseComponents = <FoodButtonDiv cheeses={cheeses} />
     const sauceComponents = <FoodButtonDiv sauces={sauces} />
     const yellowBoxComponents = <YellowToppingsBox title="Meats" toppings={toppings.meats}/>
+    const greenBoxComponenets = <GreenToppingsBox title="Non-Meats" toppings={toppings.others} />
 
 
     return (
@@ -28,6 +30,7 @@ const pizzaBuilder = () => {
             {cheeseComponents}
             {sauceComponents}
             {yellowBoxComponents}
+            {greenBoxComponenets}
 
 
 
