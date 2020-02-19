@@ -6,7 +6,7 @@ const SinglePost = (props) => {
         <div className="SinglePost">
             <div key={post.id}>
                 <h3>
-                    <Link href="/post/[id]" as={`/post/${post.id}`}>
+                    <Link href="/blog/post/[id]" as={`/blog/post/${post.id}`}>
                         <a>{post.title}</a>
                     </Link>
                 </h3>
