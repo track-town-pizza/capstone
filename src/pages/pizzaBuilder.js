@@ -46,10 +46,10 @@ const PizzaBuilder = () => {
         }
     }
 
-    const sizeComponents = <FoodButtonDiv sizes={sizes} handleClick={handleClick}/>
-    const crustComponents = <FoodButtonDiv crusts={crusts} handleClick={handleClick}/>
-    const cheeseComponents = <FoodButtonDiv cheeses={cheeses} handleClick={handleClick}/>
-    const sauceComponents = <FoodButtonDiv sauces={sauces} handleClick={handleClick}/>
+    const sizeComponents = <FoodButtonDiv sizes={sizes} handleClick={handleClick} clicked={size}/>
+    const crustComponents = <FoodButtonDiv crusts={crusts} handleClick={handleClick} clicked={crust}/>
+    const cheeseComponents = <FoodButtonDiv cheeses={cheeses} handleClick={handleClick} clicked={cheese}/>
+    const sauceComponents = <FoodButtonDiv sauces={sauces} handleClick={handleClick} clicked={sauce}/>
     const yellowBoxComponents = <YellowToppingsBox title="Meats" toppings={toppings.meats}/>
     const greenBoxComponenets = <GreenToppingsBox title="Non-Meats" toppings={toppings.others} />
     const orderCost = "$32.00"

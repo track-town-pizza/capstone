@@ -1,8 +1,8 @@
 {
     "sizes": ["Individual", "Small", "Medium", "Large", "Giant"],
     "crusts": ["White", "Wheat", "Gluten Free"],
-    "cheeses": ["Original", "Low Fat", "Vegan", "None"],
-    "sauces": ["Red", "Olive Oil", "BBQ", "Garlic", "Pesto", "None"],
+    "cheeses": ["Original", "Low Fat", "Vegan", "No Cheese"],
+    "sauces": ["Red", "Olive Oil", "BBQ", "Garlic", "Pesto", "No Sauce"],
     "toppings": {
                     "meats": ["Pepperoni", "Canadian Bacon", "Salami", "Linguica", "Ground Beef", "Sausage", "BBQ Chicken", "Plain Chicken", "Buffalo Chicken", "Garlic Chicken", "Breakfast Bacon", "Oysters", "Anchovies"],
                     "others": ["Black Olives", "Fresh Garlic", "Roasted Garlic", "Fresh Mushroom", "Fresh Tomatoes", "Sunried Tomatoes", "Red Onion", "Cooked Tomatoes", "Roasted Red Pepper", "Green Peppers", "Zucchini", "Artichoke Hearts", "Pineapple", "Spinach", "Basil Pesto", "Jalepenos", "Broccoli", "Roasted Red Pesto", "Pepperocini", "Lettuce", "Feta Cheese", "Banana Wax Pepper"]

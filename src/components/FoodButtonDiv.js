@@ -9,21 +9,33 @@ const FoodButtonDiv  = (props) => {
     let checkboxComponents = null
     if (props.sizes) {
         title = "Size"
-        foodButtonComponents = props.sizes.map(size => <YellowFoodButton buttonWord={size} handleClick={props.handleClick}/>)
+        foodButtonComponents = props.sizes.map(size =>
+            size === props.clicked ? <YellowFoodButton buttonWord={size} handleClick={props.handleClick} color="#c9b52a"/> 
+                                    : <YellowFoodButton buttonWord={size} handleClick={props.handleClick} color="#FFEC65"/>
+        )
     }
     else if (props.crusts) {
         title = "Crust"
-        foodButtonComponents = props.crusts.map(crust => <GreenFoodButton buttonWord={crust} handleClick={props.handleClick}/>)
+        foodButtonComponents = props.crusts.map(crust => 
+        crust === props.clicked ? <GreenFoodButton buttonWord={crust} handleClick={props.handleClick} color="#01471f"/>
+                                : <GreenFoodButton buttonWord={crust} handleClick={props.handleClick} color="#007030"/>
+        )
         checkboxComponents = <Checkbox name="thinCrust" shownWords = " Thin Crust" />
     }
     else if (props.cheeses) {
         title = "Cheese"
-        foodButtonComponents = props.cheeses.map(cheese => <YellowFoodButton buttonWord={cheese} handleClick={props.handleClick}/>)
+        foodButtonComponents = props.cheeses.map(cheese => 
+            cheese === props.clicked ? <YellowFoodButton buttonWord={cheese} handleClick={props.handleClick} color="#c9b52a"/> 
+                                    : <YellowFoodButton buttonWord={cheese} handleClick={props.handleClick} color="#FFEC65"/>
+        )
         checkboxComponents = <Checkbox name="extraCheese" shownWords = " Extra Cheese" />
     }
     else if (props.sauces) {
         title = "Sauce"
-        foodButtonComponents = props.sauces.map(sauce => <GreenFoodButton buttonWord={sauce} handleClick={props.handleClick}/>)
+        foodButtonComponents = props.sauces.map(sauce => 
+            sauce === props.clicked ? <GreenFoodButton buttonWord={sauce} handleClick={props.handleClick} color="#01471f"/>
+                                    : <GreenFoodButton buttonWord={sauce} handleClick={props.handleClick} color="#007030"/>
+        )
         checkboxComponents = [<Checkbox name="lightSauce" shownWords = " Light Sauce" />, 
                               <Checkbox name="extraSauce" shownWords = " Extra Sauce" />]
     }
