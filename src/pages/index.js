@@ -123,7 +123,9 @@ const Index = () => (
 				width: 32%;
 				max-width: 370px;
 				height: 200px;
+				padding: 20px;
 				background-color: #ffec65;
+				text-align: center;
 			}
 		`}</style>
 	</Layout>
