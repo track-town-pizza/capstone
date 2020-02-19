@@ -1,10 +1,13 @@
+import React from 'react';
+
+import Link from "next/link"
 import Layout from "../components/Layout"
 import AccountFormHeader from "../components/account/AccountFormHeader"
 import AccountForm from "../components/account/AccountForm"
 
 const Register = () => (
 	<Layout>
-		<div className="mx-auto mt-3 w-50">
+		<div className="responsive-width mx-auto mt-3">
 			<AccountFormHeader title="Register" subtitle="Sign up to edit blog posts, the menu, and more." />
 			<AccountForm>
 				<div className="form-group">
@@ -28,9 +31,31 @@ const Register = () => (
 				</div>
 			</AccountForm>
 		</div>
+		<span className="responsive-width link-container mx-auto mt-2 text-center dark-green-text">
+			<Link href="/login">
+				<a>Already have an account? Sign in here.</a>
+			</Link>
+		</span>
 		<style jsx>{`
-			.custom-border {
-				border-radius: 10px;
+			.responsive-width {
+				width: 40%;
+			}
+
+			.link-container {
+				display: flex;
+				justify-content: center;
+			}
+
+			@media only screen and (max-width: 600px) {
+				.responsive-width {
+					width: 100%;
+				}
+			}
+
+			@media only screen and (max-width: 1100px) {
+				.responsive-width {
+					width: 60%;
+				}
 			}
 
 			.page-title {
@@ -38,16 +63,8 @@ const Register = () => (
 				font-size: 60px;
 			}
 
-			.dark-green-text {
+			.dark-green-text, .dark-green-text a {
 				color: #094c3a;
-			}
-
-			.form-group {
-				margin-bottom: 0.5rem;
-			}
-
-			label {
-				margin-bottom: 0.25rem;
 			}
 
 			.btn-green {
