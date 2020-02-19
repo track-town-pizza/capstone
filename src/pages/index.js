@@ -51,6 +51,7 @@ const Index = () => (
 				position: absolute;
 				top: 0;
 				left: 0;
+<<<<<<< HEAD
 				width: 25%;
 				height: 100%;
 				background-color: rgba(0, 112, 48, 0.6);
@@ -126,6 +127,13 @@ const Index = () => (
 				padding: 20px;
 				background-color: #ffec65;
 				text-align: center;
+=======
+				vertical-align: middle;
+				width: 30%;
+				height: 75%;
+				background-color: green;
+				opacity: 0.75;
+>>>>>>> febf5b2cbdd3191060e9e4d04946511e3475c9ea
 			}
 		`}</style>
 	</Layout>
