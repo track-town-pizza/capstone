@@ -2,7 +2,7 @@ import React from "react"
 
 const GreenFoodButton  = (props) => {
     return (
-        <button className="options-button-green" type="button">{props.buttonWord}
+        <button name={props.buttonWord} category={props.category} className="options-button-green" type="button" onClick={props.handleClick}>{props.buttonWord}
             <style jsx>{`
                     .options-button-green {
                         display: inline;

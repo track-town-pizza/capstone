@@ -1,20 +1,58 @@
-import React from "react"
+import React, { useState } from "react"
 import Layout from "../components/Layout"
 import Link from "next/link"
-import {sizes, crusts, cheeses, sauces, toppings} from "../../data/pizzaInfo.json"
+import { sizes, crusts, cheeses, sauces, toppings } from "../../data/pizzaInfo.json"
 import FoodButtonDiv from "../components/FoodButtonDiv"
 import YellowToppingsBox from "../components/YellowToppingsBox"
 import GreenToppingsBox from "../components/GreenToppingsBox"
+import YellowFoodButton from "../components/YellowFoodButton"
+
+function getCostOfPizza() {
+
+}
+
+function buildOrderString(size, crust, cheese, sauce) {
+    if(size === "" && crust === "" && cheese === "" && sauce === ""){
+        return ""
+    }
+    else{
+        return size + " " + crust + " " + cheese + " " + sauce
+    }
+}
+
+const PizzaBuilder = () => {
+    const [size, setSize] = useState("")
+    const [crust, setCrust] = useState("")
+    const [cheese, setCheese] = useState("")
+    const [sauce, setSauce] = useState("")
 
 
-const pizzaBuilder = () => {
-    const sizeComponents = <FoodButtonDiv sizes={sizes} />
-    const crustComponents = <FoodButtonDiv crusts={crusts} />
-    const cheeseComponents = <FoodButtonDiv cheeses={cheeses} />
-    const sauceComponents = <FoodButtonDiv sauces={sauces} />
+
+    function handleClick(event) {
+        const {name, type} = event.target
+        if (type === 'button') {
+            for(let size of sizes){
+                if(name === size){setSize(name)}
+            }
+            for(let crust of crusts){
+                if(name === crust){setCrust(name)}
+            }
+            for(let cheese of cheeses){
+                if(name === cheese){setCheese(name)}
+            }
+            for(let sauce of sauces){
+                if(name === sauce){setSauce(name)}
+            }
+        }
+    }
+
+    const sizeComponents = <FoodButtonDiv sizes={sizes} handleClick={handleClick}/>
+    const crustComponents = <FoodButtonDiv crusts={crusts} handleClick={handleClick}/>
+    const cheeseComponents = <FoodButtonDiv cheeses={cheeses} handleClick={handleClick}/>
+    const sauceComponents = <FoodButtonDiv sauces={sauces} handleClick={handleClick}/>
     const yellowBoxComponents = <YellowToppingsBox title="Meats" toppings={toppings.meats}/>
     const greenBoxComponenets = <GreenToppingsBox title="Non-Meats" toppings={toppings.others} />
-
+    const orderCost = "$32.00"
 
     return (
         <Layout>
@@ -22,7 +60,7 @@ const pizzaBuilder = () => {
                 <h3>This is not online ordering.</h3>
                 <p className="d-inline">If you would like to place an order please call (541) 284-8484 or click </p>
                 <Link href="#">
-                    <a className="d-inline">here</a>
+                    <a className="d-inline text-success">here</a>
                 </Link>
             </div>
             {sizeComponents}
@@ -31,200 +69,48 @@ const pizzaBuilder = () => {
             {sauceComponents}
             {yellowBoxComponents}
             {greenBoxComponenets}
-
-
-
-
-
-
-            {/* <div className="text-center mt-2">
-                <h2>Size</h2>
-                <button className="options-button-yellow" type="button">Individual</button> 
-                <button className="options-button-yellow" type="button">Small</button> 
-                <button className="options-button-yellow" type="button">Medium</button> 
-                <button className="options-button-yellow" type="button">Large</button> 
-                <button className="options-button-yellow" type="button">Giant</button> 
-            </div> 
-            <div className="text-center mt-2">
-                <h2>Crust</h2>
-                <button className="options-button-green" type="button">White</button> 
-                <button className="options-button-green" type="button">Wheat</button> 
-                <button className="options-button-green" type="button">Gluten Free</button> 
+            <div className="order-box">
+                <h3 className="pt-2">My Order:</h3>
+                <p className="pr-5 pl-5">{buildOrderString(size, crust, cheese, sauce)}</p>
+                <h3 className="pb-2">{"Order Cost:  " + orderCost} </h3>
             </div>
-            <div className="text-center mt-2">
-                <h2>Cheese</h2>
-                <button className="options-button-yellow" type="button">Original</button> 
-                <button className="options-button-yellow" type="button">Low Fat</button> 
-                <button className="options-button-yellow" type="button">Vegan</button>
-                <button className="options-button-yellow" type="button">None</button>
 
-                <label>
-                    <input 
-                        type="checkbox"
-                        name="extraCheese"
-                        className="checkbox"
-                        // onChange={this.handleChange}
-                        // checked={this.state.isVegan}
-                    /> Extra Cheese
-                </label> 
-            </div> 
-            <div className="text-center mt-2">
-                <h2>Sauce</h2>
-                <button className="options-button-green" type="button">Red</button> 
-                <button className="options-button-green" type="button">Olive Oil</button> 
-                <button className="options-button-green" type="button">BBQ</button> 
-                <button className="options-button-green" type="button">Garlic</button> 
-                <button className="options-button-green" type="button">Pesto</button>
-                <button className="options-button-green" type="button">None</button> 
-            </div>
-            <div className="text-center mt-2">
-                <label>
-                    <input 
-                        type="checkbox"
-                        name="lightSauce"
-                        className="checkbox"
-                        // onChange={this.handleChange}
-                        // checked={this.state.isVegan}
-                    /> Light Sauce
-                </label> 
-                <label>
-                    <input 
-                        type="checkbox"
-                        name="extraSauce"
-                        className="checkbox"
-                        // onChange={this.handleChange}
-                        // checked={this.state.isVegan}
-                    /> Extra Sauce
-                </label> 
-            </div>
-            <div className="text-center mt-3">
-                <label className="half-font">
-                    <input 
-                        type="checkbox"
-                        name="lightSauce"
-                        className="checkbox"
-                        // onChange={this.handleChange}
-                        // checked={this.state.isVegan}
-                    /> Do you want different toppings on each half?
-                </label> 
-            </div>
-            <div className="text-center mt-1">
-                <h2>Meats</h2>
-                <div className="meats-holder">
-                    <label className="mx-3 mt-3">
-                        <input 
-                            type="checkbox"
-                            name="extraSauce"
-                            className="checkbox"
-                            // onChange={this.handleChange}
-                            // checked={this.state.isVegan}
-                        /> Extra Sauce
-                    </label> 
-                    <label className="mx-3 mt-3">
-                        <input 
-                            type="checkbox"
-                            name="extraSauce"
-                            className="checkbox"
-                            // onChange={this.handleChange}
-                            // checked={this.state.isVegan}
-                        /> Extra Sauce
-                    </label> 
-                    <label className="mx-3 mt-3">
-                        <input 
-                            type="checkbox"
-                            name="extraSauce"
-                            className="checkbox"
-                            // onChange={this.handleChange}
-                            // checked={this.state.isVegan}
-                        /> Extra Sauce
-                    </label> 
-                    <label className="mx-3 mt-3">
-                        <input 
-                            type="checkbox"
-                            name="extraSauce"
-                            className="checkbox"
-                            // onChange={this.handleChange}
-                            // checked={this.state.isVegan}
-                        /> Extra Sauce
-                    </label> 
-                    <label className="mx-3 mt-3">
-                        <input 
-                            type="checkbox"
-                            name="extraSauce"
-                            className="checkbox"
-                            // onChange={this.handleChange}
-                            // checked={this.state.isVegan}
-                        /> Extra Sauce
-                    </label> 
-                    <label className="mx-3 mt-3">
-                        <input 
-                            type="checkbox"
-                            name="extraSauce"
-                            className="checkbox"
-                            // onChange={this.handleChange}
-                            // checked={this.state.isVegan}
-                        /> Extra Sauce
-                    </label> 
+            <div className="text-center">
+                <h3>Ready to Order?</h3>
+                <div>
+                    <p className="mb-0 d-inline">Call (541)-284-8484 or </p>
+                    <Link href="#" className="d-inline">
+                        <a className="text-success">Order Online</a>
+                    </Link>
                 </div>
             </div>
+            <br />
+            <div className="text-center">
+                <h3>Want to add another pizza?</h3>
+                <YellowFoodButton buttonWord="Build Again" />
+            </div>
+            <div className="text-center">
+                <p className="d-inline">To see specific prices, check out our paper </p>
+                <Link href="#" className="d-inline">
+                    <a className="text-success">menu</a>
+                </Link>
+            </div>
             <style jsx>{`
-                .options-button-yellow {
-                    display:inline;
-                    background: #FFEC65;
-                    white-space: nowrap;
-                    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
-                    border-radius: 5px;
-                    border: 0;
-                    margin: .75rem;
-                    width: 10%;
-                    min-width: 75px;
-                    hieght: 5%;
-                }
-                .options-button-green {
-                    display:inline;
-                    background: #007030;
-                    white-space: nowrap;
-                    color: #FFFFFF;
-                    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
-                    border-radius: 5px;
-                    border: 0;
-                    margin: .75rem;
-                    width: 10%;
-                    min-width: 75px;
-                    hieght: 5%;
-                }
-                input {
-                    margin-left: .75rem;
-                }
-                .checkbox {
-                    width: 23px;
-                    height: 17px;
-                }
-                input[type="checkbox"] {
-                    vertical-align: middle;
-                    position: relative;
-                    bottom: 1px;                
-                }
-                .half-font {
-                    font-size: 1.5rem;
-                }
-                .meats-holder {
-                    background: #FFEC65;
-                    border-radius: 10px;
+                .order-box {
+                    margin: auto;
+                    background: #C1F7AE;
                     width: 70%;
-                    display: inline-block;
-                }
-                .other-toppings-holder {
-                    background: #007030;
                     border-radius: 10px;
-                    width: 70%;
-                    display: inline-block;
-                    color: #FFFFFF;
+                    text-align: center;
+                    margin-top: 1rem;
+                    margin-bottom: 1rem;
                 }
-                
-            `}</style>      */}
+                a {
+                    color: #007030;
+                }
+            `}</style>
         </Layout>
 
     )
 }
-export default pizzaBuilder
+export default PizzaBuilder

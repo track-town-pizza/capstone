@@ -9,21 +9,21 @@ const FoodButtonDiv  = (props) => {
     let checkboxComponents = null
     if (props.sizes) {
         title = "Size"
-        foodButtonComponents = props.sizes.map(size => <YellowFoodButton buttonWord={size}/>)
+        foodButtonComponents = props.sizes.map(size => <YellowFoodButton buttonWord={size} handleClick={props.handleClick}/>)
     }
     else if (props.crusts) {
         title = "Crust"
-        foodButtonComponents = props.crusts.map(crust => <GreenFoodButton buttonWord={crust}/>)
+        foodButtonComponents = props.crusts.map(crust => <GreenFoodButton buttonWord={crust} handleClick={props.handleClick}/>)
         checkboxComponents = <Checkbox name="thinCrust" shownWords = " Thin Crust" />
     }
     else if (props.cheeses) {
         title = "Cheese"
-        foodButtonComponents = props.cheeses.map(cheese => <YellowFoodButton buttonWord={cheese}/>)
+        foodButtonComponents = props.cheeses.map(cheese => <YellowFoodButton buttonWord={cheese} handleClick={props.handleClick}/>)
         checkboxComponents = <Checkbox name="extraCheese" shownWords = " Extra Cheese" />
     }
     else if (props.sauces) {
         title = "Sauce"
-        foodButtonComponents = props.sauces.map(sauce => <GreenFoodButton buttonWord={sauce}/>)
+        foodButtonComponents = props.sauces.map(sauce => <GreenFoodButton buttonWord={sauce} handleClick={props.handleClick}/>)
         checkboxComponents = [<Checkbox name="lightSauce" shownWords = " Light Sauce" />, 
                               <Checkbox name="extraSauce" shownWords = " Extra Sauce" />]
     }

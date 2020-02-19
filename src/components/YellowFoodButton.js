@@ -2,7 +2,7 @@ import React from "react"
 
 const YellowFoodButton  = (props) => {
     return (
-        <button className="options-button-yellow" type="button">{props.buttonWord}
+        <button name={props.buttonWord} category={props.category} className="options-button-yellow" type="button" onClick={props.handleClick}>{props.buttonWord}
             <style jsx>{`
                 .options-button-yellow {
                     display:inline;
@@ -14,7 +14,7 @@ const YellowFoodButton  = (props) => {
                     margin: .75rem;
                     width: 10%;
                     min-width: 75px;
-                    hieght: 5%;
+                    height: 5%;
                 }
             `}</style>
         </button> 
