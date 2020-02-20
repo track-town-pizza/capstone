@@ -11,7 +11,7 @@ function ItemPriceDescription (description, price) {
                     }
                     .item-description {
                         text-align: center;
-                        margin-top: .5rem;
+                        margin-top: .75rem;
                     }
                 `}</style>
             </div>
@@ -83,7 +83,6 @@ const ItemInfo = props => {
                     color: #000000;
                     display: table;
                     width: 100%;
-                    height: 35%;
                 }
                 @media only screen and (max-width: 600px) {
                     .description-box {
@@ -93,6 +92,6 @@ const ItemInfo = props => {
             `}</style>
         </div>
     )
+    
 }
-
 export default ItemInfo

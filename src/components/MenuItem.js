@@ -14,7 +14,6 @@ const MenuItem = props => {
                         margin-bottom:5%;
                         margin-right: 2.5%;
                         margin-left: 2.5%;
-                        text-decoration: none;
                     }
                     img {
                         width: 100%;

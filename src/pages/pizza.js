@@ -44,15 +44,8 @@ const Pizzas = () => {
                     margin-bottom: 1.5rem;
                     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
                 }
-
                 .build-pizza-link:hover {
                     cursor: pointer;
-                }
-
-                .button-photo {
-                    width: 50%;
-                    margin-bottom: .5rem;
-                    border-radius: 10px;
                 }
             `}</style>
 
