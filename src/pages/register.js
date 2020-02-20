@@ -48,13 +48,17 @@ const Register = () => (
 
 			@media only screen and (max-width: 600px) {
 				.responsive-width {
-					width: 100%;
+					width: 90%;
 				}
-			}
 
-			@media only screen and (max-width: 1100px) {
-				.responsive-width {
-					width: 60%;
+				.link-container {
+					flex-wrap: wrap;
+					justify-content: center;
+				}
+
+				.link-container > a {
+					margin: 10px 5px 0 5px;
+					font-size: 20px;
 				}
 			}
 
