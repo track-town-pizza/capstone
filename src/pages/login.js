@@ -50,7 +50,7 @@ const Login = () => (
 
 			@media only screen and (max-width: 600px) {
 				.responsive-width {
-					width: auto;
+					width: 90%;
 				}
 
 				.link-container {
@@ -59,14 +59,8 @@ const Login = () => (
 				}
 
 				.link-container > a {
-					margin-top: 10px;
+					margin: 10px 5px 0 5px;
 					font-size: 20px;
-				}
-			}
-
-			@media only screen and (max-width: 1100px) {
-				.responsive-width {
-					width: 60%;
 				}
 			}
 

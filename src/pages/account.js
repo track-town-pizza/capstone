@@ -4,11 +4,11 @@ import Layout from "../components/Layout"
 
 const Account = () => (
 	<Layout>
-		<div className="mx-auto mt-3 w-75 dark-green-text d-flex flex-wrap">
+		<div className="container mx-auto mt-3 dark-green-text d-flex flex-wrap">
 			<h2 className="text-uppercase page-title">My Account</h2>
-			<div className="d-flex justify-content-between mt-4 w-100">
-				<form className="w-90 pr-4">
-					<h3>Update Email</h3>
+			<div className="forms mt-4">
+				<form className="form-width form-divider">
+					<h3 className="mb-3">Update Email</h3>
 					<div className="form-group">
 						<label for="old-email-input">Old Email</label>
 						<input type="email" className="form-control" id="old-email-input" name="old-email-input" aria-describedby="emailHelp" placeholder="Old Email" />
@@ -29,9 +29,9 @@ const Account = () => (
 						<button type="submit" className="btn btn-green w-100">Update Email</button>
 					</div>
 				</form>
-				<div className="w-90">
+				<div className="form-width">
 					<form>
-						<h3>Update Password</h3>
+						<h3 className="mb-3">Update Password</h3>
 						<div className="form-group">
 							<label for="old-password-input">Old Password</label>
 							<input type="password" className="form-control" id="old-password-input" name="old-password-input" placeholder="Old Password" />
@@ -56,21 +56,92 @@ const Account = () => (
 				</div>
 			</div>
 			<div className="mt-4">
-				<h3>Delete Account Section</h3>
-				<div className="d-flex justify-content-between">
-					<div className="d-flex flex-column w-75 mr-2">
+				<h3 className="mb-3">Delete Account Section</h3>
+				<div className="delete-section">
+					<div className="delete-text mr-2">
 						<p>If you delete your account, you cannot remove it later. Please make sure that you do want to remove this account before deleting it.</p>
 						<p>An email will be sent to confirm that you do want to delete your account before removing it forever.</p>
 					</div>
-					<div className="my-auto">
-						<button className="btn btn-danger btn-w-200 text-uppercase">Delete Account</button>
+					<div className="delete-button">
+						<button className="btn btn-danger btn-width text-uppercase">Delete Account</button>
 					</div>
 				</div>
 			</div>
 		</div>
 		<style jsx>{`
-			.w-90 {
+			.container {
+				width: 75%;
+			}
+			
+			.forms {
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+			}
+
+			.form-width {
 				width: 90%;
+			}
+
+			.form-divider {
+				margin-right: 5%;
+			}
+
+			@media only screen and (max-width: 900px) {
+				.container {
+					width: 100%;
+				}
+
+				.forms {
+					flex-wrap: wrap;
+					justify-content: center;
+				}
+
+				.form-width {
+					width: 100%;
+					margin-top: 20px;
+				}
+
+				.form-divider {
+					margin-right: 0;
+				}
+			}
+
+			.delete-section {
+				display: flex;
+				justify-content: space-between;
+			}
+
+			.delete-text {
+				display: flex;
+				flex-direction: column;
+				width: 75%;
+			}
+
+			.delete-button {
+				margin: auto;
+			}
+
+			.btn-width {
+				width: 200px;
+			}
+
+			@media only screen and (max-width: 1100px) {
+				.delete-section {
+					flex-wrap: wrap;
+				}
+				
+				.delete-text {
+					width: 100%;
+				}
+
+				.delete-button {
+					margin-bottom: 10px;
+				}
+
+				.btn-width {
+					width: 250px;
+				}
 			}
 
 			.page-title {
@@ -90,10 +161,6 @@ const Account = () => (
 
 			.btn-green:hover {
 				background-color: #3f855d;
-			}
-
-			.btn-w-200 {
-				width: 200px;
 			}
 		`}</style>
 	</Layout>
