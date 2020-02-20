@@ -34,13 +34,10 @@ const Login = () => (
 		<style jsx>{`
 			.responsive-width {
 				width: 40%;
-<<<<<<< HEAD
 			}
 			
 			.custom-border {
 				border-radius: 10px;
-=======
->>>>>>> Refactor Login & Register pages to share components
 			}
 
 			.link-container {
