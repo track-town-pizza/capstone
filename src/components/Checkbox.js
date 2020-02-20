@@ -1,13 +1,14 @@
 import React from "react"
 
 const Checkbox = (props) => {
+    // console.log(props.name)
     return (
         <label>
             <input 
                 type="checkbox"
                 name={props.name}
                 className="checkbox"
-                // onChange={this.handleChange}
+                onChange={props.onChange}
                 // checked={this.state.isVegan}
             />{props.shownWords}
             <style jsx>{`

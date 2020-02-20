@@ -1,7 +1,7 @@
-import Layout from "../components/Layout"
+import Layout from "../../components/Layout"
 import React from "react"
-import MenuItems from "../components/MenuItem"
-import pizzasInfo from "../../data/pizzas.json"
+import MenuItems from "../../components/MenuItem"
+import pizzasInfo from "../../../data/pizzas.json"
 import Link from "next/link"
 
 

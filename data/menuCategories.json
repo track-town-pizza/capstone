@@ -3,36 +3,36 @@
         "key": "1",
         "imgLink": "./photos/MenuItems/Pepperoni.jpg",
         "item": "Pizza",
-        "linkToPage": "/pizza"
+        "linkToPage": "./menu/pizza"
     },
     {
         "key": "2",
         "imgLink": "./photos/MenuItems/AllSticks.jpg",
         "item": "Side Orders" ,
-        "linkToPage": "/sides"  
+        "linkToPage": "./menu/sides"  
     },
     {
         "key": "3",
         "imgLink": "./photos/MenuItems/Beverages.jpg",
         "item": "Beverages",
-        "linkToPage": "/beverages"
+        "linkToPage": "./menu/beverages"
     },
     {
         "key": "4",
         "imgLink": "./photos/MenuItems/Buffet.jpg",
         "item": "Lunch Buffet",
-        "linkToPage": "/buffet"
+        "linkToPage": "./menu/buffet"
     },
     {
         "key": "5",
         "imgLink": "./photos/MenuItems/AllSauce.jpg",
         "item": "Side Sauces",
-        "linkToPage": "/sauce"
+        "linkToPage": "./menu/sauce"
     },
     {
         "key": "6",
         "imgLink": "./photos/MenuItems/Mug.jpg",
         "item": "Merchandise",
-        "linkToPage": "/merchandise"
+        "linkToPage": "./menu/merchandise"
     }
 ]
