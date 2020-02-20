@@ -8,11 +8,9 @@ const NavBar = props => (
 					<img src="tracktownlogo2.png" alt="Track Town Pizza" id="navbar-image" width="350px" />
 				</a>
 			</Link>
-            <div id="navbar-toggle-container">
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-expanded="false" aria-label="Toggle navigation">
-                        &#9776;
-                </button>
-            </div>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+                    &#9776;
+            </button>
 		</div>
 
 		<div className="collapse navbar-collapse" id="navbar-content">
@@ -68,15 +66,14 @@ const NavBar = props => (
 			}
 
             .navbar-toggler {
-                margin-top: -90;
-                height: 50px;
+                height: 30px;
                 width: 25%;
                 right: 0;
                 float: right;
                 position: absolute;
 				background-color: red;
 				background-color: #005530;
-                font-size: 2em;
+                font-size: 1em;
             }
 
 			#navbar-content {
