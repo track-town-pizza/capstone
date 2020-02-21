@@ -1,15 +1,12 @@
 import React from "react"
 
-const EventListing = ({ eventName, eventDate }) => {
+const EventListing = ({ name, date }) => {
 	// Parse Date into mm/dd/yyyy Format
-	const date = new Date(eventDate);
-	const formattedDate = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
-
-	console.log("== name:", eventName);
-	console.log("== date:", formattedDate);
+	const unformattedDate = new Date(date);
+	const formattedDate = `${unformattedDate.getMonth()}/${unformattedDate.getDate()}/${unformattedDate.getFullYear()}`;
 	return (
 		<tr>
-			<td>{eventName}</td>
+			<td>{name}</td>
 			<td>{formattedDate}</td>
 		</tr>
 	)
