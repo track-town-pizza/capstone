@@ -1,6 +1,9 @@
 import React from "react"
 import Layout from "../components/Layout"
 
+import events from "../../data/events.json"
+import EventListing from "../components/EventListing"
+
 const Index = () => (
 	<Layout>
 		<div className="home-order-photo">
@@ -22,12 +25,23 @@ const Index = () => (
 			</div>
 		</div>
 		<div className="info-containers">
-			{/* Hours, events, and location go here */}
-			<div className="yellow-container">
-				Hours
+			<div className="yellow-container extra-padding">
+				<h3>We're open all week! Come visit us:</h3>
+				<br /><br />
+				<h4>Sun - Thur</h4>
+				<h4 className="no-margin-top grey-font">11 am - 12 pm</h4>
+				<h4>Fri - Sat</h4>
+				<h4 className="no-margin-top grey-font">11 am - 1 am</h4>
 			</div>
 			<div className="yellow-container">
-				Events
+				<h3>Events</h3>
+				<table className="table-sm table-font">
+					<tbody>
+						{events.map(event => (
+							<EventListing key={event.id} {...event} />
+						))}
+					</tbody>
+				</table>
 			</div>
 			<div className="yellow-container">
 				Location
@@ -122,10 +136,27 @@ const Index = () => (
 			.yellow-container {
 				width: 32%;
 				max-width: 370px;
-				height: 200px;
+				height: 325px;
+				margin-bottom: 5%;
 				padding: 20px;
 				background-color: #ffec65;
 				text-align: center;
+			}
+
+			.extra-padding {
+				padding: 40px;
+			}
+
+			.no-margin-top h4 {
+				margin-top: 0;
+			}
+
+			.grey-font {
+				color: gray;
+			}
+
+			.table-font {
+				font-size: 15px;
 			}
 		`}</style>
 	</Layout>
