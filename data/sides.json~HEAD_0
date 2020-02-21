@@ -1,0 +1,63 @@
+[
+    {
+        "key": "Track Sticks",
+        "information": [
+            {"description": "Track Sticks","price": "$5.50"}
+        ],
+        "imgLink": "./photos/SideOrders/TrackSticks.jpg"
+    },
+    {
+        "key": "Cheesy Sticks",
+        "information": [
+            {"description": "Cheesy Sticks","price": "$4.75"},
+            {"description": "Cheesy Garlic Sticks","price": "$5.00"}
+        ],
+        "imgLink": "./photos/SideOrders/CheesySticks.jpg"
+    },
+    {
+        "key": "Pesto Sticks",
+        "information": [
+            {"description": "Cheesy Pesto Sticks","price": "$5.50"},
+            {"description": "Cheesy Pesto & Garlic","price": "$6.00"}
+        ],
+        "imgLink": "./photos/SideOrders/PestoSticks.jpg"
+    },
+    {
+        "key": "Wings",
+        "information": [
+            {"description": "Wings","price": "$5.50"}
+        ],
+        "imgLink": "./photos/SideOrders/Wings.jpg"
+    },
+    {
+        "key": "Side Salad",
+        "information": [
+            {"description": "Small Delivery Salad","price": "$5.00"},
+            {"description": "Large Delivery Salad","price": "$8.00"}
+        ],
+        "imgLink": "./photos/SideOrders/SideSalad.jpg"
+    },
+    {
+        "key": "Salad Bar",
+        "information": [
+            {"description": "One Time Through","price": "$5.00"},
+            {"description": "All You Can Eat","price": "$8.00"}
+        ],
+        "imgLink": "./photos/SideOrders/SaladBar.jpg"
+    },
+    {
+        "key": "Cookies",
+        "information": [
+            {"description": "Cookie","price": "$0.60"},
+            {"description": "3 Cookies","price": "$1.50"}
+        ],
+        "imgLink": "./photos/SideOrders/Cookies.jpg"
+    },
+    {
+        "key": "Ice Cream",
+        "information": [
+            {"description": "Ice Cream Sandwich","price": "$3.50"}
+        ],
+        "imgLink": "./photos/SideOrders/IceCream.jpg"
+    }
+]

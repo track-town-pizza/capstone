@@ -16,15 +16,22 @@ const Layout = props => (
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossOrigin="anonymous"></script>
 
 		<NavBar />
-		<main className="w-75 mx-auto overflow-auto main">
+		<main className="main mx-auto overflow-auto">
 			{props.children}
 		</main>
 		{/* <Footer /> */}
 
 		<style jsx>{`
 			.main {
+				width: 75%;
 				margin-top: 80px;
 				font-family: "Oswald";
+			}
+
+			@media only screen and (max-width: 700px) {
+				.main {
+					width: 100%;
+				}
 			}
 		`}</style>
 	</div>

@@ -159,5 +159,12 @@
             {"description": "Triple Jump","price": "none"}
         ],
         "imgLink": "./photos/Pizza/TripleJump.jpg"
+    },
+    {
+        "key": "cheese",
+        "information": [
+            {"description": "Cheese","price": "none"}
+        ],
+        "imgLink": "./photos/Pizza/Cheese.jpg"
     }
 ]
