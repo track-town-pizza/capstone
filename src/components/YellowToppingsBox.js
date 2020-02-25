@@ -2,7 +2,7 @@ import React from "react"
 import Checkbox from "./Checkbox"
 
 const YellowToppingsBox = (props) => {
-    const checkboxComponents = props.toppings.map(topping => <Checkbox name={topping} shownWords={topping}/>)
+    const checkboxComponents = props.toppings.map(topping => <Checkbox name={topping} shownWords={topping} onChange={props.onChange}/>)
     return (
         <div className="text-center mt-1">
             <h2>{props.title}</h2>
