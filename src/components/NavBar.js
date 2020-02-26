@@ -5,7 +5,7 @@ const NavBar = props => (
 		<div className="d-inline-flex bd-highlight">
 			<Link href="/">
 				<a id="navbar-logo">
-					<img src="tracktownlogo2.png" alt="Track Town Pizza" id="navbar-image" width="350px" />
+					<img src="photos/tracktownlogo2.png" alt="Track Town Pizza" id="navbar-image" width="350px" />
 				</a>
 			</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,13 +67,14 @@ const NavBar = props => (
 
             .navbar-toggler {
                 height: 30px;
-                width: 25%;
+                width: 20%;
                 right: 0;
                 float: right;
                 position: absolute;
 				background-color: red;
 				background-color: #005530;
                 font-size: 1em;
+                margin-right: 2.5%;
             }
 
 			#navbar-content {
@@ -82,29 +83,31 @@ const NavBar = props => (
                 padding: 5px;
 			}
 
-            #navbar-image {
-                //max-width: 80%;
-            }
-
 			@media (max-width: 800px) {
                 #navbar-image {
                     width: 250px;
                 }
             }
 
-			@media (max-width: 760px) {
+			@media (max-width: 767px) {
 				#navbar-content {
-					//max-width: 25%;
 					text-align: center;
 					position: absolute;
-					top: 60px;
+					top: 59px;
 					right: 0;
 				}
 			}
 
 			@media (max-width: 600px) {
+                .navbar-toggler {
+                    margin-right: 10%;
+                }
+                #navbar-image {
+                    width: 200px;
+                }
 				#navbar-content {
-					//width: 25%;
+                    font-size: 1.5em;
+					width: 40%;
                 }
             }
 

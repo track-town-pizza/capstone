@@ -47,7 +47,6 @@ const Pizzas = () => {
                 .build-pizza-link:hover {
                     cursor: pointer;
                 }
-
             `}</style>
 
         </Layout>
