@@ -1,6 +1,6 @@
 import React from "react"
 
-const EventListing = ({ name, date }) => {
+const EventListing = ({ name, date, postUrl }) => {
 	// Parse Date into mm/dd/yyyy Format
 	const unformattedDate = new Date(date);
 	const formattedDate = `${unformattedDate.getMonth()}/${unformattedDate.getDate()}/${unformattedDate.getFullYear()}`;
