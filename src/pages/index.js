@@ -65,7 +65,9 @@ const Index = () => {
 			</div>
 			<div className="blog-container home-font">
 				<div className="blog-left-column">
-					<h3>{post.title}</h3>
+					<Link href={`/blog/post/${post.id}`} className="blog-title">
+						<h3>{post.title}</h3>
+					</Link>
 					<img src={post.imageLink} />
 				</div>
 				<div className="blog-right-column">
@@ -273,6 +275,10 @@ const Index = () => {
 					max-width: 100%;
 					border: 1px solid darkgreen;
 					border-radius: 5px;
+				}
+
+				.blog-title a, .blog-title a:hover {
+					color: white !important;
 				}
 
 				.blog-right-column {
