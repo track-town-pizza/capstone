@@ -8,26 +8,26 @@ import YellowToppingsBox from "../components/YellowToppingsBox"
 import GreenToppingsBox from "../components/GreenToppingsBox"
 import YellowFoodButton from "../components/YellowFoodButton"
 
-function getPriceOfPizza(size, extraCheese, toppings) {
-    let price = 0
-    if (size === "") {
+function getPriceOfPizza(size, extraCheese, toppings, currentPrice, totalPrice) {
+    currentPrice = 0
+    if (size === null) {
         return 0
     }
-    price += Number(prices[size])
+    currentPrice += Number(prices[size])
     if (extraCheese) {
-        price += Number(prices.Cheese[size])
+        currentPrice += Number(prices.Cheese[size])
     }
     for(let toppingStr of toppings) {
         const topping = toppingStr.replace(/ /g, "_")
-        let thing = prices[topping]
-        price += Number(thing[size])
+        let toppingPrices = prices[topping]
+        currentPrice += Number(toppingPrices[size])
     }
-    return price.toFixed(2)
+    return (totalPrice + currentPrice).toFixed(2)
 }
 
 function buildCrustString(pCrust, pThinCrust) {
     let crust = null
-    if(pCrust !== "White" && pCrust !== "") {
+    if(pCrust !== "White" && pCrust !== null) {
         if(pThinCrust) {
              crust = pCrust + " Thin Crust"
         }
@@ -43,7 +43,7 @@ function buildCrustString(pCrust, pThinCrust) {
 
 function buildCheeseString(pCheese, pExtraCheese) {
     let cheese = null
-    if(pCheese !== "Original" && pCheese !== "No Cheese" && pCheese!== "") {
+    if(pCheese !== "Original" && pCheese !== "No Cheese" && pCheese!== null) {
         if (pExtraCheese) {
             cheese = "Extra " + pCheese + " Cheese"
         }
@@ -62,7 +62,7 @@ function buildCheeseString(pCheese, pExtraCheese) {
 
 function buildSauceString(pSauce, pLightSauce, pExtraSauce) {
     let sauce = null
-    if(pSauce !== "Marinara" && pSauce !== "No Sauce" && pSauce!== "") {
+    if(pSauce !== "Marinara" && pSauce !== "No Sauce" && pSauce!== null) {
         if (pExtraSauce) {
             sauce = "Extra " + pSauce + " Sauce"
         }
@@ -92,68 +92,96 @@ function buildToppingsString(toppings, pizzaInfo) {
     return pizzaInfo
 }
 
-function buildOrderString(pizza) {
+function buildOrderString(pizza, currentPizza) {
     let pizzaInfo = []
     pizzaInfo.push(pizza.size)
-    // Not sure where to list toppings end? not end?
     pizzaInfo = buildToppingsString(pizza.toppings, pizzaInfo)
     pizzaInfo.push(buildCrustString(pizza.crust, pizza.thinCrust))
     pizzaInfo.push(buildCheeseString(pizza.cheese, pizza.extraCheese))
     pizzaInfo.push(buildSauceString(pizza.sauce, pizza.lightSauce, pizza.extraSauce))
     
-    let toppingsStr = ""
     pizzaInfo = pizzaInfo.filter(ele => ele !== null)
+    currentPizza = ""
     for(let i=0; i<pizzaInfo.length; i++) {
         if(i+1 === pizzaInfo.length) {
-            toppingsStr = toppingsStr + pizzaInfo[i]
+            currentPizza = currentPizza + pizzaInfo[i]
         }
         else {
-            toppingsStr = toppingsStr + pizzaInfo[i] + ", "
+            currentPizza = currentPizza + pizzaInfo[i] + ", "
         }
     }
-    return toppingsStr
+    return currentPizza
 }
 
 const PizzaBuilder = () => {
+    // const allPizzas = []
+    let currentPizza = ""
+    // let totalPrice = 0
+    let currentPrice = 0
     const [pizza, setPizza] = useState({
-        size: "",
-        crust: "",
-        cheese: "",
-        sauce: "",
+        size: null,
+        crust: null,
+        cheese: null,
+        sauce: null,
         thinCrust: false,
         extraCheese: false,
         lightSauce: false,
         extraSauce: false,
-        toppings: []
+        toppings: [],
+        allPizzas: [],
+        totalPrice: 0
     })
+
+    // two big errors, one there is a weird spacing issues that has to do with the extra <br/> I made
+    // and cost is not staying it is getting reset to zero, but otherwise progress has been made!
 
     function handleClick(event) {
         const {name, type} = event.target
             if (type === 'button') {
-                for(let size of sizes){
-                    if(name === size){
-                        setPizza({
+                if(name === "Build Again"){
+                    setPizza({
+                        ...pizza,
+                        size: null,
+                        crust: null,
+                        cheese: null,
+                        sauce: null,
+                        thinCrust: false,
+                        extraCheese: false,
+                        lightSauce: false,
+                        extraSauce: false,
+                        toppings: [],
+                        allPizzas: pizza.allPizzas.concat(currentPizza),
+                        totalPrice: pizza.totalPrice + currentPrice
+                    })
+                    // console.log(allPizzas)
+                }
+                else {
+                    for(let size of sizes){
+                        if(name === size){
+                            setPizza({
+                                ...pizza,
+                                size: name,
+                            })}
+                    }
+                    for(let crust of crusts){
+                        if(name === crust){
+                            setPizza({
+                                ...pizza,
+                                crust: name,
+                            })}
+                    }
+                    for(let cheese of cheeses){
+                        if(name === cheese){setPizza({
                             ...pizza,
-                            size: name,
+                            cheese: name,
                         })}
-                }
-                for(let crust of crusts){
-                    if(name === crust){setPizza({
-                        ...pizza,
-                        crust: name,
-                    })}
-                }
-                for(let cheese of cheeses){
-                    if(name === cheese){setPizza({
-                        ...pizza,
-                        cheese: name,
-                    })}
-                }
-                for(let sauce of sauces){
-                    if(name === sauce){setPizza({
-                        ...pizza,
-                        sauce: name,
-                    })}
+                    }
+                    for(let sauce of sauces){
+                        if(name === sauce){setPizza({
+                            ...pizza,
+                            sauce: name,
+                        })}
+                    }
                 }
             }
     }
@@ -208,19 +236,17 @@ const PizzaBuilder = () => {
     }
 
     const sizeComponents = <FoodButtonDiv sizes={sizes} handleClick={handleClick} clicked={pizza.size}/>
-    const crustComponents = <FoodButtonDiv crusts={crusts} handleClick={handleClick} clicked={pizza.crust} onChange={handleChange}/>
-    const cheeseComponents = <FoodButtonDiv cheeses={cheeses} handleClick={handleClick} clicked={pizza.cheese} onChange={handleChange}/>
-    const sauceComponents = <FoodButtonDiv sauces={sauces} handleClick={handleClick} clicked={pizza.sauce} onChange={handleChange}/>
-    const yellowBoxComponents = <YellowToppingsBox title="Meats" toppings={toppings.meats} onChange={handleChange}/>
-    const greenBoxComponenets = <GreenToppingsBox title="Non-Meats" toppings={toppings.others} onChange={handleChange}/>
-    // const orderCost = "$32.00"
-
+    const crustComponents = <FoodButtonDiv crusts={crusts} size={pizza.size} handleClick={handleClick} clicked={pizza.crust} onChange={handleChange} thinCrust={pizza.thinCrust}/>
+    const cheeseComponents = <FoodButtonDiv cheeses={cheeses} handleClick={handleClick} clicked={pizza.cheese} onChange={handleChange} extraCheese={pizza.extraCheese}/>
+    const sauceComponents = <FoodButtonDiv sauces={sauces} handleClick={handleClick} clicked={pizza.sauce} onChange={handleChange} lightSauce={pizza.lightSauce} extraSauce={pizza.extraSauce}/>
+    const yellowBoxComponents = <YellowToppingsBox title="Meats" toppings={toppings.meats} onChange={handleChange} wantedToppings={pizza.toppings}/>
+    const greenBoxComponenets = <GreenToppingsBox title="Non-Meats" toppings={toppings.others} onChange={handleChange} wantedToppings={pizza.toppings}/>
     return (
         <Layout>
             <div className="text-center">
-                <h3>This is not online ordering.</h3>
+                <h3>This is not online ordering</h3>
                 <p className="d-inline">If you would like to place an order please call (541) 284-8484 or click </p>
-                <Link href="#">
+                <Link href="http://www.mealage.com/2foodmenu8.jsp?restaurantId=10003">
                     <a className="d-inline text-success">here</a>
                 </Link>
             </div>
@@ -232,15 +258,18 @@ const PizzaBuilder = () => {
             {greenBoxComponenets}
             <div className="order-box">
                 <h3 className="pt-2">My Order:</h3>
-                <p className="pr-5 pl-5">{buildOrderString(pizza)}</p>
-                <h3 className="pb-2">{"Order Cost:  $" + getPriceOfPizza(pizza.size, pizza.extraCheese, pizza.toppings)} </h3>
+                { currentPizza = buildOrderString(pizza, currentPizza) }
+                {/* {console.log(pizza.allPizzas)} */}
+                { pizza.allPizzas.map(pizzaStr => <p className="pr-5 pl-5">{pizzaStr}</p>) }
+                {/* <p className="pr-5 pl-5">{buildOrderString(pizza, currentPizza)}</p> */}
+                <h3 className="pb-2">{"Order Cost:  $" + getPriceOfPizza(pizza.size, pizza.extraCheese, pizza.toppings, currentPrice, pizza.totalPrice)} </h3>
             </div>
 
             <div className="text-center">
                 <h3>Ready to Order?</h3>
                 <div>
                     <p className="mb-0 d-inline">Call (541)-284-8484 or </p>
-                    <Link href="#" className="d-inline">
+                    <Link href="http://www.mealage.com/2foodmenu8.jsp?restaurantId=10003" className="d-inline">
                         <a className="text-success">Order Online</a>
                     </Link>
                 </div>
@@ -248,7 +277,7 @@ const PizzaBuilder = () => {
             <br />
             <div className="text-center">
                 <h3>Want to add another pizza?</h3>
-                <YellowFoodButton buttonWord="Build Again" />
+                <YellowFoodButton buttonWord="Build Again" name="Build Again" handleClick={handleClick}/>
             </div>
             <div className="text-center">
                 <p className="d-inline">To see specific prices, check out our paper </p>

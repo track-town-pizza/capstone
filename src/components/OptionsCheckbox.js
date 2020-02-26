@@ -1,7 +1,6 @@
 import React from "react"
 
-const Checkbox = (props) => {
-    // console.log(props.name)
+const OptionsCheckbox = (props) => {
     return (
         <label>
             <input 
@@ -9,14 +8,13 @@ const Checkbox = (props) => {
                 name={props.name}
                 className="checkbox"
                 onChange={props.onChange}
-                // checked={this.state.isVegan}
+                checked={props.checked}
             />{props.shownWords}
             <style jsx>{`
                 label {
                     white-space: nowrap;
-                    min-width: 150px;
                     margin-top: .5rem;
-                    margin-right:.5rem;
+                    margin-right: 1rem;
                 }
                 input {
                     float: left;
@@ -24,6 +22,7 @@ const Checkbox = (props) => {
                 .checkbox {
                     width: 23px;
                     height: 17px;
+                    margin-right: .5rem;
                 }
                 input[type="checkbox"] {
                     vertical-align: middle;
@@ -35,4 +34,4 @@ const Checkbox = (props) => {
         </label>
     )
 }
-export default Checkbox
+export default OptionsCheckbox
