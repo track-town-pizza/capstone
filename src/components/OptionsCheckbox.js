@@ -13,7 +13,9 @@ const OptionsCheckbox = (props) => {
             <style jsx>{`
                 label {
                     white-space: nowrap;
-                    padding: .75rem;
+                    padding: .5rem;
+                    margin-top: .5rem;
+                    margin-right: 1rem;
                     border-radius: 10px;
                 }
                 input {

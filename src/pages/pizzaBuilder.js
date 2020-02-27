@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import Layout from "../components/Layout"
-import Link from "next/link"
 import { sizes, crusts, cheeses, sauces, toppings } from "../../data/pizzaInfo.json"
 import prices from "../../data/prices.json"
 import FoodButtonDiv from "../components/FoodButtonDiv"
@@ -8,6 +7,7 @@ import YellowToppingsBox from "../components/YellowToppingsBox"
 import GreenToppingsBox from "../components/GreenToppingsBox"
 import EndPizzaBuilderSection from "../components/EndPizzaBuilderSection"
 import HalfNHalf from "../components/HalfNHalf"
+import NotOnlineOrdering from "../components/NotOnlineOrdering"
 
 
 function getPriceOfPizza(size, extraCheese, toppings, totalPrice, currentPizzaInfo) {
@@ -257,13 +257,7 @@ const PizzaBuilder = () => {
     // think about a way to possibly redo this so that it's not so logicy for rendering with half n half
     return (
         <Layout>
-            <div className="text-center">
-                <h3>This is not online ordering</h3>
-                <p className="d-inline">If you would like to place an order please call (541) 284-8484 or click </p>
-                <Link href="http://www.mealage.com/2foodmenu8.jsp?restaurantId=10003">
-                    <a className="d-inline text-success">here</a>
-                </Link>
-            </div>
+            <NotOnlineOrdering />
             {sizeComponents}
             {crustComponents}
             {halfNHalfComponent}

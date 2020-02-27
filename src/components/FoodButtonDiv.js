@@ -35,7 +35,7 @@ const FoodButtonDiv  = (props) => {
             }
         })
         if (props.clicked === "White" || props.clicked === "Wheat") {
-            checkboxComponents = <OptionsCheckbox name="thinCrust" shownWords="Thin Crust" onChange={props.onChange} checked={props.thinCrust}/>
+            checkboxComponents = <OptionsCheckbox name="thinCrust" shownWords="Thin Crust" onChange={props.onChange} checked={props.thinCrust} color="#fffaa8"/>
         }
     }
     else if (props.cheeses) {
@@ -45,7 +45,7 @@ const FoodButtonDiv  = (props) => {
                                     : <YellowFoodButton buttonWord={cheese} handleClick={props.handleClick} color="#FFEC65"/>
         )
         if (props.clicked !== "No Cheese") {
-            checkboxComponents = <OptionsCheckbox name="extraCheese" shownWords = "Extra Cheese" onChange={props.onChange} checked={props.extraCheese}/>
+            checkboxComponents = <OptionsCheckbox name="extraCheese" shownWords = "Extra Cheese" onChange={props.onChange} checked={props.extraCheese} color="#fffaa8"/>
         }
     }
     else if (props.sauces) {
@@ -55,8 +55,8 @@ const FoodButtonDiv  = (props) => {
                                     : <GreenFoodButton buttonWord={sauce} handleClick={props.handleClick} color="#007030"/>
         )
         if (props.clicked !== "No Sauce") {
-            checkboxComponents = [<OptionsCheckbox name="lightSauce" shownWords = "Light Sauce" onChange={props.onChange} checked={props.lightSauce}/>, 
-                                  <OptionsCheckbox name="extraSauce" shownWords = "Extra Sauce" onChange={props.onChange} checked={props.extraSauce}/>]
+            checkboxComponents = [<OptionsCheckbox name="lightSauce" shownWords = "Light Sauce" onChange={props.onChange} checked={props.lightSauce} color="#fffaa8" />, 
+                                  <OptionsCheckbox name="extraSauce" shownWords = "Extra Sauce" onChange={props.onChange} checked={props.extraSauce} color="#fffaa8"/>]
         }
     }
     return (
@@ -64,7 +64,8 @@ const FoodButtonDiv  = (props) => {
             <h2>{title}</h2>
             {props.crusts ? <div>{glutenFreeWarning}</div> : null}
             {foodButtonComponents}
-            {props.sauces ? <br /> : null}
+            <br />
+            {/* {props.sauces ? <br /> : null} */}
             {checkboxComponents ? checkboxComponents : null}
         </div> 
     )
