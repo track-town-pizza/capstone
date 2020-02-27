@@ -2,7 +2,6 @@ import React from "react"
 import YellowFoodButton from "../components/YellowFoodButton"
 import Link from "next/link"
 
-
 const EndPizzaBuilderSection = (props) => {
     return (
         <div>

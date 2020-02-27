@@ -7,6 +7,8 @@ import FoodButtonDiv from "../components/FoodButtonDiv"
 import YellowToppingsBox from "../components/YellowToppingsBox"
 import GreenToppingsBox from "../components/GreenToppingsBox"
 import EndPizzaBuilderSection from "../components/EndPizzaBuilderSection"
+import HalfNHalf from "../components/HalfNHalf"
+
 
 function getPriceOfPizza(size, extraCheese, toppings, totalPrice, currentPizzaInfo) {
     let price = 0
@@ -129,6 +131,7 @@ const PizzaBuilder = () => {
         extraCheese: false,
         lightSauce: false,
         extraSauce: false,
+        halfNHalf: false,
         toppings: [],
         allPizzas: [],
         totalPrice: 0
@@ -147,6 +150,7 @@ const PizzaBuilder = () => {
                         extraCheese: false,
                         lightSauce: false,
                         extraSauce: false,
+                        halfNHalf: false,
                         toppings: [],
                         allPizzas: pizza.allPizzas.concat(currentPizzaInfo.currentPizza),
                         totalPrice: pizza.totalPrice + currentPizzaInfo.currentPrice
@@ -188,28 +192,34 @@ const PizzaBuilder = () => {
     function handleChange(event) {
         const {name, type} = event.target
         if(type === "checkbox") {
-            if(name === "thinCrust"){
+            if(name === "halfNHalf") {
                 setPizza({
                     ...pizza,
-                    thinCrust: !pizza.thinCrust,
+                    halfNHalf: !pizza.halfNHalf
                 })
             }
-            else if(name === "extraCheese"){
+            else if(name === "thinCrust") {
                 setPizza({
                     ...pizza,
-                    extraCheese: !pizza.extraCheese,
+                    thinCrust: !pizza.thinCrust
                 })
             }
-            else if(name === "lightSauce"){
+            else if(name === "extraCheese") {
                 setPizza({
                     ...pizza,
-                    lightSauce: !pizza.lightSauce,
+                    extraCheese: !pizza.extraCheese
                 })
             }
-            else if(name === "extraSauce"){
+            else if(name === "lightSauce") {
                 setPizza({
                     ...pizza,
-                    extraSauce: !pizza.extraSauce,
+                    lightSauce: !pizza.lightSauce
+                })
+            }
+            else if(name === "extraSauce") {
+                setPizza({
+                    ...pizza,
+                    extraSauce: !pizza.extraSauce
                 })
             }
             else {
@@ -224,7 +234,7 @@ const PizzaBuilder = () => {
                         remove = true
                     }
                 }
-                if (remove === false){
+                if (remove === false) {
                     setPizza({
                         ...pizza,
                         toppings: pizza.toppings.concat([name])
@@ -238,8 +248,13 @@ const PizzaBuilder = () => {
     const crustComponents = <FoodButtonDiv crusts={crusts} size={pizza.size} handleClick={handleClick} clicked={pizza.crust} onChange={handleChange} thinCrust={pizza.thinCrust}/>
     const cheeseComponents = <FoodButtonDiv cheeses={cheeses} handleClick={handleClick} clicked={pizza.cheese} onChange={handleChange} extraCheese={pizza.extraCheese}/>
     const sauceComponents = <FoodButtonDiv sauces={sauces} handleClick={handleClick} clicked={pizza.sauce} onChange={handleChange} lightSauce={pizza.lightSauce} extraSauce={pizza.extraSauce}/>
-    const yellowBoxComponents = <YellowToppingsBox title="Meats" toppings={toppings.meats} onChange={handleChange} wantedToppings={pizza.toppings}/>
-    const greenBoxComponenets = <GreenToppingsBox title="Non-Meats" toppings={toppings.others} onChange={handleChange} wantedToppings={pizza.toppings}/>
+    const yellowBoxComponent = <YellowToppingsBox title="Meats" toppings={toppings.meats} onChange={handleChange} wantedToppings={pizza.toppings}/>
+    const greenBoxComponent = <GreenToppingsBox title="Non-Meats" toppings={toppings.others} onChange={handleChange} wantedToppings={pizza.toppings}/>
+    const halfNHalfComponent = <HalfNHalf onChange={handleChange} halfNHalf={pizza.halfNHalf} />
+    const firstHalfHeading = <h2 className="text-center">First Half:</h2>
+    const secondHalfHeading = <h2 className="text-center"> Second Half:</h2>
+    
+    // think about a way to possibly redo this so that it's not so logicy for rendering with half n half
     return (
         <Layout>
             <div className="text-center">
@@ -251,10 +266,17 @@ const PizzaBuilder = () => {
             </div>
             {sizeComponents}
             {crustComponents}
+            {halfNHalfComponent}
+            {pizza.halfNHalf ? firstHalfHeading : null}
             {cheeseComponents}
             {sauceComponents}
-            {yellowBoxComponents}
-            {greenBoxComponenets}
+            {yellowBoxComponent}
+            {greenBoxComponent}
+            {pizza.halfNHalf ? secondHalfHeading : null}
+            {pizza.halfNHalf ? cheeseComponents : null}
+            {pizza.halfNHalf ? sauceComponents : null}
+            {pizza.halfNHalf ? yellowBoxComponent : null}
+            {pizza.halfNHalf ? greenBoxComponent : null}
             <div className="order-box">
                 <h3 className="pt-2">My Order:</h3>
                 { pizza.allPizzas.map(pizzaStr => <p className="pr-5 pl-5">{pizzaStr}</p>) }

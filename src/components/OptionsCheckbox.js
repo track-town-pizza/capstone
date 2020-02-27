@@ -2,7 +2,7 @@ import React from "react"
 
 const OptionsCheckbox = (props) => {
     return (
-        <label>
+        <label style={{backgroundColor:props.color}}>
             <input 
                 type="checkbox"
                 name={props.name}
@@ -13,8 +13,8 @@ const OptionsCheckbox = (props) => {
             <style jsx>{`
                 label {
                     white-space: nowrap;
-                    margin-top: .5rem;
-                    margin-right: 1rem;
+                    padding: .75rem;
+                    border-radius: 10px;
                 }
                 input {
                     float: left;
