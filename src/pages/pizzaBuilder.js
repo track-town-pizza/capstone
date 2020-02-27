@@ -11,9 +11,7 @@ import YellowFoodButton from "../components/YellowFoodButton"
 function getPriceOfPizza(size, extraCheese, toppings, totalPrice, currentPizzaInfo) {
     let price = 0
     if (size === null) {
-        console.log("ahhhhhhh" + totalPrice)
         return totalPrice === 0 ? 0 : totalPrice.toFixed(2)
-        // return 0
     }
     price += Number(prices[size])
     if (extraCheese) {
@@ -25,7 +23,6 @@ function getPriceOfPizza(size, extraCheese, toppings, totalPrice, currentPizzaIn
         price += Number(toppingPrices[size])
     }
     currentPizzaInfo.currentPrice = price
-    // return price
     return (totalPrice + price).toFixed(2)
 }
 
@@ -96,7 +93,7 @@ function buildToppingsString(toppings, pizzaInfo) {
     return pizzaInfo
 }
 
-function buildOrderString(pizza, currentPizza) {
+function buildOrderString(pizza, currentPizzaInfo) {
     let pizzaInfo = []
     pizzaInfo.push(pizza.size)
     pizzaInfo = buildToppingsString(pizza.toppings, pizzaInfo)
@@ -105,27 +102,23 @@ function buildOrderString(pizza, currentPizza) {
     pizzaInfo.push(buildSauceString(pizza.sauce, pizza.lightSauce, pizza.extraSauce))
     
     pizzaInfo = pizzaInfo.filter(ele => ele !== null)
-    currentPizza = ""
+    let pizzaStr = ""
     for(let i=0; i<pizzaInfo.length; i++) {
         if(i+1 === pizzaInfo.length) {
-            currentPizza = currentPizza + pizzaInfo[i]
+            pizzaStr = pizzaStr + pizzaInfo[i]
         }
         else {
-            currentPizza = currentPizza + pizzaInfo[i] + ", "
+            pizzaStr = pizzaStr + pizzaInfo[i] + ", "
         }
     }
-    return currentPizza
+    currentPizzaInfo.currentPizza = pizzaStr
+    return pizzaStr
 }
 
 const PizzaBuilder = () => {
-    // const allPizzas = []
-    let currentPizza = ""
-    // let totalPrice = 0
-    // let currentPrice = 0
     const currentPizzaInfo = {
         currentPizza: "",
         currentPrice: 0,
-        // totalPrice: 0
     }
     const [pizza, setPizza] = useState({
         size: null,
@@ -141,17 +134,10 @@ const PizzaBuilder = () => {
         totalPrice: 0
     })
 
-    // two big errors, one there is a weird spacing issues that has to do with the extra <br/> I made
-    // and cost is not staying it is getting reset to zero, but otherwise progress has been made!
-
     function handleClick(event) {
         const {name, type} = event.target
             if (type === 'button') {
                 if(name === "Build Again"){
-                    console.log("CURRENT COST: " + currentPizzaInfo.currentPrice)
-                    // currentPizzaInfo.totalPrice += currentPizzaInfo.currentPrice
-                    console.log("TOTAL COST: " + currentPizzaInfo.totalPrice)
-                    // const newCost = pizza.totalPrice + currentPizzaInfo.currentPrice
                     setPizza({
                         size: null,
                         crust: null,
@@ -162,14 +148,9 @@ const PizzaBuilder = () => {
                         lightSauce: false,
                         extraSauce: false,
                         toppings: [],
-                        allPizzas: pizza.allPizzas.concat(currentPizza),
+                        allPizzas: pizza.allPizzas.concat(currentPizzaInfo.currentPizza),
                         totalPrice: pizza.totalPrice + currentPizzaInfo.currentPrice
                     })
-                    // console.log(currentPizzaInfo.currentPrice)
-                    // console.log("COST: " + pizza.totalPrice)
-                    // console.log(currentPizza)
-
-                    // console.log(allPizzas)
                 }
                 else {
                     for(let size of sizes){
@@ -276,12 +257,8 @@ const PizzaBuilder = () => {
             {greenBoxComponenets}
             <div className="order-box">
                 <h3 className="pt-2">My Order:</h3>
-                { currentPizza = buildOrderString(pizza, currentPizza) }
-                {/* {console.log(pizza.allPizzas)} */}
                 { pizza.allPizzas.map(pizzaStr => <p className="pr-5 pl-5">{pizzaStr}</p>) }
-                {/* <p className="pr-5 pl-5">{buildOrderString(pizza, currentPizza)}</p> */}
-                {/* {currentPrice = getPriceOfPizza(pizza.size, pizza.extraCheese, pizza.toppings)} */}
-                {/* <h3 className="pb-2">{"Order Cost:  $" + (currentPrice + pizza.totalPrice).toFixed(2)} </h3> */}
+                <p className="pr-5 pl-5">{buildOrderString(pizza, currentPizzaInfo)}</p>
                 <h3 className="pb-2">{"Order Cost:  $" + getPriceOfPizza(pizza.size, pizza.extraCheese, pizza.toppings, pizza.totalPrice, currentPizzaInfo)} </h3>
             </div>
 
