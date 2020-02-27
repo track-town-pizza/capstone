@@ -33,7 +33,7 @@ const Index = () => {
 				</div>
 			</div>
 			<div className="info-containers home-font">
-				<div className="yellow-container extra-padding">
+				<div className="yellow-container extra-padding hours-margin">
 					<h3>We're open all week! Come visit us:</h3>
 					<br />
 					<div className="hours-container">
@@ -48,17 +48,17 @@ const Index = () => {
 				</div>
 				<div className="yellow-container">
 					<h3>Events</h3>
-					<table className="table-sm table-font">
+					<table className="table-sm table-font w-100">
 						<tbody>
-							{events.map(event => (
+							{events.slice(0, 5).map(event => (
 								<EventListing key={event.id} {...event} />
 							))}
 						</tbody>
 					</table>
 				</div>
-				<div className="yellow-container extra-padding">
+				<div className="yellow-container extra-padding location-size">
 					<h4>Located at {info.address}</h4>
-					<br />
+					<span className="responsive-break"><br /></span>
 					<h4>Across from Matthew Knight Arena</h4>
 					<img src={info.matthewKnightImgLink} alt="Matthew Knight Arena Front" />
 				</div>
@@ -102,18 +102,32 @@ const Index = () => {
 					background-color: rgba(0, 112, 48, 0.6);
 				}
 
+				@media only screen and (max-width: 900px) {
+					.home-order-photo {
+						position: static !important;
+						display: flex !important;
+						flex-direction: column;
+					}
+
+					.responsive-break {
+						display: none;
+					}
+
+					.responsive-spacing {
+						display: inline !important;
+					}
+
+					.responsive-phone {
+						font-size: 30px;
+					}
+				}
+
 				@media only screen and (max-width: 1100px) {
 					.order-overlay {
 						width: 30% !important;
 					}
 
 					@media only screen and (max-width: 900px) {
-						.home-order-photo {
-							position: static !important;
-							display: flex !important;
-							flex-direction: column;
-						}
-
 						.order-overlay {
 							position: static !important;
 							width: 100% !important;
@@ -121,18 +135,6 @@ const Index = () => {
 							padding: 10px 0;
 							background-color: rgba(0, 112, 48, 1) !important;
 							border-radius: 5px !important;
-						}
-
-						.responsive-break {
-							display: none;
-						}
-
-						.responsive-spacing {
-							display: inline !important;
-						}
-
-						.responsive-phone {
-							font-size: 30px;
 						}
 					}
 				}
@@ -218,7 +220,19 @@ const Index = () => {
 					border-radius: 2px;
 				}
 
-				@media only screen and (max-width: 900px) {
+				@media only screen and (max-width: 1100px) {
+					.yellow-container img {
+						height: 100px;
+					}
+
+					@media only screen and (max-width: 1000px) {
+						.yellow-container img {
+							height: auto;
+						}
+					}
+				}
+
+				@media only screen and (max-width: 1000px) {
 					.info-containers {
 						flex-wrap: wrap;
 						justify-content: center;
@@ -227,14 +241,34 @@ const Index = () => {
 
 					.yellow-container {
 						max-width: 100%;
-						width: 100%;
-						height: auto;
+						width: 48%;
+						height: 300px;
 						margin-top: 0;
 						border-radius: 5px;
 					}
 
 					.extra-padding {
-						padding: 10px 0 !important;
+						padding: 10px !important;
+					}
+
+					.hours-margin {
+						margin-right: 25px;
+					}
+
+					.location-size {
+						width: 100%;
+						height: 275px
+					}
+
+					@media only screen and (max-width: 900px) {
+						.yellow-container {
+							width: 100%;
+							height: auto;
+						}
+
+						.hours-margin {
+							margin-right: 0;
+						}
 					}
 				}
 
@@ -299,6 +333,16 @@ const Index = () => {
 
 					.blog-right-column {
 						padding: 20px 10px 0 10px;
+					}
+				}
+
+				@media only screen and (max-width: 700px) {
+					.home-order-photo,
+					.home-order-photo img,
+					.order-overlay,
+					.yellow-container,
+					.blog-container {
+						border-radius: 0 !important;
 					}
 				}
 			`}</style>

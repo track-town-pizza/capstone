@@ -6,8 +6,32 @@ const EventListing = ({ name, date, postUrl }) => {
 	const formattedDate = `${unformattedDate.getMonth()}/${unformattedDate.getDate()}/${unformattedDate.getFullYear()}`;
 	return (
 		<tr>
-			<td>{name}</td>
+			<td className="event-name">{name}</td>
 			<td>{formattedDate}</td>
+			<style jsx>{`
+				.event-name {
+					text-align: left;
+					font-size: 16px;
+				}
+
+				@media only screen and (max-width: 1501px) {
+					.event-name {
+						font-size: 15px;
+					}
+
+					@media only screen and (max-width: 1204px) {
+						.event-name {
+							font-size: 14px;
+						}
+
+						@media only screen and (max-width: 960px) {
+							.event-name {
+								font-size: 13px;
+							}
+						}
+					}
+				}
+			`}</style>
 		</tr>
 	)
 }
