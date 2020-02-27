@@ -24,7 +24,7 @@ const EventListing = ({ name, date, postUrl }) => {
 							font-size: 14px;
 						}
 
-						@media only screen and (max-width: 960px) {
+						@media only screen and (max-width: 1084px) {
 							.event-name {
 								font-size: 13px;
 							}
