@@ -5,7 +5,7 @@ const ToppingsCheckbox = (props) => {
         <label>
             <input 
                 type="checkbox"
-                name={props.name}
+                name={props.name+props.second}
                 className="checkbox"
                 onChange={props.onChange}
                 checked={props.checked}

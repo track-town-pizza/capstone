@@ -301,25 +301,56 @@ const PizzaBuilder = () => {
                         extraSauce: !pizza.secondHalf.extraSauce
                 }})
             }
-            // else {
-            //     let remove = false
-            //     for(let i=0; i<pizza.toppings.length; i++) {
-            //         if (name === pizza.toppings[i]) {
-            //             pizza.toppings.splice(i, 1)
-            //             setPizza({
-            //                 ...pizza,
-            //                 toppings: pizza.toppings
-            //             })
-            //             remove = true
-            //         }
-            //     }
-            //     if (remove === false) {
-            //         setPizza({
-            //             ...pizza,
-            //             toppings: pizza.toppings.concat([name])
-            //         })
-            //     }
-            // }
+            else {
+                console.log(name)
+                let remove = false
+                if(name.search("Second") === -1) {
+                    for(let i=0; i<pizza.firstHalf.toppings.length; i++) {
+                        if (name === pizza.firstHalf.toppings[i]) {
+                            pizza.firstHalf.toppings.splice(i, 1)
+                            setPizza({
+                                ...pizza,
+                                firstHalf: {
+                                    toppings: pizza.firstHalf.toppings
+                                }
+                            })
+                            remove = true
+                        }
+                    }
+                    if (remove === false) {
+                        setPizza({
+                            ...pizza,
+                            firstHalf: {
+                                toppings: pizza.firstHalf.toppings.concat([name])
+                            }
+                        })
+                    }
+                }
+                else {
+                    remove = false
+                    const newName = name.replace(/Second/g, "")
+                    for(let i=0; i<pizza.secondHalf.toppings.length; i++) {
+                        if (newName === pizza.secondHalf.toppings[i]) {
+                            pizza.secondHalf.toppings.splice(i, 1)
+                            setPizza({
+                                ...pizza,
+                                secondHalf: {
+                                    toppings: pizza.secondHalf.toppings
+                                }
+                            })
+                            remove = true
+                        }
+                    }
+                    if (remove === false) {
+                        setPizza({
+                            ...pizza,
+                            secondHalf: {
+                                toppings: pizza.secondHalf.toppings.concat([newName])
+                            }
+                        })
+                    }
+                }
+            }
         }
     }
 
@@ -327,51 +358,40 @@ const PizzaBuilder = () => {
     const crustComponents = <FoodButtonDiv crusts={crusts} size={pizza.size} handleClick={handleClick} clicked={pizza.crust} onChange={handleChange} thinCrust={pizza.thinCrust} second=""/>
     const cheeseComponents = <FoodButtonDiv cheeses={cheeses} handleClick={handleClick} clicked={pizza.firstHalf.cheese} onChange={handleChange} extraCheese={pizza.firstHalf.extraCheese} second=""/>
     const sauceComponents = <FoodButtonDiv sauces={sauces} handleClick={handleClick} clicked={pizza.firstHalf.sauce} onChange={handleChange} lightSauce={pizza.firstHalf.lightSauce} extraSauce={pizza.firstHalf.extraSauce} second=""/>
-    // const yellowBoxComponent = <YellowToppingsBox title="Meats" toppings={toppings.meats} onChange={handleChange} wantedToppings={pizza.toppings}/>
-    // const greenBoxComponent = <GreenToppingsBox title="Non-Meats" toppings={toppings.others} onChange={handleChange} wantedToppings={pizza.toppings}/>
+    const yellowBoxComponent = <YellowToppingsBox title="Meats" toppings={toppings.meats} onChange={handleChange} wantedToppings={pizza.firstHalf.toppings} second=""/>
+    const greenBoxComponent = <GreenToppingsBox title="Non-Meats" toppings={toppings.others} onChange={handleChange} wantedToppings={pizza.firstHalf.toppings} second=""/>
     
     const halfNHalfComponent = <HalfNHalf onChange={handleChange} halfNHalf={pizza.halfNHalf} second="" />
-    // const firstHalfHeading = <h2 className="text-center">First Half:</h2>
+    const firstHalfHeading = <h2 className="text-center">First Half:</h2>
     const secondHalfHeading = <h2 className="text-center"> Second Half:</h2>
 
     const secondCheeseComponents = <FoodButtonDiv cheeses={cheeses} handleClick={handleClick} clicked={pizza.secondHalf.cheese} onChange={handleChange} extraCheese={pizza.secondHalf.extraCheese} second="Second"/>
     const secondSauceComponents = <FoodButtonDiv sauces={sauces} handleClick={handleClick} clicked={pizza.secondHalf.sauce} onChange={handleChange} lightSauce={pizza.secondHalf.lightSauce} extraSauce={pizza.secondHalf.extraSauce} second="Second"/>
-    // const secondYellowBoxComponent = <YellowToppingsBox title="Meats" toppings={toppings.meats} onChange={handleChange} wantedToppings={pizza.toppings}/>
-    // const secondGreenBoxComponent = <GreenToppingsBox title="Non-Meats" toppings={toppings.others} onChange={handleChange} wantedToppings={pizza.toppings}/>
+    const secondYellowBoxComponent = <YellowToppingsBox title="Meats" toppings={toppings.meats} onChange={handleChange} wantedToppings={pizza.secondHalf.toppings} second="Second"/>
+    const secondGreenBoxComponent = <GreenToppingsBox title="Non-Meats" toppings={toppings.others} onChange={handleChange} wantedToppings={pizza.secondHalf.toppings} second="Second"/>
     
     // think about a way to possibly redo this so that it's not so logicy for rendering with half n half
     return (
         <Layout>
             <NotOnlineOrdering />
-            {sizeComponents}
+            {/* {sizeComponents}
             {crustComponents}
-            {halfNHalfComponent}
+            {halfNHalfComponent} */}
             {/* {pizza.halfNHalf ? firstHalfHeading : null} */}
-            {cheeseComponents}
+            {/* {cheeseComponents}
             {secondCheeseComponents}
             {sauceComponents}
-            {secondSauceComponents}
-            {pizza.thinCrust ? <p>thin crust</p> : <p>Not thin</p>}
-            {pizza.firstHalf.extraCheese ? <p>first half extraCheese</p> : <p>Not first half extraCheese</p>}
-            {pizza.firstHalf.lightSauce ? <p>first half lightSauce</p> : <p>Not first half lightSauce</p>}
-            {pizza.firstHalf.extraSauce ? <p>first half extraSauce</p> : <p>Not first half extraSauce</p>}
-            {pizza.secondHalf.extraCheese ? <p>second half extraCheese</p> : <p>Not second half extraCheese</p>}
-            {pizza.secondHalf.lightSauce ? <p>second half lightSauce</p> : <p>Not second half lightSauce</p>}
-            {pizza.secondHalf.extraSauce ? <p>second half extraSauce</p> : <p>Not second half extraSauce</p>}
-
-            {/* <p>{pizza.thinCrust}</p> */}
-            {/* <p>{pizza.size}</p>
-            <p>{pizza.firstHalf.cheese}</p>
-            <p>{pizza.firstHalf.sauce}</p>
-            <p>{pizza.secondHalf.cheese}</p>
-            <p>{pizza.secondHalf.sauce}</p> */}
-            {/* {yellowBoxComponent} */}
-            {/* {greenBoxComponent} */}
+            {secondSauceComponents} */}
+            {yellowBoxComponent}
+            {greenBoxComponent}
+            {secondYellowBoxComponent}
+            {secondGreenBoxComponent}
+            {pizza.firstHalf.toppings.includes("Pepperoni") ? <p>We love pep</p> : <p>we hate pep</p>}
             {/* {pizza.halfNHalf ? secondHalfHeading : null}
             {pizza.halfNHalf ? secondCheeseComponents : null} */}
             {/* {pizza.halfNHalf ? sauceComponents : null}
             {pizza.halfNHalf ? yellowBoxComponent : null}
-            {pizza.halfNHalf ? greenBoxComponent : null} */}
+            {pizza.halfNHalf ? greenBoxComponent : null}
             {/* <div className="order-box">
                 <h3 className="pt-2">My Order:</h3>
                 { pizza.allPizzas.map(pizzaStr => <p className="pr-5 pl-5">{pizzaStr}</p>) }
