@@ -16,6 +16,7 @@ function getPriceOfPizza(size, extraCheese, toppings, totalPrice, currentPizzaIn
         return totalPrice === 0 ? 0 : totalPrice.toFixed(2)
     }
     price += Number(prices[size])
+    // if the user said no cheese then they should not be charged for extra cheese
     if (extraCheese) {
         price += Number(prices.Cheese[size])
     }
@@ -125,25 +126,36 @@ const PizzaBuilder = () => {
     const [pizza, setPizza] = useState({
         size: null,
         crust: null,
-        cheese: null,
-        sauce: null,
         thinCrust: false,
-        extraCheese: false,
-        lightSauce: false,
-        extraSauce: false,
         halfNHalf: false,
-        toppings: [],
+        firstHalf: {
+            cheese: null,
+            sauce: null,
+            extraCheese: false,
+            lightSauce: false,
+            extraSauce: false,
+            toppings: []
+        },
+        secondHalf: {
+            cheese: null,
+            sauce: null,
+            extraCheese: false,
+            lightSauce: false,
+            extraSauce: false,
+            toppings: []
+        },
         allPizzas: [],
         totalPrice: 0
     })
 
     function handleClick(event) {
         const {name, type} = event.target
-            if (type === 'button') {
-                if(name === "Build Again"){
-                    setPizza({
-                        size: null,
-                        crust: null,
+        if (type === 'button') {
+            if(name === "Build Again"){
+                setPizza({
+                    size: null,
+                    crust: null,
+                    firstHalf: {
                         cheese: null,
                         sauce: null,
                         thinCrust: false,
@@ -152,41 +164,78 @@ const PizzaBuilder = () => {
                         extraSauce: false,
                         halfNHalf: false,
                         toppings: [],
-                        allPizzas: pizza.allPizzas.concat(currentPizzaInfo.currentPizza),
-                        totalPrice: pizza.totalPrice + currentPizzaInfo.currentPrice
-                    })
+                    },
+                    secondHalf: {
+                        cheese: null,
+                        sauce: null,
+                        thinCrust: false,
+                        extraCheese: false,
+                        lightSauce: false,
+                        extraSauce: false,
+                        halfNHalf: false,
+                        toppings: [],
+                    },
+                    allPizzas: pizza.allPizzas.concat(currentPizzaInfo.currentPizza),
+                    totalPrice: pizza.totalPrice + currentPizzaInfo.currentPrice
+                })
+            }
+            else {
+                for(let size of sizes){
+                    if(name === size){
+                        setPizza({
+                            ...pizza,
+                            size: size,
+                        })}
                 }
-                else {
-                    for(let size of sizes){
-                        if(name === size){
-                            setPizza({
-                                ...pizza,
-                                size: name,
-                            })}
-                    }
-                    for(let crust of crusts){
-                        if(name === crust){
-                            setPizza({
-                                ...pizza,
-                                crust: name,
-                            })}
-                    }
-                    for(let cheese of cheeses){
-                        if(name === cheese){
-                            setPizza({
+                for(let crust of crusts){
+                    if(name === crust){
+                        setPizza({
                             ...pizza,
-                            cheese: name,
+                            crust: crust,
                         })}
+                }
+                for(let cheese of cheeses){
+                    if(name === cheese){
+                        setPizza({
+                        ...pizza,
+                        firstHalf: {
+                            ...pizza.firstHalf,
+                            cheese: cheese
+                        }})
                     }
-                    for(let sauce of sauces){
-                        if(name === sauce){
-                            setPizza({
-                            ...pizza,
-                            sauce: name,
-                        })}
+                }
+                for(let cheese of cheeses){
+                    if(name === (cheese + "Second")){
+                        setPizza({
+                        ...pizza,
+                        secondHalf: {
+                            ...pizza.secondHalf,
+                            cheese: cheese
+                        }})
+                    }
+                }
+                for(let sauce of sauces){
+                    if(name === sauce){
+                        setPizza({
+                        ...pizza,
+                        firstHalf: {
+                            ...pizza.firstHalf,
+                            sauce: sauce
+                        }})
+                    }
+                }
+                for(let sauce of sauces){
+                    if(name === sauce + "Second"){
+                        setPizza({
+                        ...pizza,
+                        secondHalf: {
+                            ...pizza.secondHalf,
+                            sauce: sauce
+                        }})
                     }
                 }
             }
+        }
     }
 
     function handleChange(event) {
@@ -207,52 +256,88 @@ const PizzaBuilder = () => {
             else if(name === "extraCheese") {
                 setPizza({
                     ...pizza,
-                    extraCheese: !pizza.extraCheese
-                })
+                    firstHalf: {
+                        ...pizza.firstHalf,
+                        extraCheese: !pizza.firstHalf.extraCheese
+                }})
             }
             else if(name === "lightSauce") {
                 setPizza({
                     ...pizza,
-                    lightSauce: !pizza.lightSauce
-                })
+                    firstHalf: {
+                        ...pizza.firstHalf,
+                        lightSauce: !pizza.firstHalf.lightSauce
+                }})
             }
             else if(name === "extraSauce") {
                 setPizza({
                     ...pizza,
-                    extraSauce: !pizza.extraSauce
-                })
+                    firstHalf: {
+                        ...pizza.firstHalf,
+                        extraSauce: !pizza.firstHalf.extraSauce
+                }})
             }
-            else {
-                let remove = false
-                for(let i=0; i<pizza.toppings.length; i++) {
-                    if (name === pizza.toppings[i]) {
-                        pizza.toppings.splice(i, 1)
-                        setPizza({
-                            ...pizza,
-                            toppings: pizza.toppings
-                        })
-                        remove = true
-                    }
-                }
-                if (remove === false) {
-                    setPizza({
-                        ...pizza,
-                        toppings: pizza.toppings.concat([name])
-                    })
-                }
+            else if(name === "extraCheeseSecond") {
+                setPizza({
+                    ...pizza,
+                    secondHalf: {
+                        ...pizza.secondHalf,
+                        extraCheese: !pizza.secondHalf.extraCheese
+                }})
             }
+            else if(name === "lightSauceSecond") {
+                setPizza({
+                    ...pizza,
+                    secondHalf: {
+                        ...pizza.secondHalf,
+                        lightSauce: !pizza.secondHalf.lightSauce
+                }})
+            }
+            else if(name === "extraSauceSecond") {
+                setPizza({
+                    ...pizza,
+                    secondHalf: {
+                        ...pizza.secondHalf,
+                        extraSauce: !pizza.secondHalf.extraSauce
+                }})
+            }
+            // else {
+            //     let remove = false
+            //     for(let i=0; i<pizza.toppings.length; i++) {
+            //         if (name === pizza.toppings[i]) {
+            //             pizza.toppings.splice(i, 1)
+            //             setPizza({
+            //                 ...pizza,
+            //                 toppings: pizza.toppings
+            //             })
+            //             remove = true
+            //         }
+            //     }
+            //     if (remove === false) {
+            //         setPizza({
+            //             ...pizza,
+            //             toppings: pizza.toppings.concat([name])
+            //         })
+            //     }
+            // }
         }
     }
 
-    const sizeComponents = <FoodButtonDiv sizes={sizes} handleClick={handleClick} clicked={pizza.size}/>
-    const crustComponents = <FoodButtonDiv crusts={crusts} size={pizza.size} handleClick={handleClick} clicked={pizza.crust} onChange={handleChange} thinCrust={pizza.thinCrust}/>
-    const cheeseComponents = <FoodButtonDiv cheeses={cheeses} handleClick={handleClick} clicked={pizza.cheese} onChange={handleChange} extraCheese={pizza.extraCheese}/>
-    const sauceComponents = <FoodButtonDiv sauces={sauces} handleClick={handleClick} clicked={pizza.sauce} onChange={handleChange} lightSauce={pizza.lightSauce} extraSauce={pizza.extraSauce}/>
-    const yellowBoxComponent = <YellowToppingsBox title="Meats" toppings={toppings.meats} onChange={handleChange} wantedToppings={pizza.toppings}/>
-    const greenBoxComponent = <GreenToppingsBox title="Non-Meats" toppings={toppings.others} onChange={handleChange} wantedToppings={pizza.toppings}/>
-    const halfNHalfComponent = <HalfNHalf onChange={handleChange} halfNHalf={pizza.halfNHalf} />
-    const firstHalfHeading = <h2 className="text-center">First Half:</h2>
+    const sizeComponents = <FoodButtonDiv sizes={sizes} handleClick={handleClick} clicked={pizza.size} second="" />
+    const crustComponents = <FoodButtonDiv crusts={crusts} size={pizza.size} handleClick={handleClick} clicked={pizza.crust} onChange={handleChange} thinCrust={pizza.thinCrust} second=""/>
+    const cheeseComponents = <FoodButtonDiv cheeses={cheeses} handleClick={handleClick} clicked={pizza.firstHalf.cheese} onChange={handleChange} extraCheese={pizza.firstHalf.extraCheese} second=""/>
+    const sauceComponents = <FoodButtonDiv sauces={sauces} handleClick={handleClick} clicked={pizza.firstHalf.sauce} onChange={handleChange} lightSauce={pizza.firstHalf.lightSauce} extraSauce={pizza.firstHalf.extraSauce} second=""/>
+    // const yellowBoxComponent = <YellowToppingsBox title="Meats" toppings={toppings.meats} onChange={handleChange} wantedToppings={pizza.toppings}/>
+    // const greenBoxComponent = <GreenToppingsBox title="Non-Meats" toppings={toppings.others} onChange={handleChange} wantedToppings={pizza.toppings}/>
+    
+    const halfNHalfComponent = <HalfNHalf onChange={handleChange} halfNHalf={pizza.halfNHalf} second="" />
+    // const firstHalfHeading = <h2 className="text-center">First Half:</h2>
     const secondHalfHeading = <h2 className="text-center"> Second Half:</h2>
+
+    const secondCheeseComponents = <FoodButtonDiv cheeses={cheeses} handleClick={handleClick} clicked={pizza.secondHalf.cheese} onChange={handleChange} extraCheese={pizza.secondHalf.extraCheese} second="Second"/>
+    const secondSauceComponents = <FoodButtonDiv sauces={sauces} handleClick={handleClick} clicked={pizza.secondHalf.sauce} onChange={handleChange} lightSauce={pizza.secondHalf.lightSauce} extraSauce={pizza.secondHalf.extraSauce} second="Second"/>
+    // const secondYellowBoxComponent = <YellowToppingsBox title="Meats" toppings={toppings.meats} onChange={handleChange} wantedToppings={pizza.toppings}/>
+    // const secondGreenBoxComponent = <GreenToppingsBox title="Non-Meats" toppings={toppings.others} onChange={handleChange} wantedToppings={pizza.toppings}/>
     
     // think about a way to possibly redo this so that it's not so logicy for rendering with half n half
     return (
@@ -261,22 +346,38 @@ const PizzaBuilder = () => {
             {sizeComponents}
             {crustComponents}
             {halfNHalfComponent}
-            {pizza.halfNHalf ? firstHalfHeading : null}
+            {/* {pizza.halfNHalf ? firstHalfHeading : null} */}
             {cheeseComponents}
+            {secondCheeseComponents}
             {sauceComponents}
-            {yellowBoxComponent}
-            {greenBoxComponent}
-            {pizza.halfNHalf ? secondHalfHeading : null}
-            {pizza.halfNHalf ? cheeseComponents : null}
-            {pizza.halfNHalf ? sauceComponents : null}
+            {secondSauceComponents}
+            {pizza.thinCrust ? <p>thin crust</p> : <p>Not thin</p>}
+            {pizza.firstHalf.extraCheese ? <p>first half extraCheese</p> : <p>Not first half extraCheese</p>}
+            {pizza.firstHalf.lightSauce ? <p>first half lightSauce</p> : <p>Not first half lightSauce</p>}
+            {pizza.firstHalf.extraSauce ? <p>first half extraSauce</p> : <p>Not first half extraSauce</p>}
+            {pizza.secondHalf.extraCheese ? <p>second half extraCheese</p> : <p>Not second half extraCheese</p>}
+            {pizza.secondHalf.lightSauce ? <p>second half lightSauce</p> : <p>Not second half lightSauce</p>}
+            {pizza.secondHalf.extraSauce ? <p>second half extraSauce</p> : <p>Not second half extraSauce</p>}
+
+            {/* <p>{pizza.thinCrust}</p> */}
+            {/* <p>{pizza.size}</p>
+            <p>{pizza.firstHalf.cheese}</p>
+            <p>{pizza.firstHalf.sauce}</p>
+            <p>{pizza.secondHalf.cheese}</p>
+            <p>{pizza.secondHalf.sauce}</p> */}
+            {/* {yellowBoxComponent} */}
+            {/* {greenBoxComponent} */}
+            {/* {pizza.halfNHalf ? secondHalfHeading : null}
+            {pizza.halfNHalf ? secondCheeseComponents : null} */}
+            {/* {pizza.halfNHalf ? sauceComponents : null}
             {pizza.halfNHalf ? yellowBoxComponent : null}
-            {pizza.halfNHalf ? greenBoxComponent : null}
-            <div className="order-box">
+            {pizza.halfNHalf ? greenBoxComponent : null} */}
+            {/* <div className="order-box">
                 <h3 className="pt-2">My Order:</h3>
                 { pizza.allPizzas.map(pizzaStr => <p className="pr-5 pl-5">{pizzaStr}</p>) }
                 <p className="pr-5 pl-5">{buildOrderString(pizza, currentPizzaInfo)}</p>
                 <h3 className="pb-2">{"Order Cost:  $" + getPriceOfPizza(pizza.size, pizza.extraCheese, pizza.toppings, pizza.totalPrice, currentPizzaInfo)} </h3>
-            </div>
+            </div> */}
             <EndPizzaBuilderSection handleClick={handleClick}/>
             <style jsx>{`
                 .order-box {

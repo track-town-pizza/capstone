@@ -17,7 +17,7 @@ const EndPizzaBuilderSection = (props) => {
             <br />
             <div className="text-center">
                 <h3>Want to add another pizza?</h3>
-                <YellowFoodButton buttonWord="Build Again" name="Build Again" handleClick={props.handleClick}/>
+                <YellowFoodButton buttonWord="Build Again" name="Build Again" handleClick={props.handleClick} second=""/>
             </div>
             <div className="text-center">
                 <p className="d-inline">To see specific prices, check out our paper </p>

@@ -5,7 +5,8 @@ import OptionsCheckbox from "./OptionsCheckbox"
 const HalfNHalf = (props) => {
     return (
         <div className="text-center m-4">
-            <OptionsCheckbox name="halfNHalf" onChange={props.onChange} checked={props.halfNHalf} shownWords="Half and half pizza?" color="#C1F7AE"/>
+            <h3>Half-and-Half Pizza?</h3>
+            <OptionsCheckbox name="halfNHalf" onChange={props.onChange} checked={props.halfNHalf} shownWords="Yes" color="#C1F7AE" second={props.second}/>
         </div>
     )
 }

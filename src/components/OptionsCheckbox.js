@@ -5,7 +5,7 @@ const OptionsCheckbox = (props) => {
         <label style={{backgroundColor:props.color}}>
             <input 
                 type="checkbox"
-                name={props.name}
+                name={props.name + props.second}
                 className="checkbox"
                 onChange={props.onChange}
                 checked={props.checked}
