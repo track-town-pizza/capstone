@@ -240,6 +240,7 @@ const PizzaBuilder = () => {
 
     function handleChange(event) {
         const {name, type} = event.target
+        console.log(name)
         if(type === "checkbox") {
             if(name === "halfNHalf") {
                 setPizza({
@@ -302,7 +303,6 @@ const PizzaBuilder = () => {
                 }})
             }
             else {
-                console.log(name)
                 let remove = false
                 if(name.search("Second") === -1) {
                     for(let i=0; i<pizza.firstHalf.toppings.length; i++) {
@@ -311,6 +311,7 @@ const PizzaBuilder = () => {
                             setPizza({
                                 ...pizza,
                                 firstHalf: {
+                                    ...pizza.firstHalf,
                                     toppings: pizza.firstHalf.toppings
                                 }
                             })
@@ -321,6 +322,7 @@ const PizzaBuilder = () => {
                         setPizza({
                             ...pizza,
                             firstHalf: {
+                                ...pizza.firstHalf,
                                 toppings: pizza.firstHalf.toppings.concat([name])
                             }
                         })
@@ -335,6 +337,7 @@ const PizzaBuilder = () => {
                             setPizza({
                                 ...pizza,
                                 secondHalf: {
+                                    ...pizza.secondHalf,
                                     toppings: pizza.secondHalf.toppings
                                 }
                             })
@@ -345,6 +348,7 @@ const PizzaBuilder = () => {
                         setPizza({
                             ...pizza,
                             secondHalf: {
+                                ...pizza.secondHalf,
                                 toppings: pizza.secondHalf.toppings.concat([newName])
                             }
                         })
@@ -371,27 +375,24 @@ const PizzaBuilder = () => {
     const secondGreenBoxComponent = <GreenToppingsBox title="Non-Meats" toppings={toppings.others} onChange={handleChange} wantedToppings={pizza.secondHalf.toppings} second="Second"/>
     
     // think about a way to possibly redo this so that it's not so logicy for rendering with half n half
+
+    // when I chose a topping it resets my sauce and cheese components...weird
     return (
         <Layout>
             <NotOnlineOrdering />
-            {/* {sizeComponents}
+            {sizeComponents}
             {crustComponents}
-            {halfNHalfComponent} */}
-            {/* {pizza.halfNHalf ? firstHalfHeading : null} */}
-            {/* {cheeseComponents}
-            {secondCheeseComponents}
+            {halfNHalfComponent}
+            {pizza.halfNHalf ? firstHalfHeading : null}
+            {cheeseComponents}
             {sauceComponents}
-            {secondSauceComponents} */}
             {yellowBoxComponent}
             {greenBoxComponent}
-            {secondYellowBoxComponent}
-            {secondGreenBoxComponent}
-            {pizza.firstHalf.toppings.includes("Pepperoni") ? <p>We love pep</p> : <p>we hate pep</p>}
-            {/* {pizza.halfNHalf ? secondHalfHeading : null}
-            {pizza.halfNHalf ? secondCheeseComponents : null} */}
-            {/* {pizza.halfNHalf ? sauceComponents : null}
-            {pizza.halfNHalf ? yellowBoxComponent : null}
-            {pizza.halfNHalf ? greenBoxComponent : null}
+            {pizza.halfNHalf ? secondHalfHeading : null}
+            {pizza.halfNHalf ? secondCheeseComponents : null}
+            {pizza.halfNHalf ? secondSauceComponents : null}
+            {pizza.halfNHalf ? secondYellowBoxComponent : null}
+            {pizza.halfNHalf ? secondGreenBoxComponent : null} 
             {/* <div className="order-box">
                 <h3 className="pt-2">My Order:</h3>
                 { pizza.allPizzas.map(pizzaStr => <p className="pr-5 pl-5">{pizzaStr}</p>) }
