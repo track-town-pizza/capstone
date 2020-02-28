@@ -3,7 +3,7 @@ import GreenFoodButton from "./GreenFoodButton"
 import YellowFoodButton from "./YellowFoodButton"
 import OptionsCheckbox from "./OptionsCheckbox"
 
-const FoodButtonDiv  = (props) => {
+const PizzaCustomOpts  = (props) => {
     let foodButtonComponents = null
     let title = null
     let checkboxComponents = null
@@ -35,7 +35,7 @@ const FoodButtonDiv  = (props) => {
             }
         })
         if (props.clicked === "White" || props.clicked === "Wheat") {
-            checkboxComponents = <OptionsCheckbox name="thinCrust" shownWords="Thin Crust" onChange={props.onChange} checked={props.thinCrust} color="#fffaa8" second={props.second} />
+            checkboxComponents = <OptionsCheckbox name="thinCrust" shownWords="Thin Crust" onChange={props.onChange} checked={props.thinCrust} second={props.second} />
         }
     }
     else if (props.cheeses) {
@@ -45,7 +45,7 @@ const FoodButtonDiv  = (props) => {
                                     : <YellowFoodButton buttonWord={cheese} handleClick={props.handleClick} color="#FFEC65" second={props.second}/>
         )
         if (props.clicked !== "No Cheese") {
-            checkboxComponents = <OptionsCheckbox name="extraCheese" shownWords = "Extra Cheese" onChange={props.onChange} checked={props.extraCheese} color="#fffaa8" second={props.second}/>
+            checkboxComponents = <OptionsCheckbox name="extraCheese" shownWords = "Extra Cheese" onChange={props.onChange} checked={props.extraCheese} second={props.second}/>
         }
     }
     else if (props.sauces) {
@@ -55,8 +55,8 @@ const FoodButtonDiv  = (props) => {
                                     : <GreenFoodButton buttonWord={sauce} handleClick={props.handleClick} color="#007030" second={props.second}/>
         )
         if (props.clicked !== "No Sauce") {
-            checkboxComponents = [<OptionsCheckbox name="lightSauce" shownWords = "Light Sauce" onChange={props.onChange} checked={props.lightSauce} color="#fffaa8"  second={props.second}/>, 
-                                  <OptionsCheckbox name="extraSauce" shownWords = "Extra Sauce" onChange={props.onChange} checked={props.extraSauce} color="#fffaa8"  second={props.second} />]
+            checkboxComponents = [<OptionsCheckbox name="lightSauce" shownWords = "Light Sauce" onChange={props.onChange} checked={props.lightSauce}  second={props.second}/>, 
+                                  <OptionsCheckbox name="extraSauce" shownWords = "Extra Sauce" onChange={props.onChange} checked={props.extraSauce}  second={props.second} />]
         }
     }
     return (
@@ -65,9 +65,8 @@ const FoodButtonDiv  = (props) => {
             {props.crusts ? <div>{glutenFreeWarning}</div> : null}
             {foodButtonComponents}
             <br />
-            {/* {props.sauces ? <br /> : null} */}
             {checkboxComponents ? checkboxComponents : null}
         </div> 
     )
 }
-export default FoodButtonDiv
+export default PizzaCustomOpts

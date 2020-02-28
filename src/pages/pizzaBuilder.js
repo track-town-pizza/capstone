@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import Layout from "../components/Layout"
 import { sizes, crusts, cheeses, sauces, toppings } from "../../data/pizzaInfo.json"
 import prices from "../../data/prices.json"
-import FoodButtonDiv from "../components/FoodButtonDiv"
+import PizzaCustomOpts from "../components/PizzaCustomOpts"
 import YellowToppingsBox from "../components/YellowToppingsBox"
 import GreenToppingsBox from "../components/GreenToppingsBox"
 import EndPizzaBuilderSection from "../components/EndPizzaBuilderSection"
@@ -358,10 +358,10 @@ const PizzaBuilder = () => {
         }
     }
 
-    const sizeComponents = <FoodButtonDiv sizes={sizes} handleClick={handleClick} clicked={pizza.size} second="" />
-    const crustComponents = <FoodButtonDiv crusts={crusts} size={pizza.size} handleClick={handleClick} clicked={pizza.crust} onChange={handleChange} thinCrust={pizza.thinCrust} second=""/>
-    const cheeseComponents = <FoodButtonDiv cheeses={cheeses} handleClick={handleClick} clicked={pizza.firstHalf.cheese} onChange={handleChange} extraCheese={pizza.firstHalf.extraCheese} second=""/>
-    const sauceComponents = <FoodButtonDiv sauces={sauces} handleClick={handleClick} clicked={pizza.firstHalf.sauce} onChange={handleChange} lightSauce={pizza.firstHalf.lightSauce} extraSauce={pizza.firstHalf.extraSauce} second=""/>
+    const sizeComponents = <PizzaCustomOpts sizes={sizes} handleClick={handleClick} clicked={pizza.size} second="" />
+    const crustComponents = <PizzaCustomOpts crusts={crusts} size={pizza.size} handleClick={handleClick} clicked={pizza.crust} onChange={handleChange} thinCrust={pizza.thinCrust} second=""/>
+    const cheeseComponents = <PizzaCustomOpts cheeses={cheeses} handleClick={handleClick} clicked={pizza.firstHalf.cheese} onChange={handleChange} extraCheese={pizza.firstHalf.extraCheese} second=""/>
+    const sauceComponents = <PizzaCustomOpts sauces={sauces} handleClick={handleClick} clicked={pizza.firstHalf.sauce} onChange={handleChange} lightSauce={pizza.firstHalf.lightSauce} extraSauce={pizza.firstHalf.extraSauce} second=""/>
     const yellowBoxComponent = <YellowToppingsBox title="Meats" toppings={toppings.meats} onChange={handleChange} wantedToppings={pizza.firstHalf.toppings} second=""/>
     const greenBoxComponent = <GreenToppingsBox title="Non-Meats" toppings={toppings.others} onChange={handleChange} wantedToppings={pizza.firstHalf.toppings} second=""/>
     
@@ -369,14 +369,11 @@ const PizzaBuilder = () => {
     const firstHalfHeading = <h2 className="text-center">First Half:</h2>
     const secondHalfHeading = <h2 className="text-center"> Second Half:</h2>
 
-    const secondCheeseComponents = <FoodButtonDiv cheeses={cheeses} handleClick={handleClick} clicked={pizza.secondHalf.cheese} onChange={handleChange} extraCheese={pizza.secondHalf.extraCheese} second="Second"/>
-    const secondSauceComponents = <FoodButtonDiv sauces={sauces} handleClick={handleClick} clicked={pizza.secondHalf.sauce} onChange={handleChange} lightSauce={pizza.secondHalf.lightSauce} extraSauce={pizza.secondHalf.extraSauce} second="Second"/>
+    const secondCheeseComponents = <PizzaCustomOpts cheeses={cheeses} handleClick={handleClick} clicked={pizza.secondHalf.cheese} onChange={handleChange} extraCheese={pizza.secondHalf.extraCheese} second="Second"/>
+    const secondSauceComponents = <PizzaCustomOpts sauces={sauces} handleClick={handleClick} clicked={pizza.secondHalf.sauce} onChange={handleChange} lightSauce={pizza.secondHalf.lightSauce} extraSauce={pizza.secondHalf.extraSauce} second="Second"/>
     const secondYellowBoxComponent = <YellowToppingsBox title="Meats" toppings={toppings.meats} onChange={handleChange} wantedToppings={pizza.secondHalf.toppings} second="Second"/>
     const secondGreenBoxComponent = <GreenToppingsBox title="Non-Meats" toppings={toppings.others} onChange={handleChange} wantedToppings={pizza.secondHalf.toppings} second="Second"/>
-    
-    // think about a way to possibly redo this so that it's not so logicy for rendering with half n half
 
-    // when I chose a topping it resets my sauce and cheese components...weird
     return (
         <Layout>
             <NotOnlineOrdering />
