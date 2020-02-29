@@ -9,22 +9,34 @@ import EndPizzaBuilderSection from "../components/EndPizzaBuilderSection"
 import HalfNHalf from "../components/HalfNHalf"
 import NotOnlineOrdering from "../components/NotOnlineOrdering"
 
+function determinePrice(size, pizzaInfo) {
+    let price = 0
+    price += Number(prices[size])
+    if (pizzaInfo.extraCheese && pizzaInfo.cheese !== "No Cheese") {
+        price += Number(prices.Cheese[size])
+    }
+    for(let toppingStr of pizzaInfo.toppings) {
+        const topping = toppingStr.replace(/ /g, "_")
+        const toppingPrices = prices[topping]
+        price += Number(toppingPrices[size])
+    }
+    return price
+}
 
-function getPriceOfPizza(size, extraCheese, toppings, totalPrice, currentPizzaInfo) {
+function getPriceOfPizza(size, halfNHalf, firstHalf, secondHalf, totalPrice, currentPizzaInfo) {
     let price = 0
     if (size === null) {
         return totalPrice === 0 ? 0 : totalPrice.toFixed(2)
     }
-    price += Number(prices[size])
-    // if the user said no cheese then they should not be charged for extra cheese
-    if (extraCheese) {
-        price += Number(prices.Cheese[size])
+    if(halfNHalf) {
+        let fPrice = determinePrice(size, firstHalf)
+        let sPrice = determinePrice(size, secondHalf)
+        price = fPrice > sPrice ? fPrice : sPrice
     }
-    for(let toppingStr of toppings) {
-        const topping = toppingStr.replace(/ /g, "_")
-        let toppingPrices = prices[topping]
-        price += Number(toppingPrices[size])
+    else {
+        price = determinePrice(size, firstHalf)
     }
+    
     currentPizzaInfo.currentPrice = price
     return (totalPrice + price).toFixed(2)
 }
@@ -93,27 +105,49 @@ function buildToppingsString(toppings, pizzaInfo) {
     for(let topping of toppings) {
         pizzaInfo.push(topping)
     }
-    return pizzaInfo
 }
 
 function buildOrderString(pizza, currentPizzaInfo) {
-    let pizzaInfo = []
+    const pizzaInfo = []
     pizzaInfo.push(pizza.size)
-    pizzaInfo = buildToppingsString(pizza.toppings, pizzaInfo)
     pizzaInfo.push(buildCrustString(pizza.crust, pizza.thinCrust))
-    pizzaInfo.push(buildCheeseString(pizza.cheese, pizza.extraCheese))
-    pizzaInfo.push(buildSauceString(pizza.sauce, pizza.lightSauce, pizza.extraSauce))
-    
-    pizzaInfo = pizzaInfo.filter(ele => ele !== null)
-    let pizzaStr = ""
-    for(let i=0; i<pizzaInfo.length; i++) {
-        if(i+1 === pizzaInfo.length) {
-            pizzaStr = pizzaStr + pizzaInfo[i]
-        }
-        else {
-            pizzaStr = pizzaStr + pizzaInfo[i] + ", "
+
+    if(pizza.halfNHalf) {
+        console.log(pizza.firstHalf.cheese)
+        console.log(pizza.firstHalf.sauce)
+        console.log(pizza.firstHalf.toppings)
+        console.log(pizza.secondHalf.cheese)
+        console.log(pizza.secondHalf.sauce)
+        console.log(pizza.secondHalf.toppings)
+
+
+        if(pizza.firstHalf.cheese !== null && pizza.firstHalf.sauce !== null && pizza.firstHalf.toppings !== [] && pizza.secondHalf.cheese !== null && pizza.secondHalf.sauce !== null && pizza.secondHalf.toppings !== [] ) {
+            pizzaInfo.push("First Half: ")
+            buildToppingsString(pizza.firstHalf.toppings, pizzaInfo)
+            pizzaInfo.push(buildCheeseString(pizza.firstHalf.cheese, pizza.firstHalf.extraCheese))
+            pizzaInfo.push(buildSauceString(pizza.firstHalf.sauce, pizza.firstHalf.lightSauce, pizza.firstHalf.extraSauce))
+            pizzaInfo.push("Second Half: ")
+            buildToppingsString(pizza.secondHalf.toppings, pizzaInfo)
+            pizzaInfo.push(buildCheeseString(pizza.secondHalf.cheese, pizza.secondHalf.extraCheese))
+            pizzaInfo.push(buildSauceString(pizza.secondHalf.sauce, pizza.secondHalf.lightSauce, pizza.secondHalf.extraSauce))
         }
     }
+    else {
+        buildToppingsString(pizza.firstHalf.toppings, pizzaInfo)
+        pizzaInfo.push(buildCheeseString(pizza.firstHalf.cheese, pizza.firstHalf.extraCheese))
+        pizzaInfo.push(buildSauceString(pizza.firstHalf.sauce, pizza.firstHalf.lightSauce, pizza.firstHalf.extraSauce))
+    }
+
+    const filtPizzaInfo = pizzaInfo.filter(ele => ele !== null)
+    let pizzaStr = ""
+    for(let i=0; i<filtPizzaInfo.length; i++) {
+        if(i+1 === filtPizzaInfo.length || filtPizzaInfo[i] === "First Half: " || filtPizzaInfo[i] === "Second Half: ") {
+            pizzaStr = pizzaStr + filtPizzaInfo[i]
+        }
+        else {
+            pizzaStr = pizzaStr + filtPizzaInfo[i] + ", "
+        }
+    } 
     currentPizzaInfo.currentPizza = pizzaStr
     return pizzaStr
 }
@@ -240,7 +274,6 @@ const PizzaBuilder = () => {
 
     function handleChange(event) {
         const {name, type} = event.target
-        console.log(name)
         if(type === "checkbox") {
             if(name === "halfNHalf") {
                 setPizza({
@@ -390,12 +423,12 @@ const PizzaBuilder = () => {
             {pizza.halfNHalf ? secondSauceComponents : null}
             {pizza.halfNHalf ? secondYellowBoxComponent : null}
             {pizza.halfNHalf ? secondGreenBoxComponent : null} 
-            {/* <div className="order-box">
+            <div className="order-box">
                 <h3 className="pt-2">My Order:</h3>
                 { pizza.allPizzas.map(pizzaStr => <p className="pr-5 pl-5">{pizzaStr}</p>) }
                 <p className="pr-5 pl-5">{buildOrderString(pizza, currentPizzaInfo)}</p>
-                <h3 className="pb-2">{"Order Cost:  $" + getPriceOfPizza(pizza.size, pizza.extraCheese, pizza.toppings, pizza.totalPrice, currentPizzaInfo)} </h3>
-            </div> */}
+                <h3 className="pb-2">{"Order Cost:  $" + getPriceOfPizza(pizza.size, pizza.halfNHalf, pizza.firstHalf, pizza.secondHalf, pizza.totalPrice, currentPizzaInfo)} </h3>
+            </div>
             <EndPizzaBuilderSection handleClick={handleClick}/>
             <style jsx>{`
                 .order-box {
