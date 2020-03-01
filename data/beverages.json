@@ -2,7 +2,7 @@
     {
         "key": "Soda",
         "information": [
-            {"subheading": null,"items": [
+            {"subheading": "none","items": [
                 {"description": "Pitcher","price": "$7.25"},
                 {"description": "Track Sticks","price": "$5.50"},
                 {"description": "Track Sticks","price": "$5.50"}
