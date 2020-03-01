@@ -1,0 +1,27 @@
+[
+    {
+        "key": "Soda",
+        "information": [
+            {"subheading": null,"items": [
+                {"description": "Pitcher","price": "$7.25"},
+                {"description": "Track Sticks","price": "$5.50"},
+                {"description": "Track Sticks","price": "$5.50"}
+            ]}
+        ]
+    },
+    {
+        "key": "Beer",
+        "information": [
+            {"subheading": "Domestic Beer", "items": [
+                {"description": "Pitcher","price": "$7.25"},
+                {"description": "Track Sticks","price": "$5.50"},
+                {"description": "Track Sticks","price": "$5.50"}
+            ]},
+            {"subheading": "Micro Beer", "items": [
+                {"description": "Pitcher","price": "$7.25"},
+                {"description": "Track Sticks","price": "$5.50"},
+                {"description": "Track Sticks","price": "$5.50"}
+            ]}
+        ]
+    }
+]
