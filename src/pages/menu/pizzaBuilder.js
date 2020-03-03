@@ -460,7 +460,7 @@ const PizzaBuilder = () => {
             {pizza.halfNHalf ? 
             <SecondHalfOptions handleClick={handleClick} clickedSize={pizza.size} second="Second" onChange={handleChange}
                                cheeses={cheeses} clickedCheese={pizza.secondHalf.cheese} extraCheese={pizza.secondHalf.extraCheese}
-                               sauces={sauces} clickedSauce={pizza.secondHalf.sauce} lightSauce={pizza.secondHalf.lightSauce} extraSauce={pizza.firstHalf.extraSauce}
+                               sauces={sauces} clickedSauce={pizza.secondHalf.sauce} lightSauce={pizza.secondHalf.lightSauce} extraSauce={pizza.secondHalf.extraSauce}
                                meats={toppings.meats} wantedToppings={pizza.secondHalf.toppings}
                                others={toppings.others}
             />
