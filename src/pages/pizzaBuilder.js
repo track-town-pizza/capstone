@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import Layout from "../components/Layout"
 import { sizes, crusts, cheeses, sauces, toppings } from "../../data/pizzaInfo.json"
 import prices from "../../data/prices.json"
+import restaurantInfo from "../../data/restaurantInfo.json"
 import EndPizzaBuilderSection from "../components/EndPizzaBuilderSection"
 import NotOnlineOrdering from "../components/NotOnlineOrdering"
 import FirstHalfOptions from "../components/FirstHalfOptions"
@@ -447,7 +448,7 @@ const PizzaBuilder = () => {
     }
     return (
         <Layout>
-            <NotOnlineOrdering />
+            <NotOnlineOrdering phoneNumber={restaurantInfo.phoneNumber} />
             <FirstHalfOptions sizes={sizes} handleClick={handleClick} clickedSize={pizza.size} second="" 
                               crusts={crusts} clickedCrust={pizza.crust} onChange={handleChange} thinCrust={pizza.thinCrust}
                               halfNHalf={pizza.halfNHalf}
@@ -470,7 +471,7 @@ const PizzaBuilder = () => {
                 <p className="pr-5 pl-5">{buildOrderString(pizza, currentPizzaInfo)}</p>
                 <h3 className="pb-2">{"Order Cost:  $" + getPriceOfPizza(pizza.size, pizza.halfNHalf, pizza.firstHalf, pizza.secondHalf, pizza.totalPrice, currentPizzaInfo)} </h3>
             </div>
-            <EndPizzaBuilderSection handleClick={handleClick}/>
+            <EndPizzaBuilderSection handleClick={handleClick} phoneNumber={restaurantInfo.phoneNumber}/>
             <style jsx>{`
                 .order-box {
                     margin: auto;
