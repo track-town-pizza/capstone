@@ -11,27 +11,27 @@ const PizzaCustomOpts  = (props) => {
     if (props.sizes) {
         title = "Size"
         foodButtonComponents = props.sizes.map(size =>
-            size === props.clicked ? <YellowFoodButton buttonWord={size} handleClick={props.handleClick} color="#c9b52a" second={props.second}/> 
-                                    : <YellowFoodButton buttonWord={size} handleClick={props.handleClick} color="#FFEC65" second={props.second}/>
+            size === props.clicked ? <YellowFoodButton buttonWord={size} key={size} handleClick={props.handleClick} color="#c9b52a" second={props.second}/> 
+                                    : <YellowFoodButton buttonWord={size} key={size} handleClick={props.handleClick} color="#FFEC65" second={props.second}/>
         )
     }
     else if (props.crusts) {
         title = "Crust"
         foodButtonComponents = props.crusts.map(crust => {
             if(crust === "Gluten Free" && props.size === "Small" && crust === props.clicked) {
-                return <GreenFoodButton buttonWord={crust} handleClick={props.handleClick} color="#01471f" second={props.second}/>
+                return <GreenFoodButton buttonWord={crust} key={crust} handleClick={props.handleClick} color="#01471f" second={props.second}/>
             }
             else if(crust === "Gluten Free" && props.size === "Small") {
-                return <GreenFoodButton buttonWord={crust} handleClick={props.handleClick} color="#007030" second={props.second}/>
+                return <GreenFoodButton buttonWord={crust} key={crust} handleClick={props.handleClick} color="#007030" second={props.second}/>
             }
             else if(crust === "Gluten Free" && props.size !== "Small") {
-                return <GreenFoodButton buttonWord={crust} handleClick={props.handleClick} color="rgba(0, 112, 48, 0.53)" second={props.second}/>
+                return <GreenFoodButton buttonWord={crust} key={crust} handleClick={props.handleClick} color="rgba(0, 112, 48, 0.53)" second={props.second}/>
             }
             else if(crust === props.clicked) {
-                return <GreenFoodButton buttonWord={crust} handleClick={props.handleClick} color="#01471f" second={props.second}/>
+                return <GreenFoodButton buttonWord={crust} key={crust} handleClick={props.handleClick} color="#01471f" second={props.second}/>
             }
             else {
-                return <GreenFoodButton buttonWord={crust} handleClick={props.handleClick} color="#007030" second={props.second}/>
+                return <GreenFoodButton buttonWord={crust} key={crust} handleClick={props.handleClick} color="#007030" second={props.second}/>
             }
         })
         if (props.clicked === "White" || props.clicked === "Wheat") {
@@ -41,8 +41,8 @@ const PizzaCustomOpts  = (props) => {
     else if (props.cheeses) {
         title = "Cheese"
         foodButtonComponents = props.cheeses.map(cheese => 
-            cheese === props.clicked ? <YellowFoodButton buttonWord={cheese} handleClick={props.handleClick} color="#c9b52a" second={props.second}/> 
-                                    : <YellowFoodButton buttonWord={cheese} handleClick={props.handleClick} color="#FFEC65" second={props.second}/>
+            cheese === props.clicked ? <YellowFoodButton buttonWord={cheese} key={cheese} handleClick={props.handleClick} color="#c9b52a" second={props.second}/> 
+                                    : <YellowFoodButton buttonWord={cheese} key={cheese} handleClick={props.handleClick} color="#FFEC65" second={props.second}/>
         )
         if (props.clicked !== "No Cheese") {
             checkboxComponents = <OptionsCheckbox name="extraCheese" shownWords = "Extra Cheese" onChange={props.onChange} checked={props.extraCheese} second={props.second}/>
@@ -51,8 +51,8 @@ const PizzaCustomOpts  = (props) => {
     else if (props.sauces) {
         title = "Sauce"
         foodButtonComponents = props.sauces.map(sauce => 
-            sauce === props.clicked ? <GreenFoodButton buttonWord={sauce} handleClick={props.handleClick} color="#01471f" second={props.second}/>
-                                    : <GreenFoodButton buttonWord={sauce} handleClick={props.handleClick} color="#007030" second={props.second}/>
+            sauce === props.clicked ? <GreenFoodButton buttonWord={sauce} key={sauce} handleClick={props.handleClick} color="#01471f" second={props.second}/>
+                                    : <GreenFoodButton buttonWord={sauce} key={sauce} handleClick={props.handleClick} color="#007030" second={props.second}/>
         )
         if (props.clicked !== "No Sauce") {
             checkboxComponents = [<OptionsCheckbox name="lightSauce" shownWords = "Light Sauce" onChange={props.onChange} checked={props.lightSauce}  second={props.second}/>, 
