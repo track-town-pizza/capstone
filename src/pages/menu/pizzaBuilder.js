@@ -467,8 +467,8 @@ const PizzaBuilder = () => {
             : null }
             <div className="order-box">
                 <h3 className="pt-2">My Order:</h3>
-                { pizza.allPizzas.map(pizzaStr => <p key={pizzaStr} className="pr-5 pl-5">{pizzaStr}</p>) }
-                <p className="pr-5 pl-5">{buildOrderString(pizza, currentPizzaInfo)}</p>
+                { pizza.allPizzas.map((pizzaStr, index) => <p key={pizzaStr} className="pr-5 pl-5">{"Pizza " + (index + 1) + ": " + pizzaStr}</p>) }
+                <p className="pr-5 pl-5">{"Pizza " + (pizza.allPizzas.length + 1) + ": " + buildOrderString(pizza, currentPizzaInfo) }</p>
                 <h3 className="pb-2">{"Order Cost:  $" + getPriceOfPizza(pizza.size, pizza.halfNHalf, pizza.firstHalf, pizza.secondHalf, pizza.totalPrice, currentPizzaInfo)} </h3>
             </div>
             <EndPizzaBuilderSection handleClick={handleClick} phoneNumber={restaurantInfo.phoneNumber}/>
