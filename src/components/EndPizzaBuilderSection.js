@@ -9,7 +9,7 @@ const EndPizzaBuilderSection = (props) => {
                 <h3>Ready to Order?</h3>
                 <div>
                     <p className="mb-0 d-inline">{"Call " + props.phoneNumber + " or "}</p>
-                    <Link href="http://www.mealage.com/2foodmenu8.jsp?restaurantId=10003" className="d-inline">
+                    <Link href={props.onlineOrderingLink} className="d-inline">
                         <a className="text-success">Order Online</a>
                     </Link>
                 </div>
