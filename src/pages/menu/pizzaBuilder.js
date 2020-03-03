@@ -1,12 +1,12 @@
 import React, { useState } from "react"
-import Layout from "../components/Layout"
-import { sizes, crusts, cheeses, sauces, toppings } from "../../data/pizzaInfo.json"
-import prices from "../../data/prices.json"
-import restaurantInfo from "../../data/restaurantInfo.json"
-import EndPizzaBuilderSection from "../components/EndPizzaBuilderSection"
-import NotOnlineOrdering from "../components/NotOnlineOrdering"
-import FirstHalfOptions from "../components/FirstHalfOptions"
-import SecondHalfOptions from "../components/SecondHalfOptions"
+import Layout from "../../components/Layout"
+import EndPizzaBuilderSection from "../../components/EndPizzaBuilderSection"
+import NotOnlineOrdering from "../../components/NotOnlineOrdering"
+import FirstHalfOptions from "../../components/FirstHalfOptions"
+import SecondHalfOptions from "../../components/SecondHalfOptions"
+import { sizes, crusts, cheeses, sauces, toppings } from "../../../data/pizzaInfo.json"
+import prices from "../../../data/prices.json"
+import restaurantInfo from "../../../data/restaurantInfo.json"
 
 // determines the price of a pizza based on size and toppings
 // returns the price of the pizza
