@@ -190,10 +190,17 @@ function buildOrderString(pizza, currentPizzaInfo) {
 }
 
 const PizzaBuilder = () => {
+    // Save the current pizza information. Used so we can eventually add the pizza to the entire order
+    // so the user can see each pizza they build
     const currentPizzaInfo = {
         currentPizza: "",
         currentPrice: 0,
     }
+
+    // All of the information about a pizza
+    // size, crust, cheese, and sauce are strings
+    // allPizzas is an array of strings of all the pizzas
+    // totalPrice is the price of the entire order
     const [pizza, setPizza] = useState({
         size: null,
         crust: null,
@@ -219,9 +226,12 @@ const PizzaBuilder = () => {
         totalPrice: 0
     })
 
+    // handles when a user clicks on a button
     function handleClick(event) {
         const {name, type} = event.target
         if (type === 'button') {
+            // reset state so the user can start over and build a new pizza
+            // add the current pizza to the entire order
             if(name === "Build Again"){
                 setPizza({
                     size: null,
@@ -251,6 +261,7 @@ const PizzaBuilder = () => {
                 })
             }
             else {
+                // loop through all these so if they change the code does not need to be refactored
                 for(let size of sizes){
                     if(name === size){
                         setPizza({
@@ -275,6 +286,7 @@ const PizzaBuilder = () => {
                         }})
                     }
                 }
+                // Second tells that the pizza is half and half and this is for the second half
                 for(let cheese of cheeses){
                     if(name === (cheese + "Second")){
                         setPizza({
@@ -309,9 +321,11 @@ const PizzaBuilder = () => {
         }
     }
 
+    // describes functionality when a user clicks on a checkbox
     function handleChange(event) {
         const {name, type} = event.target
         if(type === "checkbox") {
+            // set everything opposite to what it was
             if(name === "halfNHalf") {
                 setPizza({
                     ...pizza,
@@ -374,7 +388,9 @@ const PizzaBuilder = () => {
             }
             else {
                 let remove = false
+                // find out if the topping was in the second half or not
                 if(name.search("Second") === -1) {
+                    // remove the topping from the from the wanted toppings if the user already chose it
                     for(let i=0; i<pizza.firstHalf.toppings.length; i++) {
                         if (name === pizza.firstHalf.toppings[i]) {
                             pizza.firstHalf.toppings.splice(i, 1)
@@ -388,6 +404,7 @@ const PizzaBuilder = () => {
                             remove = true
                         }
                     }
+                    // add the topping
                     if (remove === false) {
                         setPizza({
                             ...pizza,
@@ -398,6 +415,7 @@ const PizzaBuilder = () => {
                         })
                     }
                 }
+                // do everything described above for the second half if the topping is for the second half
                 else {
                     remove = false
                     const newName = name.replace(/Second/g, "")
