@@ -2,19 +2,24 @@ import React, { useState } from "react"
 import Layout from "../components/Layout"
 import { sizes, crusts, cheeses, sauces, toppings } from "../../data/pizzaInfo.json"
 import prices from "../../data/prices.json"
-import PizzaCustomOpts from "../components/PizzaCustomOpts"
-import YellowToppingsBox from "../components/YellowToppingsBox"
-import GreenToppingsBox from "../components/GreenToppingsBox"
 import EndPizzaBuilderSection from "../components/EndPizzaBuilderSection"
-import HalfNHalf from "../components/HalfNHalf"
 import NotOnlineOrdering from "../components/NotOnlineOrdering"
+import FirstHalfOptions from "../components/FirstHalfOptions"
+import SecondHalfOptions from "../components/SecondHalfOptions"
 
+// determines the price of a pizza based on size and toppings
+// returns the price of the pizza
+// size is the size of the pizza in string format
+// pizzaInfo is an object. It is the information about the pizza including the toppings and if it has extra cheese
 function determinePrice(size, pizzaInfo) {
     let price = 0
+    // get base price based on size
     price += Number(prices[size])
+    // charge more if the user wants extra cheese
     if (pizzaInfo.extraCheese && pizzaInfo.cheese !== "No Cheese") {
         price += Number(prices.Cheese[size])
     }
+    // find the cost from the toppings
     for(let toppingStr of pizzaInfo.toppings) {
         const topping = toppingStr.replace(/ /g, "_")
         const toppingPrices = prices[topping]
@@ -23,26 +28,45 @@ function determinePrice(size, pizzaInfo) {
     return price
 }
 
+// This function determines if the pizza is half and half or not then returns the appropriate price based on that
+// returns the price of a pizza in string form to two decimal places
+// size is the size of the pizza in string format
+// halfNHalf is a boolean about whether the pizza is a half and half pizza or not
+// totalPrice is the current total price of the whole order
+// currentPizzaInfo is the an object. The price is saved in this object as an int.
 function getPriceOfPizza(size, halfNHalf, firstHalf, secondHalf, totalPrice, currentPizzaInfo) {
     let price = 0
+    // if the user hasn't picked a size yet
     if (size === null) {
+        // return the total cost of their order otherwise 0 if nothing has been added to the order yet
         return totalPrice === 0 ? 0 : totalPrice.toFixed(2)
     }
+
     if(halfNHalf) {
         let fPrice = determinePrice(size, firstHalf)
         let sPrice = determinePrice(size, secondHalf)
+        // The price is determined by the more expensizve side
         price = fPrice > sPrice ? fPrice : sPrice
     }
     else {
         price = determinePrice(size, firstHalf)
     }
     
+    // Save the information in currentPizzaInfo so we can build the entire order later
     currentPizzaInfo.currentPrice = price
     return (totalPrice + price).toFixed(2)
 }
 
-function buildCrustString(pCrust, pThinCrust) {
+// Builds the a string of the crust information 
+// returns the string crust information
+// pCrust is a string of the crust of the pizza
+// pThinCrust is a boolean of whether the pizza is thin crust or not
+// pSize is a string of the pizza size
+function buildCrustString(pCrust, pThinCrust, pSize) {
     let crust = null
+    if(pCrust === "Gluten Free" && pSize !== "Small") {
+        return null
+    }
     if(pCrust !== "White" && pCrust !== null) {
         if(pThinCrust) {
              crust = pCrust + " Thin Crust"
@@ -51,12 +75,18 @@ function buildCrustString(pCrust, pThinCrust) {
             crust = pCrust + " Crust"
         }
     }
+    // if it is white crust, it is not specified since that is default
     else if(pCrust === "White" && pThinCrust) {
         crust = "Thin Crust"
     }
+
     return crust
 }
 
+// Builds the a string of the cheese information 
+// returns the string cheese information
+// pCheese is a string of the cheese of the pizza
+// pExtraCheese is a boolean of whether the pizza has extra cheese or not
 function buildCheeseString(pCheese, pExtraCheese) {
     let cheese = null
     if(pCheese !== "Original" && pCheese !== "No Cheese" && pCheese!== null) {
@@ -76,6 +106,11 @@ function buildCheeseString(pCheese, pExtraCheese) {
     return cheese
 }
 
+// Builds the a string of the crust information 
+// returns the string sauce information
+// pSauce is a string of the crust of the pizza
+// pLightSauce is a boolean of whether the pizza has light sauce or not
+// pExtraSauce is a boolean of whether the pizza has extra sauce or not
 function buildSauceString(pSauce, pLightSauce, pExtraSauce) {
     let sauce = null
     if(pSauce !== "Marinara" && pSauce !== "No Sauce" && pSauce!== null) {
@@ -101,36 +136,35 @@ function buildSauceString(pSauce, pLightSauce, pExtraSauce) {
     return sauce
 }
 
+// Puts all the wanted toppings in an array
+// toppings is an array of all the toppings the pizza will have
+// pizzaInfo is an array of that will hold the toppings
 function buildToppingsString(toppings, pizzaInfo) {
     for(let topping of toppings) {
         pizzaInfo.push(topping)
     }
 }
 
+// Calls all the function to create a string of the pizza
+// Returns the string of the entire pizza
+// pizza is an object. It is all the information about the pizza. It must have everything that is included in state.
+// currentPizzaInfo is an object. It holds information the current pizza. The string pizza order is saved in this string.
 function buildOrderString(pizza, currentPizzaInfo) {
     const pizzaInfo = []
+    // pizza only has one size and crust
     pizzaInfo.push(pizza.size)
-    pizzaInfo.push(buildCrustString(pizza.crust, pizza.thinCrust))
+    pizzaInfo.push(buildCrustString(pizza.crust, pizza.thinCrust, pizza.size))
 
+    // the pizza can have different toppings, cheese, and sauce if it is half and half
     if(pizza.halfNHalf) {
-        console.log(pizza.firstHalf.cheese)
-        console.log(pizza.firstHalf.sauce)
-        console.log(pizza.firstHalf.toppings)
-        console.log(pizza.secondHalf.cheese)
-        console.log(pizza.secondHalf.sauce)
-        console.log(pizza.secondHalf.toppings)
-
-
-        if(pizza.firstHalf.cheese !== null && pizza.firstHalf.sauce !== null && pizza.firstHalf.toppings !== [] && pizza.secondHalf.cheese !== null && pizza.secondHalf.sauce !== null && pizza.secondHalf.toppings !== [] ) {
-            pizzaInfo.push("First Half: ")
-            buildToppingsString(pizza.firstHalf.toppings, pizzaInfo)
-            pizzaInfo.push(buildCheeseString(pizza.firstHalf.cheese, pizza.firstHalf.extraCheese))
-            pizzaInfo.push(buildSauceString(pizza.firstHalf.sauce, pizza.firstHalf.lightSauce, pizza.firstHalf.extraSauce))
-            pizzaInfo.push("Second Half: ")
-            buildToppingsString(pizza.secondHalf.toppings, pizzaInfo)
-            pizzaInfo.push(buildCheeseString(pizza.secondHalf.cheese, pizza.secondHalf.extraCheese))
-            pizzaInfo.push(buildSauceString(pizza.secondHalf.sauce, pizza.secondHalf.lightSauce, pizza.secondHalf.extraSauce))
-        }
+        pizzaInfo.push("First Half: ")
+        buildToppingsString(pizza.firstHalf.toppings, pizzaInfo)
+        pizzaInfo.push(buildCheeseString(pizza.firstHalf.cheese, pizza.firstHalf.extraCheese))
+        pizzaInfo.push(buildSauceString(pizza.firstHalf.sauce, pizza.firstHalf.lightSauce, pizza.firstHalf.extraSauce))
+        pizzaInfo.push("Second Half: ")
+        buildToppingsString(pizza.secondHalf.toppings, pizzaInfo)
+        pizzaInfo.push(buildCheeseString(pizza.secondHalf.cheese, pizza.secondHalf.extraCheese))
+        pizzaInfo.push(buildSauceString(pizza.secondHalf.sauce, pizza.secondHalf.lightSauce, pizza.secondHalf.extraSauce))
     }
     else {
         buildToppingsString(pizza.firstHalf.toppings, pizzaInfo)
@@ -138,8 +172,10 @@ function buildOrderString(pizza, currentPizzaInfo) {
         pizzaInfo.push(buildSauceString(pizza.firstHalf.sauce, pizza.firstHalf.lightSauce, pizza.firstHalf.extraSauce))
     }
 
+    // Take out nulls which mean the user has not specified what they want for that catetory yet
     const filtPizzaInfo = pizzaInfo.filter(ele => ele !== null)
     let pizzaStr = ""
+    // Build the string based on the information that has been pushed onto the array
     for(let i=0; i<filtPizzaInfo.length; i++) {
         if(i+1 === filtPizzaInfo.length || filtPizzaInfo[i] === "First Half: " || filtPizzaInfo[i] === "Second Half: ") {
             pizzaStr = pizzaStr + filtPizzaInfo[i]
@@ -148,6 +184,7 @@ function buildOrderString(pizza, currentPizzaInfo) {
             pizzaStr = pizzaStr + filtPizzaInfo[i] + ", "
         }
     } 
+    // Save the information in currentPizzaInfo so we can build the entire order later
     currentPizzaInfo.currentPizza = pizzaStr
     return pizzaStr
 }
@@ -390,39 +427,25 @@ const PizzaBuilder = () => {
             }
         }
     }
-
-    const sizeComponents = <PizzaCustomOpts sizes={sizes} handleClick={handleClick} clicked={pizza.size} second="" />
-    const crustComponents = <PizzaCustomOpts crusts={crusts} size={pizza.size} handleClick={handleClick} clicked={pizza.crust} onChange={handleChange} thinCrust={pizza.thinCrust} second=""/>
-    const cheeseComponents = <PizzaCustomOpts cheeses={cheeses} handleClick={handleClick} clicked={pizza.firstHalf.cheese} onChange={handleChange} extraCheese={pizza.firstHalf.extraCheese} second=""/>
-    const sauceComponents = <PizzaCustomOpts sauces={sauces} handleClick={handleClick} clicked={pizza.firstHalf.sauce} onChange={handleChange} lightSauce={pizza.firstHalf.lightSauce} extraSauce={pizza.firstHalf.extraSauce} second=""/>
-    const yellowBoxComponent = <YellowToppingsBox title="Meats" toppings={toppings.meats} onChange={handleChange} wantedToppings={pizza.firstHalf.toppings} second=""/>
-    const greenBoxComponent = <GreenToppingsBox title="Non-Meats" toppings={toppings.others} onChange={handleChange} wantedToppings={pizza.firstHalf.toppings} second=""/>
-    
-    const halfNHalfComponent = <HalfNHalf onChange={handleChange} halfNHalf={pizza.halfNHalf} second="" />
-    const firstHalfHeading = <h2 className="text-center">First Half:</h2>
-    const secondHalfHeading = <h2 className="text-center"> Second Half:</h2>
-
-    const secondCheeseComponents = <PizzaCustomOpts cheeses={cheeses} handleClick={handleClick} clicked={pizza.secondHalf.cheese} onChange={handleChange} extraCheese={pizza.secondHalf.extraCheese} second="Second"/>
-    const secondSauceComponents = <PizzaCustomOpts sauces={sauces} handleClick={handleClick} clicked={pizza.secondHalf.sauce} onChange={handleChange} lightSauce={pizza.secondHalf.lightSauce} extraSauce={pizza.secondHalf.extraSauce} second="Second"/>
-    const secondYellowBoxComponent = <YellowToppingsBox title="Meats" toppings={toppings.meats} onChange={handleChange} wantedToppings={pizza.secondHalf.toppings} second="Second"/>
-    const secondGreenBoxComponent = <GreenToppingsBox title="Non-Meats" toppings={toppings.others} onChange={handleChange} wantedToppings={pizza.secondHalf.toppings} second="Second"/>
-
     return (
         <Layout>
             <NotOnlineOrdering />
-            {sizeComponents}
-            {crustComponents}
-            {halfNHalfComponent}
-            {pizza.halfNHalf ? firstHalfHeading : null}
-            {cheeseComponents}
-            {sauceComponents}
-            {yellowBoxComponent}
-            {greenBoxComponent}
-            {pizza.halfNHalf ? secondHalfHeading : null}
-            {pizza.halfNHalf ? secondCheeseComponents : null}
-            {pizza.halfNHalf ? secondSauceComponents : null}
-            {pizza.halfNHalf ? secondYellowBoxComponent : null}
-            {pizza.halfNHalf ? secondGreenBoxComponent : null} 
+            <FirstHalfOptions sizes={sizes} handleClick={handleClick} clickedSize={pizza.size} second="" 
+                              crusts={crusts} clickedCrust={pizza.crust} onChange={handleChange} thinCrust={pizza.thinCrust}
+                              halfNHalf={pizza.halfNHalf}
+                              cheeses={cheeses} clickedCheese={pizza.firstHalf.cheese} extraCheese={pizza.firstHalf.extraCheese}
+                              sauces={sauces} clickedSauce={pizza.firstHalf.sauce} lightSauce={pizza.firstHalf.lightSauce} extraSauce={pizza.firstHalf.extraSauce}
+                              meats={toppings.meats} wantedToppings={pizza.firstHalf.toppings}
+                              others={toppings.others}
+            />
+            {pizza.halfNHalf ? 
+            <SecondHalfOptions handleClick={handleClick} clickedSize={pizza.size} second="Second" onChange={handleChange}
+                               cheeses={cheeses} clickedCheese={pizza.secondHalf.cheese} extraCheese={pizza.secondHalf.extraCheese}
+                               sauces={sauces} clickedSauce={pizza.secondHalf.sauce} lightSauce={pizza.secondHalf.lightSauce} extraSauce={pizza.firstHalf.extraSauce}
+                               meats={toppings.meats} wantedToppings={pizza.secondHalf.toppings}
+                               others={toppings.others}
+            />
+            : null }
             <div className="order-box">
                 <h3 className="pt-2">My Order:</h3>
                 { pizza.allPizzas.map(pizzaStr => <p className="pr-5 pl-5">{pizzaStr}</p>) }
@@ -442,7 +465,6 @@ const PizzaBuilder = () => {
                 }
             `}</style>
         </Layout>
-
     )
 }
 export default PizzaBuilder
