@@ -70,6 +70,7 @@ const Index = () => {
 					<Link href={`/blog/post/${post.id}`} className="blog-title">
 						<h3>{post.title}</h3>
 					</Link>
+					<small>{post.date}</small>
 					<img src={post.imageLink} alt="" />
 				</div>
 				<div className="blog-right-column">
