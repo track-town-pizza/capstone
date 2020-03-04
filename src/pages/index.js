@@ -33,7 +33,13 @@ const Index = () => {
 				</div>
 			</div>
 			<div className="info-containers home-font">
-				<div className="yellow-container extra-padding hours-margin">
+				<div className="yellow-container extra-padding location-margin">
+					<h4>Located at {info.address}</h4>
+					<span className="responsive-break"><br /></span>
+					<h4>Across from Matthew Knight Arena</h4>
+					<img src={info.matthewKnightImgLink} alt="Matthew Knight Arena Front" />
+				</div>
+				<div className="yellow-container extra-padding">
 					<h3>We're open all week! Come visit us:</h3>
 					<br />
 					<div className="hours-container">
@@ -46,21 +52,17 @@ const Index = () => {
 						<h4 className="no-margin-top grey-font">{info.openHourFriSat} {info.openHourFriSatPeriod} - {info.closeHourFriSat} {info.closeHourFriSatPeriod}</h4>
 					</div>
 				</div>
-				<div className="yellow-container">
+				<div className="yellow-container events-size">
 					<h3>Events</h3>
-					<table className="table-sm table-font w-100">
-						<tbody>
-							{events.slice(0, 5).map(event => (
-								<EventListing key={event.id} {...event} />
-							))}
-						</tbody>
-					</table>
-				</div>
-				<div className="yellow-container extra-padding location-size">
-					<h4>Located at {info.address}</h4>
-					<span className="responsive-break"><br /></span>
-					<h4>Across from Matthew Knight Arena</h4>
-					<img src={info.matthewKnightImgLink} alt="Matthew Knight Arena Front" />
+					<div className="table-responsive-sm">
+						<table className="table-sm table-font w-100">
+							<tbody>
+								{events.map(event => (
+									<EventListing key={event.id} {...event} />
+								))}
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 			<div className="blog-container home-font">
@@ -68,7 +70,7 @@ const Index = () => {
 					<Link href={`/blog/post/${post.id}`} className="blog-title">
 						<h3>{post.title}</h3>
 					</Link>
-					<img src={post.imageLink} />
+					<img src={post.imageLink} alt="" />
 				</div>
 				<div className="blog-right-column">
 					<p>{post.content}</p>
@@ -107,14 +109,6 @@ const Index = () => {
 						position: static !important;
 						display: flex !important;
 						flex-direction: column;
-					}
-
-					.responsive-break {
-						display: none;
-					}
-
-					.responsive-spacing {
-						display: inline !important;
 					}
 
 					.responsive-phone {
@@ -201,8 +195,7 @@ const Index = () => {
 				.yellow-container {
 					width: 32%;
 					max-width: 370px;
-					max-height: 345px;
-					height: 345px;
+					height: 360px;
 					margin-bottom: 2%;
 					padding: 20px;
 					border: 1px solid #ffe100;
@@ -220,19 +213,7 @@ const Index = () => {
 					border-radius: 2px;
 				}
 
-				@media only screen and (max-width: 1100px) {
-					.yellow-container img {
-						height: 100px;
-					}
-
-					@media only screen and (max-width: 1000px) {
-						.yellow-container img {
-							height: auto;
-						}
-					}
-				}
-
-				@media only screen and (max-width: 1000px) {
+				@media only screen and (max-width: 1252px) {
 					.info-containers {
 						flex-wrap: wrap;
 						justify-content: center;
@@ -242,22 +223,22 @@ const Index = () => {
 					.yellow-container {
 						max-width: 100%;
 						width: 48%;
-						height: 300px;
+						height: 275px;
 						margin-top: 0;
 						border-radius: 5px;
 					}
 
 					.extra-padding {
-						padding: 10px !important;
+						padding: 20px !important;
 					}
 
-					.hours-margin {
+					.location-margin {
 						margin-right: 25px;
 					}
 
-					.location-size {
+					.events-size {
 						width: 100%;
-						height: 275px
+						height: auto;
 					}
 
 					@media only screen and (max-width: 900px) {
@@ -266,9 +247,26 @@ const Index = () => {
 							height: auto;
 						}
 
-						.hours-margin {
+						.location-margin {
 							margin-right: 0;
 						}
+					}
+				}
+
+				@media only screen and (max-width: 1182px) {
+					.responsive-break {
+						display: none;
+					}
+
+					.responsive-spacing {
+						display: inline !important;
+					}
+				}
+
+				@media only screen and (max-width: 1100px) {
+					.yellow-container img {
+						margin: 15px;
+						height: auto;
 					}
 				}
 
