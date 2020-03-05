@@ -13,9 +13,29 @@ const Post = () => {
     if (postData.posts[router.query.id] != undefined) {
         const postNum = router.query.id
         return (
-            <Layout>
-                <SinglePost post={postData.posts[postNum]} key={postNum}/>
-            </Layout>
+            <div>
+                <Layout>
+                    <div className="blog-container">
+                        <SinglePost post={postData.posts[postNum]} key={postNum}/>
+                    </div>
+                </Layout>
+
+                <style jsx>{`
+                    .blog-container {
+                        margin-left: 20%;
+                        margin-right: 20%;
+                        width: 60%;
+                    }
+
+                    @media only screen and (max-width: 700px) {
+                        .blog-container {
+                            margin-left: 10%;
+                            margin-right: 10%;
+                            width: 80%;
+                        }
+                    }
+                `}</style>
+            </div>
         )
     } else {
         return (
