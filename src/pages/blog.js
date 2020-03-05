@@ -17,8 +17,6 @@ const Blog = props => (
     /*
     const [blogState, setBlog] = useState({
         page: 0,
-
-
     })
     */
 
@@ -29,6 +27,7 @@ const Blog = props => (
                     <SinglePost post={post} key={post.id}/>
                 ))}
             </div>
+            <div id="bottom-bar"/>
         </Layout>
 
         <style jsx>{`
@@ -38,13 +37,28 @@ const Blog = props => (
                 width: 60%;
             }
 
+            #bottom-bar {
+                margin-left: 20%;
+                margin-right: 20%;
+                width: 60%;
+                height: 3px;
+                left: 27px;
+                top: 771px;
+                background: #007030;
+                transform: matrix(1, 0, 0, -1, 0, 0);
+            }
+
             @media only screen and (max-width: 700px) {
                 .blog-container {
                     margin-left: 10%;
                     margin-right: 10%;
                     width: 80%;
                 }
-
+                #bottom-bar {
+                    margin-left: 10%;
+                    margin-right: 10%;
+                    width: 80%;
+                }
             }
 
 
