@@ -5,7 +5,7 @@ const Footer = () => (
         <footer className="mt-2 page-footer bg-dark text-white d-flex flex-wrap justify-content-center">
 
             <p className="text-white mr-3 my-2">© Track Town Pizza</p>
-            
+
             <Link href="/menu">
                 <a className="text-white mr-3 my-2">Menu</a>
             </Link>
@@ -37,10 +37,9 @@ const Footer = () => (
         <style jsx>{`
             footer {
                 bottom: 0;
-                position: absolute;
                 width: 100%;
             }
-        `}              
+        `}
         </style>
     </div>
 )
