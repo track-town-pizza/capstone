@@ -5,17 +5,27 @@ const SinglePost = (props) => {
     return (
         <div className="SinglePost">
             <div key={post.id}>
-                <h3>
-                    <Link href="/blog/[id]" as={`/blog/${post.id}`}>
-                        <a>{post.title}</a>
-                    </Link>
-                </h3>
-                <small>{post.date}</small>
+                <div class="d-flex justify-content-between align-items-center ">
+                    <h3>
+                        <Link href="/blog/[id]" as={`/blog/${post.id}`}>
+                            <a>{post.title}</a>
+                        </Link>
+                    </h3>
+                    <small>{post.date}</small>
+                </div>
                 <img src={post.imageLink} className="mw-100" />
                 <p>{post.content}</p>
             </div>
 
             <style jsx>{`
+                h3 {
+                    display: inline;
+                }
+
+                small {
+                    display: inline;
+                }
+
                 img {
                     margin-top: 15px;
                     margin-bottom: 15px;
