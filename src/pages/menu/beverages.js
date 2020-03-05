@@ -1,7 +1,7 @@
-import Layout from "../components/Layout"
+import Layout from "../../components/Layout"
 import React from "react"
-import BeverageItems from "../components/BeverageItem"
-import beveragesInfo from "../../data/beverages.json"
+import BeverageItems from "../../components/BeverageItem"
+import beveragesInfo from "../../../data/beverages.json"
 
 const Beverages = () => {
     const BeverageItemsComponents = beveragesInfo.map((beveragesInfo, colorIndex) => (<BeverageItems itemInfo={beveragesInfo} colorKey={colorIndex % 2 ? "color1" : "color2"}/>))
