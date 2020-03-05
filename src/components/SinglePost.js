@@ -5,13 +5,13 @@ const SinglePost = (props) => {
     return (
         <div className="SinglePost">
             <div key={post.id}>
-                <div class="d-flex justify-content-between align-items-center ">
+                <div className="d-flex justify-content-between align-items-center" id="blog-header">
                     <h3>
                         <Link href="/blog/[id]" as={`/blog/${post.id}`}>
                             <a>{post.title}</a>
                         </Link>
                     </h3>
-                    <small>{post.date}</small>
+                    <h4>{post.date}</h4>
                 </div>
                 <img src={post.imageLink} className="mw-100" />
                 <p>{post.content}</p>
@@ -19,16 +19,25 @@ const SinglePost = (props) => {
 
             <style jsx>{`
                 h3 {
-                    display: inline;
+                    display: inline-block;
+                    float: left;
                 }
 
-                small {
-                    display: inline;
+                h4 {
+                    display: block;
+                    float: right;
+                    font-size: 1em;
+                    margin-left: 20px;
                 }
 
                 img {
+                    display: block;
                     margin-top: 15px;
                     margin-bottom: 15px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    max-height: 600px;
+                    max-width: 60px;
                 }
 
                 .SinglePost {
