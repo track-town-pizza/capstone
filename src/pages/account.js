@@ -55,18 +55,6 @@ const Account = () => (
 					</span>
 				</div>
 			</div>
-			<div className="mt-4">
-				<h3 className="mb-3">Delete Account Section</h3>
-				<div className="delete-section">
-					<div className="delete-text mr-2">
-						<p>If you delete your account, you cannot remove it later. Please make sure that you do want to remove this account before deleting it.</p>
-						<p>An email will be sent to confirm that you do want to delete your account before removing it forever.</p>
-					</div>
-					<div className="delete-button">
-						<button className="btn btn-danger btn-width text-uppercase">Delete Account</button>
-					</div>
-				</div>
-			</div>
 		</div>
 		<style jsx>{`
 			.container {
@@ -107,41 +95,8 @@ const Account = () => (
 				}
 			}
 
-			.delete-section {
-				display: flex;
-				justify-content: space-between;
-			}
-
-			.delete-text {
-				display: flex;
-				flex-direction: column;
-				width: 75%;
-			}
-
-			.delete-button {
-				margin: auto;
-			}
-
 			.btn-width {
 				width: 200px;
-			}
-
-			@media only screen and (max-width: 1100px) {
-				.delete-section {
-					flex-wrap: wrap;
-				}
-				
-				.delete-text {
-					width: 100%;
-				}
-
-				.delete-button {
-					margin-bottom: 10px;
-				}
-
-				.btn-width {
-					width: 250px;
-				}
 			}
 
 			.page-title {
