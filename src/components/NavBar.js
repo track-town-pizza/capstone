@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 const NavBar = props => (
-	<nav className="navbar navbar-expand-md navbar-green fixed-top">
+	<nav className="navbar navbar-expand-md navbar-green top">
 		<div className="d-inline-flex bd-highlight">
 			<Link href="/">
 				<a id="navbar-logo">
@@ -59,6 +59,7 @@ const NavBar = props => (
 			.navbar-green {
 				background-color: #007030;
 				height: 60px;
+                margin-bottom:-60px;
 			}
 
 			#navbar-logo {
