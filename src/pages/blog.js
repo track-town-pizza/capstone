@@ -28,6 +28,13 @@ const Blog = props => (
                 ))}
             </div>
             <div id="bottom-bar"/>
+
+            <nav className="blog-nav">
+                <a href="#">1</a>.....
+                <a href="#">2</a>.....
+                <a href="#">3</a>.....
+                <a href="#">Earliest Post</a> -->
+            </nav>
         </Layout>
 
         <style jsx>{`
@@ -48,17 +55,30 @@ const Blog = props => (
                 transform: matrix(1, 0, 0, -1, 0, 0);
             }
 
+            .blog-nav {
+                margin-top: 10px;
+                text-align: center;
+                color: #007030;
+            }
+
+            .blog-nav a {
+                color: #007030;
+            }
+
+
             @media only screen and (max-width: 700px) {
                 .blog-container {
                     margin-left: 10%;
                     margin-right: 10%;
                     width: 80%;
                 }
+
                 #bottom-bar {
                     margin-left: 10%;
                     margin-right: 10%;
                     width: 80%;
                 }
+
             }
 
 
