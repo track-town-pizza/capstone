@@ -1,14 +1,9 @@
 {
 	"phone": "541-284-8484",
 	"address": "1809 Franklin Blvd, Eugene, OR 97403",
-	"onlineOrderLink": "http://www.mealage.com/2foodmenu8.jsps?restaurantId=10003",
-	"matthewKnightImgLink": "./photos/matthew_knight_arena_outside.jpg",
-	"openHourRegular": "11",
-	"openHourRegularPeriod": "am",
-	"closeHourRegular": "12",
-	"closeHourRegularPeriod": "am",
-	"openHourFriSat": "11",
-	"openHourFriSatPeriod": "am",
-	"closeHourFriSat": "1",
-	"closeHourFriSatPeriod": "am"
+	"onlineOrderLink": "http://www.mealage.com/2foodmenu8.jsp?restaurantId=10003",
+	"openHoursSunThur": "11:00",
+	"closeHoursSunThur": "00:00",
+	"openHoursFriSat": "11:00",
+	"closeHoursFriSat": "01:00"
 }

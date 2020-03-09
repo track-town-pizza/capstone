@@ -38,12 +38,12 @@ const Index = () => {
 					<br />
 					<div className="hours-container">
 						<h4>Sun - Thur</h4>
-						<h4 className="no-margin-top grey-font">{info.openHourRegular} {info.openHourRegularPeriod} - {info.closeHourRegular} {info.closeHourRegularPeriod}</h4>
+						{/* <h4 className="no-margin-top grey-font">{regularOpenHours} - {info.closeHourRegular} {info.closeHourRegularPeriod}</h4> */}
 					</div>
 					<br />
 					<div className="hours-container">
 						<h4>Fri - Sat</h4>
-						<h4 className="no-margin-top grey-font">{info.openHourFriSat} {info.openHourFriSatPeriod} - {info.closeHourFriSat} {info.closeHourFriSatPeriod}</h4>
+						{/* <h4 className="no-margin-top grey-font">{info.openHourFriSat} {info.openHourFriSatPeriod} - {info.closeHourFriSat} {info.closeHourFriSatPeriod}</h4> */}
 					</div>
 				</div>
 				<div className="yellow-container">
@@ -60,7 +60,7 @@ const Index = () => {
 					<h4>Located at {info.address}</h4>
 					<span className="responsive-break"><br /></span>
 					<h4>Across from Matthew Knight Arena</h4>
-					<img src={info.matthewKnightImgLink} alt="Matthew Knight Arena Front" />
+					<img src="/photos/matthew_knight_arena_outside.jpg" alt="Matthew Knight Arena Front" />
 				</div>
 			</div>
 			<div className="blog-container home-font">
