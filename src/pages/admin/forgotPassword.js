@@ -1,9 +1,9 @@
 import React from "react"
 import Link from "next/link"
 
-import Layout from "../components/Layout"
-import AccountFormHeader from "../components/account/AccountFormHeader"
-import AccountForm from "../components/account/AccountForm"
+import Layout from "../../components/Layout"
+import AccountFormHeader from "../../components/account/AccountFormHeader"
+import AccountForm from "../../components/account/AccountForm"
 
 const ForgotPassword = () => (
 	<Layout>
@@ -21,7 +21,7 @@ const ForgotPassword = () => (
 			</AccountForm>
 		</div>
 		<span className="responsive-width link-container mx-auto mt-2 text-center dark-green-text">
-			<Link href="/login">
+			<Link href="/admin/login">
 				<a>Know your password? Sign in here.</a>
 			</Link>
 		</span>
