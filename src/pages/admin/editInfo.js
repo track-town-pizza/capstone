@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { format } from "date-fns"
-import Layout from "../components/Layout"
+import Layout from "../../components/Layout"
 
-import info from "../../data/info.json"
-import eventData from "../../data/events.json"
+import info from "../../../data/info.json"
+import eventData from "../../../data/events.json"
 
 const EditInfo = () => {
 	const [ phone, setPhone ] = useState(info.phone)
@@ -16,6 +16,7 @@ const EditInfo = () => {
 	const [ events, setEvents ] = useState(eventData)
 
 	useEffect(() => {
+		// Format event dates before rendering data into input fields
 		setEvents(events.map(event => (
 			{
 				...event,
@@ -44,38 +45,44 @@ const EditInfo = () => {
 							className="form-control" value={address}
 							onChange={e => setAddress(e.target.value)} />
 					</div>
-					<div className="form-group">
-						<label htmlFor="open-hours-sun-thur">Sun - Thur Open Hours</label>
-						<input type="time" id="open-hours-sun-thur" name="open-hours-sun-thur"
-							className="form-control" value={openHoursSunThur}
-							onChange={e => setOpenHoursSunThur(e.target.value)} />
+					<div className="d-flex justify-content-between">
+						<div className="form-group hours-width">
+							<label htmlFor="open-hours-sun-thur">Sun - Thur Open Hours</label>
+							<input type="time" id="open-hours-sun-thur" name="open-hours-sun-thur"
+								className="form-control" value={openHoursSunThur}
+								onChange={e => setOpenHoursSunThur(e.target.value)} />
+						</div>
+						<div className="form-group hours-width">
+							<label htmlFor="close-hours-sun-thur">Sun - Thur Close Hours</label>
+							<input type="time" id="close-hours-sun-thur" name="close-hours-sun-thur"
+								className="form-control" value={closeHoursSunThur}
+								onChange={e => setCloseHoursSunThur(e.target.value)} />
+						</div>
 					</div>
-					<div className="form-group">
-						<label htmlFor="close-hours-sun-thur">Sun - Thur Close Hours</label>
-						<input type="time" id="close-hours-sun-thur" name="close-hours-sun-thur"
-							className="form-control" value={closeHoursSunThur}
-							onChange={e => setCloseHoursSunThur(e.target.value)} />
+					<div className="d-flex justify-content-between">
+						<div className="form-group hours-width">
+							<label htmlFor="open-hours-fri-sat">Fri - Sat Open Hours</label>
+							<input type="time" id="open-hours-fri-sat" name="open-hours-fri-sat"
+								className="form-control" value={openHoursFriSat}
+								onChange={e => setOpenHoursFriSat(e.target.value)} />
+						</div>
+						<div className="form-group hours-width">
+							<label htmlFor="close-hours-fri-sat">Fri - Sat Close Hours</label>
+							<input type="time" id="close-hours-fri-sat" name="close-hours-fri-sat"
+								className="form-control" value={closeHoursFriSat}
+								onChange={e => setCloseHoursFriSat(e.target.value)} />
+						</div>
 					</div>
-					<div className="form-group">
-						<label htmlFor="open-hours-fri-sat">Fri - Sat Open Hours</label>
-						<input type="time" id="open-hours-fri-sat" name="open-hours-fri-sat"
-							className="form-control" value={openHoursFriSat}
-							onChange={e => setOpenHoursFriSat(e.target.value)} />
+					<div className="form-group d-flex justify-content-center">
+						<button type="submit" className="btn btn-green w-100">Update Info</button>
 					</div>
-					<div className="form-group">
-						<label htmlFor="close-hours-fri-sat">Fri - Sat Close Hours</label>
-						<input type="time" id="close-hours-fri-sat" name="close-hours-fri-sat"
-							className="form-control" value={closeHoursFriSat}
-							onChange={e => setCloseHoursFriSat(e.target.value)} />
-					</div>
-					<button type="submit" className="btn btn-green w-100">Update Info</button>
 				</form>
 				<form className="form-spacing">
 					<h3>Events</h3>
 					{events.map((event, i) => (
-						<div key={event.id} className="form-row d-flex justify-content-between">
+						<div key={event.id} className="d-flex justify-content-between">
 							<div className="form-group event-name">
-								<label htmlFor={`event-name-${i}`}>Event {event.id} Name &amp; Date</label>
+								<label htmlFor={`event-name-${i}`}>Event {event.id} Name</label>
 								<input type="text" id={`event-name-${i}`} name={`event-name-${i}`}
 									className="form-control" value={event.name}
 									onChange={e => setEvents(events.map(currEvent => (
@@ -88,7 +95,7 @@ const EditInfo = () => {
 									)))} />
 							</div>
 							<div className="form-group event-date">
-								<label htmlFor={`event-date-${i}`}>&nbsp;</label>
+								<label htmlFor={`event-date-${i}`}>Date</label>
 								<input type="date" id={`event-date-${i}`} name={`event-date-${i}`}
 									className="form-control" value={event.date}
 									onChange={e => setEvents(events.map(currEvent => (
@@ -102,6 +109,9 @@ const EditInfo = () => {
 							</div>
 						</div>
 					))}
+					<div className="form-group">
+						<button type="submit" className="btn btn-green w-100">Update Events</button>
+					</div>
 				</form>
 			</div>
 			<style jsx>{`
@@ -120,6 +130,10 @@ const EditInfo = () => {
 				.form-spacing {
 					width: 90%;
 					margin-right: 5%;
+				}
+
+				.hours-width {
+					width: 49%;
 				}
 
 				.event-name {
