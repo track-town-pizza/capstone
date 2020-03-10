@@ -1,14 +1,40 @@
 import React from "react"
 import Link from "next/link"
+
+import {
+	format,
+	setHours,
+	setMinutes,
+	setSeconds
+} from "date-fns"
+
 import Layout from "../components/Layout"
+import EventListing from "../components/EventListing"
 
 import info from '../../data/info.json'
 import events from "../../data/events.json"
 import postData from "../../data/PostData.json"
-import EventListing from "../components/EventListing"
+
+function parseTime(time) {
+	let date = new Date()
+
+	const hour = parseInt(time.substring(0, 2))
+	const minute = parseInt(time.substring(3, 5))
+	
+	date = setHours(date, hour)
+	date = setMinutes(date, minute)
+	date = setSeconds(date, 0)
+
+	return format(date, "h:mm a")
+}
 
 const Index = () => {
-	const post = postData.posts[0];
+	const post = postData.posts[0]
+	
+	const openHourSunThur = parseTime(info.openHourSunThur)
+	const closeHourSunThur = parseTime(info.closeHourSunThur)
+	const openHourFriSat = parseTime(info.openHourFriSat)
+	const closeHourFriSat = parseTime(info.closeHourFriSat)
 
 	return (
 		<Layout>
@@ -44,12 +70,12 @@ const Index = () => {
 					<br />
 					<div className="hours-container">
 						<h4>Sun - Thur</h4>
-						{/* <h4 className="no-margin-top grey-font">{regularOpenHours} - {info.closeHourRegular} {info.closeHourRegularPeriod}</h4> */}
+						<h4 className="no-margin-top grey-font">{openHourSunThur} - {closeHourSunThur}</h4>
 					</div>
 					<br />
 					<div className="hours-container">
 						<h4>Fri - Sat</h4>
-						{/* <h4 className="no-margin-top grey-font">{info.openHourFriSat} {info.openHourFriSatPeriod} - {info.closeHourFriSat} {info.closeHourFriSatPeriod}</h4> */}
+						<h4 className="no-margin-top grey-font">{openHourFriSat} - {closeHourFriSat}</h4>
 					</div>
 				</div>
 				<div className="yellow-container events-size">
