@@ -4,7 +4,7 @@ import Link from "next/link"
 const ManagementHubButton = () => (
 	<div>
 		<Link href="#">
-			<button type="button" className="btn btn-green"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;Return to Management Hub</button>
+			<button type="button" className="btn btn-green"><i className="fas fa-arrow-left"></i>&nbsp;&nbsp;Return to Management Hub</button>
 		</Link>
 		<style jsx>{`
 			.btn-green {
