@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { format } from "date-fns"
+
 import Layout from "../../components/Layout"
+import ManagementHubButton from "../../components/admin/ManagementHubButton"
 
 import info from "../../../data/info.json"
 import eventData from "../../../data/events.json"
@@ -112,6 +114,7 @@ const EditInfo = () => {
 					</div>
 				</form>
 			</div>
+			<ManagementHubButton />
 			<style jsx>{`
 				.title {
 					color: #094c3a;
