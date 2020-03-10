@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { format } from "date-fns"
-
 import Layout from "../../components/Layout"
-import ManagementHubButton from "../../components/admin/ManagementHubButton"
 
 import info from "../../../data/info.json"
 import eventData from "../../../data/events.json"
@@ -10,10 +8,10 @@ import eventData from "../../../data/events.json"
 const EditInfo = () => {
 	const [ phone, setPhone ] = useState(info.phone)
 	const [ address, setAddress ] = useState(info.address)
-	const [ openHourSunThur, setOpenHourSunThur ] = useState(info.openHourSunThur)
-	const [ closeHourSunThur, setCloseHourSunThur ] = useState(info.closeHourSunThur)
-	const [ openHourFriSat, setOpenHourFriSat ] = useState(info.openHourFriSat)
-	const [ closeHourFriSat, setCloseHourFriSat ] = useState(info.closeHourFriSat)
+	const [ openHoursSunThur, setOpenHoursSunThur ] = useState(info.openHoursSunThur)
+	const [ closeHoursSunThur, setCloseHoursSunThur ] = useState(info.closeHoursSunThur)
+	const [ openHoursFriSat, setOpenHoursFriSat ] = useState(info.openHoursFriSat)
+	const [ closeHoursFriSat, setCloseHoursFriSat ] = useState(info.closeHoursFriSat)
 
 	const [ events, setEvents ] = useState(eventData)
 
@@ -26,6 +24,8 @@ const EditInfo = () => {
 			}
 		)))
 	}, [])
+
+	console.log("== Events:", events)
 
 	return (
 		<Layout>
@@ -49,28 +49,28 @@ const EditInfo = () => {
 						<div className="form-group hours-width">
 							<label htmlFor="open-hours-sun-thur">Sun - Thur Open Hours</label>
 							<input type="time" id="open-hours-sun-thur" name="open-hours-sun-thur"
-								className="form-control" value={openHourSunThur}
-								onChange={e => setOpenHourSunThur(e.target.value)} />
+								className="form-control" value={openHoursSunThur}
+								onChange={e => setOpenHoursSunThur(e.target.value)} />
 						</div>
 						<div className="form-group hours-width">
 							<label htmlFor="close-hours-sun-thur">Sun - Thur Close Hours</label>
 							<input type="time" id="close-hours-sun-thur" name="close-hours-sun-thur"
-								className="form-control" value={closeHourSunThur}
-								onChange={e => setCloseHourSunThur(e.target.value)} />
+								className="form-control" value={closeHoursSunThur}
+								onChange={e => setCloseHoursSunThur(e.target.value)} />
 						</div>
 					</div>
 					<div className="d-flex justify-content-between">
 						<div className="form-group hours-width">
 							<label htmlFor="open-hours-fri-sat">Fri - Sat Open Hours</label>
 							<input type="time" id="open-hours-fri-sat" name="open-hours-fri-sat"
-								className="form-control" value={openHourFriSat}
-								onChange={e => setOpenHourFriSat(e.target.value)} />
+								className="form-control" value={openHoursFriSat}
+								onChange={e => setOpenHoursFriSat(e.target.value)} />
 						</div>
 						<div className="form-group hours-width">
 							<label htmlFor="close-hours-fri-sat">Fri - Sat Close Hours</label>
 							<input type="time" id="close-hours-fri-sat" name="close-hours-fri-sat"
-								className="form-control" value={closeHourFriSat}
-								onChange={e => setCloseHourFriSat(e.target.value)} />
+								className="form-control" value={closeHoursFriSat}
+								onChange={e => setCloseHoursFriSat(e.target.value)} />
 						</div>
 					</div>
 					<div className="form-group d-flex justify-content-center">
@@ -114,7 +114,6 @@ const EditInfo = () => {
 					</div>
 				</form>
 			</div>
-			<ManagementHubButton />
 			<style jsx>{`
 				.title {
 					color: #094c3a;
