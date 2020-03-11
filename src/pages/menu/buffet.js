@@ -1,7 +1,7 @@
-import Layout from "../components/Layout"
+import Layout from "../../components/Layout"
 import React from "react"
-import BuffetItems from "../components/BeverageItem"
-import buffetInfo from "../../data/buffet.json"
+import BuffetItems from "../../components/BeverageItem"
+import buffetInfo from "../../../data/buffet.json"
 
 const Buffet = () => {
     const BuffetItemsComponents = buffetInfo.map((buffetInfo, colorIndex) => (<BuffetItems itemInfo={buffetInfo} colorKey={colorIndex % 2 ? "color1" : "color2"}/>))

@@ -1,7 +1,7 @@
-import Layout from "../components/Layout"
+import Layout from "../../components/Layout"
 import React from "react"
-import MenuItems from "../components/MenuItem"
-import saucesInfo from "../../data/sauces.json"
+import MenuItems from "../../components/MenuItem"
+import saucesInfo from "../../../data/sauces.json"
 
 const Sauces = () => {
     const MenuItemsComponents = saucesInfo.map(sauceInfo => (<MenuItems itemInfo={sauceInfo} page="sauce"/>))

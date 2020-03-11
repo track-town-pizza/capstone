@@ -4,167 +4,160 @@
         "information": [
             {"description": "Pepperoni","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/Pepperoni.jpg"
+        "imgLink": "../photos/Pizza/Pepperoni.jpg"
     },
     {
         "key": "cheese",
         "information": [
             {"description": "Cheese","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/Cheese.jpg"
+        "imgLink": "../photos/Pizza/Cheese.jpg"
     },
     {
         "key": "bbqChicken",
         "information": [
             {"description": "BBQ Chicken","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/BBQChicken.jpg"
+        "imgLink": "../photos/Pizza/BBQChicken.jpg"
     },
     {
         "key": "100YardDash",
         "information": [
             {"description": "100 Yard Dash","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/100YardDash.jpg"
+        "imgLink": "../photos/Pizza/100YardDash.jpg"
     },
     {
         "key": "5000Meters",
         "information": [
             {"description": "5000 Meters","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/5000Meters.jpg"
+        "imgLink": "../photos/Pizza/5000Meters.jpg"
     },
     {
         "key": "buffaloChicken",
         "information": [
             {"description": "Buffalo Chicken","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/BuffaloChicken.jpg"
+        "imgLink": "../photos/Pizza/BuffaloChicken.jpg"
     }, 
     {
         "key": "olympian",
         "information": [
             {"description": "Olympian","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/Olympian.jpg"
+        "imgLink": "../photos/Pizza/Olympian.jpg"
     },
     {
         "key": "decathlon",
         "information": [
             {"description": "Decathlon","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/Decathlon.jpg"
+        "imgLink": "../photos/Pizza/Decathlon.jpg"
     },
     {
         "key": "garlicChicken",
         "information": [
             {"description": "Garlic Chicken","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/GarlicChicken.jpg"
+        "imgLink": "../photos/Pizza/GarlicChicken.jpg"
     },
     {
         "key": "gourmet",
         "information": [
             {"description": "Gourmet","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/Gourmet.jpg"
+        "imgLink": "../photos/Pizza/Gourmet.jpg"
     },
     {
         "key": "hammer",
         "information": [
             {"description": "Hammer","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/Hammer.jpg"
+        "imgLink": "../photos/Pizza/Hammer.jpg"
     },
     {
         "key": "hawaiianpunch",
         "information": [
             {"description": "Hawaiian Punch","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/HawaiianPunch.jpg"
+        "imgLink": "../photos/Pizza/HawaiianPunch.jpg"
     },
     {
         "key": "heptathlon",
         "information": [
             {"description": "Heptathlon","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/heptathlon.jpg"
+        "imgLink": "../photos/Pizza/heptathlon.jpg"
     },
     {
         "key": "chickenMetropol",
         "information": [
             {"description": "Chicken Metropol","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/ChickenMetropol.jpg"
+        "imgLink": "../photos/Pizza/ChickenMetropol.jpg"
     },
     {
         "key": "florentine",
         "information": [
             {"description": "Florentine","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/Florentine.jpg"
+        "imgLink": "../photos/Pizza/Florentine.jpg"
     },
     {
         "key": "longJump",
         "information": [
             {"description": "Long Jump","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/LongJump.jpg"
+        "imgLink": "../photos/Pizza/LongJump.jpg"
     },
     {
         "key": "mediterranean",
         "information": [
             {"description": "Mediterranean","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/mediterranean.jpg"
+        "imgLink": "../photos/Pizza/mediterranean.jpg"
     },
     {
         "key": "originalVeggie",
         "information": [
             {"description": "Original Veggie","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/OriginalVeggie.jpg"
+        "imgLink": "../photos/Pizza/OriginalVeggie.jpg"
     },
     {
         "key": "poleVault",
         "information": [
             {"description": "Pole Vault","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/PoleVault.jpg"
+        "imgLink": "../photos/Pizza/PoleVault.jpg"
     },
     {
         "key": "quattroFormaggi",
         "information": [
             {"description": "Quattro Formaggi","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/QuattroFormaggi.jpg"
+        "imgLink": "../photos/Pizza/QuattroFormaggi.jpg"
     },
     {
         "key": "taco",
         "information": [
             {"description": "Taco","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/Taco.jpg"
+        "imgLink": "../photos/Pizza/Taco.jpg"
     },
     {
         "key": "trackFieldCombo",
         "information": [
             {"description": "Track and Field Combo","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/TrackFieldCombo.jpg"
+        "imgLink": "../photos/Pizza/TrackFieldCombo.jpg"
     }, 
     {
         "key": "tripleJump",
         "information": [
             {"description": "Triple Jump","price": "none"}
         ],
-        "imgLink": "./photos/Pizza/TripleJump.jpg"
-    },
-    {
-        "key": "cheese",
-        "information": [
-            {"description": "Cheese","price": "none"}
-        ],
-        "imgLink": "./photos/Pizza/Cheese.jpg"
+        "imgLink": "../photos/Pizza/TripleJump.jpg"
     }
 ]

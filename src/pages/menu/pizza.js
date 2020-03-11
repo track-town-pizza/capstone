@@ -1,7 +1,7 @@
-import Layout from "../components/Layout"
+import Layout from "../../components/Layout"
 import React from "react"
-import MenuItems from "../components/MenuItem"
-import pizzasInfo from "../../data/pizzas.json"
+import MenuItems from "../../components/MenuItem"
+import pizzasInfo from "../../../data/pizzas.json"
 import Link from "next/link"
 
 
@@ -11,7 +11,7 @@ const Pizzas = () => {
         <Layout>
             <div className="text-center">
                 <h1 className="text-center mb-4">Track Town Pizzas</h1>
-                    <Link href="#">
+                    <Link href="./pizzaBuilder">
                         <div className="build-pizza-link">
                             <a>
                                 <p className="text-center mt-3">Build Your Own</p>
