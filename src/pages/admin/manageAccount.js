@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Layout from "../components/Layout"
+import Layout from "../../components/Layout"
 
-const Account = () => (
+const ManageAccount = () => (
 	<Layout>
 		<div className="container mx-auto mt-3 dark-green-text d-flex flex-wrap">
 			<h2 className="text-uppercase page-title">My Account</h2>
@@ -121,4 +121,4 @@ const Account = () => (
 	</Layout>
 )
 
-export default Account
+export default ManageAccount
