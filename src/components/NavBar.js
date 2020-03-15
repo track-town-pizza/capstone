@@ -109,6 +109,7 @@ const NavBar = props => (
 				#navbar-content {
                     font-size: 1.5em;
 					width: 40%;
+                    z-index: 5;
                 }
             }
 
