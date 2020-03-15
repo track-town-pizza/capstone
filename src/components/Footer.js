@@ -2,7 +2,7 @@ import Link from "next/link"
 
 const Footer = () => (
     <div>
-        <footer className="mt-2 page-footer bg-dark text-white d-flex flex-wrap justify-content-center">
+        <footer className="page-footer bg-dark text-white d-flex flex-wrap justify-content-center">
 
             <p className="text-white mr-3 my-2">© Track Town Pizza</p>
 
@@ -26,8 +26,8 @@ const Footer = () => (
                 <a className="text-white mr-3 my-2">About</a>
             </Link>
 
-            <Link href="#">
-                <a href="#" className="text-white mr-3 my-2">
+            <Link href="https://www.facebook.com/TrackTownPizza/">
+                <a className="text-white mr-3 my-2">
                     <i className="fab fa-facebook-square"></i>
                 </a>
             </Link>
