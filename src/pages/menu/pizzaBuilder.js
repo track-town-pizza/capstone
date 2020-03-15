@@ -260,6 +260,7 @@ const PizzaBuilder = () => {
                     allPizzas: pizza.allPizzas.concat(currentPizzaInfo.currentPizza),
                     totalPrice: pizza.totalPrice + currentPizzaInfo.currentPrice
                 })
+                window.scrollTo(0,0)
             }
             else {
                 // loop through all these so if they change the code does not need to be refactored
