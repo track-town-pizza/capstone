@@ -2,8 +2,8 @@ import React from "react"
 import Link from "next/link"
 
 import Layout from "../../components/Layout"
-import AccountFormHeader from "../../components/account/AccountFormHeader"
-import AccountForm from "../../components/account/AccountForm"
+import AccountFormHeader from "../../components/admin/AccountFormHeader"
+import AccountForm from "../../components/admin/AccountForm"
 
 const ForgotPassword = () => (
 	<Layout>
@@ -27,7 +27,7 @@ const ForgotPassword = () => (
 		</span>
 		<style jsx>{`
 			.responsive-width {
-				width: 40%;
+				width: 33%;
 			}
 
 			.link-container {
@@ -53,7 +53,7 @@ const ForgotPassword = () => (
 
 			.page-title {
 				font-family: 'Oswald', sans-serif;
-				font-size: 60px;
+				font-size: 45px;
 			}
 
 			.dark-green-text, .dark-green-text a {
