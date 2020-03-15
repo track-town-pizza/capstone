@@ -10,20 +10,24 @@ const ManageAccount = () => (
 				<form className="form-width form-divider">
 					<h3 className="mb-3">Update Email</h3>
 					<div className="form-group">
-						<label for="old-email-input">Old Email</label>
-						<input type="email" className="form-control" id="old-email-input" name="old-email-input" aria-describedby="emailHelp" placeholder="Old Email" />
+						<label htmlFor="old-email-input">Old Email</label>
+						<input type="email" className="form-control" id="old-email-input"
+							name="old-email-input" aria-describedby="emailHelp" placeholder="Old Email" />
 					</div>
 					<div className="form-group">
-						<label for="new-email-input">New Email</label>
-						<input type="email" className="form-control" id="new-email-input" name="new-email-input" aria-describedby="emailHelp" placeholder="New Email" />
+						<label htmlFor="new-email-input">New Email</label>
+						<input type="email" className="form-control" id="new-email-input"
+							name="new-email-input" aria-describedby="emailHelp" placeholder="New Email" />
 					</div>
 					<div className="form-group">
-						<label for="confirm-new-email-input">Confirm New Email</label>
-						<input type="email" className="form-control" id="confirm-new-email-input" name="confirm-new-email-input" aria-describedby="emailHelp" placeholder="Confirm New Email" />
+						<label htmlFor="confirm-new-email-input">Confirm New Email</label>
+						<input type="email" className="form-control" id="confirm-new-email-input"
+							name="confirm-new-email-input" aria-describedby="emailHelp" placeholder="Confirm New Email" />
 					</div>
 					<div className="form-group">
-						<label for="password-input">Password</label>
-						<input type="password" className="form-control" id="password-input" name="password-input" placeholder="Password" />
+						<label htmlFor="password-input">Password</label>
+						<input type="password" className="form-control"
+							id="password-input" name="password-input" placeholder="Password" />
 					</div>
 					<div className="form-group">
 						<button type="submit" className="btn btn-green w-100">Update Email</button>
@@ -33,16 +37,19 @@ const ManageAccount = () => (
 					<form>
 						<h3 className="mb-3">Update Password</h3>
 						<div className="form-group">
-							<label for="old-password-input">Old Password</label>
-							<input type="password" className="form-control" id="old-password-input" name="old-password-input" placeholder="Old Password" />
+							<label htmlFor="old-password-input">Old Password</label>
+							<input type="password" className="form-control"
+								id="old-password-input" name="old-password-input" placeholder="Old Password" />
 						</div>
 						<div className="form-group">
-							<label for="new-password-input">New Password</label>
-							<input type="password" className="form-control" id="new-password-input" name="new-password-input" placeholder="New Password" />
+							<label htmlFor="new-password-input">New Password</label>
+							<input type="password" className="form-control" id="new-password-input"
+								name="new-password-input" placeholder="New Password" />
 						</div>
 						<div className="form-group">
-							<label for="confirm-new-password-input">Confirm New Password</label>
-							<input type="password" className="form-control" id="confirm-new-password-input" name="confirm-new-password-input" placeholder="Confirm New Password" />
+							<label htmlFor="confirm-new-password-input">Confirm New Password</label>
+							<input type="password" className="form-control" id="confirm-new-password-input"
+								name="confirm-new-password-input" placeholder="Confirm New Password" />
 						</div>
 						<div className="form-group">
 							<button type="submit" className="btn btn-green w-100">Update Password</button>

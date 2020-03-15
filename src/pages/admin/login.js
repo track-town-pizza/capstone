@@ -1,9 +1,8 @@
-import React from 'react';
-
+import React from "react"
 import Link from "next/link"
 import Layout from "../../components/Layout"
-import AccountFormHeader from "../../components/account/AccountFormHeader"
-import AccountForm from "../../components/account/AccountForm"
+import AccountFormHeader from "../../components/admin/AccountFormHeader"
+import AccountForm from "../../components/admin/AccountForm"
 
 const Login = () => (
 	<Layout>
@@ -11,11 +10,11 @@ const Login = () => (
 			<AccountFormHeader title="Login" subtitle="Sign in to edit blog posts, the menu, and more." />
 			<AccountForm>
 				<div className="form-group">
-					<label for="email-input">Email</label>
+					<label htmlFor="email-input">Email</label>
 					<input type="email" className="form-control" id="email-input" aria-describedby="emailHelp" placeholder="Email" />
 				</div>
 				<div className="form-group">
-					<label for="password-input">Password</label>
+					<label htmlFor="password-input">Password</label>
 					<input type="password" className="form-control" id="password-input" placeholder="Password" />
 				</div>
 				<div className="form-group">
@@ -27,13 +26,10 @@ const Login = () => (
 			<Link href="/admin/forgotpassword">
 				<a>Forgot your password?</a>
 			</Link>
-			<Link href="/admin/register">
-				<a>Register as a new user</a>
-			</Link>
 		</span>
 		<style jsx>{`
 			.responsive-width {
-				width: 40%;
+				width: 33%;
 			}
 			
 			.custom-border {
@@ -42,7 +38,7 @@ const Login = () => (
 
 			.link-container {
 				display: flex;
-				justify-content: space-between;
+				justify-content: center;
 			}
 
 			@media only screen and (max-width: 600px) {
@@ -63,7 +59,7 @@ const Login = () => (
 
 			.page-title {
 				font-family: 'Oswald', sans-serif;
-				font-size: 60px;
+				font-size: 45px;
 			}
 
 			.dark-green-text, .dark-green-text a {
