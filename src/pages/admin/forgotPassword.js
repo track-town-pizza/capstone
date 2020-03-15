@@ -11,7 +11,7 @@ const ForgotPassword = () => (
 			<AccountFormHeader title="Forgot Password" subtitle="Enter your email address to reset your password." />
 			<AccountForm>
 				<div className="form-group">
-					<label for="email-input">Email Address</label>
+					<label htmlFor="email-input">Email Address</label>
 					<input type="email" id="email-input" name="email-input" aria-describedby="emailHelp"
 						className="form-control" placeholder="pizza@tracktown.com" />
 				</div>
