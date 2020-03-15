@@ -28,7 +28,7 @@ const Layout = props => (
 				margin-top: 80px;
 				font-family: "Oswald";
                 margin-bottom: 10vh;
-                min-height: 90vh;
+				min-height: 90vh;
 			}
 
 			@media only screen and (max-width: 700px) {
