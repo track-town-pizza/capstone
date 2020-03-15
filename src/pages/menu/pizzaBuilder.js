@@ -260,6 +260,7 @@ const PizzaBuilder = () => {
                     allPizzas: pizza.allPizzas.concat(currentPizzaInfo.currentPizza),
                     totalPrice: pizza.totalPrice + currentPizzaInfo.currentPrice
                 })
+                window.scrollTo(0,0)
             }
             else {
                 // loop through all these so if they change the code does not need to be refactored
@@ -272,10 +273,18 @@ const PizzaBuilder = () => {
                 }
                 for(let crust of crusts){
                     if(name === crust){
-                        setPizza({
-                            ...pizza,
-                            crust: crust,
-                        })}
+                        if (name === "Gluten Free" && pizza.size !== "Small") {
+                            setPizza({
+                                ...pizza
+                            })
+                            alert("Gluten free crust is only available in size small")
+                        }
+                        else {
+                            setPizza({
+                                ...pizza,
+                                crust: crust,
+                            })}
+                        }
                 }
                 for(let cheese of cheeses){
                     if(name === cheese){
@@ -470,7 +479,7 @@ const PizzaBuilder = () => {
                 { pizza.allPizzas.map((pizzaStr, index) => <p key={pizzaStr} className="pr-5 pl-5">{"Pizza " + (index + 1) + ": " + pizzaStr}</p>) }
                 <p className="pr-5 pl-5">{"Pizza " + (pizza.allPizzas.length + 1) + ": " + buildOrderString(pizza, currentPizzaInfo) }</p>
                 <h3 className="pb-2">{"Order Cost:  $" + getPriceOfPizza(pizza.size, pizza.halfNHalf, pizza.firstHalf, pizza.secondHalf, pizza.totalPrice, currentPizzaInfo)} </h3>
-                <p className="pb-2">Price cannot be determined until a pizza size is chosen</p>
+            { pizza.size ? null : <p className="pb-2">Price cannot be determined until a pizza size is chosen</p> }
             </div>
             <EndPizzaBuilderSection handleClick={handleClick} phoneNumber={phoneNumber} onlineOrderingLink={onlineOrderingLink} />
             <style jsx>{`
