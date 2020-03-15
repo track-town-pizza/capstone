@@ -272,10 +272,17 @@ const PizzaBuilder = () => {
                 }
                 for(let crust of crusts){
                     if(name === crust){
-                        setPizza({
-                            ...pizza,
-                            crust: crust,
-                        })}
+                        if (name === "Gluten Free" && pizza.size !== "Small") {
+                            setPizza({
+                                ...pizza
+                            })
+                        }
+                        else {
+                            setPizza({
+                                ...pizza,
+                                crust: crust,
+                            })}
+                        }
                 }
                 for(let cheese of cheeses){
                     if(name === cheese){
