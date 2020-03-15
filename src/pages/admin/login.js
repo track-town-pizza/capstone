@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React from "react"
 import Link from "next/link"
 import Layout from "../../components/Layout"
 import AccountFormHeader from "../../components/account/AccountFormHeader"
@@ -11,11 +10,11 @@ const Login = () => (
 			<AccountFormHeader title="Login" subtitle="Sign in to edit blog posts, the menu, and more." />
 			<AccountForm>
 				<div className="form-group">
-					<label for="email-input">Email</label>
+					<label htmlFor="email-input">Email</label>
 					<input type="email" className="form-control" id="email-input" aria-describedby="emailHelp" placeholder="Email" />
 				</div>
 				<div className="form-group">
-					<label for="password-input">Password</label>
+					<label htmlFor="password-input">Password</label>
 					<input type="password" className="form-control" id="password-input" placeholder="Password" />
 				</div>
 				<div className="form-group">
@@ -26,9 +25,6 @@ const Login = () => (
 		<span className="responsive-width link-container mx-auto mt-2 text-center dark-green-text">
 			<Link href="/admin/forgotpassword">
 				<a>Forgot your password?</a>
-			</Link>
-			<Link href="/admin/register">
-				<a>Register as a new user</a>
 			</Link>
 		</span>
 		<style jsx>{`
@@ -42,7 +38,7 @@ const Login = () => (
 
 			.link-container {
 				display: flex;
-				justify-content: space-between;
+				justify-content: center;
 			}
 
 			@media only screen and (max-width: 600px) {
