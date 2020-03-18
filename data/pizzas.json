@@ -88,7 +88,7 @@
         "information": [
             {"description": "Heptathlon","price": "none"}
         ],
-        "imgLink": "../photos/Pizza/heptathlon.jpg"
+        "imgLink": "../photos/Pizza/Heptathlon.jpg"
     },
     {
         "key": "chickenMetropol",
@@ -116,7 +116,7 @@
         "information": [
             {"description": "Mediterranean","price": "none"}
         ],
-        "imgLink": "../photos/Pizza/mediterranean.jpg"
+        "imgLink": "../photos/Pizza/Mediterranean.jpg"
     },
     {
         "key": "originalVeggie",
