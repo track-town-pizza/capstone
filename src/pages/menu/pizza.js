@@ -23,6 +23,12 @@ const Pizzas = () => {
             <div className="pizzas-container">
                 {MenuItemsComponents}
             </div>
+            <div className="text-center">
+                <h4 className="d-inline">To see specific prices, check out our paper </h4>
+                <Link href="#" className="d-inline">
+                    <h4 className="menu-cursor"><a className="text-success">menu</a></h4>
+                </Link>
+            </div>
 
             <style jsx>{`
                 .pizzas-container {
@@ -45,6 +51,9 @@ const Pizzas = () => {
                     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
                 }
                 .build-pizza-link:hover {
+                    cursor: pointer;
+                }
+                .menu-cursor:hover {
                     cursor: pointer;
                 }
             `}</style>
