@@ -10,6 +10,7 @@ const About = () => {
                 <div className="h-50 mx-auto">
                     <img src={aboutData.imgLink} className="img-fluid rounded" alt="Track Town Pizza" />
                 </div>
+                <br/>
                 <div className="mx-auto">
                     <p className="about-text">{aboutData.p1}</p>
                     <p className="about-text">{aboutData.p2}</p>
@@ -22,8 +23,8 @@ const About = () => {
                         <a href={aboutData.pdfLink} className="text-success">Track Town USA Map</a>
                     </Link>
                     <br/>
-                    <Link href="#">
-                        <a href="#" className="text-success">Track Town Pizza Blog</a>
+                    <Link href="/blog">
+                        <a className="text-success">Track Town Pizza Blog</a>
                     </Link>
                 </div>
             </div>
