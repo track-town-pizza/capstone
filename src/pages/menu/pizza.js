@@ -14,7 +14,7 @@ const Pizzas = () => {
                     <Link href="./pizzaBuilder">
                         <div className="build-pizza-link">
                             <a>
-                                <p className="text-center mt-3">Build Your Own</p>
+                                <h4 className="text-center mt-2 mb-2">Build Your Own</h4>
                             </a>
                         </div>
                     </Link>
