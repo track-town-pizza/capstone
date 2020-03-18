@@ -18,7 +18,7 @@ const Pizzas = () => {
                             </a>
                         </div>
                     </Link>
-                <h3 className="text-center mb-4">Or Check Out Our Delicious Menu Pizzas</h3>
+                <h3 className="text-center mb-4 mr-2 ml-2">Or Check Out Our Delicious Menu Pizzas</h3>
             </div>
             <div className="pizzas-container">
                 {MenuItemsComponents}
