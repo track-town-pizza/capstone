@@ -23,10 +23,10 @@ const Pizzas = () => {
             <div className="pizzas-container">
                 {MenuItemsComponents}
             </div>
-            <div className="text-center">
+            <div className="text-center overflow-hidden">
                 <h4 className="d-inline">To see specific prices, check out our paper </h4>
-                <Link href="#" className="d-inline">
-                    <h4 className="menu-cursor"><a className="text-success">menu</a></h4>
+                <Link href="#">
+                    <h4 className="menu-cursor d-inline"><a className="text-success">menu</a></h4>
                 </Link>
             </div>
 
