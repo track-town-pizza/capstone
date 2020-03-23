@@ -17,7 +17,7 @@ function parseJsonToUsableObj() {
     return buffet
 }
 
-const editBuffetPrice = () => {
+const editBuffetPrices = () => {
     const buffet = parseJsonToUsableObj()
     const [ buffetInfo, setBuffetInfo ] = useState(buffet)
     const EditBuffetItems = []
@@ -88,7 +88,7 @@ const editBuffetPrice = () => {
             <div className="text-center">
                {EditBuffetItems}
             </div>
-            <SubmitButton words="Submit Side Prices" onClick={onClick} />
+            <SubmitButton words="Submit Buffet Prices" onClick={onClick} />
             <style jsx>{`
                 .box {
                     text-align:center;
@@ -99,4 +99,4 @@ const editBuffetPrice = () => {
         </Layout>
     )
 }
-export default editBuffetPrice
+export default editBuffetPrices
