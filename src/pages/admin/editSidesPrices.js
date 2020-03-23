@@ -46,7 +46,20 @@ const editSidesPrices = () => {
             }
             if(success) {
                 alert("The prices have been updated")
-                // combine old and new information to update the database
+                const newSidesPrices = []
+                let iter = 0
+                for (const sideInfo of allSidesInfo) {
+                    const obj = new Object()
+                    obj.key = sideInfo.key
+                    obj.imgLink = sideInfo.imgLink
+                    obj.information = new Array()
+                    for(let i=iter; i<iter+sideInfo.information.length; i++) {
+                        obj.information.push(sides[i])
+                    }
+                    iter += sideInfo.information.length
+                    newSidesPrices.push(obj)
+                }
+                // push newSidesPrices into the db as it is the updated information
             }
         }
     }
