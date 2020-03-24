@@ -35,35 +35,57 @@ const editBeveragePrices = () => {
 
     // This function updates the text that the user sees as they change the price
     function onChange(event) {
-        // const { id } = event.target
-        // setSides( sides.map(currSide => (
-        //     id === currSide.description ? 
-        //     {
-        //         ...currSide,
-        //         price: event.target.value
-        //     } : {...currSide}
-        // )))
+        const { id } = event.target
+        setBeverages( beverages.map(currBeverage => (
+            id === currBeverage.subheading + currBeverage.description ? 
+            {
+                ...currBeverage,
+                price: event.target.value
+            } : {...currBeverage}
+        )))
     }
 
     // This function controls what happens when the user hits the submit button
     function onClick(event) {
-        // const { type } = event
-        // let success = true
-        // if(type === 'click') {
-        //     for(const side of sides) {
-        //         // if the user messed up the format for the price, they must fix it 
-        //         // before the prices can be updated
-        //         if(!MONEY_PATTERN.test(side.price)) {
-        //             success = false
-        //             alert(side.description + " price was not done correctly. It must be in the form $X.XX or $XX.XX. Please fix it before this form can be submitted")
-        //         }
-        //     }
-        //     // the all the elements are in the correct format, the prices can be updated
-        //     if(success) {
-        //         alert("The prices have been updated")
+        const { type } = event
+        let success = true
+        if(type === 'click') {
+            for(const beverage of beverages) {
+                // if the user messed up the format for the price, they must fix it 
+                // before the prices can be updated
+                if(!MONEY_PATTERN.test(beverage.price)) {
+                    success = false
+                    alert(beverage.subheading + " " + beverage.description + " price was not done correctly. It must be in the form $X.XX or $XX.XX. Please fix it before this form can be submitted")
+                }
+            }
+            // the all the elements are in the correct format, the prices can be updated
+            if(success) {
+                alert("The prices have been updated")
                 
-        //     }
-        // }
+                // put the new information back into the original format
+                const newBeverageArr = []
+                for(let i=0; i<beverages.length; i++) {
+                    newBeverageArr.push(beverages[i])
+                    delete newBeverageArr[i].subheading
+                }
+               
+                // make a deep copy for the new object with the items array empty
+                const newBeverageInfo = JSON.parse(JSON.stringify(allBeverageInfo))
+                let iter = 0
+                for(const beverageItem of newBeverageInfo) {
+                    for(const subAndItems of beverageItem.information) {
+                        let len = subAndItems.items.length
+                        // remove the old prices and put in the new prices
+                        subAndItems.items = []
+                        for(let i=iter; i<iter+len; i++) {
+                            subAndItems.items.push(newBeverageArr[i])
+                        }
+                        iter += len
+                    }
+                }
+                // push new data (newBeverageInfo) into database
+            }
+        }
     }
 
     return (
