@@ -13,12 +13,12 @@ function parseJsonToUsableObj() {
     let beverageInfo = []
     for(const beverageItem of allBeverageInfo) {
         for(const subAndItems of beverageItem.information){
-            for(let i=0; i<subAndItems.length; i++) {
-                if(subAndItems.subheading !== "none"){
-                    subAndItems.items[i] = ""
+            for(let i=0; i<subAndItems.items.length; i++) {
+                if(subAndItems.subheading === "none"){
+                    subAndItems.items[i].subheading = ""
                 } 
                 else{
-                    subAndItems.items[i] = subAndItems.subheading
+                    subAndItems.items[i].subheading = subAndItems.subheading
                 }
             }
             beverageInfo = beverageInfo.concat(subAndItems.items)
@@ -31,7 +31,7 @@ const editBeveragePrices = () => {
     const beverageInfo = parseJsonToUsableObj()
     const [ beverages, setBeverages ] = useState(beverageInfo)
     const EditBeverageItems = []
-    EditBeverageItems.push(beverages.map(item => <EditFoodItem id={item.description} name={item.subheading + " " + item.description} defaultValue={item.price} onChange={onChange}/>))
+    EditBeverageItems.push(beverages.map(item => <EditFoodItem id={item.subheading+item.description} name={item.subheading + " " + item.description} defaultValue={item.price} onChange={onChange}/>))
 
     // This function updates the text that the user sees as they change the price
     function onChange(event) {
