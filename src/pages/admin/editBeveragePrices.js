@@ -12,13 +12,13 @@ const MONEY_PATTERN = /^\$(\d{1,3}(\,\d{3})*|(\d+))(\.[0-9]{2})$/
 function parseJsonToUsableObj() {
     let beverageInfo = []
     for(const beverageItem of allBeverageInfo) {
-        for(const subAndItems of beverageItem.information){
-            for(let i=0; i<subAndItems.items.length; i++) {
-                if(subAndItems.subheading === "none"){
-                    subAndItems.items[i].subheading = ""
-                } 
-                else{
-                    subAndItems.items[i].subheading = subAndItems.subheading
+        for(const subAndItems of beverageItem.information) {
+            for(const item of subAndItems.items) {
+                if(subAndItems.subheading === "none") {
+                    item.subheading = ""
+                }
+                else {
+                    item.subheading = subAndItems.subheading
                 }
             }
             beverageInfo = beverageInfo.concat(subAndItems.items)
