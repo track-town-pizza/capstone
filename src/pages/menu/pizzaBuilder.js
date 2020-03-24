@@ -6,7 +6,7 @@ import FirstHalfOptions from "../../components/FirstHalfOptions"
 import SecondHalfOptions from "../../components/SecondHalfOptions"
 import { sizes, crusts, cheeses, sauces, toppings } from "../../../data/pizzaInfo.json"
 import prices from "../../../data/prices.json"
-import { phoneNumber, onlineOrderingLink } from "../../../data/restaurantInfo.json"
+import { phone, onlineOrderLink } from "../../../data/info.json"
 
 // determines the price of a pizza based on size and toppings
 // returns the price of the pizza
@@ -457,7 +457,7 @@ const PizzaBuilder = () => {
     }
     return (
         <Layout>
-            <NotOnlineOrdering phoneNumber={phoneNumber} onlineOrderingLink={onlineOrderingLink} />
+            <NotOnlineOrdering phoneNumber={phone} onlineOrderingLink={onlineOrderLink} />
             <FirstHalfOptions sizes={sizes} handleClick={handleClick} clickedSize={pizza.size} second="" 
                               crusts={crusts} clickedCrust={pizza.crust} onChange={handleChange} thinCrust={pizza.thinCrust}
                               halfNHalf={pizza.halfNHalf}
@@ -481,7 +481,7 @@ const PizzaBuilder = () => {
                 <h3 className="pb-2">{"Order Cost:  $" + getPriceOfPizza(pizza.size, pizza.halfNHalf, pizza.firstHalf, pizza.secondHalf, pizza.totalPrice, currentPizzaInfo)} </h3>
             { pizza.size ? null : <p className="pb-2">Price cannot be determined until a pizza size is chosen</p> }
             </div>
-            <EndPizzaBuilderSection handleClick={handleClick} phoneNumber={phoneNumber} onlineOrderingLink={onlineOrderingLink} />
+            <EndPizzaBuilderSection handleClick={handleClick} phoneNumber={phone} onlineOrderingLink={onlineOrderLink} />
             <style jsx>{`
                 .order-box {
                     margin: auto;

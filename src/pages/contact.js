@@ -11,40 +11,56 @@ Props used in this page:
 
 const Contact = props => (
 	<Layout>
-		<div className="d-flex flex-column">					{/* Contents of Contact Page */}
-			<div className="d-flex justify-content-between">			{/* Title and Edit/Save/Cancel Buttons */}
-				<h1 className="title text-uppercase">Contact Us</h1>
-				{props.isAdminView && !props.isInEditMode &&
-					<button class="btn btn-primary">Edit</button>
-				}
-				{/* TODO: add conditional Save & Cancel buttons for being in admin edit mode */}
+		<div>
+			<div className="info-box mx-auto">
+				<h1 className="title">Contact Us</h1>
 			</div>
-			<div className="d-flex justify-content-between flex-wrap main-container">		{/* Contact Info & Map */}
-				<div className="text-left">
+			<div className="info-box mx-auto">
+				<div className="location">
 					<h3>Location</h3>
-					{!props.isInEditMode &&
-						<p>{props.location}</p>
-					}
+					<p>{props.location}</p>
 				</div>
-				<div className="text-right">
+				<div className="phone">
 					<h3>Phone</h3>
-					{!props.isInEditMode &&
-						<p>{props.phone}</p>
-					}
+					<p>{props.phone}</p>
 				</div>
+			</div>
+			<div className="content mx-auto">
 				<GoogleMaps />
 			</div>
 		</div>
 		
+
 		<style jsx>{`
 			.title {
-				color: #094c3a;
-				font-family: 'Oswald', sans-serif;
 				font-size: 60px;
 			}
-
+			.info-box{
+				width: 70%;
+			}
 			.content {
-				width: 40%;
+				width: 70%;
+				clear:both; 
+			}
+			.location{
+				float: left;
+			}
+			.phone{
+				float:right;
+			}
+			@media only screen and (max-width: 600px) {
+				.info-box{
+					width: 90%;
+				}
+				.content{
+					width: 90%;
+				}
+				.location{
+					margin-right: 50px;
+				}
+				.phone{
+					float:left;
+				}
 			}
 		`}</style>
 	</Layout>
@@ -52,8 +68,6 @@ const Contact = props => (
 
 // These hardcoded values will eventually change to be programmatically determined
 Contact.getInitialProps = () => ({
-	isAdminView: false,
-	isInEditMode: false,
 	location: '1809 Franklin Blvd, Eugene, OR 97403',
 	phone: '541-284-8484'
 })

@@ -31,6 +31,11 @@ const Footer = () => (
                     <i className="fab fa-facebook-square"></i>
                 </a>
             </Link>
+            <Link href="https://www.instagram.com/tracktownpizza/">
+                <a className="text-white mr-3 my-2">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </Link>
 
         </footer>
 

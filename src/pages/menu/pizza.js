@@ -14,14 +14,20 @@ const Pizzas = () => {
                     <Link href="./pizzaBuilder">
                         <div className="build-pizza-link">
                             <a>
-                                <p className="text-center mt-3">Build Your Own</p>
+                                <h4 className="text-center mt-2 mb-2">Build Your Own</h4>
                             </a>
                         </div>
                     </Link>
-                <h3 className="text-center mb-4">Or Check Out Our Delicious Menu Pizzas</h3>
+                <h3 className="text-center mb-4 mr-2 ml-2">Or Check Out Our Delicious Menu Pizzas</h3>
             </div>
             <div className="pizzas-container">
                 {MenuItemsComponents}
+            </div>
+            <div className="text-center overflow-hidden">
+                <h4 className="d-inline">To see specific prices, check out our paper </h4>
+                <Link href="#">
+                    <h4 className="menu-cursor d-inline"><a className="text-success">menu</a></h4>
+                </Link>
             </div>
 
             <style jsx>{`
@@ -45,6 +51,9 @@ const Pizzas = () => {
                     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
                 }
                 .build-pizza-link:hover {
+                    cursor: pointer;
+                }
+                .menu-cursor:hover {
                     cursor: pointer;
                 }
             `}</style>

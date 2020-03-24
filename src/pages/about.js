@@ -1,15 +1,17 @@
 import Layout from "../components/Layout"
 import Link from "next/link"
 import aboutData from "../../data/about.json"
+import React from "react"
 
 const About = () => {
     return (
         <Layout>
             <div className="w-75 mx-auto">
                 <h1 className="text-center">About Track Town Pizza</h1>
-                <div className="h-50 mx-auto">
-                    <img src={aboutData.imgLink} className="img-fluid rounded" alt="Track Town Pizza" />
+                <div className="text-center">
+                    <img src={aboutData.imgLink} className="w-75 img-fluid rounded" alt="Track Town Pizza" />
                 </div>
+                <br/>
                 <div className="mx-auto">
                     <p className="about-text">{aboutData.p1}</p>
                     <p className="about-text">{aboutData.p2}</p>
@@ -22,8 +24,8 @@ const About = () => {
                         <a href={aboutData.pdfLink} className="text-success">Track Town USA Map</a>
                     </Link>
                     <br/>
-                    <Link href="#">
-                        <a href="#" className="text-success">Track Town Pizza Blog</a>
+                    <Link href="/blog">
+                        <a className="text-success">Track Town Pizza Blog</a>
                     </Link>
                 </div>
             </div>

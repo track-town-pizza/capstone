@@ -11,7 +11,7 @@ const PizzaCustomOpts  = (props) => {
     if (props.sizes) {
         title = "Size"
         foodButtonComponents = props.sizes.map(size =>
-            size === props.clicked ? <YellowFoodButton buttonWord={size} key={size} handleClick={props.handleClick} color="#c9b52a" boxShadow="0px 6px 6px rgba(0, 0, 0, .5)" second={props.second}/> 
+            size === props.clicked ? <YellowFoodButton buttonWord={size} key={size} handleClick={props.handleClick} color="#c9b52a" boxShadow="5px 5px 5px rgba(0, 0, 0, .5)" second={props.second}/> 
                                     : <YellowFoodButton buttonWord={size} key={size} handleClick={props.handleClick} color="#FFEC65" second={props.second}/>
         )
     }
@@ -62,7 +62,7 @@ const PizzaCustomOpts  = (props) => {
     return (
         <div className="text-center mt-2">
             <h2>{title}</h2>
-            {props.crusts ? <div>{glutenFreeWarning}</div> : null}
+            {props.crusts ? <div className="mr-2 ml-2">{glutenFreeWarning}</div> : null}
             {foodButtonComponents}
             <br />
             {checkboxComponents ? checkboxComponents : null}
