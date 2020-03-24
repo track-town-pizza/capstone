@@ -13,8 +13,6 @@ function parseJsonToUsableObj() {
     let beverageInfo = []
     for(const beverageItem of allBeverageInfo) {
         for(const subAndItems of beverageItem.information){
-            // this needs to be changed so its not just a temp obj
-            // for(item of subAndItems){
             for(let i=0; i<subAndItems.length; i++) {
                 if(subAndItems.subheading !== "none"){
                     subAndItems.items[i] = ""
