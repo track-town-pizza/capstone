@@ -56,20 +56,17 @@ const editSidesPrices = () => {
                 alert("The prices have been updated")
                 // A new object is created that matches the original format of the object for the database
                 // The new information is merged with the unchanged information
-                const newSidesPrices = []
+                const newSidesInfo = JSON.parse(JSON.stringify(allSidesInfo))
                 let iter = 0
-                for (const sideInfo of allSidesInfo) {
-                    const obj = {}
-                    obj.key = sideInfo.key
-                    obj.imgLink = sideInfo.imgLink
-                    obj.information = []
-                    for(let i=iter; i<iter+sideInfo.information.length; i++) {
-                        obj.information.push(sides[i])
+                for (const sideInfo of newSidesInfo) {
+                    const len = sideInfo.information.length
+                    sideInfo.information = []
+                    for(let i=iter; i<iter+len; i++) {
+                        sideInfo.information.push(sides[i])
                     }
                     iter += sideInfo.information.length
-                    newSidesPrices.push(obj)
                 }
-                console.log(newSidesPrices)
+                console.log(newSidesInfo)
                 // push newSidesPrices into the db as it is the updated information
             }
         }
