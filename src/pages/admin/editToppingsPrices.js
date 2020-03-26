@@ -5,8 +5,8 @@ import Layout from "../../components/Layout"
 import EditFoodItem from "../../components/admin/EditFoodItem"
 import SubmitButton from "../../components/admin/SubmitPricesBtn"
 // This is a regular expression that tells is used for checking that the 
-// new price is in the correct format
-const MONEY_PATTERN = /^\d{1,5}(\.\d{2})?$/
+// new price is in the correct format. 
+const MONEY_PATTERN = /^\d{1,5}\.\d\d$/
 
 // This function takes the original data and modifies two arrays of data that 
 // can be udpated
@@ -89,35 +89,25 @@ const editToppingsPrices = () => {
                 }
             }
             for(const size of sizes) {
-                console.log(size.prices)
                 if(!MONEY_PATTERN.test(size.prices)) {
                     success = false
                     alert(size.description + " price was not done correctly. It must be in the form X.XX or XX.XX. Please fix it before this form can be submitted")
                 }
             }
-        //     // the all the elements are in the correct format, the prices can be updated
+            // the all the elements are in the correct format, the prices can be updated
             if(success) {
                 alert("The prices have been updated")
                 // A new object is created that matches the original format of the object for the database
                 // The new information is merged with the unchanged information
                 const newPricesInfo = JSON.parse(JSON.stringify(allToppingsInfo))
-
-
-
-
-
-        //         const newSidesInfo = JSON.parse(JSON.stringify(allSidesInfo))
-        //         let iter = 0
-        //         for (const sideInfo of newSidesInfo) {
-        //             const len = sideInfo.information.length
-        //             sideInfo.information = []
-        //             for(let i=iter; i<iter+len; i++) {
-        //                 sideInfo.information.push(sides[i])
-        //             }
-        //             iter += sideInfo.information.length
-        //         }
-        //         console.log(newSidesInfo)
-        //         // push newSidesPrices into the db as it is the updated information
+                for(const size of sizes) {
+                    newPricesInfo[size.description] = size.prices
+                }
+                for(const topping of toppings) {
+                    newPricesInfo[topping.description] = topping.prices
+                }
+                console.log(newPricesInfo)
+                // push newly updated information into the database
             }
         }
     }
@@ -135,7 +125,6 @@ const editToppingsPrices = () => {
                 .box {
                     text-align:center;
                 }
-	
 			`}</style>
 
         </Layout>
