@@ -6,7 +6,7 @@ import EditFoodItem from "../../components/admin/EditFoodItem"
 import SubmitButton from "../../components/admin/SubmitPricesBtn"
 // This is a regular expression that tells is used for checking that the 
 // new price is in the correct format
-const MONEY_PATTERN = /^\$(\d{1,3}(\,\d{3})*|(\d+))(\.[0-9]{2})$/
+const MONEY_PATTERN = /^\d{1,5}(\.\d{2})?$/
 
 // This function takes the original data and modifies two arrays of data that 
 // can be udpated
@@ -75,22 +75,37 @@ const editToppingsPrices = () => {
 
     // This function controls what happens when the user hits the submit button
     function onClick(event) {
-        // const { type } = event
-        // let success = true
-        // if(type === 'click') {
-        //     for(const side of sides) {
-        //         // if the user messed up the format for the price, they must fix it 
-        //         // before the prices can be updated
-        //         if(!MONEY_PATTERN.test(side.price)) {
-        //             success = false
-        //             alert(side.description + " price was not done correctly. It must be in the form $X.XX or $XX.XX. Please fix it before this form can be submitted")
-        //         }
-        //     }
+        const { type } = event
+        let success = true
+        if(type === 'click') {
+            for(const topping of toppings) {
+                for(const size of sizes) {
+                     // if the user messed up the format for the price, they must fix it 
+                    // before the prices can be updated
+                    if(!MONEY_PATTERN.test(topping.prices[size.description])) {
+                        success = false
+                        alert(size.description + " " + topping.description + " price was not done correctly. It must be in the form X.XX or XX.XX. Please fix it before this form can be submitted")
+                    }
+                }
+            }
+            for(const size of sizes) {
+                console.log(size.prices)
+                if(!MONEY_PATTERN.test(size.prices)) {
+                    success = false
+                    alert(size.description + " price was not done correctly. It must be in the form X.XX or XX.XX. Please fix it before this form can be submitted")
+                }
+            }
         //     // the all the elements are in the correct format, the prices can be updated
-        //     if(success) {
-        //         alert("The prices have been updated")
-        //         // A new object is created that matches the original format of the object for the database
-        //         // The new information is merged with the unchanged information
+            if(success) {
+                alert("The prices have been updated")
+                // A new object is created that matches the original format of the object for the database
+                // The new information is merged with the unchanged information
+                const newPricesInfo = JSON.parse(JSON.stringify(allToppingsInfo))
+
+
+
+
+
         //         const newSidesInfo = JSON.parse(JSON.stringify(allSidesInfo))
         //         let iter = 0
         //         for (const sideInfo of newSidesInfo) {
@@ -103,8 +118,8 @@ const editToppingsPrices = () => {
         //         }
         //         console.log(newSidesInfo)
         //         // push newSidesPrices into the db as it is the updated information
-        //     }
-        // }
+            }
+        }
     }
 
     return (
