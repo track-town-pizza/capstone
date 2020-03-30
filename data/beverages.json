@@ -58,7 +58,7 @@
                 {"description": "Milk","price": "$1.25"},
                 {"description": "Bottle Water","price": "$1.25"},
                 {"description": "Coffee","price": "$1.65"},
-                {"description": "Red Bull (sugar free & orange)","price": "$2.50"}
+                {"description": "Red Bull","price": "$2.50"}
             ]}
         ]
     }
