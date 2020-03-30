@@ -17,7 +17,7 @@ function parseJsonToUsableObj() {
     return buffet
 }
 
-const editBuffetPrice = () => {
+const editBuffetPrices = () => {
     const buffet = parseJsonToUsableObj()
     const [ buffetInfo, setBuffetInfo ] = useState(buffet)
     const EditBuffetItems = []
@@ -53,25 +53,10 @@ const editBuffetPrice = () => {
                 alert("The prices have been updated")
                 // A new object is created that matches the original format of the object for the database
                 // The new information is merged with the unchanged information
-                const newBuffetPrices = [{
-                                        key: "Buffet Prices",
-                                        information:[
-                                            {
-                                                subheading: "none",
-                                                items: []
-                                            },
-                                            {
-                                                subheading: "none",
-                                                items: []
-                                            },
-                                            {
-                                                subheading: "none",
-                                                items: []
-                                            }
-                                        ]
-                                    }]
+                const newBuffetPrices = JSON.parse(JSON.stringify(buffetPrices))
                 let iter = 0
-                for (let i=0; i<buffetPrices[0].information.length; i++){ 
+                for (let i=0; i<buffetPrices[0].information.length; i++){
+                    newBuffetPrices[0].information[i].items = []
                     for(let j=iter; j<iter+buffetPrices[0].information[i].items.length; j++) {
                         newBuffetPrices[0].information[i].items.push(buffetInfo[j])
                     }
@@ -88,7 +73,7 @@ const editBuffetPrice = () => {
             <div className="text-center">
                {EditBuffetItems}
             </div>
-            <SubmitButton words="Submit Side Prices" onClick={onClick} />
+            <SubmitButton words="Submit Buffet Prices" onClick={onClick} />
             <style jsx>{`
                 .box {
                     text-align:center;
@@ -99,4 +84,4 @@ const editBuffetPrice = () => {
         </Layout>
     )
 }
-export default editBuffetPrice
+export default editBuffetPrices
