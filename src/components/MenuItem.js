@@ -3,11 +3,11 @@ import ItemInfo from "./ItemInfo"
 
 const MenuItem = props => {
     return (
-        <div className="side-item">
+        <div className="item">
             <img src={props.itemInfo.imgLink} alt="Track Town Pizza"/>
             <ItemInfo itemInformation={props.itemInfo.information} page={props.page}/>
             <style jsx>{`
-                    .side-item {
+                    .item {
                         min-width: 200px;
                         width: 25%;
                         min-height: 250px;
