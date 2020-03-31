@@ -1,6 +1,6 @@
 import Layout from "../../components/Layout"
 import React from "react"
-import BuffetItems from "../../components/BeverageItem"
+import BuffetItems from "../../components/menu/BeverageItem"
 import buffetInfo from "../../../data/buffet.json"
 
 const Buffet = () => {

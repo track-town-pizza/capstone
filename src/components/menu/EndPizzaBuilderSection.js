@@ -1,5 +1,5 @@
 import React from "react"
-import YellowFoodButton from "../components/YellowFoodButton"
+import YellowFoodButton from "./YellowFoodButton"
 import Link from "next/link"
 
 const EndPizzaBuilderSection = (props) => {
