@@ -7,7 +7,7 @@ const Merchandise = () => {
     const MenuItemsComponents = allMerchInfo.map(merchInfo => (<MenuItems itemInfo={merchInfo} page="merchandise"/>))
     return (
         <Layout>
-            <h1 className="text-center mb-4">Side Orders</h1>
+            <h1 className="text-center mb-4">Merchandise</h1>
             <div className="sides-container">
                 {MenuItemsComponents}
             </div>
