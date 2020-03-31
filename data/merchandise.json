@@ -1,0 +1,66 @@
+[
+    {
+        "key": "Mug",
+        "information": [
+            {"description": "Track Town Mug","price": "$15.00"}
+        ],
+        "imgLink": "../photos/Merchandise/mug.jpg"
+    },
+    {
+        "key": "Koozie",
+        "information": [
+            {"description": "Track Town Koozie","price": "$5.00"}
+        ],
+        "imgLink": "../photos/Merchandise/koozie.jpg"
+    },
+    {
+        "key": "Tie Dye Shirt",
+        "information": [
+            {"description": "Tie-Dye T-shirt","price": "$20.00"}
+        ],
+        "imgLink": "../photos/Merchandise/tieDyeShirt.jpg"
+    },
+    {
+        "key": "Blue Shirt",
+        "information": [
+            {"description": "Blue T-shirt","price": "$16.00"}
+        ],
+        "imgLink": "../photos/Merchandise/blueShirt.jpg"
+    },
+    {
+        "key": "Dark Green T-Shirt",
+        "information": [
+            {"description": "Dark Green T-shirt","price": "$16.00"}
+        ],
+        "imgLink": "../photos/Merchandise/darkGreenShirt.jpg"
+    },
+    {
+        "key": "Green Shirt",
+        "information": [
+            {"description": "Green T-shirt","price": "$16.00"}
+        ],
+        "imgLink": "../photos/Merchandise/greenShirt.jpg"
+    },
+    {
+        "key": "White Shirt",
+        "information": [
+            {"description": "White T-shirt","price": "$16.00"}
+        ],
+        "imgLink": "../photos/Merchandise/whiteShirt.jpg"
+    },
+    {
+        "key": "Classic Green T-Shirt",
+        "information": [
+            {"description": "Classic Green T-shirt","price": "$16.00"}
+        ],
+        "imgLink": "../photos/Merchandise/oldGreenShirt.jpg"
+    },
+    {
+        "key": "Classic Grey T-Shirt",
+        "information": [
+            {"description": "Classic Grey T-shirt","price": "$16.00"}
+        ],
+        "imgLink": "../photos/Merchandise/greyShirt.jpg"
+    }
+]
+    
