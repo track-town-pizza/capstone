@@ -78,7 +78,7 @@ const editMerchandisePrices = () => {
             <div className="text-center">
                {EditSidesItems}
             </div>
-            <SubmitButton words="Submit Side Prices" onClick={onClick} />
+            <SubmitButton words="Submit Merch Prices" onClick={onClick} />
             <style jsx>{`
                 .box {
                     text-align:center;
