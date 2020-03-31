@@ -74,7 +74,7 @@ const editMerchandisePrices = () => {
 
     return (
         <Layout>
-            <h2 className="text-center">Edit Side Orders' Prices</h2>
+            <h2 className="text-center">Edit Merchandise Prices</h2>
             <div className="text-center">
                {EditSidesItems}
             </div>
