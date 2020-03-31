@@ -1,6 +1,6 @@
 import Layout from "../../components/Layout"
 import React from "react"
-import BeverageItems from "../../components/BeverageItem"
+import BeverageItems from "../../components/menu/BeverageItem"
 import beveragesInfo from "../../../data/beverages.json"
 
 const Beverages = () => {

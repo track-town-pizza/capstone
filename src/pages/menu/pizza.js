@@ -1,6 +1,6 @@
 import Layout from "../../components/Layout"
 import React from "react"
-import MenuItems from "../../components/MenuItem"
+import MenuItems from "../../components/menu/MenuItem"
 import pizzasInfo from "../../../data/pizzas.json"
 import Link from "next/link"
 

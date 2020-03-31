@@ -1,6 +1,6 @@
 import Layout from "../components/Layout"
 import menuInfo from "../../data/menuCategories.json"
-import MenuCategory from "../components/MenuCategory"
+import MenuCategory from "../components/menu/MenuCategory"
 import React from "react"
 
 const Menu = () => {
