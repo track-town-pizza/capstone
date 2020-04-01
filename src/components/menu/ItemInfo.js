@@ -11,7 +11,8 @@ function ItemPriceDescription (description, price) {
                     }
                     .item-description {
                         text-align: center;
-                        margin-top: .75rem;
+                        margin-top: .9rem;
+                        font-size: 15px;
                     }
                 `}</style>
             </div>
@@ -30,12 +31,15 @@ function ItemPriceDescription (description, price) {
                     margin-bottom: .5rem;
                     margin-left: .5rem;
                     margin-top: .5rem;
+                    font-size: 14px;
+                    
                 }
                 .item-price {
                     float: right;
                     margin-bottom: .5rem;
                     margin-right: .5rem;
                     margin-top: .5rem;
+                    font-size: 14px;
                 }
             `}</style>
         </div>
