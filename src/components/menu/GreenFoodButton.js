@@ -17,6 +17,21 @@ const GreenFoodButton  = (props) => {
                         min-width: 75px;
                         hieght: 5%;
                     }
+                    @media only screen and (max-width: 1050px) {
+                        .options-button-green {
+                            width: 15%;
+                        }
+                    }
+                    @media only screen and (max-width: 800px) {
+                        .options-button-green {
+                            width: 17%;
+                        }
+                    }
+                    @media only screen and (max-width: 600px) {
+                        .options-button-green {
+                            width: 30%;
+                        }
+                    }
                 `}</style>
             </button> 
     )

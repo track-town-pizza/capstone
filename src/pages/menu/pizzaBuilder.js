@@ -479,7 +479,7 @@ const PizzaBuilder = () => {
                 { pizza.allPizzas.map((pizzaStr, index) => <p key={pizzaStr} className="pr-5 pl-5">{"Pizza " + (index + 1) + ": " + pizzaStr}</p>) }
                 <p className="pr-5 pl-5">{"Pizza " + (pizza.allPizzas.length + 1) + ": " + buildOrderString(pizza, currentPizzaInfo) }</p>
                 <h3 className="pb-2">{"Order Cost:  $" + getPriceOfPizza(pizza.size, pizza.halfNHalf, pizza.firstHalf, pizza.secondHalf, pizza.totalPrice, currentPizzaInfo)} </h3>
-            { pizza.size ? null : <p className="pb-2">Price cannot be determined until a pizza size is chosen</p> }
+            { pizza.size ? null : <p className="pb-2 mx-2">Price cannot be determined until a pizza size is chosen</p> }
             </div>
             <EndPizzaBuilderSection handleClick={handleClick} phoneNumber={phone} onlineOrderingLink={onlineOrderLink} menuLink={prices.Menu_Link}/>
             <style jsx>{`

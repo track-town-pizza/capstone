@@ -16,6 +16,21 @@ const YellowFoodButton  = (props) => {
                     min-width: 75px;
                     height: 5%;
                 }
+                @media only screen and (max-width: 1050px) {
+                    .options-button-yellow {
+                        width: 15%;
+                    }
+                }
+                @media only screen and (max-width: 800px) {
+                    .options-button-yellow {
+                        width: 17%;
+                    }
+                }
+                @media only screen and (max-width: 600px) {
+                    .options-button-yellow {
+                        width: 30%;
+                    }
+                }
             `}</style>
         </button> 
     )
