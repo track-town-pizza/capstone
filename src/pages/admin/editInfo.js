@@ -118,7 +118,7 @@ const EditInfo = () => {
 			<style jsx>{`
 				.title {
 					color: #094c3a;
-					font-family: 'Open Sans', sans-serif;
+					font-family: 'Roboto', sans-serif;
 					font-size: 60px;
 				}
 

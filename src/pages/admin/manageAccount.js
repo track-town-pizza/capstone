@@ -107,7 +107,7 @@ const ManageAccount = () => (
 			}
 
 			.page-title {
-				font-family: 'Open Sans', sans-serif;
+				font-family: 'Roboto', sans-serif;
 				font-size: 60px;
 			}
 

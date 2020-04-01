@@ -50,7 +50,7 @@ const NavBar = props => (
 		<style jsx>{`
 			.link {
 				text-transform: uppercase;
-				font-family: 'Open Sans Condensed', sans-serif;
+				font-family: 'Oswald', sans-serif;
 				font-size: 20px;
 				padding: 0 20px;
 				color: #ffec65;

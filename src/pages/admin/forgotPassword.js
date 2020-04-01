@@ -52,7 +52,7 @@ const ForgotPassword = () => (
 			}
 
 			.page-title {
-				font-family: 'Open Sans', sans-serif;
+				font-family: 'Oswald', sans-serif;
 				font-size: 45px;
 			}
 

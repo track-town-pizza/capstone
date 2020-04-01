@@ -70,12 +70,12 @@ const Index = () => {
 					<br />
 					<div className="hours-container">
 						<h4>Sun - Thur</h4>
-						<h4 className="no-margin-top grey-font">{openHourSunThur} - {closeHourSunThur}</h4>
+						<h4 className="no-margin-top">{openHourSunThur} - {closeHourSunThur}</h4>
 					</div>
 					<br />
 					<div className="hours-container">
 						<h4>Fri - Sat</h4>
-						<h4 className="no-margin-top grey-font">{openHourFriSat} - {closeHourFriSat}</h4>
+						<h4 className="no-margin-top">{openHourFriSat} - {closeHourFriSat}</h4>
 					</div>
 				</div>
 				<div className="yellow-container events-size">
@@ -105,7 +105,7 @@ const Index = () => {
 			</div>
 			<style jsx>{`
 				.home-font {
-					font-family: 'Open Sans', sans-serif;
+					font-family: 'Roboto', sans-serif;
 				}
 
 				.home-order-photo {
@@ -303,10 +303,6 @@ const Index = () => {
 
 				.no-margin-top h4 {
 					margin-top: 0;
-				}
-
-				.grey-font {
-					color: gray;
 				}
 
 				.table-width {
