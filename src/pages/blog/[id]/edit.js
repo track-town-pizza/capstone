@@ -18,6 +18,13 @@ function onClick(event) {
     }
 }
 
+function correctImageLink(link) {
+    const findString = "https://drive.google.com/open?id="
+    const replacementString = "https://drive.google.com/uc?id="
+
+    return link.replace(findString, replacementString)
+}
+
 const Post = () => {
 	const router = useRouter()
 
@@ -53,7 +60,7 @@ const Post = () => {
 
                                     <label htmlFor="postImageLink">Image Link</label>
                                     <input type="url" id="imageLink" name="imageLink" className="form-control"
-                                        value={postImageLink} onChange={e => setPostImageLink(e.target.value)} />
+                                        value={postImageLink} onChange={e => setPostImageLink(correctImageLink(e.target.value))} />
                                     <p/>
 
                                     <label htmlFor="postContent">Content</label>
