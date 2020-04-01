@@ -46,7 +46,7 @@ const editToppingsPrices = () => {
     for(const size of sizes) {
         EditPizzaItems.push(<EditFoodItem id={size.description} name={size.description} defaultValue={size.prices} onChange={onChange}/>)
     }
-    EditPizzaItems.push(<EditFoodItem id={"newLink"} name={"New Menu Link"} defaultValue={newLink.menu_link} onChange={onChange} width={"500px"}/>)
+    EditPizzaItems.push(<EditFoodItem id={"newLink"} name={"New Menu Link"} defaultValue={newLink.menu_link} onChange={onChange} width={"600px"}/>)
 
     // This function updates the text that the user sees as they change the price
     function onChange(event) {
