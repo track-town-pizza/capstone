@@ -7,19 +7,19 @@ const ManagementHub = () => {
     return (
         <Layout>
             <h2 className="text-center">Click on a link to edit that information: </h2>
-            <Link href="#">
+            <Link href="./editToppingsPrices">
                 <h4 className="correct-cursor"><a className="text-success">Pizza & Pizza Topping Prices</a></h4>
             </Link>
-            <Link href="#">
+            <Link href="./editSidesPrices">
                 <h4 className="correct-cursor"><a className="text-success">Side Order Prices</a></h4>
             </Link>
-            <Link href="#">
+            <Link href="./editBeveragePrices">
                 <h4 className="correct-cursor"><a className="text-success">Beverage Prices</a></h4>
             </Link>
-            <Link href="#">
+            <Link href="./editBuffetPrices">
                 <h4 className="correct-cursor"><a className="text-success">Buffet Prices</a></h4>
             </Link>
-            <Link href="#">
+            <Link href="./editMerchandisePrices">
                 <h4 className="correct-cursor"><a className="text-success">Merchandise Prices</a></h4>
             </Link>
             <Link href="./editInfo">
