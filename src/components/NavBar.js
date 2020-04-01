@@ -5,7 +5,7 @@ const NavBar = props => (
 		<div className="d-inline-flex bd-highlight">
 			<Link href="/">
 				<a id="navbar-logo">
-					<img src="/photos/tracktownlogo2.png" alt="Track Town Pizza" id="navbar-image" width="350px" />
+					<img src="https://drive.google.com/uc?id=1j94pNWIwre3EaH1cfNQnJjJWMQrL0Nkv" alt="Track Town Pizza" id="navbar-image" width="350px" />
 				</a>
 			</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-expanded="false" aria-label="Toggle navigation">
