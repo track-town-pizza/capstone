@@ -6,7 +6,7 @@ const AccountFormHeader = ({ title, subtitle }) => (
 		<p>{subtitle}</p>
 		<style jsx>{`
 			.page-title {
-				font-family: 'Open Sans Condensed', sans-serif;
+				font-family: 'Open Sans', sans-serif;
 				font-size: 45px;
 				text-transform: uppercase;
 			}
