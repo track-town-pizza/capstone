@@ -33,7 +33,7 @@ const Footer = () => (
             </Link>
             <Link href="https://www.instagram.com/tracktownpizza/">
                 <a className="text-white mr-3 my-2">
-                    <i class="fab fa-instagram"></i>
+                    <i className="fab fa-instagram"></i>
                 </a>
             </Link>
 
