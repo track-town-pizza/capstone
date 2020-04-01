@@ -28,8 +28,10 @@ const editToppingsPrices = () => {
     const toppingsPriceInfo = []
     const sizePriceInfo = []
     parseJsonToUsableObj(toppingsPriceInfo, sizePriceInfo)
+    const menuLink = {menu_link: allToppingsInfo.Menu_Link}
     const [ toppings, setToppings ] = useState(toppingsPriceInfo)
     const [ sizes, setSizes ] = useState(sizePriceInfo)
+    const [ newLink, setLink ] = useState(menuLink)
 
     // use state to make the elements the user will see
     const EditToppingItems = []
@@ -44,18 +46,26 @@ const editToppingsPrices = () => {
     for(const size of sizes) {
         EditPizzaItems.push(<EditFoodItem id={size.description} name={size.description} defaultValue={size.prices} onChange={onChange}/>)
     }
+    EditPizzaItems.push(<EditFoodItem id={"newLink"} name={"New Menu Link"} defaultValue={newLink.menu_link} onChange={onChange} width={"500px"}/>)
 
     // This function updates the text that the user sees as they change the price
     function onChange(event) {
         const { id } = event.target
-        // sizes and toppings must be done separately because they are two different state calls
-        if(id === "Individual" || id === "Small" || id === "Medium" || id === "Large" || id === "Giant") {
+        // sizes, toppings, and menu link must be done separately because they are two different state calls
+        if(id === "newLink") {
+            const findString = "https://drive.google.com/open?id="
+            const replacementString = "https://drive.google.com/uc?id="
+            const link = event.target.value
+            const goodLink = link.replace(findString, replacementString)
+            setLink({menu_link: goodLink})
+        }
+        else if(id === "Individual" || id === "Small" || id === "Medium" || id === "Large" || id === "Giant") {
             setSizes(sizes.map(currSize => (
-            id === currSize.description ? 
-            {
-                ...currSize,
-                prices: event.target.value
-            } : {...currSize}
+                id === currSize.description ? 
+                {
+                    ...currSize,
+                    prices: event.target.value
+                } : {...currSize}
             )))
         }
         else {
@@ -69,7 +79,7 @@ const editToppingsPrices = () => {
                         [newid[1]]: event.target.value
                     }
                 } : {...currTopping}
-                )))
+            )))
         }
     }
 
@@ -96,7 +106,7 @@ const editToppingsPrices = () => {
             }
             // the all the elements are in the correct format, the prices can be updated
             if(success) {
-                alert("The prices have been updated")
+                alert("The information has been updated")
                 // A new object is created that matches the original format of the object for the database
                 // The new information is merged with the unchanged information
                 const newPricesInfo = JSON.parse(JSON.stringify(allToppingsInfo))
@@ -106,6 +116,7 @@ const editToppingsPrices = () => {
                 for(const topping of toppings) {
                     newPricesInfo[topping.description] = topping.prices
                 }
+                newPricesInfo.Menu_Link = newLink.menu_link
                 console.log(newPricesInfo)
                 // push newly updated information into the database
             }

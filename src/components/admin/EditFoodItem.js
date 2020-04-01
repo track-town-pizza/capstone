@@ -5,7 +5,7 @@ const EditFoodItem = props => {
         <div>
             <label htmlFor={props.id}>{props.name}</label>
             <input id={props.id} name={props.name}
-                value={props.defaultValue} onChange={props.onChange}/>
+                value={props.defaultValue} onChange={props.onChange} style={{width: props.width}}/>
             <style jsx>{`
                 label {
                     display: inline-block;
