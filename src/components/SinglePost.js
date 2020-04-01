@@ -8,7 +8,7 @@ const SinglePost = (props) => {
                 <div className="d-flex justify-content-between align-items-center" id="blog-header">
                     <h3>
                         <Link href="/blog/[id]" as={`/blog/${post.id}`}>
-                            <a>{post.title}</a>
+                            <a className="text-success">{post.title}</a>
                         </Link>
                     </h3>
                     <h4>{post.date}</h4>
@@ -47,6 +47,10 @@ const SinglePost = (props) => {
                     border-radius: 10px;
                     padding: 20px;
                     margin-bottom: 30px;
+                }
+
+                p {
+                    white-space: pre-wrap;
                 }
             `}</style>
         </div>

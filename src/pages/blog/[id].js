@@ -22,9 +22,9 @@ const Post = () => {
 
                 <style jsx>{`
                     .blog-container {
-                        margin-left: 20%;
-                        margin-right: 20%;
-                        width: 60%;
+                        margin-left: 15%;
+                        margin-right: 15%;
+                        width: 70%;
                     }
 
                     @media only screen and (max-width: 700px) {
