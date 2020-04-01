@@ -13,7 +13,7 @@ const ToppingsCheckbox = (props) => {
             <style jsx>{`
                 label {
                     white-space: nowrap;
-                    min-width: 150px;
+                    min-width: 175px;
                     margin-top: .5rem;
                 }
                 input {
