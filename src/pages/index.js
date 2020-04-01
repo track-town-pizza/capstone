@@ -40,7 +40,7 @@ const Index = () => {
 		<Layout>
 			<div className="home-order-photo home-font">
 				<div className="home-photo">
-					<img src="/photos/track_town_front_cropped.jpg" alt="Track Town Front" />
+					<img src="https://drive.google.com/uc?id=1cxQfj33F6lRIwRn6Vsm3Whoh4SFuJjBb" alt="Track Town Front" />
 				</div>
 				<div className="order-overlay">
 					<div className="order-text">

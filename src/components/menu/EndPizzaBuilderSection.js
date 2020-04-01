@@ -21,7 +21,7 @@ const EndPizzaBuilderSection = (props) => {
             </div>
             <div className="text-center">
                 <p className="d-inline">To see specific prices, check out our paper </p>
-                <Link href="#" className="d-inline">
+                <Link href="https://drive.google.com/uc?id=1qlcIvlW1D-g-xfKzPu7-AOVd9AgekXx5" className="d-inline">
                     <a className="text-success">menu</a>
                 </Link>
             </div>
