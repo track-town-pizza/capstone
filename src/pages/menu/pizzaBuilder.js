@@ -6,7 +6,6 @@ import FirstHalfOptions from "../../components/menu/FirstHalfOptions"
 import SecondHalfOptions from "../../components/menu/SecondHalfOptions"
 import { sizes, crusts, cheeses, sauces, toppings } from "../../../data/pizzaInfo.json"
 import prices from "../../../data/prices.json"
-import { phone, onlineOrderLink } from "../../../data/info.json"
 
 // determines the price of a pizza based on size and toppings
 // returns the price of the pizza
@@ -190,7 +189,7 @@ function buildOrderString(pizza, currentPizzaInfo) {
     return pizzaStr
 }
 
-const PizzaBuilder = () => {
+const PizzaBuilder = ({ phone, onlineOrderLink }) => {
     // Save the current pizza information. Used so we can eventually add the pizza to the entire order
     // so the user can see each pizza they build
     const currentPizzaInfo = {
@@ -496,4 +495,14 @@ const PizzaBuilder = () => {
         </Layout>
     )
 }
+
+PizzaBuilder.getInitialProps = async () => {
+    const infoResJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
+
+    return {
+        phone: infoResJson.phone,
+        onlineOrderLink: infoResJson.onlineOrderLink
+    }
+}
+
 export default PizzaBuilder

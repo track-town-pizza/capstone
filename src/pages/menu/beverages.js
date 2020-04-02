@@ -1,10 +1,10 @@
-import Layout from "../../components/Layout"
 import React from "react"
+import fetch from "isomorphic-unfetch"
+import Layout from "../../components/Layout"
 import BeverageItems from "../../components/menu/BeverageItem"
-import beveragesInfo from "../../../data/beverages.json"
 
-const Beverages = () => {
-    const BeverageItemsComponents = beveragesInfo.map((beveragesInfo, colorIndex) => (<BeverageItems itemInfo={beveragesInfo} colorKey={colorIndex % 2 ? "color1" : "color2"}/>))
+const Beverages = ({ beverages }) => {
+    const BeverageItemsComponents = beverages.map((beverage, colorIndex) => (<BeverageItems itemInfo={beverage} colorKey={colorIndex % 2 ? "color1" : "color2"}/>))
     return (
         <Layout>
             <h1 className="text-center mb-4">Beverages</h1>
@@ -25,4 +25,11 @@ const Beverages = () => {
         </Layout>
     )
 }
+
+Beverages.getInitialProps = async () => {
+    const resJson = await fetch(`${process.env.URL_ROOT}/api/menu/beverages`).then(_ => _.json())
+
+    return { beverages: resJson }
+}
+
 export default Beverages
