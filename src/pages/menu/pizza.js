@@ -1,12 +1,12 @@
-import Layout from "../../components/Layout"
 import React from "react"
-import MenuItems from "../../components/menu/MenuItem"
-import pizzasInfo from "../../../data/pizzas.json"
 import Link from "next/link"
+import fetch from "isomorphic-unfetch"
 
+import Layout from "../../components/Layout"
+import MenuItems from "../../components/menu/MenuItem"
 
-const Pizzas = () => {
-    const MenuItemsComponents = pizzasInfo.map(pizzaInfo => (<MenuItems itemInfo={pizzaInfo} page="pizza"/>))
+const Pizzas = ({ pizzasInfo }) => {
+    const MenuItemsComponents = pizzasInfo.map(pizzaInfo => (<MenuItems itemInfo={pizzaInfo} page="pizza" key={pizzaInfo.key} />))
     return (
         <Layout>
             <div className="text-center">
@@ -61,4 +61,11 @@ const Pizzas = () => {
         </Layout>
     )
 }
+
+Pizzas.getInitialProps = async () => {
+    const resJson = await fetch(`${process.env.URL_ROOT}/api/menu/pizzas`).then(_ => _.json())
+
+    return { pizzasInfo: resJson }
+}
+
 export default Pizzas
