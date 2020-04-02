@@ -1,5 +1,6 @@
 import React from "react"
 import Link from "next/link"
+import fetch from "isomorphic-unfetch"
 
 import {
 	format,
@@ -11,8 +12,6 @@ import {
 import Layout from "../components/Layout"
 import EventListing from "../components/EventListing"
 
-import info from '../../data/info.json'
-import events from "../../data/events.json"
 import postData from "../../data/PostData.json"
 
 function parseTime(time) {
@@ -28,7 +27,7 @@ function parseTime(time) {
 	return format(date, "h:mm a")
 }
 
-const Index = () => {
+const Index = ({ info, events }) => {
 	const post = postData.posts[0]
 	
 	const openHourSunThur = parseTime(info.openHourSunThur)
@@ -92,8 +91,8 @@ const Index = () => {
 				</div>
 			</div>
 			<div className="blog-container home-font">
-				<div className="blog-left-column">
-					<Link href={`/blog/post/${post.id}`} className="blog-title">
+				<div className="blog-left-column blog-title">
+					<Link href={`/blog/post/${post.id}`}>
 						<h3>{post.title}</h3>
 					</Link>
 					<small>{post.date}</small>
@@ -373,6 +372,16 @@ const Index = () => {
 			`}</style>
 		</Layout>
 	);
+}
+
+Index.getInitialProps = async () => {
+	const infoResJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
+	const eventsResJson = await fetch(`${process.env.URL_ROOT}/api/events`).then(_ => _.json())
+
+	return {
+		info: infoResJson,
+		events: eventsResJson
+	}
 }
 
 export default Index

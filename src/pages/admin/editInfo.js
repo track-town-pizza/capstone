@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react"
+import fetch from "isomorphic-unfetch"
 import { format } from "date-fns"
 
 import Layout from "../../components/Layout"
 import ManagementHubButton from "../../components/admin/ManagementHubButton"
 
-import info from "../../../data/info.json"
-import eventData from "../../../data/events.json"
-
-const EditInfo = () => {
+const EditInfo = ({ info, eventData }) => {
 	const [ phone, setPhone ] = useState(info.phone)
 	const [ address, setAddress ] = useState(info.address)
 	const [ openHourSunThur, setOpenHourSunThur ] = useState(info.openHourSunThur)
@@ -157,6 +155,16 @@ const EditInfo = () => {
 			`}</style>
 		</Layout>
 	)
+}
+
+EditInfo.getInitialProps = async () => {
+	const infoResJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
+	const eventsResJson = await fetch(`${process.env.URL_ROOT}/api/events`).then(_ => _.json())
+
+	return {
+		info: infoResJson,
+		eventData: eventsResJson
+	}
 }
 
 export default EditInfo
