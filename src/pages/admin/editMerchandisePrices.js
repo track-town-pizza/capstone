@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import allMerchInfo from "../../../data/merchandise.json"
+import fetch from "isomorphic-unfetch"
 import Layout from "../../components/Layout"
 import EditFoodItem from "../../components/admin/EditFoodItem"
 import SubmitButton from "../../components/admin/SubmitPricesBtn"
@@ -9,7 +9,7 @@ const MONEY_PATTERN = /^\$(\d{1,3}(\,\d{3})*|(\d+))(\.[0-9]{2})$/
 
 // This function takes the original data and returns an array of data that 
 // can be udpated
-function parseJsonToUsableObj() {
+function parseJsonToUsableObj(allMerchInfo) {
     let merchInfo = []
     for(let merch of allMerchInfo) {
         merchInfo = merchInfo.concat(merch.information.map(item => { 
@@ -20,8 +20,8 @@ function parseJsonToUsableObj() {
     return merchInfo
 }
 
-const editMerchandisePrices = () => {
-    const merchInfo = parseJsonToUsableObj()
+const EditMerchandisePrices = ({ allMerchInfo }) => {
+    const merchInfo = parseJsonToUsableObj(allMerchInfo)
     const [ merchandise, setMerchandise ] = useState(merchInfo)
     const EditSidesItems = []
     EditSidesItems.push(merchandise.map(item => <EditFoodItem id={item.description} name={item.description} defaultValue={item.price} onChange={onChange}/>))
@@ -89,4 +89,11 @@ const editMerchandisePrices = () => {
         </Layout>
     )
 }
-export default editMerchandisePrices
+
+EditMerchandisePrices.getInitialProps = async () => {
+    const resJson = await fetch(`${process.env.URL_ROOT}/api/menu/merchandise`).then(_ => _.json())
+
+    return { allMerchInfo: resJson }
+}
+
+export default EditMerchandisePrices
