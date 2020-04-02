@@ -21,11 +21,10 @@ const About = () => {
                 <div className="text-center">
                     <h3>Check out the rest of Track Town USA</h3>
                     <Link href={aboutData.pdfLink}>
-                        <a href={aboutData.pdfLink} className="text-success">Track Town USA Map</a>
+                        <a className="text-success"><h5>Track Town USA Map</h5></a>
                     </Link>
-                    <br/>
                     <Link href="/blog">
-                        <a className="text-success">Track Town Pizza Blog</a>
+                        <a className="text-success"><h5>Track Town Pizza Blog</h5></a>
                     </Link>
                 </div>
             </div>
