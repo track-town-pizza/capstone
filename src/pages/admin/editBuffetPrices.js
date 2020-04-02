@@ -1,5 +1,5 @@
-import React, {useState} from "react"
-import buffetPrices from "../../../data/buffet.json"
+import React, { useState } from "react"
+import fetch from "isomorphic-unfetch"
 import Layout from "../../components/Layout"
 import EditFoodItem from "../../components/admin/EditFoodItem"
 import SubmitButton from "../../components/admin/SubmitPricesBtn"
@@ -9,7 +9,7 @@ const MONEY_PATTERN = /^\$(\d{1,3}(\,\d{3})*|(\d+))(\.[0-9]{2})$/
 
 // This function takes the original data and returns an array of data that 
 // can be udpated
-function parseJsonToUsableObj() {
+function parseJsonToUsableObj(buffetPrices) {
     let buffet = []
     for(const buffetPrice of buffetPrices[0].information) {
         buffet = buffet.concat(buffetPrice.items)
@@ -17,8 +17,8 @@ function parseJsonToUsableObj() {
     return buffet
 }
 
-const editBuffetPrices = () => {
-    const buffet = parseJsonToUsableObj()
+const EditBuffetPrices = ({ buffetPrices }) => {
+    const buffet = parseJsonToUsableObj(buffetPrices)
     const [ buffetInfo, setBuffetInfo ] = useState(buffet)
     const EditBuffetItems = []
     EditBuffetItems.push(buffetInfo.map(item => <EditFoodItem id={item.description} name={item.description} defaultValue={item.price} onChange={onChange} />))
@@ -84,4 +84,11 @@ const editBuffetPrices = () => {
         </Layout>
     )
 }
-export default editBuffetPrices
+
+EditBuffetPrices.getInitialProps = async () => {
+    const buffetResJson = await fetch(`${process.env.URL_ROOT}/api/menu/buffet`).then(_ => _.json())
+
+    return { buffetPrices: [buffetResJson] }
+}
+
+export default EditBuffetPrices

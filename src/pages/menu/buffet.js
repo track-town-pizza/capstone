@@ -1,9 +1,9 @@
-import Layout from "../../components/Layout"
 import React from "react"
+import fetch from "isomorphic-unfetch"
+import Layout from "../../components/Layout"
 import BuffetItems from "../../components/menu/BeverageItem"
-import buffetInfo from "../../../data/buffet.json"
 
-const Buffet = () => {
+const Buffet = ({ buffetInfo }) => {
     const BuffetItemsComponents = buffetInfo.map((buffetInfo, colorIndex) => (<BuffetItems itemInfo={buffetInfo} colorKey={colorIndex % 2 ? "color1" : "color2"}/>))
     return (
         <Layout>
@@ -26,4 +26,11 @@ const Buffet = () => {
         </Layout>
     )
 }
+
+Buffet.getInitialProps = async () => {
+    const resJson = await fetch(`${process.env.URL_ROOT}/api/menu/buffet`).then(_ => _.json())
+
+    return { buffetInfo: [resJson] }
+}
+
 export default Buffet
