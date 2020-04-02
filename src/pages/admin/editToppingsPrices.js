@@ -1,6 +1,6 @@
 import React, {useState} from "react"
+import fetch from "isomorphic-unfetch"
 import allToppingsInfo from "../../../data/prices.json"
-import pizzaInfo from "../../../data/pizzaInfo.json"
 import Layout from "../../components/Layout"
 import EditFoodItem from "../../components/admin/EditFoodItem"
 import SubmitButton from "../../components/admin/SubmitPricesBtn"
@@ -10,7 +10,7 @@ const MONEY_PATTERN = /^\d{1,5}\.\d\d$/
 
 // This function takes the original data and modifies two arrays of data that 
 // can be udpated
-function parseJsonToUsableObj(toppingsPriceInfo, sizePriceInfo) {
+function parseJsonToUsableObj(pizzaInfo, toppingsPriceInfo, sizePriceInfo) {
     for(const size of pizzaInfo.sizes) {
         sizePriceInfo.push({prices: allToppingsInfo[size], description: size})
     }
@@ -24,10 +24,10 @@ function parseJsonToUsableObj(toppingsPriceInfo, sizePriceInfo) {
     }
 }
 
-const editToppingsPrices = () => {
+const EditToppingsPrices = ({ pizzaInfo }) => {
     const toppingsPriceInfo = []
     const sizePriceInfo = []
-    parseJsonToUsableObj(toppingsPriceInfo, sizePriceInfo)
+    parseJsonToUsableObj(pizzaInfo, toppingsPriceInfo, sizePriceInfo)
     const [ toppings, setToppings ] = useState(toppingsPriceInfo)
     const [ sizes, setSizes ] = useState(sizePriceInfo)
 
@@ -130,4 +130,11 @@ const editToppingsPrices = () => {
         </Layout>
     )
 }
-export default editToppingsPrices
+
+EditToppingsPrices.getInitialProps = async () => {
+    const resJson = await fetch(`${process.env.URL_ROOT}/api/menu/pizzaInfo`).then(_ => _.json())
+
+    return { pizzaInfo: resJson }
+}
+
+export default EditToppingsPrices
