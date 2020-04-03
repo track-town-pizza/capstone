@@ -4,16 +4,13 @@ import Layout from "../components/Layout"
 import postData from "../../data/PostData.json" // will be removed with backend implementation
 import SinglePost from "../components/SinglePost"
 
-const postRenderLimit = 3
-
-/*
-function getPostSet(pageNumber) {
-    postSet = []
-
+function setPostCount() {
+    // Fetch the amount of posts that exist
+    return 10; // placeholder value
 }
-*/
 
-const postCount = 10 // Need to query database on how many posts there are
+const postRenderLimit = 3
+const postCount = setPostCount() // Need to query database on how many posts there are
 
 const Blog = () => {
 
