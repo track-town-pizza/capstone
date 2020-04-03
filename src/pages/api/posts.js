@@ -25,10 +25,11 @@ handler.get(async (req, res) => {
 	})
 })
 
+// UNDER CONSTRUCTION, CURRENTLY DOES NOT WORK WITH CURRENT NEXT/ROUTER SETUP
+// FOR INDIVIDUAL BLOG POSTS
 handler.post(async (req, res) => {
 	const { postId } = req.body
 	let doc = await req.db.collection("info").findOne({ "_id": ObjectId(postId) })
-	console.log("== Requested doc:", doc)
 	res.json(doc)
 })
 

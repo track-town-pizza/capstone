@@ -1,7 +1,9 @@
+import React from "react"
 import Link from "next/link"
+import { format } from "date-fns"
 
-const SinglePost = (props) => {
-    const post = props.post
+const SinglePost = ({ post }) => {
+    const formattedDate = format(new Date(post.date), "MM/dd/yyyy")
     return (
         <div className="SinglePost">
             <div key={post.id}>
@@ -11,7 +13,7 @@ const SinglePost = (props) => {
                             <a className="text-success">{post.title}</a>
                         </Link>
                     </h3>
-                    <h4>{post.date}</h4>
+                    <h4>{formattedDate}</h4>
                 </div>
                 <img src={post.imageLink} className="mw-100" />
                 <p>{post.content}</p>
