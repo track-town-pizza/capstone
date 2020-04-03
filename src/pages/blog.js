@@ -15,16 +15,6 @@ function getPostSet(pageNumber) {
 
 const postCount = 10 // Need to query database on how many posts there are
 
-/*
-const BlogNav = () => {
-
-    function onClick(event) {
-            const { type } = event
-            if (type ===
-
-*/
-
-
 const Blog = () => {
 
     const firstPage = true
@@ -32,9 +22,61 @@ const Blog = () => {
 
 
     const [blogState, setBlog] = useState({
+        newestPostDate: null,
+        oldestPostDate: null,
         posts: []
     })
 
+    // handles when user clicks on blog nav
+    function handleClick(event) {
+        const {name, type} = event.target
+        if (type === 'submit') {
+            if (name === "New Posts") {
+                // Fetch most recent posts from after oldestPostDate
+            }
+            if (name === "Old Posts") {
+                // Fetch most recent posts from before oldestPostDate
+            }
+            window.scrollTo(0, 0)
+        }
+    }
+
+    let blogNav;
+    if (postCount <= postRenderLimit) {
+        blogNav = <div></div>
+    }
+    else {
+        blogNav =
+        <div>
+            <button name="New Posts" onClick={handleClick}>&lsaquo; Newer Posts</button>
+            <div id="blogNavSeperator"> | </div>
+            <button name="Old Posts" onClick={handleClick}>Older Posts &rsaquo;</button>
+            <style jsx> {`
+                #blogNavSeperator {
+                    margin: 7px;
+                    display: inline;
+                }
+
+                .blog-nav {
+                    margin-top: 10px;
+                    text-align: center;
+                    color: #007030;
+                }
+
+                button {
+                    background: none!important;
+                    border: none;
+                    padding: 0!important;
+                    color: #007030;
+                    cursor: pointer;
+                }
+
+                button:hover {
+                    text-decoration: underline;
+                }
+            `}</style>
+       </div>
+    }
 
     return (
         <div>
@@ -47,17 +89,7 @@ const Blog = () => {
                 <div id="bottom-bar"/>
 
                 <nav className="blog-nav">
-
-                    <a href="#">&lsaquo; Newer Posts</a>
-                    <div id="blogNavSeperator"> | </div>
-                    <a href="#">Older Posts &rsaquo;</a>
-
-                    {/*
-                    <a href="#">1</a>.....
-                    <a href="#">2</a>.....
-                    <a href="#">3</a>.....
-                    <a href="#">Earliest Post</a> -->
-                    */}
+                    {blogNav}
                 </nav>
             </Layout>
 
@@ -85,16 +117,6 @@ const Blog = () => {
                     color: #007030;
                 }
 
-                .blog-nav a {
-                    color: #007030;
-                }
-
-                #blogNavSeperator {
-                    margin: 7px;
-                    display: inline;
-                }
-
-
                 @media only screen and (max-width: 700px) {
                     .blog-container {
                         margin-left: 10%;
@@ -109,10 +131,7 @@ const Blog = () => {
                     }
 
                 }
-
-
             `}</style>
-
         </div>
     )
 }
