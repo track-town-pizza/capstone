@@ -12,8 +12,6 @@ import {
 import Layout from "../components/Layout"
 import EventListing from "../components/EventListing"
 
-import postData from "../../data/PostData.json"
-
 function parseTime(time) {
 	let date = new Date()
 
@@ -27,9 +25,7 @@ function parseTime(time) {
 	return format(date, "h:mm a")
 }
 
-const Index = ({ info, events }) => {
-	const post = postData.posts[0]
-	
+const Index = ({ info, events, post }) => {
 	const openHourSunThur = parseTime(info.openHourSunThur)
 	const closeHourSunThur = parseTime(info.closeHourSunThur)
 	const openHourFriSat = parseTime(info.openHourFriSat)
@@ -377,10 +373,12 @@ const Index = ({ info, events }) => {
 Index.getInitialProps = async () => {
 	const infoResJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
 	const eventsResJson = await fetch(`${process.env.URL_ROOT}/api/events`).then(_ => _.json())
+	const postsResJson = await fetch(`${process.env.URL_ROOT}/api/posts`).then(_ => _.json())
 
 	return {
 		info: infoResJson,
-		events: eventsResJson
+		events: eventsResJson,
+		post: postsResJson[0]
 	}
 }
 

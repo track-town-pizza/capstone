@@ -1,6 +1,8 @@
+import React from "react"
 import Link from "next/link"
+import fetch from "isomorphic-unfetch"
+
 import Layout from "../components/Layout"
-import postData from "../../data/PostData.json" // will be removed with backend implementation
 import SinglePost from "../components/SinglePost"
 
 const postRenderLimit = 3;
@@ -12,7 +14,7 @@ function getPostSet(pageNumber) {
 }
 */
 
-const Blog = props => (
+const Blog = ({ posts }) => (
 
     /*
     const [blogState, setBlog] = useState({
@@ -23,8 +25,8 @@ const Blog = props => (
     <div>
         <Layout>
             <div className="blog-container">
-                {postData.posts.map(post => (
-                    <SinglePost post={post} key={post.id}/>
+                {posts.map(post => (
+                    <SinglePost post={post} key={post._id}/>
                 ))}
             </div>
             <div id="bottom-bar"/>
@@ -86,5 +88,11 @@ const Blog = props => (
 
     </div>
 )
+
+Blog.getInitialProps = async () => {
+    const resJson = await fetch(`${process.env.URL_ROOT}/api/posts`).then(_ => _.json())
+
+    return { posts: resJson }
+}
 
 export default Blog
