@@ -4,13 +4,12 @@ import EndPizzaBuilderSection from "../../components/menu/EndPizzaBuilderSection
 import NotOnlineOrdering from "../../components/menu/NotOnlineOrdering"
 import FirstHalfOptions from "../../components/menu/FirstHalfOptions"
 import SecondHalfOptions from "../../components/menu/SecondHalfOptions"
-import prices from "../../../data/prices.json"
 
 // determines the price of a pizza based on size and toppings
 // returns the price of the pizza
 // size is the size of the pizza in string format
 // pizzaInfo is an object. It is the information about the pizza including the toppings and if it has extra cheese
-function determinePrice(size, pizzaInfo) {
+function determinePrice(size, pizzaInfo, prices) {
     let price = 0
     // get base price based on size
     price += Number(prices[size])
@@ -33,7 +32,7 @@ function determinePrice(size, pizzaInfo) {
 // halfNHalf is a boolean about whether the pizza is a half and half pizza or not
 // totalPrice is the current total price of the whole order
 // currentPizzaInfo is the an object. The price is saved in this object as an int.
-function getPriceOfPizza(size, halfNHalf, firstHalf, secondHalf, totalPrice, currentPizzaInfo) {
+function getPriceOfPizza(size, halfNHalf, firstHalf, secondHalf, totalPrice, currentPizzaInfo, prices) {
     let price = 0
     // if the user hasn't picked a size yet
     if (size === null) {
@@ -42,13 +41,13 @@ function getPriceOfPizza(size, halfNHalf, firstHalf, secondHalf, totalPrice, cur
     }
 
     if(halfNHalf) {
-        let fPrice = determinePrice(size, firstHalf)
-        let sPrice = determinePrice(size, secondHalf)
+        let fPrice = determinePrice(size, firstHalf, prices)
+        let sPrice = determinePrice(size, secondHalf, prices)
         // The price is determined by the more expensizve side
         price = fPrice > sPrice ? fPrice : sPrice
     }
     else {
-        price = determinePrice(size, firstHalf)
+        price = determinePrice(size, firstHalf, prices)
     }
     
     // Save the information in currentPizzaInfo so we can build the entire order later
@@ -188,7 +187,7 @@ function buildOrderString(pizza, currentPizzaInfo) {
     return pizzaStr
 }
 
-const PizzaBuilder = ({ phone, onlineOrderLink, sizes, crusts, cheeses, sauces, toppings }) => {
+const PizzaBuilder = ({ phone, onlineOrderLink, sizes, crusts, cheeses, sauces, toppings, prices }) => {
     // Save the current pizza information. Used so we can eventually add the pizza to the entire order
     // so the user can see each pizza they build
     const currentPizzaInfo = {
@@ -476,7 +475,7 @@ const PizzaBuilder = ({ phone, onlineOrderLink, sizes, crusts, cheeses, sauces, 
                 <h3 className="pt-2">My Order:</h3>
                 { pizza.allPizzas.map((pizzaStr, index) => <p key={pizzaStr} className="pr-5 pl-5">{"Pizza " + (index + 1) + ": " + pizzaStr}</p>) }
                 <p className="pr-5 pl-5">{"Pizza " + (pizza.allPizzas.length + 1) + ": " + buildOrderString(pizza, currentPizzaInfo) }</p>
-                <h3 className="pb-2">{"Order Cost:  $" + getPriceOfPizza(pizza.size, pizza.halfNHalf, pizza.firstHalf, pizza.secondHalf, pizza.totalPrice, currentPizzaInfo)} </h3>
+                <h3 className="pb-2">{"Order Cost:  $" + getPriceOfPizza(pizza.size, pizza.halfNHalf, pizza.firstHalf, pizza.secondHalf, pizza.totalPrice, currentPizzaInfo, prices)} </h3>
             { pizza.size ? null : <p className="pb-2">Price cannot be determined until a pizza size is chosen</p> }
             </div>
             <EndPizzaBuilderSection handleClick={handleClick} phoneNumber={phone} onlineOrderingLink={onlineOrderLink} />
@@ -498,6 +497,7 @@ const PizzaBuilder = ({ phone, onlineOrderLink, sizes, crusts, cheeses, sauces, 
 PizzaBuilder.getInitialProps = async () => {
     const infoResJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
     const pizzaInfoResJson = await fetch(`${process.env.URL_ROOT}/api/menu/pizzaInfo`).then(_ => _.json())
+    const pricesResJson = await fetch(`${process.env.URL_ROOT}/api/menu/prices`).then(_ => _.json())
 
     return {
         phone: infoResJson.phone,
@@ -506,7 +506,8 @@ PizzaBuilder.getInitialProps = async () => {
         crusts: pizzaInfoResJson.crusts,
         cheeses: pizzaInfoResJson.cheeses,
         sauces: pizzaInfoResJson.sauces,
-        toppings: pizzaInfoResJson.toppings
+        toppings: pizzaInfoResJson.toppings,
+        prices: pricesResJson
     }
 }
 
