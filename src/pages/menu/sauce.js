@@ -1,9 +1,9 @@
-import Layout from "../../components/Layout"
 import React from "react"
+import fetch from "isomorphic-unfetch"
+import Layout from "../../components/Layout"
 import MenuItems from "../../components/menu/MenuItem"
-import saucesInfo from "../../../data/sauces.json"
 
-const Sauces = () => {
+const Sauces = ({ saucesInfo }) => {
     const MenuItemsComponents = saucesInfo.map(sauceInfo => (<MenuItems itemInfo={sauceInfo} page="sauce"/>))
     return (
         <Layout>
@@ -23,4 +23,11 @@ const Sauces = () => {
         </Layout>
     )
 }
+
+Sauces.getInitialProps = async () => {
+    const saucesResJson = await fetch(`${process.env.URL_ROOT}/api/menu/sauces`).then(_ => _.json())
+
+    return { saucesInfo: saucesResJson }
+}
+
 export default Sauces
