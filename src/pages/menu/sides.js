@@ -1,9 +1,10 @@
-import Layout from "../../components/Layout"
 import React from "react"
-import MenuItems from "../../components/menu/MenuItem"
-import sidesInfo from "../../../data/sides.json"
+import fetch from "isomorphic-unfetch"
 
-const Sides = () => {
+import Layout from "../../components/Layout"
+import MenuItems from "../../components/menu/MenuItem"
+
+const Sides = ({ sidesInfo }) => {
     const MenuItemsComponents = sidesInfo.map(sideInfo => (<MenuItems itemInfo={sideInfo} page="sides"/>))
     return (
         <Layout>
@@ -23,4 +24,13 @@ const Sides = () => {
         </Layout>
     )
 }
+
+Sides.getInitialProps = async () => {
+    const resJson = await fetch(`${process.env.URL_ROOT}/api/menu/sides`).then(_ => _.json())
+
+    console.log("== Sides:", resJson)
+
+    return { sidesInfo: resJson }
+}
+
 export default Sides

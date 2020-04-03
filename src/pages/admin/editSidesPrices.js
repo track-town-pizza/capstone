@@ -1,15 +1,17 @@
 import React, {useState} from "react"
-import allSidesInfo from "../../../data/sides.json"
+import fetch from "isomorphic-unfetch"
+
 import Layout from "../../components/Layout"
 import EditFoodItem from "../../components/admin/EditFoodItem"
 import SubmitButton from "../../components/admin/SubmitPricesBtn"
+
 // This is a regular expression that tells is used for checking that the 
 // new price is in the correct format
 const MONEY_PATTERN = /^\$(\d{1,3}(\,\d{3})*|(\d+))(\.[0-9]{2})$/
 
 // This function takes the original data and returns an array of data that 
 // can be udpated
-function parseJsonToUsableObj() {
+function parseJsonToUsableObj(allSidesInfo) {
     let sidesInfo = []
     for(let side of allSidesInfo) {
         sidesInfo = sidesInfo.concat(side.information.map(item => { 
@@ -20,8 +22,8 @@ function parseJsonToUsableObj() {
     return sidesInfo
 }
 
-const editSidesPrices = () => {
-    const sidesInfo = parseJsonToUsableObj()
+const EditSidesPrices = ({ allSidesInfo }) => {
+    const sidesInfo = parseJsonToUsableObj(allSidesInfo)
     const [ sides, setSides ] = useState(sidesInfo)
     const EditSidesItems = []
     EditSidesItems.push(sides.map(item => <EditFoodItem id={item.description} name={item.description} defaultValue={item.price} onChange={onChange}/>))
@@ -89,4 +91,11 @@ const editSidesPrices = () => {
         </Layout>
     )
 }
-export default editSidesPrices
+
+EditSidesPrices.getInitialProps = async () => {
+    const resJson = await fetch(`${process.env.URL_ROOT}/api/menu/sides`).then(_ => _.json())
+
+    return { allSidesInfo: resJson }
+}
+
+export default EditSidesPrices
