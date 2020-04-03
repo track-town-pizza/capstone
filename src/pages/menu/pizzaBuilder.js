@@ -4,6 +4,7 @@ import EndPizzaBuilderSection from "../../components/menu/EndPizzaBuilderSection
 import NotOnlineOrdering from "../../components/menu/NotOnlineOrdering"
 import FirstHalfOptions from "../../components/menu/FirstHalfOptions"
 import SecondHalfOptions from "../../components/menu/SecondHalfOptions"
+import Modal from "../../components/Modal"
 import { sizes, crusts, cheeses, sauces, toppings } from "../../../data/pizzaInfo.json"
 import prices from "../../../data/prices.json"
 import { phone, onlineOrderLink } from "../../../data/info.json"
@@ -224,7 +225,8 @@ const PizzaBuilder = () => {
             toppings: []
         },
         allPizzas: [],
-        totalPrice: 0
+        totalPrice: 0,
+        displayModal: false
     })
 
     // handles when a user clicks on a button
@@ -262,6 +264,12 @@ const PizzaBuilder = () => {
                 })
                 window.scrollTo(0,0)
             }
+            else if(name === "closeModal") {
+                setPizza({
+                    ...pizza,
+                    displayModal: false
+                })
+            }
             else {
                 // loop through all these so if they change the code does not need to be refactored
                 for(let size of sizes){
@@ -275,9 +283,10 @@ const PizzaBuilder = () => {
                     if(name === crust){
                         if (name === "Gluten Free" && pizza.size !== "Small") {
                             setPizza({
-                                ...pizza
+                                ...pizza,
+                                displayModal: true
                             })
-                            alert("Gluten free crust is only available in size small")
+                            // alert("Gluten free crust is only available in size small")
                         }
                         else {
                             setPizza({
@@ -457,6 +466,7 @@ const PizzaBuilder = () => {
     }
     return (
         <Layout>
+            {pizza.displayModal ? <Modal message="Gluten free crust is only available in size small" onClick={handleClick} /> : null }
             <NotOnlineOrdering phoneNumber={phone} onlineOrderingLink={onlineOrderLink} />
             <FirstHalfOptions sizes={sizes} handleClick={handleClick} clickedSize={pizza.size} second="" 
                               crusts={crusts} clickedCrust={pizza.crust} onChange={handleChange} thinCrust={pizza.thinCrust}
