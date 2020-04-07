@@ -79,7 +79,7 @@ const Index = ({ info, events, post }) => {
 						<table className="table-sm table-font w-100">
 							<tbody>
 								{events.map(event => (
-									<EventListing key={event.id} {...event} />
+									<EventListing key={event.key} {...event} />
 								))}
 							</tbody>
 						</table>

@@ -1,49 +1,56 @@
+import React, { useState, useEffect } from "react"
 import { useRouter } from "next/router"
+import fetch from "isomorphic-unfetch"
+
 import Layout from "../../components/Layout"
-import postData from "../../../data/PostData.json" // will be removed with backend implementation
 import SinglePost from "../../components/SinglePost.js"
+import postData from "../../../data/PostData.json" // will be removed with backend implementation
 
 const Post = () => {
-	const router = useRouter()
+    const router = useRouter()
+    const { id } = router.query
 
-    // !!!WARNING!!!
-    // Data fetching is currently reliant on the fact that post id's match with array positions.
-    // Will have to fetch based on date when using MongoDB
+    const [ post, setPost ] = useState({})
 
-    if (postData.posts[router.query.id] != undefined) {
-        const postNum = router.query.id
-        return (
-            <div>
-                <Layout>
-                    <div className="blog-container">
-                        <SinglePost post={postData.posts[postNum]} key={postNum}/>
-                    </div>
-                </Layout>
+    useEffect(() => {
+        console.log("In useEffect()")
 
-                <style jsx>{`
-                    .blog-container {
-                        margin-left: 15%;
-                        margin-right: 15%;
-                        width: 70%;
-                    }
+        async function getPost() {
+            console.log("In getPost()")
+            const res = await fetch(`${process.env.URL_ROOT}/api/posts/${id}`).then(_ => _.json())
+            setPost(res)
+            console.log("== Post in getPost():", post)
+        }
+    
+        getPost()
+    }, [])
 
-                    @media only screen and (max-width: 700px) {
+    return (
+        <Layout>
+            {post != null ? (
+                <div className="blog-container">
+                    <SinglePost post={post} key={post._id}/>
+                    <style jsx>{`
                         .blog-container {
-                            margin-left: 10%;
-                            margin-right: 10%;
-                            width: 80%;
+                            margin-left: 15%;
+                            margin-right: 15%;
+                            width: 70%;
                         }
-                    }
-                `}</style>
-            </div>
-        )
-    } else {
-        return (
-            <Layout>
-                <p>Could not display post :(</p>
-            </Layout>
-        )
-    }
+                        
+                        @media only screen and (max-width: 700px) {
+                            .blog-container {
+                                margin-left: 10%;
+                                margin-right: 10%;
+                                width: 80%;
+                            }
+                        }
+                        `}</style>
+                </div>
+            ) : (
+                <p>Uh oh, something went wrong! We could not display your post. Please check your Internet connection and try again later.</p>
+            )}  
+        </Layout>
+    )
 }
 
 export default Post
