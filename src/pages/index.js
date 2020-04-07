@@ -6,7 +6,8 @@ import {
 	format,
 	setHours,
 	setMinutes,
-	setSeconds
+	setSeconds,
+	closestIndexTo
 } from "date-fns"
 
 import Layout from "../components/Layout"
@@ -91,7 +92,7 @@ const Index = ({ info, events, post }) => {
 					<Link href={`/blog/post/${post.id}`}>
 						<h3>{post.title}</h3>
 					</Link>
-					<small>{post.date}</small>
+					<small>{format(new Date(post.date), "MM/dd/yyyy")}</small>
 					<img src={post.imageLink} alt="" />
 				</div>
 				<div className="blog-right-column">
@@ -375,10 +376,22 @@ Index.getInitialProps = async () => {
 	const eventsResJson = await fetch(`${process.env.URL_ROOT}/api/events`).then(_ => _.json())
 	const postsResJson = await fetch(`${process.env.URL_ROOT}/api/posts`).then(_ => _.json())
 
+	// Grab all event dates from JSON
+	let postDates = []
+	for (let post of postsResJson) {
+		postDates.push(new Date(post.date))
+	}
+
+	// Find the most recently-published post to send to the client side
+	const idx = closestIndexTo(new Date(), postDates)
+	const post = postsResJson[idx]
+
+	console.log("== Newest Post:", post)
+
 	return {
 		info: infoResJson,
 		events: eventsResJson,
-		post: postsResJson[0]
+		post: post
 	}
 }
 
