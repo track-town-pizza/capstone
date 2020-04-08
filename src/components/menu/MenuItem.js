@@ -11,7 +11,7 @@ const MenuItem = props => {
                         min-width: 200px;
                         width: 25%;
                         min-height: 250px;
-                        margin-bottom:5%;
+                        margin-bottom: 5%;
                         margin-right: 2.5%;
                         margin-left: 2.5%;
                     }
@@ -20,7 +20,7 @@ const MenuItem = props => {
                         border-radius: 10px 10px 0px 0px;
                     }
                     @media only screen and (max-width: 600px) {
-                        .side-item {
+                        .item {
                             min-height: 0px;
                         }
                     }

@@ -58,7 +58,7 @@ const Login = () => (
 			}
 
 			.page-title {
-				font-family: 'Oswald', sans-serif;
+				font-family: 'Roboto', sans-serif;
 				font-size: 45px;
 			}
 

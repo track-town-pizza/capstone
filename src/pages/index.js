@@ -55,7 +55,7 @@ const Index = ({ info, events, post }) => {
 				</div>
 			</div>
 			<div className="info-containers home-font">
-				<div className="yellow-container extra-padding location-margin">
+				<div className="yellow-container extra-padding location-container">
 					<h4>Located at {info.address}</h4>
 					<span className="responsive-break"><br /></span>
 					<h4>Across from Matthew Knight Arena</h4>
@@ -66,17 +66,17 @@ const Index = ({ info, events, post }) => {
 					<br />
 					<div className="hours-container">
 						<h4>Sun - Thur</h4>
-						<h4 className="no-margin-top grey-font">{openHourSunThur} - {closeHourSunThur}</h4>
+						<h4 className="no-margin-top">{openHourSunThur} - {closeHourSunThur}</h4>
 					</div>
 					<br />
 					<div className="hours-container">
 						<h4>Fri - Sat</h4>
-						<h4 className="no-margin-top grey-font">{openHourFriSat} - {closeHourFriSat}</h4>
+						<h4 className="no-margin-top">{openHourFriSat} - {closeHourFriSat}</h4>
 					</div>
 				</div>
 				<div className="yellow-container events-size">
 					<h3>Events</h3>
-					<div className="table-responsive-sm">
+					<div className="table-responsive-sm mx-auto table-width">
 						<table className="table-sm table-font w-100">
 							<tbody>
 								{events.map(event => (
@@ -101,7 +101,7 @@ const Index = ({ info, events, post }) => {
 			</div>
 			<style jsx>{`
 				.home-font {
-					font-family: 'Open Sans Condensed', sans-serif;
+					font-family: 'Roboto', sans-serif;
 				}
 
 				.home-order-photo {
@@ -173,7 +173,7 @@ const Index = ({ info, events, post }) => {
 					display: none;
 				}
 
-				@media only screen and (max-width: 1300px) {
+				@media only screen and (max-width: 1400px) {
 					.order-text {
 						font-size: 25px;
 					}
@@ -211,18 +211,19 @@ const Index = ({ info, events, post }) => {
 					display: flex;
 					flex-wrap: wrap;
 					flex-grow: 1;
-					justify-content: space-between;
+					justify-content: center;
 					align-items: center;
+					padding: 0;
 				}
 
 				.yellow-container {
-					width: 32%;
-					max-width: 370px;
-					height: 360px;
+					width: 48%;
+					max-width: 100%;
+					height: 330px;
 					margin-bottom: 2%;
 					padding: 20px;
 					border: 1px solid #ffe100;
-					border-radius: 2%;
+					border-radius: 5px;
 					background-color: #ffec65;
 					overflow: hidden;
 					text-align: center;
@@ -233,50 +234,49 @@ const Index = ({ info, events, post }) => {
 					width: auto;
 					margin: 15px auto 0 auto;
 					border: 1px solid #ffe100;
-					border-radius: 2px;
+					border-radius: 5px;
 				}
 
-				@media only screen and (max-width: 1252px) {
-					.info-containers {
-						flex-wrap: wrap;
-						justify-content: center;
-						padding: 0;
+				.events-size {
+					width: 98%;
+					height: auto;
+					border-radius: 5px;
+				}
+				
+				.location-container {
+					margin-right: 25px;
+				}
+
+				@media only screen and (max-width: 1302px) {
+					.location-container h4 {
+						font-size: 24px !important;
 					}
 
+					@media only screen and (max-width: 1000px) {
+						.location-container h4 {
+							font-size: 22px !important;
+						}
+					}
+				}
+
+				@media only screen and (max-width: 950px) {
+					.yellow-container h3 {
+						font-size 24px !important;
+					}
+				}
+
+				@media only screen and (max-width: 900px) {
 					.yellow-container {
-						max-width: 100%;
-						width: 48%;
-						height: 275px;
-						margin-top: 0;
-						border-radius: 5px;
-					}
-
-					.extra-padding {
-						padding: 20px !important;
-					}
-
-					.location-margin {
-						margin-right: 25px;
-					}
-
-					.events-size {
 						width: 100%;
 						height: auto;
 					}
 
-					@media only screen and (max-width: 900px) {
-						.yellow-container {
-							width: 100%;
-							height: auto;
-						}
-
-						.location-margin {
-							margin-right: 0;
-						}
+					.location-container {
+						margin-right: 0;
 					}
 				}
 
-				@media only screen and (max-width: 1182px) {
+				@media only screen and (max-width: 1200px) {
 					.responsive-break {
 						display: none;
 					}
@@ -301,8 +301,14 @@ const Index = ({ info, events, post }) => {
 					margin-top: 0;
 				}
 
-				.grey-font {
-					color: gray;
+				.table-width {
+					width: 75%;
+				}
+
+				@media only screen and (max-width: 1100px) {
+					.table-width {
+						width: 100%;
+					}
 				}
 
 				.table-font {

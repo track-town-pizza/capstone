@@ -1,9 +1,9 @@
 import React from "react"
+import { format } from "date-fns"
 
 const EventListing = ({ name, date, postUrl }) => {
-	// Parse Date into mm/dd/yyyy Format
-	const unformattedDate = new Date(date);
-	const formattedDate = `${unformattedDate.getMonth()}/${unformattedDate.getDate()}/${unformattedDate.getFullYear()}`;
+	const formattedDate = format(new Date(date), "MM/dd/yyyy");
+	
 	return (
 		<tr>
 			<td className="event-name">{name}</td>
@@ -11,10 +11,12 @@ const EventListing = ({ name, date, postUrl }) => {
 			<style jsx>{`
 				.event-name {
 					text-align: left !important;
+					font-size: 14px;
 				}
 
 				.event-date {
 					text-align: right !important;
+					font-size: 14px;
 				}
 			`}</style>
 		</tr>

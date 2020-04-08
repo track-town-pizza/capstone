@@ -25,7 +25,7 @@ const Pizzas = ({ pizzasInfo }) => {
             </div>
             <div className="text-center overflow-hidden">
                 <h4 className="d-inline">To see specific prices, check out our paper </h4>
-                <Link href="https://drive.google.com/uc?id=1qlcIvlW1D-g-xfKzPu7-AOVd9AgekXx5">
+                <Link href={prices.Menu_Link}>
                     <a className="text-success"><h4 className="menu-cursor d-inline">menu</h4></a>
                 </Link>
             </div>
