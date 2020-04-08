@@ -5,7 +5,7 @@ import fetch from "isomorphic-unfetch"
 import Layout from "../../components/Layout"
 import MenuItems from "../../components/menu/MenuItem"
 
-const Pizzas = ({ pizzasInfo }) => {
+const Pizzas = ({ pizzasInfo, prices }) => {
     const MenuItemsComponents = pizzasInfo.map(pizzaInfo => (<MenuItems itemInfo={pizzaInfo} page="pizza" key={pizzaInfo.key} />))
     return (
         <Layout>
@@ -63,9 +63,13 @@ const Pizzas = ({ pizzasInfo }) => {
 }
 
 Pizzas.getInitialProps = async () => {
-    const resJson = await fetch(`${process.env.URL_ROOT}/api/menu/pizzas`).then(_ => _.json())
+    const pizzasRes = await fetch(`${process.env.URL_ROOT}/api/menu/pizzas`).then(_ => _.json())
+    const pricesRes = await fetch(`${process.env.URL_ROOT}/api/menu/prices`).then(_ => _.json())
 
-    return { pizzasInfo: resJson }
+    return {
+        pizzasInfo: pizzasRes,
+        prices: pricesRes
+    }
 }
 
 export default Pizzas

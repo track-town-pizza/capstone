@@ -29,22 +29,22 @@ const EditToppingsPrices = ({ pizzaInfo, allToppingsInfo }) => {
     parseJsonToUsableObj(pizzaInfo, allToppingsInfo, toppingsPriceInfo, sizePriceInfo)
     const [ toppings, setToppings ] = useState(toppingsPriceInfo)
     const [ sizes, setSizes ] = useState(sizePriceInfo)
-    const [ newLink, setLink ] = useState(pizzaInfo.menuLink)
+    const [ newLink, setLink ] = useState(allToppingsInfo.Menu_Link)
 
     // use state to make the elements the user will see
-    const EditToppingItems = []
-    const EditPizzaItems = []
+    const editToppingItems = []
+    const editPizzaItems = []
     for(const topping of toppings) {
         const toppingStr = topping.description.replace(/_/g, " ")
-        EditToppingItems.push(<h4>{toppingStr}</h4>)
+        editToppingItems.push(<h4>{toppingStr}</h4>)
         for(const size of sizes) {
-            EditToppingItems.push(<EditFoodItem id={topping.description+"*"+size.description} name={size.description} defaultValue={topping.prices[size.description]} onChange={onChange}/>)
+            editToppingItems.push(<EditFoodItem id={topping.description+"*"+size.description} name={size.description} defaultValue={topping.prices[size.description]} onChange={onChange}/>)
         }
     }
     for(const size of sizes) {
-        EditPizzaItems.push(<EditFoodItem id={size.description} name={size.description} defaultValue={size.prices} onChange={onChange}/>)
+        editPizzaItems.push(<EditFoodItem id={size.description} name={size.description} defaultValue={size.prices} onChange={onChange}/>)
     }
-    EditPizzaItems.push(<EditFoodItem id={"newLink"} name={"New Menu Link"} defaultValue={newLink.menu_link} onChange={onChange} width={"600px"}/>)
+    editPizzaItems.push(<EditFoodItem id={"newLink"} name={"New Menu Link"} defaultValue={newLink} onChange={onChange} width={"600px"}/>)
 
     // This function updates the text that the user sees as they change the price
     function onChange(event) {
@@ -125,9 +125,9 @@ const EditToppingsPrices = ({ pizzaInfo, allToppingsInfo }) => {
         <Layout>
             <h2 className="text-center">Edit Topping Prices</h2>
             <div className="text-center">
-               {EditToppingItems}
+               {editToppingItems}
                 <h4>Pizza Sizes</h4>
-                {EditPizzaItems}
+                {editPizzaItems}
             </div>
             <SubmitButton words="Submit Topping Prices" onClick={onClick} />
             <style jsx>{`
@@ -141,12 +141,12 @@ const EditToppingsPrices = ({ pizzaInfo, allToppingsInfo }) => {
 }
 
 EditToppingsPrices.getInitialProps = async () => {
-    const pizzaInfoResJson = await fetch(`${process.env.URL_ROOT}/api/menu/pizzaInfo`).then(_ => _.json())
-    const pricesResJson = await fetch(`${process.env.URL_ROOT}/api/menu/prices`).then(_ => _.json())
+    const pizzasRes = await fetch(`${process.env.URL_ROOT}/api/menu/pizzaInfo`).then(_ => _.json())
+    const pricesRes = await fetch(`${process.env.URL_ROOT}/api/menu/prices`).then(_ => _.json())
 
     return {
-        pizzaInfo: pizzaInfoResJson,
-        allToppingsInfo: pricesResJson
+        pizzaInfo: pizzasRes,
+        allToppingsInfo: pricesRes
     }
 }
 
