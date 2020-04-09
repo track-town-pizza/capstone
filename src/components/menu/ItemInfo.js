@@ -31,8 +31,7 @@ function ItemPriceDescription (description, price) {
                     margin-bottom: .5rem;
                     margin-left: .5rem;
                     margin-top: .5rem;
-                    font-size: 14px;
-                    
+                    font-size: 14px;  
                 }
                 .item-price {
                     float: right;
@@ -66,7 +65,7 @@ const ItemInfo = props => {
                         width: 100%;
                         height: 35%;
                     }
-                    @media only screen and (max-width: 600px) {
+                    @media only screen and (max-width: 500px) {
                         .description-box {
                             height: auto;
                         }
@@ -75,27 +74,51 @@ const ItemInfo = props => {
             </div>
         )
     }
-
-    return (
-        <div className="description-box">
-            {ItemInfoPriceDescriptionComponents}
-            <style jsx>{`
-                .description-box {
-                    background: #FFEC65;
-                    border-radius: 0px 0px 10px 10px;
-                    overflow: auto;
-                    color: #000000;
-                    display: table;
-                    width: 100%;
-                }
-                @media only screen and (max-width: 600px) {
+    else if(props.page === "merchandise") {
+        return (
+            <div className="description-box">
+                {ItemInfoPriceDescriptionComponents}
+                <style jsx>{`
                     .description-box {
-                        height: auto;
+                        background: #FFEC65;
+                        border-radius: 0px 0px 10px 10px;
+                        overflow: auto;
+                        color: #000000;
+                        display: table;
+                        width: 100%;
+                        padding: 1rem;
                     }
-                }
-            `}</style>
-        </div>
-    )
-    
+                    @media only screen and (max-width: 1100px) {
+                        .description-box {
+                            height: auto;
+                            padding: .25rem;
+                        }
+                    }
+                `}</style>
+            </div>
+        )
+    }
+    else {
+        return (
+            <div className="description-box">
+                {ItemInfoPriceDescriptionComponents}
+                <style jsx>{`
+                    .description-box {
+                        background: #FFEC65;
+                        border-radius: 0px 0px 10px 10px;
+                        overflow: auto;
+                        color: #000000;
+                        display: table;
+                        width: 100%;
+                    }
+                    @media only screen and (max-width: 600px) {
+                        .description-box {
+                            height: auto;
+                        }
+                    }
+                `}</style>
+            </div>
+        )
+    }  
 }
 export default ItemInfo
