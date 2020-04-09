@@ -6,7 +6,7 @@ import SinglePost from "../components/SinglePost"
 
 function setPostCount() {
     // Fetch the amount of posts that exist
-    return 10; // <- placeholder value for now
+    return 8; // <- placeholder value for now
 }
 
 function getOldestPostID() {
@@ -22,15 +22,16 @@ function getNewestPostID() {
 
     let posts = postData.posts
     let postIDs = posts.map(a => a.id)
-    //console.log(Math.min.apply(Math, postIDs))
     return Math.min.apply(Math, postIDs) // <- placeholder value for now
 }
 
 // This function fetches a specified amount of posts that were posted after given post(identified with id)
 function getPostsAfter(leadingPostID, amountOfPosts) {
     // Fetch the posts posted after post with id [leadingPostID] from the database, LIMIT amountOfPosts
-    //const posts = postData.posts.slice(leadingPostID+1+
-    const posts = postData.posts
+    let firstIndex = parseInt(leadingPostID) - amountOfPosts
+    let lastIndex = parseInt(leadingPostID)
+    console.log("Fetching (after) posts index " + firstIndex + " to index " + lastIndex)
+    const posts = postData.posts.slice(firstIndex, lastIndex) // Needs to be replaced with database call
 
     return posts
 }
@@ -38,7 +39,10 @@ function getPostsAfter(leadingPostID, amountOfPosts) {
 // This function fetches a specified amount of posts that were posted before given post(identified with id)
 function getPostsBefore(leadingPostID, amountOfPosts) {
     // Fetch the posts posted before post with id [leadingPostID] from the database, LIMIT amountOfPosts
-    const posts = postData.posts
+    let firstIndex = parseInt(leadingPostID) + 1
+    let lastIndex = parseInt(leadingPostID) + 1 + amountOfPosts
+    console.log("Fetching (before) posts index " + firstIndex + " to index " + lastIndex)
+    const posts = postData.posts.slice(firstIndex, lastIndex) // Needs to be replaced with database call
 
     return posts
 }
@@ -58,17 +62,8 @@ const Blog = () => {
     const [blogState, setBlog] = useState({
         newestPostID: getNewestPostID(),
         oldestPostID: getOldestPostID(),
-        posts: getPostsBefore(getNewestPostID()+1, postRenderLimit)
+        posts: getPostsBefore(getNewestPostID()-1, postRenderLimit)
     })
-
-    /*
-    setBlog(blogState.newestPostID = getNewestPostID())
-    setBlog(blogState.oldestPostID = getOldestPostID())
-
-    setBlog(blogState.posts = getPosts(blogState.newestPostID, postRenderLimit))
-    */
-
-    console.log(blogState.newestPostID)
 
     // handles when user clicks on blog nav
     function handleClick(event) {
@@ -76,18 +71,20 @@ const Blog = () => {
         if (type === 'submit') {
             if (name === "New Posts") {
                 // Fetch most recent posts from after oldestPostDate
+                console.log("Fetching new posts")
                 setBlog({
                     newestPostID: blogState.newestPostID,
                     oldestPostID: blogState.oldestPostID,
-                    posts: getPostsAfter(blogState.posts[0].id)
+                    posts: getPostsAfter(blogState.posts[0].id, postRenderLimit)
                 })
             }
-            if (name === "Old Posts") {
+            else if (name === "Old Posts") {
                 // Fetch most recent posts from before oldestPostDate
+                console.log("Fetching old posts")
                 setBlog({
                     newestPostID: blogState.newestPostID,
                     oldestPostID: blogState.oldestPostID,
-                    posts: getPostsBefore(blogState.posts[postRenderLimit-1].id)
+                    posts: getPostsBefore(blogState.posts[blogState.posts.length - 1].id, postRenderLimit)
                 })
             }
             window.scrollTo(0, 0)
@@ -98,13 +95,56 @@ const Blog = () => {
     if (postCount <= postRenderLimit) {
         blogNav = <div></div>
     }
-    /*else if (at first page) {
-     *
-     * }
-     * else if (at last page) {
-     *
-     * }
-     */
+    else if (parseInt(blogState.posts[0].id) === blogState.newestPostID) {
+        blogNav =
+        <div>
+            <button name="Old Posts" onClick={handleClick}>Older Posts &rsaquo;</button>
+            <style jsx> {`
+                .blog-nav {
+                    margin-top: 10px;
+                    text-align: center;
+                    color: #007030;
+                }
+
+                button {
+                    background: none!important;
+                    border: none;
+                    padding: 0!important;
+                    color: #007030;
+                    cursor: pointer;
+                }
+
+                button:hover {
+                    text-decoration: underline;
+                }
+            `}</style>
+       </div>
+     }
+     else if (parseInt(blogState.posts[blogState.posts.length-1].id) === blogState.oldestPostID) {
+        blogNav =
+        <div>
+            <button name="New Posts" onClick={handleClick}>&lsaquo; Newer Posts</button>
+            <style jsx> {`
+                .blog-nav {
+                    margin-top: 10px;
+                    text-align: center;
+                    color: #007030;
+                }
+
+                button {
+                    background: none!important;
+                    border: none;
+                    padding: 0!important;
+                    color: #007030;
+                    cursor: pointer;
+                }
+
+                button:hover {
+                    text-decoration: underline;
+                }
+            `}</style>
+       </div>
+    }
     else {
         blogNav =
         <div>
@@ -142,7 +182,7 @@ const Blog = () => {
         <div>
             <Layout>
                 <div className="blog-container">
-                    {postData.posts.map(post => (
+                    {blogState.posts.map(post => (
                         <SinglePost post={post} key={post.id}/>
                     ))}
                 </div>
