@@ -392,8 +392,6 @@ Index.getInitialProps = async () => {
 	const idx = closestIndexTo(new Date(), postDates)
 	const post = postsResJson[idx]
 
-	console.log("== Newest Post:", post)
-
 	return {
 		info: infoResJson,
 		events: eventsResJson,

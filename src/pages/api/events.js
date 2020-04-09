@@ -16,12 +16,30 @@ handler.get(async (req, res) => {
 					res.json(JSON.stringify(events))
 				} else {
 					console.log("== Error: either no events were found or an error occurred while converting the cursor to an array")
+					res.status(500).json({ err })
 				}
 			})
 		} else {
 			console.log("== Error: either no cursor found or an error occurred while performing the query")
+			res.status(500).json({ err })
 		}
 	})
+})
+
+handler.post(async (req, res) => {
+	const { events } = req.body
+
+	// Remove _id attribute to prevent attempts to update it in DB
+	for (let event of events) {
+		delete event["_id"]
+	}
+
+	try {
+		await req.db.collection("events").updateMany({ }, { events }, { upsert: true })
+		res.status(201).json({ message: "OK" })
+	} catch (err) {
+		res.status(500).json({ err })
+	}
 })
 
 export default handler

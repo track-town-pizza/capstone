@@ -16,10 +16,12 @@ handler.get(async (req, res) => {
 					res.json(JSON.stringify(sides))
 				} else {
 					console.log("== Error: either no sides were found or an error occurred while converting the cursor to an array")
+					res.status(500).json({ err })
 				}
 			})
 		} else {
 			console.log("== Error: either no cursor found or an error occurred while performing the query")
+			res.status(500).json({ err })
 		}
 	})
 })

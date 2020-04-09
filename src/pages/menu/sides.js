@@ -27,9 +27,6 @@ const Sides = ({ sidesInfo }) => {
 
 Sides.getInitialProps = async () => {
     const resJson = await fetch(`${process.env.URL_ROOT}/api/menu/sides`).then(_ => _.json())
-
-    console.log("== Sides:", resJson)
-
     return { sidesInfo: resJson }
 }
 
