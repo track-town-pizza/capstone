@@ -104,8 +104,8 @@ const ItemInfo = props => {
             <div className="description-box">
                 {ItemInfoPriceDescriptionComponents}
                 <div className="text-center">
-                    <button className="pizza-btn" name="" onClick="">Toppings</button>
-                    <button className="pizza-btn" name="" onClick="">Prices</button>
+                    <button className="pizza-btn" type="button" name={props.itemInformation[0].description + "toppings"} onClick={props.onClick}>Toppings</button>
+                    <button className="pizza-btn" type="button" name={props.itemInformation[0].description + "prices"} onClick={props.onClick}>Prices</button>
                 </div>
                 <style jsx>{`
                     .pizza-btn {

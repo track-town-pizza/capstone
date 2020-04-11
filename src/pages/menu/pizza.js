@@ -7,7 +7,14 @@ import Link from "next/link"
 
 
 const Pizzas = () => {
-    const MenuItemsComponents = pizzasInfo.map(pizzaInfo => (<MenuItems itemInfo={pizzaInfo} page="pizza"/>))
+    function handleClick(event) {
+        const {name, type} = event.target
+        if(type === "button"){
+            console.log(name)
+        }
+    }
+
+    const MenuItemsComponents = pizzasInfo.map(pizzaInfo => (<MenuItems itemInfo={pizzaInfo} page="pizza" onClick={handleClick}/>))
     return (
         <Layout>
             <div className="text-center">
