@@ -12,7 +12,7 @@ function ItemPriceDescription (description, price) {
                     .item-description {
                         text-align: center;
                         margin-top: .9rem;
-                        font-size: 20px;
+                        font-size: 18px;
                         font-weight: bold;
                     }
                 `}</style>
