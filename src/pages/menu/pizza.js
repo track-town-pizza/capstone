@@ -38,7 +38,15 @@ const Pizzas = () => {
                     })
                 }
                 else if(whatToDisplayArr.length >= 2 && whatToDisplayArr[1] === "prices") {
-    
+                    const ele = pizzasInfo.find(obj => {
+                        return obj.key === whatToDisplayArr[0]
+                    })
+                    const strToDisplay = "Small: " + ele.prices[0] + ", Medium: " + ele.prices[1] + ", Large: " + ele.prices[2] + ", Giant: " + ele.prices[3]
+                    setInfoToDisplayModal({
+                        ...infoToDisplayModal,
+                        prices: true,
+                        pricesMessage: strToDisplay
+                    })
                 }
             }
         }
@@ -48,6 +56,7 @@ const Pizzas = () => {
     return (
         <Layout>
             {infoToDisplayModal.toppings ? <Modal message={infoToDisplayModal.toppingsMessage} onClick={handleClick} /> : null}
+            {infoToDisplayModal.prices ? <Modal message={infoToDisplayModal.pricesMessage} onClick={handleClick} /> : null}
             <div className="text-center">
                 <h1 className="text-center mb-4">Track Town Pizzas</h1>
                     <Link href="./pizzaBuilder">
