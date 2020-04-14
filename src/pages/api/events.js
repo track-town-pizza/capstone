@@ -27,15 +27,19 @@ handler.get(async (req, res) => {
 })
 
 handler.post(async (req, res) => {
-	const { events } = req.body
+	const { event } = req.body
 
 	// Remove _id attribute to prevent attempts to update it in DB
-	for (let event of events) {
-		delete event["_id"]
-	}
+	delete event["_id"]
+
+	console.log("== Event being updated in DB:", event)
 
 	try {
-		await req.db.collection("events").updateMany({ }, { events }, { upsert: true })
+		await req.db.collection("events").updateOne(
+			{ eventNumber: { $eq: event.eventNumber } },
+			{ $set: event },
+			{ upsert: true }
+		)
 		res.status(201).json({ message: "OK" })
 	} catch (err) {
 		res.status(500).json({ err })
