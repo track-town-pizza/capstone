@@ -24,8 +24,8 @@ const ManagementHub = () => {
             <Link href="./editInfo">
                 <h4 className="correct-cursor"><a className="text-success">General Restaurant Info & Events</a></h4>
             </Link>
-            <Link href="#">
-                <h4 className="correct-cursor"><a className="text-success">Create a New Blog Post</a></h4>
+            <Link href="./editMenuPizzaPrices">
+                <h4 className="correct-cursor"><a className="text-success">Menu Pizza Prices</a></h4>
             </Link>
             <style jsx>{`
                 .correct-cursor{
