@@ -66,7 +66,6 @@ const editMerchandisePrices = () => {
                     }
                     iter += sideInfo.information.length
                 }
-                console.log(newMerchandiseInfo)
                 // push newSidesPrices into the db as it is the updated information
             }
         }

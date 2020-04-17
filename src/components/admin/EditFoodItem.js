@@ -12,7 +12,7 @@ const EditFoodItem = props => {
                     width: 200px;
                     text-align: right;
                     margin-right: 10px;
-                    margin-top: 20px;
+                    margin-top: 10px;
                   }​
             `}</style>
         </div>

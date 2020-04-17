@@ -7,7 +7,7 @@ const ManagementHub = () => {
         <Layout>
             <h2 className="text-center">Click on a link to edit that information: </h2>
             <Link href="./editToppingsPrices">
-                <h4 className="correct-cursor"><a className="text-success">Pizza & Pizza Topping Prices</a></h4>
+                <h4 className="correct-cursor"><a className="text-success">Base Pizzas & Pizza Topping Prices</a></h4>
             </Link>
             <Link href="./editSidesPrices">
                 <h4 className="correct-cursor"><a className="text-success">Side Order Prices</a></h4>

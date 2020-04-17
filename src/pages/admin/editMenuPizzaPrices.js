@@ -33,7 +33,7 @@ const editMenuPizzaPrices = () => {
     const EditItems = []
     for(let item of namePriceInfo) {
         if(counter === 0) {
-            EditItems.push(<h3>{item.name}</h3>)
+            EditItems.push(<h3 className="mt-4">{item.name}</h3>)
         }
         EditItems.push(<EditFoodItem id={item.name+item.size} name={item.size} defaultValue={item.price} onChange={onChange}/>)
         if(counter === 3){
