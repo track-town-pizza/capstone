@@ -27,7 +27,7 @@ const Pizzas = () => {
             }
             else {
                 const whatToDisplayArr = name.split('*')
-                if(whatToDisplayArr.length >= 2 && whatToDisplayArr[1] === "toppings") {
+                if(whatToDisplayArr.length >= 2 && whatToDisplayArr[1] === "description") {
                     const ele = pizzasInfo.find(obj => {
                         return obj.key === whatToDisplayArr[0]
                     })
