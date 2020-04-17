@@ -12,7 +12,8 @@ function ItemPriceDescription (description, price) {
                     .item-description {
                         text-align: center;
                         margin-top: .9rem;
-                        font-size: 15px;
+                        font-size: 18px;
+                        font-weight: bold;
                     }
                 `}</style>
             </div>
@@ -92,6 +93,40 @@ const ItemInfo = props => {
                         .description-box {
                             height: auto;
                             padding: .25rem;
+                        }
+                    }
+                `}</style>
+            </div>
+        )
+    }
+    else if(props.page === "pizza") {
+        return (
+            <div className="description-box">
+                {ItemInfoPriceDescriptionComponents}
+                <div className="text-center">
+                    <button className="pizza-btn" type="button" name={props.itemInformation[0].description + "*toppings"} onClick={props.onClick}>Toppings</button>
+                    <button className="pizza-btn" type="button" name={props.itemInformation[0].description + "*prices"} onClick={props.onClick}>Prices</button>
+                </div>
+                <style jsx>{`
+                    .pizza-btn {
+                        margin-right: 10px;
+                        border: 0;
+                        background-color: #007030;
+                        color: #FFFFFF;
+                        border-radius: 5px;
+                        margin-bottom: .5rem;
+                    }
+                    .description-box {
+                        background: #FFEC65;
+                        border-radius: 0px 0px 10px 10px;
+                        overflow: auto;
+                        color: #000000;
+                        display: table;
+                        width: 100%;
+                    }
+                    @media only screen and (max-width: 600px) {
+                        .description-box {
+                            height: auto;
                         }
                     }
                 `}</style>

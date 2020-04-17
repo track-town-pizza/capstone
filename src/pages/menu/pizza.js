@@ -1,15 +1,62 @@
 import Layout from "../../components/Layout"
-import React from "react"
+import React, {useState} from "react"
 import MenuItems from "../../components/menu/MenuItem"
 import pizzasInfo from "../../../data/pizzas.json"
 import prices from "../../../data/prices.json"
 import Link from "next/link"
+import Modal from "../../components/Modal"
 
 
 const Pizzas = () => {
-    const MenuItemsComponents = pizzasInfo.map(pizzaInfo => (<MenuItems itemInfo={pizzaInfo} page="pizza"/>))
+    const [infoToDisplayModal, setInfoToDisplayModal] = useState({
+        toppings: false,
+        toppingsMessage: "",
+        prices: false,
+        pricesMessage: ""
+    })
+    function handleClick(event) {
+        const {name, type} = event.target
+        if(type === "button"){
+            if(name === "closeModal") {
+                setInfoToDisplayModal({
+                    toppings: false,
+                    toppingsMessage: "",
+                    prices: false,
+                    pricesMessage: ""
+                })
+            }
+            else {
+                const whatToDisplayArr = name.split('*')
+                if(whatToDisplayArr.length >= 2 && whatToDisplayArr[1] === "toppings") {
+                    const ele = pizzasInfo.find(obj => {
+                        return obj.key === whatToDisplayArr[0]
+                    })
+                    setInfoToDisplayModal({
+                        ...infoToDisplayModal,
+                        toppings: true,
+                        toppingsMessage: ele.toppings.toString().replace(/,/g, ", ")
+                    })
+                }
+                else if(whatToDisplayArr.length >= 2 && whatToDisplayArr[1] === "prices") {
+                    const ele = pizzasInfo.find(obj => {
+                        return obj.key === whatToDisplayArr[0]
+                    })
+                    const strToDisplay = "Small: " + ele.prices[0] + ", Medium: " + ele.prices[1] + ", Large: " + ele.prices[2] + ", Giant: " + ele.prices[3]
+                    setInfoToDisplayModal({
+                        ...infoToDisplayModal,
+                        prices: true,
+                        pricesMessage: strToDisplay
+                    })
+                }
+            }
+        }
+    }
+
+    const MenuItemsComponents = pizzasInfo.map(pizzaInfo => (<MenuItems itemInfo={pizzaInfo} page="pizza" onClick={handleClick}/>))
     return (
         <Layout>
+            {infoToDisplayModal.toppings ? <Modal message={infoToDisplayModal.toppingsMessage} onClick={handleClick} /> : null}
+            {infoToDisplayModal.prices ? <Modal message={infoToDisplayModal.pricesMessage} onClick={handleClick} /> : null}
             <div className="text-center">
                 <h1 className="text-center mb-4">Track Town Pizzas</h1>
                     <Link href="./pizzaBuilder">
