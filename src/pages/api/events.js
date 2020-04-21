@@ -27,23 +27,29 @@ handler.get(async (req, res) => {
 })
 
 handler.post(async (req, res) => {
-	const { event } = req.body
+	const { events } = req.body
 
-	// Remove _id attribute to prevent attempts to update it in DB
-	delete event["_id"]
+	for (let event of events) {
+		// Remove _id attributes to prevent attempts to update them in DB
+		delete event["_id"]
 
-	console.log("== Event being updated in DB:", event)
-
-	try {
-		await req.db.collection("events").updateOne(
-			{ eventNumber: { $eq: event.eventNumber } },
-			{ $set: event },
-			{ upsert: true }
-		)
-		res.status(201).json({ message: "OK" })
-	} catch (err) {
-		res.status(500).json({ err })
+		// Update document in DB
+		try {
+			await req.db.collection("events").updateOne(
+				{ "eventNumber": event.eventNumber },
+				{ $set: event },
+				{ upsert: true }
+			)
+		} catch (err) {
+			// An error occurred, exit API
+			res.status(500).json({ err })
+			return
+		}
 	}
+
+	// If the for loop completes without returning, then no
+	// errors occurred while updating all of the documents.
+	res.status(200).json({ message: "OK" })
 })
 
 export default handler

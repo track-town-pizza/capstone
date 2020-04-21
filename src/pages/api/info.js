@@ -22,8 +22,7 @@ handler.post(async (req, res) => {
 			{ $set: info },
 			{ upsert: true }		// PUTs if document found, POSTs otherwise
 		)
-	
-		res.status(201).json({ message: "OK" })
+		res.status(200).json({ message: "OK" })
 	} catch (err) {
 		// Return error with 500 status code if update fails
 		res.status(500).json({ err })

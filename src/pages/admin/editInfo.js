@@ -41,21 +41,6 @@ const EditInfo = ({ info, eventData: events }) => {
 		setTimeout(() => setDisplayModal(false), 3000)
 	}
 
-	// Send updated event to DB API
-	async function updateEvent(event) {
-		const res = await fetch(`${process.env.URL_ROOT}/api/events`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify({ event })
-		})
-
-		// Return boolean for isErr flag based on whether
-		// an error exists or not
-		return res.err != null ? true : false
-	}
-
 	// Update info in DB based on data entered in info form
 	async function updateInfo(e) {
 		e.preventDefault()
@@ -78,91 +63,63 @@ const EditInfo = ({ info, eventData: events }) => {
 			body: JSON.stringify({ info: updatedInfo })
 		}).then(_ => _.json())
 
-		// Display error toast if error message is returned from DB API
-		if (res.err != null) {
+		if (res.err) {
+			// Display error toast if error message is returned from DB API
 			setModalMessage(`Info could not be updated. The following error occurred:\n${res.err}`)
 			displayToast()
-		}
-
-		// Display success toast if OK message is returned from DB API
-		if (res.message === "OK") {
+		} else if (res.message === "OK") {
+			// Display success toast if no error message is returned from DB API
 			setModalMessage("Info has successfully been updated.")
 			displayToast()
 		}
 	}
-
+	
 	async function updateEvents(e) {
 		e.preventDefault()
-
-		// Flag to determine whether an error has occurred or not
-		let isErr = false
 
 		// Create updated representation of event 1 object to send as update
 		let updatedEvent1 = events[0]
 		updatedEvent1.name = event1Name
 		updatedEvent1.date = formatISO(new Date(event1Date))
 
-		isErr = await updateEvent(updatedEvent1)
-		if (isErr) {
-			setModalMessage(`An error occurred. Events could not be updated. Please try again later.`)
-			displayToast()
-			return
-		}
-
 		// Create updated representation of event 2 object to send as update
 		let updatedEvent2 = events[1]
 		updatedEvent2.name = event2Name
 		updatedEvent2.date = formatISO(new Date(event2Date))
-		if (!isErr) {
-			isErr = await updateEvent(updatedEvent2)
-			if (isErr) {
-				setModalMessage(`An error occurred. Events could not be updated. Please try again later.`)
-				displayToast()
-				return
-			}
-		}
 
 		// Create updated representation of event 3 object to send as update
 		let updatedEvent3 = events[2]
 		updatedEvent3.name = event3Name
 		updatedEvent3.date = formatISO(new Date(event3Date))
-		if (!isErr) {
-			isErr = await updateEvent(updatedEvent3)
-			if (isErr) {
-				setModalMessage(`An error occurred. Events could not be updated. Please try again later.`)
-				displayToast()
-				return
-			}
-		}
 
 		// Create updated representation of event 4 object to send as update
 		let updatedEvent4 = events[3]
 		updatedEvent4.name = event4Name
 		updatedEvent4.date = formatISO(new Date(event4Date))
-		if (!isErr) {
-			isErr = await updateEvent(updatedEvent4)
-			if (isErr) {
-				setModalMessage(`An error occurred. Events could not be updated. Please try again later.`)
-				displayToast()
-				return
-			}
-		}
 
 		// Create updated representation of event 5 object to send as update
 		let updatedEvent5 = events[4]
 		updatedEvent5.name = event5Name
 		updatedEvent5.date = formatISO(new Date(event5Date))
-		if (!isErr) {
-			isErr = await updateEvent(updatedEvent5)
-			if (isErr) {
-				setModalMessage(`An error occurred. Events could not be updated. Please try again later.`)
-				displayToast()
-				return
-			} else {
-				// Display success toast if OK message is returned from DB API
-				setModalMessage("Events have successfully been updated.")
-				displayToast()
-			}
+
+		// Update events in DB API
+		let updatedEvents = [ updatedEvent1, updatedEvent2, updatedEvent3, updatedEvent4, updatedEvent5 ]
+		const res = await fetch(`${process.env.URL_ROOT}/api/events`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({ events: updatedEvents })
+		}).then(_ => _.json())
+
+		if (res.err) {
+			// Display error toast if error message is returned from DB API
+			setModalMessage(`An error occurred. Events could not be updated. Please try again later.`)
+			displayToast()
+		} else if (res.message === "OK") {
+			// Display success toast if OK message is returned from DB API
+			setModalMessage("Events have successfully been updated.")
+			displayToast()
 		}
 	}
 
