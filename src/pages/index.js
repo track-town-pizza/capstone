@@ -14,13 +14,14 @@ import EventListing from "../components/EventListing"
 import info from '../../data/info.json'
 import events from "../../data/events.json"
 import postData from "../../data/PostData.json"
+import PhoneNumber from "../components/PhoneNumber"
 
 function parseTime(time) {
 	let date = new Date()
 
 	const hour = parseInt(time.substring(0, 2))
 	const minute = parseInt(time.substring(3, 5))
-	
+
 	date = setHours(date, hour)
 	date = setMinutes(date, minute)
 	date = setSeconds(date, 0)
@@ -30,7 +31,7 @@ function parseTime(time) {
 
 const Index = () => {
 	const post = postData.posts[0]
-	
+
 	const openHourSunThur = parseTime(info.openHourSunThur)
 	const closeHourSunThur = parseTime(info.closeHourSunThur)
 	const openHourFriSat = parseTime(info.openHourFriSat)
@@ -50,7 +51,7 @@ const Index = () => {
 							<span className="responsive-spacing">&nbsp;</span>
 							Call us:
 							<br />
-							<span className="responsive-phone">{info.phone}</span>
+							<span className="responsive-phone"><PhoneNumber phoneNumber={info.phone} linkColor="white"/></span>
 						</p>
 						<Link href={info.onlineOrderLink}>
 							<a className="btn btn-yellow btn-responsive">Order Online!</a>
@@ -246,7 +247,7 @@ const Index = () => {
 					height: auto;
 					border-radius: 5px;
 				}
-				
+
 				.location-container {
 					margin-right: 25px;
 				}
