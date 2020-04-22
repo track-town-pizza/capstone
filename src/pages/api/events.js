@@ -36,7 +36,7 @@ handler.post(async (req, res) => {
 		// Update document in DB
 		try {
 			await req.db.collection("events").updateOne(
-				{ "eventNumber": event.eventNumber },
+				{ eventNumber: event.eventNumber },
 				{ $set: event },
 				{ upsert: true }
 			)

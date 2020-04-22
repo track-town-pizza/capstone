@@ -16,8 +16,6 @@ handler.post(async (req, res) => {
 	// Remove _id attribute to prevent attempts to update it in DB
 	delete prices["_id"]
 
-	console.log("== New Prices (Server Side):", prices)
-
 	try {
 		await req.db.collection("prices").updateOne(
 			{ key: "prices" },
