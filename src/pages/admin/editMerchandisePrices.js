@@ -1,8 +1,11 @@
 import React, {useState} from "react"
 import fetch from "isomorphic-unfetch"
+
 import Layout from "../../components/Layout"
+import Modal from "../../components/Modal"
 import EditFoodItem from "../../components/admin/EditFoodItem"
 import SubmitButton from "../../components/admin/SubmitPricesBtn"
+
 // This is a regular expression that tells is used for checking that the 
 // new price is in the correct format
 const MONEY_PATTERN = /^\$(\d{1,3}(\,\d{3})*|(\d+))(\.[0-9]{2})$/
@@ -23,6 +26,17 @@ function parseJsonToUsableObj(allMerchInfo) {
 const EditMerchandisePrices = ({ allMerchInfo }) => {
     const merchInfo = parseJsonToUsableObj(allMerchInfo)
     const [ merchandise, setMerchandise ] = useState(merchInfo)
+
+    // Modal UI variables
+	const [ displayModal, setDisplayModal ] = useState(false)
+	const [ modalMessage, setModalMessage ] = useState("")
+
+	// Display modal for 3 seconds
+	function displayToast() {
+		setDisplayModal(true)
+		setTimeout(() => setDisplayModal(false), 3000)
+	}
+
     const EditSidesItems = []
     EditSidesItems.push(merchandise.map(item => <EditFoodItem id={item.description} name={item.description} defaultValue={item.price} onChange={onChange}/>))
 
@@ -39,7 +53,7 @@ const EditMerchandisePrices = ({ allMerchInfo }) => {
     }
 
     // This function controls what happens when the user hits the submit button
-    function onClick(event) {
+    async function onClick(event) {
         const { type } = event
         let success = true
         if(type === 'click') {
@@ -48,12 +62,12 @@ const EditMerchandisePrices = ({ allMerchInfo }) => {
                 // before the prices can be updated
                 if(!MONEY_PATTERN.test(merch.price)) {
                     success = false
-                    alert(merch.description + " price was not done correctly. It must be in the form $X.XX or $XX.XX. Please fix it before this form can be submitted")
+                    setModalMessage(merch.description + " price was not done correctly. It must be in the form $X.XX or $XX.XX. Please fix it before this form can be submitted")
+                    displayToast()
                 }
             }
             // the all the elements are in the correct format, the prices can be updated
             if(success) {
-                alert("The prices have been updated")
                 // A new object is created that matches the original format of the object for the database
                 // The new information is merged with the unchanged information
                 const newMerchandiseInfo = JSON.parse(JSON.stringify(allMerchInfo))
@@ -66,14 +80,38 @@ const EditMerchandisePrices = ({ allMerchInfo }) => {
                     }
                     iter += sideInfo.information.length
                 }
-                console.log(newMerchandiseInfo)
+
                 // push newSidesPrices into the db as it is the updated information
+                const res = await fetch(`${process.env.URL_ROOT}/api/menu/merchandise`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        merchandise: newMerchandiseInfo
+                    })
+                }).then(_ => _.json())
+
+                if (res.err) {
+                    // Display error toast if error message is returned from DB API
+                    setModalMessage(`Prices and info could not be updated. The following error occurred:\n${res.err}`)
+                    displayToast()
+                } 
+                
+                if (res.message === "OK") {
+                    // Display success toast if no error message is returned from DB API
+                    setModalMessage("Prices and info have successfully been updated.")
+                    displayToast()
+                }
             }
         }
     }
 
     return (
         <Layout>
+            {displayModal && (
+				<Modal message={modalMessage} onClick={() => setDisplayModal(false)} />
+			)}
             <h2 className="text-center">Edit Merchandise Prices</h2>
             <div className="text-center">
                {EditSidesItems}
