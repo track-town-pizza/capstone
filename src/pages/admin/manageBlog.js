@@ -4,14 +4,19 @@ import { format } from "date-fns"
 import Layout from "../../components/Layout"
 import ManagementHubButton from "../../components/admin/ManagementHubButton"
 import GeneralButton from "../../components/admin/GeneralBtn"
+import BlogManagementList from "../../components/admin/BlogManagementList"
 
 const ManageBlog = () => {
+
+    let postInfoList = ["dog", "log", "bog"]
+
+
      // This function controls what happens when the user hits the delete button
     function onClick(event) {
-        const { type } = event
-        let success = true
-        if(type === 'click') {
-            if (confirm("Are you sure you want to delete this post?")) {
+        const { name, type } = event.target
+        //console.log("type: ", type)
+        if(type === 'submit' || type === 'click') {
+            if (confirm("Are you sure you want to delete this post? Post ID: " + toString(name))) {
                 // Remove post from database
                 alert("Post deleted.")
             }
@@ -22,7 +27,7 @@ const ManageBlog = () => {
         <Layout>
             <h2 className="text-center">Manage Blog Posts</h2>
             <div className="text-center">
-                <p>blog list here</p>
+                <BlogManagementList removePostFunc={onClick} postInfos={postInfoList}/>
             </div>
             <div className="d-flex flex-row justify-content-between">
                 <div className="d-inline p-2">
