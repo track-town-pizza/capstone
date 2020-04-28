@@ -20,6 +20,18 @@ const PhoneNumber = (props) => {
             </div>
         )
     }
+    else if (props.linkColor === "yellow") {
+        return (
+            <div className="d-inline">
+                <a className="yellowPhone" href={"tel:+" + removeDashes(props.phoneNumber)}>{props.phoneNumber}</a>
+                <style jsx> {`
+                    .yellowPhone {
+                        color: #ffec65;
+                    }
+                `}</style>
+            </div>
+        )
+    }
     else if (props.linkColor === "black") {
         return (
             <div className="d-inline">

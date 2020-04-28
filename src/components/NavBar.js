@@ -1,4 +1,6 @@
 import Link from "next/link"
+import info from '../../data/info.json'
+import PhoneNumber from "./PhoneNumber"
 
 const NavBar = props => (
 	<nav className="navbar navbar-expand-md navbar-green top">
@@ -45,9 +47,21 @@ const NavBar = props => (
 					</Link>
 				</li>
 			</ul>
+
+            <div className="phoneNumContainer">
+                Order now by calling <PhoneNumber phoneNumber={info.phone} linkColor="yellow"/>
+            </div>
 		</div>
 
 		<style jsx>{`
+            .phoneNumContainer {
+                font-family: 'Oswald', sans-serif;
+                font-size: 20px;
+                margin-right: 20px;
+				//color: #ffec65;
+                max-width: 265px;
+            }
+
 			.link {
 				text-transform: uppercase;
 				font-family: 'Oswald', sans-serif;
@@ -82,7 +96,14 @@ const NavBar = props => (
 				background-color: #007030;
                 width: 25%;
                 padding: 5px;
+                z-index: 5;
 			}
+
+            @media (max-width: 1140px) {
+                .phoneNumContainer {
+                    display: none;
+                }
+            }
 
 			@media (max-width: 800px) {
                 #navbar-image {
@@ -109,7 +130,6 @@ const NavBar = props => (
 				#navbar-content {
                     font-size: 1.5em;
 					width: 40%;
-                    z-index: 5;
                 }
             }
 
