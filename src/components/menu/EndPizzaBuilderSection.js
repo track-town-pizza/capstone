@@ -1,6 +1,7 @@
 import React from "react"
 import YellowFoodButton from "./YellowFoodButton"
 import Link from "next/link"
+import PhoneNumber from "../PhoneNumber"
 
 const EndPizzaBuilderSection = (props) => {
     return (
@@ -8,7 +9,7 @@ const EndPizzaBuilderSection = (props) => {
             <div className="text-center">
                 <h3>Ready to Order?</h3>
                 <div>
-                    <p className="mb-0 d-inline">{"Call " + props.phoneNumber + " or "}</p>
+                    <p className="mb-0 d-inline">Call <PhoneNumber phoneNumber={props.phoneNumber} linkColor="green"/> or </p>
                     <Link href={props.onlineOrderingLink} className="d-inline">
                         <a className="text-success">Order Online</a>
                     </Link>
