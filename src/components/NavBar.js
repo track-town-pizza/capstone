@@ -48,8 +48,9 @@ const NavBar = props => (
 				</li>
 			</ul>
 
-            <div className="phoneNumContainer">
-                Order now by calling <PhoneNumber phoneNumber={info.phone} linkColor="yellow"/>
+            <div className="phoneNumContainer text-white">
+				<i className="fas fa-phone"></i>
+				<PhoneNumber phoneNumber={info.phone} linkColor="white"/>
             </div>
 		</div>
 

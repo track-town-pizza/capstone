@@ -84,6 +84,7 @@ const editBeveragePrices = () => {
                     }
                 }
                 // push new data (newBeverageInfo) into database
+                console.log(newBeverageInfo)
             }
         }
     }
