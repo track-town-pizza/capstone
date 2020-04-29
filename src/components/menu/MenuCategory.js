@@ -8,7 +8,7 @@ const MenuCategory = props => (
                 <a>
                     <img src={props.menuInfo.imgLink} alt="Track Town Pizza" />
                     <div className="green-box">
-                        <p className="p-2 m-0 text-center">{props.menuInfo.item}</p>
+                        <p className="menu-text p-2 m-0 text-center">{props.menuInfo.item}</p>
                     </div>
                 </a>
             </div>
@@ -39,6 +39,12 @@ const MenuCategory = props => (
                 color: #FFFFFF;
                 border-radius: 10px;
             }
+            @supports (-ms-ime-align: auto) {
+                .menu-text {
+                    font-weight: bold;
+                    font-size: 18px;
+                }
+              }
         `}
         </style>
     </div>

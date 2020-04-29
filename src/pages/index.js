@@ -64,7 +64,7 @@ const Index = () => {
 					<h4>Located at {info.address}</h4>
 					<span className="responsive-break"><br /></span>
 					<h4>Across from Matthew Knight Arena</h4>
-					<img src="/photos/matthew_knight_arena_outside.jpg" alt="Matthew Knight Arena Front" />
+					<img src="https://drive.google.com/uc?id=1WqcZOcLvjuxH117FO0emq7Mg7viWCW65" alt="Matthew Knight Arena Front" className="rounded"/>
 				</div>
 				<div className="yellow-container extra-padding">
 					<h3>We're open all week! Come visit us:</h3>
