@@ -8,10 +8,11 @@ import BlogManagementList from "../../components/admin/BlogManagementList"
 
 const ManageBlog = () => {
 
-    let postInfoList = ["dog", "log", "bog"]
+    //let postInfoList = ["dog", "log", "bog"]
 
 
      // This function controls what happens when the user hits the delete button
+    /*
     function onClick(event) {
         const { name, type } = event.target
         //console.log("type: ", type)
@@ -22,12 +23,14 @@ const ManageBlog = () => {
             }
         }
     }
+    */
 
    return (
         <Layout>
             <h2 className="text-center">Manage Blog Posts</h2>
             <div className="text-center">
-                <BlogManagementList removePostFunc={onClick} postInfos={postInfoList}/>
+       {/*<BlogManagementList removePostFunc={onClick} postInfos={postInfoList}/>*/}
+                <BlogManagementList/>
             </div>
             <div className="d-flex flex-row justify-content-between">
                 <div className="d-inline p-2">
