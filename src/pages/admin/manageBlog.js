@@ -10,8 +10,8 @@ const ManageBlog = () => {
    return (
         <Layout>
             <h2 className="text-center">Manage Blog Posts</h2>
-            <div className="text-center">
-                <BlogManagementList/>
+            <div className="text-center" id="blogManageList">
+                <BlogManagementList />
             </div>
             <div className="d-flex flex-row justify-content-between">
                 <div className="d-inline p-2">
@@ -25,6 +25,11 @@ const ManageBlog = () => {
                 .box {
                     text-align:center;
                 }
+
+                #blogManageList {
+                    margin-bottom: 10px;
+                }
+
 			`}</style>
         </Layout>
     )
