@@ -27,7 +27,7 @@ const ManageBlog = () => {
                 }
 
                 #blogManageList {
-                    margin-bottom: 10px;
+                    margin-bottom: 40px;
                 }
 
 			`}</style>
