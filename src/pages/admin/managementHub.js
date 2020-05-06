@@ -9,23 +9,26 @@ const ManagementHub = () => {
             <Link href="./editToppingsPrices">
                 <h4 className="correct-cursor"><a className="text-success">Base Pizzas & Pizza Topping Prices</a></h4>
             </Link>
-            <Link href="./editSidesPrices">
-                <h4 className="correct-cursor"><a className="text-success">Side Order Prices</a></h4>
-            </Link>
             <Link href="./editBeveragePrices">
                 <h4 className="correct-cursor"><a className="text-success">Beverage Prices</a></h4>
             </Link>
+            <Link href="./manageBlog">
+                <h4 className="correct-cursor"><a className="text-success">Blog</a></h4>
+            </Link>
             <Link href="./editBuffetPrices">
                 <h4 className="correct-cursor"><a className="text-success">Buffet Prices</a></h4>
-            </Link>
-            <Link href="./editMerchandisePrices">
-                <h4 className="correct-cursor"><a className="text-success">Merchandise Prices</a></h4>
             </Link>
             <Link href="./editInfo">
                 <h4 className="correct-cursor"><a className="text-success">General Restaurant Info & Events</a></h4>
             </Link>
             <Link href="./editMenuPizzaPrices">
                 <h4 className="correct-cursor"><a className="text-success">Menu Pizza Prices</a></h4>
+            </Link>
+            <Link href="./editMerchandisePrices">
+                <h4 className="correct-cursor"><a className="text-success">Merchandise Prices</a></h4>
+            </Link>
+            <Link href="./editSidesPrices">
+                <h4 className="correct-cursor"><a className="text-success">Side Order Prices</a></h4>
             </Link>
             <style jsx>{`
                 .correct-cursor{
