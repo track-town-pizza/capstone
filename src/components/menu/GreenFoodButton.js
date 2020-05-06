@@ -13,7 +13,7 @@ const GreenFoodButton  = (props) => {
                         border-radius: 5px;
                         border: 0;
                         margin: .75rem;
-                        width: 10%;
+                        width: 11%;
                         min-width: 75px;
                         hieght: 5%;
                     }

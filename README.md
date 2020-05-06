@@ -38,3 +38,11 @@ If you wish to run the application in a production environment, build the applic
 then start the application with
 
 `npm run start`
+
+To access the application on a web browser, navigate to the following URL:
+
+`http://localhost:3000`
+
+To access the Content Management System, navigate to the following URL:
+
+`http://localhost:3000/admin/managementHub`

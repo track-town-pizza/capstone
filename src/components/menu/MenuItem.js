@@ -6,7 +6,7 @@ const MenuItem = props => {
         return (
             <div className="item">
                 <img src={props.itemInfo.imgLink} alt="Track Town Pizza"/>
-                <ItemInfo itemInformation={props.itemInfo.information} page={props.page}/>
+                <ItemInfo itemInformation={props.itemInfo.information} page={props.page} onClick={props.onClick}/>
                 <style jsx>{`
                         .item {
                             min-width: 200px;
@@ -32,7 +32,7 @@ const MenuItem = props => {
     return (
         <div className="item">
             <img src={props.itemInfo.imgLink} alt="Track Town Pizza"/>
-            <ItemInfo itemInformation={props.itemInfo.information} page={props.page}/>
+            <ItemInfo itemInformation={props.itemInfo.information} page={props.page} onClick={props.onClick}/>
             <style jsx>{`
                     .item {
                         min-width: 200px;

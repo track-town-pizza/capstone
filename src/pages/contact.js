@@ -1,5 +1,6 @@
 import Layout from "../components/Layout"
 import GoogleMaps from "../components/GoogleMaps"
+import PhoneNumber from "../components/PhoneNumber"
 
 /*
 Props used in this page:
@@ -22,14 +23,14 @@ const Contact = props => (
 				</div>
 				<div className="phone">
 					<h3>Phone</h3>
-					<p>{props.phone}</p>
+					<p><PhoneNumber phoneNumber={props.phone} linkColor="black"/></p>
 				</div>
 			</div>
 			<div className="content mx-auto">
 				<GoogleMaps />
 			</div>
 		</div>
-		
+
 
 		<style jsx>{`
 			.title {
@@ -40,7 +41,7 @@ const Contact = props => (
 			}
 			.content {
 				width: 70%;
-				clear:both; 
+				clear:both;
 			}
 			.location{
 				float: left;

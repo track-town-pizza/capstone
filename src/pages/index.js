@@ -12,13 +12,14 @@ import {
 
 import Layout from "../components/Layout"
 import EventListing from "../components/EventListing"
+import PhoneNumber from "../components/PhoneNumber"
 
 function parseTime(time) {
 	let date = new Date()
 
 	const hour = parseInt(time.substring(0, 2))
 	const minute = parseInt(time.substring(3, 5))
-	
+
 	date = setHours(date, hour)
 	date = setMinutes(date, minute)
 	date = setSeconds(date, 0)
@@ -46,7 +47,7 @@ const Index = ({ info, events, post }) => {
 							<span className="responsive-spacing">&nbsp;</span>
 							Call us:
 							<br />
-							<span className="responsive-phone">{info.phone}</span>
+							<span className="responsive-phone"><PhoneNumber phoneNumber={info.phone} linkColor="white"/></span>
 						</p>
 						<Link href={info.onlineOrderLink}>
 							<a className="btn btn-yellow btn-responsive">Order Online!</a>
@@ -59,7 +60,7 @@ const Index = ({ info, events, post }) => {
 					<h4>Located at {info.address}</h4>
 					<span className="responsive-break"><br /></span>
 					<h4>Across from Matthew Knight Arena</h4>
-					<img src="/photos/matthew_knight_arena_outside.jpg" alt="Matthew Knight Arena Front" />
+					<img src="https://drive.google.com/uc?id=1WqcZOcLvjuxH117FO0emq7Mg7viWCW65" alt="Matthew Knight Arena Front" className="rounded"/>
 				</div>
 				<div className="yellow-container extra-padding">
 					<h3>We're open all week! Come visit us:</h3>
@@ -242,7 +243,7 @@ const Index = ({ info, events, post }) => {
 					height: auto;
 					border-radius: 5px;
 				}
-				
+
 				.location-container {
 					margin-right: 25px;
 				}

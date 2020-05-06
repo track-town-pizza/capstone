@@ -49,7 +49,7 @@ const EditToppingsPrices = ({ pizzaInfo, allToppingsInfo }) => {
     const editPizzaItems = []
     for(const topping of toppings) {
         const toppingStr = topping.description.replace(/_/g, " ")
-        editToppingItems.push(<h4>{toppingStr}</h4>)
+        editToppingItems.push(<h3 className="mt-4 mb-0">{toppingStr}</h3>)
         for(const size of sizes) {
             editToppingItems.push(<EditFoodItem id={topping.description+"*"+size.description} name={size.description} defaultValue={topping.prices[size.description]} onChange={onChange}/>)
         }
@@ -161,8 +161,8 @@ const EditToppingsPrices = ({ pizzaInfo, allToppingsInfo }) => {
 			)}
             <h2 className="text-center">Edit Topping Prices</h2>
             <div className="text-center">
-               {editToppingItems}
-                <h4>Pizza Sizes</h4>
+                {editToppingItems}
+                <h3 className="mt-4 mb-0">Pizza Sizes</h3>
                 {editPizzaItems}
             </div>
             <SubmitButton words="Submit Topping Prices" onClick={onClick} />

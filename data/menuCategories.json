@@ -13,13 +13,13 @@
     },
     {
         "key": "3",
-        "imgLink": "https://drive.google.com/uc?id=1yHNrW3_Nb4PtpVkA0UYh4n_lGa1RJNOA",
+        "imgLink": "https://drive.google.com/uc?id=1khrAUGCq_MYvzc0hoQuGMmio7w3q7sSl",
         "item": "Beverages",
         "linkToPage": "./menu/beverages"
     },
     {
         "key": "4",
-        "imgLink": "https://drive.google.com/uc?id=1seLMoZ4UECTeJjmz_MrbjldZ91QTdMfj",
+        "imgLink": "https://drive.google.com/uc?id=1umCrNE6XWE-RWXYppSajGV3OvcZyzFM9",
         "item": "Lunch Buffet",
         "linkToPage": "./menu/buffet"
     },

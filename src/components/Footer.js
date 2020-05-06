@@ -14,10 +14,6 @@ const Footer = () => (
                 <a className="text-white mr-3 my-2">Contact</a>
             </Link>
 
-            <Link href="/events">
-                <a className="text-white mr-3 my-2">Events</a>
-            </Link>
-
             <Link href="/blog">
                 <a className="text-white mr-3 my-2">Blog</a>
             </Link>

@@ -78,7 +78,6 @@ const EditSidesPrices = ({ allSidesInfo }) => {
                     }
                     iter += sideInfo.information.length
                 }
-                console.log("== Sides on Client Side:", newSidesInfo)
 
                 // push newSidesPrices into the db as it is the updated information
                 const res = await fetch(`${process.env.URL_ROOT}/api/menu/sides`, {
