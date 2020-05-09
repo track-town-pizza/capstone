@@ -1,10 +1,12 @@
 import React from "react"
 import Link from "next/link"
+import fetch from "isomorphic-unfetch"
+
 import Layout from "../../components/Layout"
 
-const ManagementHub = () => {
+const ManagementHub = ({ info }) => {
     return (
-        <Layout>
+        <Layout info={info}>
             <h2 className="text-center">Click on a link to edit that information: </h2>
             <Link href="./editToppingsPrices">
                 <h4 className="correct-cursor"><a className="text-success">Base Pizzas & Pizza Topping Prices</a></h4>
@@ -40,4 +42,11 @@ const ManagementHub = () => {
         </Layout>
     )
 }
+
+ManagementHub.getInitialProps = async () => {
+    const infoJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
+
+    return { info: infoJson }
+}
+
 export default ManagementHub

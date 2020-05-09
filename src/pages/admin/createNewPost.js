@@ -1,54 +1,92 @@
 import React, { useState } from 'react'
-import { useRouter } from "next/router"
 import Link from "next/link"
+import { format, formatISO } from "date-fns"
+
 import Layout from "../../components/Layout"
-import SinglePost from "../../components/SinglePost.js"
-import postData from "../../../data/PostData.json" // will be removed with backend implementation
-import SubmitButton from "../../components/admin/SubmitPricesBtn"
 import ManagementHubButton from "../../components/admin/ManagementHubButton"
 import GeneralButton from "../../components/admin/GeneralBtn"
 
-import { format } from "date-fns"
-
-// This function controls what happens when the user hits the submit button
-function onClick(event) {
-    const { type } = event
-    let success = true
-    if(type === 'click') {
-        if(success) {
-            // push new post data into database
-            alert("Blog post has been created")
-        }
-    }
-}
-
-function correctImageLink(link) {
-    const findString = "https://drive.google.com/open?id="
-    const replacementString = "https://drive.google.com/uc?id="
-
-    return link.replace(findString, replacementString)
-}
-
-const Post = () => {
-
+const Post = ({ info }) => {
     let todaysDate =  new Date()
 
-    const post = {
+    const emptyPost = {
         "id": "",
-        "date": format(new Date, 'MM/dd/yyyy'),
+        "date": format(new Date(), 'MM/dd/yyyy'),
         "title": "",
         "content": "",
         "imageLink": ""
     }
 
+    const [ post, setPost ] = useState(emptyPost)
     const [ postTitle, setPostTitle ] = useState(post.title)
     const [ postDate, setPostDate ] = useState(post.date)
     const [ postContent, setPostContent ] = useState(post.content)
     const [ postImageLink, setPostImageLink ] = useState(post.imageLink)
 
+    // This function controls what happens when the user hits the submit button
+    async function onClick(event) {
+        const { type } = event
+        let success = true
+        if (type === 'click') {
+            if (success) {
+                // push new post data into database
+                alert("Blog post has been created")
+
+                // Grab existing IDs from database
+                const posts = await fetch(`${process.env.URL_ROOT}/api/posts`).then(_ => _.json())
+                const postIds = posts.map(p => p.id)
+
+                // Find largest existing ID to compute new post's ID
+                let maxId = 0
+                postIds.forEach(id => {
+                    if (id > maxId) {
+                        maxId = id
+                    }
+                })
+
+                console.log("== Largest ID:", maxId)
+
+                // Set up new post
+                let post = {
+                    id: maxId + 1,
+                    title: postTitle,
+                    date: formatISO(new Date()),
+                    content: postContent,
+                    imageLink: postImageLink
+                }
+
+                // Insert new post in DB
+                const res = await fetch(`${process.env.URL_ROOT}/api/posts`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ post })
+                }).then(_ => _.json())
+
+                // Display error message if an error occurred during insertion
+                if (res.err) {
+                    alert(`The following error occurred: ${res.err}`)
+                }
+
+                // Display success message if OK returned with inserted ID
+                if (res.message === "OK" && res.insertedId) {
+                    alert("Post has successfully been inserted.")
+                }
+            }
+        }
+    }
+
+    function correctImageLink(link) {
+        const findString = "https://drive.google.com/open?id="
+        const replacementString = "https://drive.google.com/uc?id="
+
+        return link.replace(findString, replacementString)
+    }
+
     return (
         <div>
-            <Layout>
+            <Layout info={info}>
                 <div className="blog-container">
 
                 <h2>Creating New Post</h2>
@@ -181,6 +219,12 @@ const Post = () => {
             `}</style>
         </div>
     )
+}
+
+Post.getInitialProps = async () => {
+    const infoJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
+
+    return { info: infoJson }
 }
 
 export default Post

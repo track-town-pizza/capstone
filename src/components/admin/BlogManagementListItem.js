@@ -1,11 +1,11 @@
 import React from "react"
 import Link from "next/link"
 
-const BlogManagementListItem = props => {
+const BlogManagementListItem = ({ postInfo }) => {
 
-    let blogInfo = props.postInfo
-    let postLink = "/blog/" + blogInfo.id
-    let editLink = "/blog/" + blogInfo.id + "/edit"
+    let blogInfo = postInfo
+    let postLink = "/blog/" + blogInfo._id
+    let editLink = "/blog/" + blogInfo._id + "/edit"
 
      // This function controls what happens when the user hits the delete button
     function onClickDelete(event) {
@@ -25,7 +25,7 @@ const BlogManagementListItem = props => {
                 <span className="datePart">{blogInfo.date}</span>
                 <span className="titlePart">
                     <Link href={postLink}>
-                        {blogInfo.title}
+                        <a>{blogInfo.title}</a>
                     </Link>
                 </span>
                 <span className="buttonsPart">

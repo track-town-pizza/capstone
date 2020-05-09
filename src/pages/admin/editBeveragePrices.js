@@ -30,7 +30,7 @@ function parseJsonToUsableObj(allBeverageInfo) {
     return beverageInfo
 }
 
-const EditBeveragePrices = ({ allBeverageInfo }) => {
+const EditBeveragePrices = ({ allBeverageInfo, info }) => {
     const beverageInfo = parseJsonToUsableObj(allBeverageInfo)
     const [ beverages, setBeverages ] = useState(beverageInfo)
     const [ displayModal, setDisplayModal ] = useState(false)
@@ -125,7 +125,7 @@ const EditBeveragePrices = ({ allBeverageInfo }) => {
     }
 
     return (
-        <Layout>
+        <Layout info={info}>
             {displayModal && (
                 <Modal message={modalMessage} onClick={() => setDisplayModal(false)} />
             )}
@@ -147,8 +147,12 @@ const EditBeveragePrices = ({ allBeverageInfo }) => {
 
 EditBeveragePrices.getInitialProps = async () => {
     const resJson = await fetch(`${process.env.URL_ROOT}/api/menu/beverages`).then(_ => _.json())
+    const infoJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
 
-    return { allBeverageInfo: resJson }
+    return {
+        allBeverageInfo: resJson,
+        info: infoJson
+    }
 }
 
 export default EditBeveragePrices

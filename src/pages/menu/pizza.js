@@ -1,12 +1,12 @@
 import React, {useState} from "react"
-import Layout from "../../components/Layout"
 import fetch from "isomorphic-unfetch"
-
-import MenuItems from "../../components/menu/MenuItem"
 import Link from "next/link"
+
+import Layout from "../../components/Layout"
+import MenuItems from "../../components/menu/MenuItem"
 import Modal from "../../components/Modal"
 
-const Pizzas = ({ pizzasInfo, prices }) => {
+const Pizzas = ({ pizzasInfo, prices, info }) => {
     const [infoToDisplayModal, setInfoToDisplayModal] = useState({
         toppings: false,
         toppingsMessage: "",
@@ -53,7 +53,7 @@ const Pizzas = ({ pizzasInfo, prices }) => {
 
     const MenuItemsComponents = pizzasInfo.map(pizzaInfo => (<MenuItems itemInfo={pizzaInfo} page="pizza" onClick={handleClick}/>))
     return (
-        <Layout>
+        <Layout info={info}>
             {infoToDisplayModal.toppings ? <Modal message={infoToDisplayModal.toppingsMessage} onClick={handleClick} /> : null}
             {infoToDisplayModal.prices ? <Modal message={infoToDisplayModal.pricesMessage} onClick={handleClick} /> : null}
             <div className="text-center">
@@ -112,10 +112,12 @@ const Pizzas = ({ pizzasInfo, prices }) => {
 Pizzas.getInitialProps = async () => {
     const pizzasRes = await fetch(`${process.env.URL_ROOT}/api/menu/pizzas`).then(_ => _.json())
     const pricesRes = await fetch(`${process.env.URL_ROOT}/api/menu/prices`).then(_ => _.json())
+    const infoRes = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
 
     return {
         pizzasInfo: pizzasRes,
-        prices: pricesRes
+        prices: pricesRes,
+        info: infoRes
     }
 }
 

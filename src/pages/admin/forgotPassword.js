@@ -5,8 +5,8 @@ import Layout from "../../components/Layout"
 import AccountFormHeader from "../../components/admin/AccountFormHeader"
 import AccountForm from "../../components/admin/AccountForm"
 
-const ForgotPassword = () => (
-	<Layout>
+const ForgotPassword = ({ info }) => (
+	<Layout info={info}>
 		<div className="responsive-width mx-auto mt-3">
 			<AccountFormHeader title="Forgot Password" subtitle="Enter your email address to reset your password." />
 			<AccountForm>
@@ -72,5 +72,11 @@ const ForgotPassword = () => (
 		`}</style>
 	</Layout>
 )
+
+ForgotPassword.getInitialProps = async () => {
+	const infoJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
+
+	return { info: infoJson }
+}
 
 export default ForgotPassword

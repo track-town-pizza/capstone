@@ -27,12 +27,24 @@ handler.get(async (req, res) => {
 	})
 })
 
-// UNDER CONSTRUCTION, CURRENTLY DOES NOT WORK WITH CURRENT NEXT/ROUTER SETUP
-// FOR INDIVIDUAL BLOG POSTS
 handler.post(async (req, res) => {
-	const { postId } = req.body
-	let doc = await req.db.collection("info").findOne({ "_id": ObjectId(postId) })
-	res.json(doc)
+	const { post } = req.body
+
+	// Remove _id attribute to prevent attempts to update it in DB
+	if (post["_id"]) {
+		delete post["_id"]
+	}
+
+	try {
+		let doc = await req.db.collection("posts").insertOne(post)
+		res.status(201).json({
+			message: "OK",
+			insertedId: doc.insertedId
+		})
+	} catch (err) {
+		// Return error with 500 status code if insertion fails
+		res.status(500).json({ err })
+	}
 })
 
 export default handler

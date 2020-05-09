@@ -3,9 +3,9 @@ import Link from "next/link"
 import fetch from "isomorphic-unfetch"
 import React from "react"
 
-const About = ({ about }) => {
+const About = ({ about, info }) => {
     return (
-        <Layout>
+        <Layout info={info}>
             <div className="w-75 mx-auto">
                 <h1 className="text-center">About Track Town Pizza</h1>
                 <div className="text-center">
@@ -34,8 +34,12 @@ const About = ({ about }) => {
 
 About.getInitialProps = async (req, res) => {
     const resJson = await fetch(`${process.env.URL_ROOT}/api/about`).then(_ => _.json())
+    const info = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
 
-    return { about: resJson }
+    return {
+        about: resJson,
+        info: info
+    }
 }
 
 export default About

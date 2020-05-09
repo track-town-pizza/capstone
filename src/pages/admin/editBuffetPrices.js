@@ -20,7 +20,7 @@ function parseJsonToUsableObj(buffetPrices) {
     return buffet
 }
 
-const EditBuffetPrices = ({ buffetPrices }) => {
+const EditBuffetPrices = ({ buffetPrices, info }) => {
     const buffet = parseJsonToUsableObj(buffetPrices)
     const [ buffetInfo, setBuffetInfo ] = useState(buffet)
     
@@ -100,7 +100,7 @@ const EditBuffetPrices = ({ buffetPrices }) => {
     }
 
     return (
-        <Layout>
+        <Layout info={info}>
             {displayModal && (
 				<Modal message={modalMessage} onClick={() => setDisplayModal(false)} />
 			)}
@@ -122,8 +122,12 @@ const EditBuffetPrices = ({ buffetPrices }) => {
 
 EditBuffetPrices.getInitialProps = async () => {
     const buffetResJson = await fetch(`${process.env.URL_ROOT}/api/menu/buffet`).then(_ => _.json())
+    const infoJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
 
-    return { buffetPrices: [buffetResJson] }
+    return {
+        buffetPrices: [buffetResJson],
+        info: infoJson
+    }
 }
 
 export default EditBuffetPrices

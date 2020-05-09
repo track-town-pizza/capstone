@@ -23,7 +23,7 @@ function parseJsonToUsableObj(allMerchInfo) {
     return merchInfo
 }
 
-const EditMerchandisePrices = ({ allMerchInfo }) => {
+const EditMerchandisePrices = ({ allMerchInfo, info }) => {
     const merchInfo = parseJsonToUsableObj(allMerchInfo)
     const [ merchandise, setMerchandise ] = useState(merchInfo)
 
@@ -107,7 +107,7 @@ const EditMerchandisePrices = ({ allMerchInfo }) => {
     }
 
     return (
-        <Layout>
+        <Layout info={info}>
             {displayModal && (
 				<Modal message={modalMessage} onClick={() => setDisplayModal(false)} />
 			)}
@@ -129,8 +129,12 @@ const EditMerchandisePrices = ({ allMerchInfo }) => {
 
 EditMerchandisePrices.getInitialProps = async () => {
     const resJson = await fetch(`${process.env.URL_ROOT}/api/menu/merchandise`).then(_ => _.json())
+    const infoJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
 
-    return { allMerchInfo: resJson }
+    return {
+        allMerchInfo: resJson,
+        info: infoJson
+    }
 }
 
 export default EditMerchandisePrices

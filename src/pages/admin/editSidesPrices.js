@@ -23,7 +23,7 @@ function parseJsonToUsableObj(allSidesInfo) {
     return sidesInfo
 }
 
-const EditSidesPrices = ({ allSidesInfo }) => {
+const EditSidesPrices = ({ allSidesInfo, info }) => {
     const sidesInfo = parseJsonToUsableObj(allSidesInfo)
     const [ sides, setSides ] = useState(sidesInfo)
     const [ displayModal, setDisplayModal ] = useState(false)
@@ -102,7 +102,7 @@ const EditSidesPrices = ({ allSidesInfo }) => {
     }
 
     return (
-        <Layout>
+        <Layout info={info}>
             {displayModal && (
 				<Modal message={modalMessage} onClick={() => setDisplayModal(false)} />
 			)}
@@ -124,8 +124,12 @@ const EditSidesPrices = ({ allSidesInfo }) => {
 
 EditSidesPrices.getInitialProps = async () => {
     const resJson = await fetch(`${process.env.URL_ROOT}/api/menu/sides`).then(_ => _.json())
+    const infoJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
 
-    return { allSidesInfo: resJson }
+    return {
+        allSidesInfo: resJson,
+        info: infoJson
+    }
 }
 
 export default EditSidesPrices

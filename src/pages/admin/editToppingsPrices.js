@@ -26,7 +26,7 @@ function parseJsonToUsableObj(pizzaInfo, allToppingsInfo, toppingsPriceInfo, siz
     }
 }
 
-const EditToppingsPrices = ({ pizzaInfo, allToppingsInfo }) => {
+const EditToppingsPrices = ({ pizzaInfo, allToppingsInfo, info }) => {
     const toppingsPriceInfo = []
     const sizePriceInfo = []
     parseJsonToUsableObj(pizzaInfo, allToppingsInfo, toppingsPriceInfo, sizePriceInfo)
@@ -155,7 +155,7 @@ const EditToppingsPrices = ({ pizzaInfo, allToppingsInfo }) => {
     }
 
     return (
-        <Layout>
+        <Layout info={info}>
             {displayModal && (
 				<Modal message={modalMessage} onClick={() => setDisplayModal(false)} />
 			)}
@@ -179,10 +179,12 @@ const EditToppingsPrices = ({ pizzaInfo, allToppingsInfo }) => {
 EditToppingsPrices.getInitialProps = async () => {
     const pizzasRes = await fetch(`${process.env.URL_ROOT}/api/menu/pizzaInfo`).then(_ => _.json())
     const pricesRes = await fetch(`${process.env.URL_ROOT}/api/menu/prices`).then(_ => _.json())
+    const infoRes = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
 
     return {
         pizzaInfo: pizzasRes,
-        allToppingsInfo: pricesRes
+        allToppingsInfo: pricesRes,
+        info: infoRes
     }
 }
 

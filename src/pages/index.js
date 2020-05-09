@@ -34,7 +34,7 @@ const Index = ({ info, events, post }) => {
 	const closeHourFriSat = parseTime(info.closeHourFriSat)
 
 	return (
-		<Layout>
+		<Layout info={info}>
 			<div className="home-order-photo home-font">
 				<div className="home-photo">
 					<img src="https://drive.google.com/uc?id=1cxQfj33F6lRIwRn6Vsm3Whoh4SFuJjBb" alt="Track Town Front" />

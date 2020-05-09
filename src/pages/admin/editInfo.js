@@ -124,7 +124,7 @@ const EditInfo = ({ info, eventData: events }) => {
 	}
 
 	return (
-		<Layout>
+		<Layout info={info}>
 			{displayModal && (
 				<Modal message={modalMessage} onClick={() => setDisplayModal(false)} />
 			)}

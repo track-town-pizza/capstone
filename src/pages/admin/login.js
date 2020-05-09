@@ -1,11 +1,12 @@
 import React from "react"
 import Link from "next/link"
+
 import Layout from "../../components/Layout"
 import AccountFormHeader from "../../components/admin/AccountFormHeader"
 import AccountForm from "../../components/admin/AccountForm"
 
-const Login = () => (
-	<Layout>
+const Login = ({ info }) => (
+	<Layout info={info}>
 		<div className="responsive-width mx-auto mt-3">
 			<AccountFormHeader title="Login" subtitle="Sign in to edit blog posts, the menu, and more." />
 			<AccountForm>
@@ -78,5 +79,11 @@ const Login = () => (
 		`}</style>
 	</Layout>
 )
+
+Login.getInitialProps = async () {
+	const infoJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
+
+	return { info: infoJson }
+}
 
 export default Login

@@ -4,30 +4,28 @@ import fetch from "isomorphic-unfetch"
 
 import Layout from "../../components/Layout"
 import SinglePost from "../../components/SinglePost.js"
-import postData from "../../../data/PostData.json" // will be removed with backend implementation
 
-const Post = () => {
+const Post = ({ info }) => {
     const router = useRouter()
-    const { id } = router.query
-
-    const [ post, setPost ] = useState({})
+    const [ post, setPost ] = useState(null)
+    let id = router.query.id
 
     useEffect(() => {
-        console.log("In useEffect()")
+        console.log("== Router.Query:", router.query)
+        console.log("== ID:", id)
 
         async function getPost() {
-            console.log("In getPost()")
             const res = await fetch(`${process.env.URL_ROOT}/api/posts/${id}`).then(_ => _.json())
             setPost(res)
-            console.log("== Post in getPost():", post)
         }
-    
         getPost()
     }, [])
 
     return (
-        <Layout>
-            {post != null ? (
+        <Layout info={info}>
+            {id == undefined ? (
+                <p>The requested post does not exist. {window.location.href}</p>
+            ) : post != null ? (
                 <div className="blog-container">
                     <SinglePost post={post} key={post._id}/>
                     <style jsx>{`
@@ -51,6 +49,12 @@ const Post = () => {
             )}  
         </Layout>
     )
+}
+
+Post.getInitialProps = async () => {
+    const infoJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
+
+    return { info: infoJson }
 }
 
 export default Post
