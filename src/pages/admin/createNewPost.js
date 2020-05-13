@@ -51,7 +51,7 @@ const Post = ({ info }) => {
         let newPost = {
             id: `${maxId + 1}`,
             title: postTitle,
-            date: formatISO(new Date(postDate)),
+            date: formatISO(new Date(addDays(new Date(postDate), 1))),
             content: postContent,
             imageLink: postImageLink
         }

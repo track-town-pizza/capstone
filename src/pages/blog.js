@@ -1,6 +1,7 @@
 import React from "react"
 import Router from "next/router"
 import fetch from "isomorphic-unfetch"
+import { addDays } from "date-fns"
 
 import Layout from "../components/Layout"
 import SinglePost from "../components/SinglePost"
@@ -168,7 +169,10 @@ const Blog = ({ posts, page, numPages, info }) => {
 
 Blog.getInitialProps = async context => {
 	// Fetch posts in ascending order of date
-	const postsJson = await fetch(`${process.env.URL_ROOT}/api/posts`).then(_ => _.json())
+	let postsJson = await fetch(`${process.env.URL_ROOT}/api/posts`).then(_ => _.json())
+
+	// Filter posts by whether they are published yet or not
+	postsJson = postsJson.filter(p => new Date(p.date) <= addDays(new Date(), 1))
 
 	// Prepare pagination
 	const count = postsJson.length
