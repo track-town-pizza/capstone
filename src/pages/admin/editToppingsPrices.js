@@ -68,7 +68,7 @@ const EditToppingsPrices = ({ pizzaInfo, allToppingsInfo, info }) => {
             const replacementString = "https://drive.google.com/uc?id="
             const link = event.target.value
             const goodLink = link.replace(findString, replacementString)
-            setLink({menu_link: goodLink})
+            setLink(goodLink)
         }
         else if(id === "Individual" || id === "Small" || id === "Medium" || id === "Large" || id === "Giant") {
             setSizes(sizes.map(currSize => (
@@ -128,7 +128,7 @@ const EditToppingsPrices = ({ pizzaInfo, allToppingsInfo, info }) => {
                 for(const topping of toppings) {
                     newPricesInfo[topping.description] = topping.prices
                 }
-                newPricesInfo.Menu_Link = newLink.menu_link
+                newPricesInfo.Menu_Link = newLink
 
                 // Push newly updated information into the database
                 const res = await fetch(`${process.env.URL_ROOT}/api/menu/prices`, {

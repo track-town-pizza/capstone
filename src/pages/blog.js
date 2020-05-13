@@ -70,22 +70,18 @@ const Blog = ({ postData, info }) => {
         let lastIndex= parseInt(postIDs.indexOf(leadingPostID.toString()))
         let firstIndex = parseInt(lastIndex) - parseInt(amountOfPosts)
     
-        //console.log("Fetching (before) posts index ", firstIndex," to index ", lastIndex)
         const returnPosts = posts.slice(firstIndex, lastIndex)
         return returnPosts // Needs to be replaced with database call
     }
     
     // This function fetches a specified amount of posts that were posted before given post(identified with id)
     function getPostsBefore(leadingPostID, amountOfPosts) {
-        //console.log("leadingPostID: ", leadingPostID)
-        //console.log("GET BEFORE")
         // Fetch the posts posted before post with id [leadingPostID] from the database, LIMIT amountOfPosts
         let posts = orderPostsByDate(postData)
         let postIDs = posts.map(a => a.id)
         let firstIndex = parseInt(postIDs.indexOf(leadingPostID.toString()))
         let lastIndex = parseInt(firstIndex) + parseInt(amountOfPosts)
     
-        //console.log("Fetching (before) posts index ", firstIndex," to index ", lastIndex)
         const returnPosts = posts.slice(firstIndex + 1, lastIndex + 1)
         return returnPosts // Needs to be replaced with database call
     }

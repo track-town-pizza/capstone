@@ -30,21 +30,25 @@ const Pizzas = ({ pizzasInfo, prices, info }) => {
                     const ele = pizzasInfo.find(obj => {
                         return obj.key === whatToDisplayArr[0]
                     })
+
                     setInfoToDisplayModal({
-                        ...infoToDisplayModal,
                         toppings: true,
-                        toppingsMessage: ele.toppings.toString().replace(/,/g, ", ")
+                        toppingsMessage: ele.toppings.toString().replace(/,/g, ", "),
+                        prices: false,
+                        pricesMessage: ""
                     })
                 }
                 else if(whatToDisplayArr.length >= 2 && whatToDisplayArr[1] === "prices") {
                     const ele = pizzasInfo.find(obj => {
                         return obj.key === whatToDisplayArr[0]
                     })
+
                     const strToDisplay = "Small: " + ele.prices[0] + ", Medium: " + ele.prices[1] + ", Large: " + ele.prices[2] + ", Giant: " + ele.prices[3]
                     setInfoToDisplayModal({
-                        ...infoToDisplayModal,
                         prices: true,
-                        pricesMessage: strToDisplay
+                        pricesMessage: strToDisplay,
+                        toppings: false,
+                        toppingsMessage: ""
                     })
                 }
             }

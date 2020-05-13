@@ -95,8 +95,6 @@ const EditBeveragePrices = ({ allBeverageInfo, info }) => {
                     }
                 }
 
-                console.log("== newBeverageInfo:", newBeverageInfo)
-
                 // push new data (newBeverageInfo) into database
                 const res = await fetch(`${process.env.URL_ROOT}/api/menu/beverages`, {
                     method: "POST",

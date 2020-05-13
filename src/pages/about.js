@@ -20,9 +20,7 @@ const About = ({ about, info }) => {
                 </div>
                 <div className="text-center">
                     <h3>Check out the rest of Track Town USA</h3>
-                    <Link href={about.pdfLink}>
-                        <a className="text-success"><h5>Track Town USA Map</h5></a>
-                    </Link>
+                    <a href={about.pdfLink} className="text-success"><h5>Track Town USA Map</h5></a>
                     <Link href="/blog">
                         <a className="text-success"><h5>Track Town Pizza Blog</h5></a>
                     </Link>

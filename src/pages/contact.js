@@ -13,7 +13,8 @@ Props used in this page:
 	- phone
 */
 
-const Contact = ({ info }) => (
+const Contact = ({ info }) => {
+	return (
 	<Layout info={info}>
 		<div>
 			<div className="info-box mx-auto">
@@ -22,7 +23,7 @@ const Contact = ({ info }) => (
 			<div className="info-box mx-auto">
 				<div className="location">
 					<h3>Location</h3>
-					<p>{info.location}</p>
+					<p>{info.address}</p>
 				</div>
 				<div className="phone">
 					<h3>Phone</h3>
@@ -68,7 +69,7 @@ const Contact = ({ info }) => (
 			}
 		`}</style>
 	</Layout>
-)
+)}
 
 // These hardcoded values will eventually change to be programmatically determined
 Contact.getInitialProps = async () => {
