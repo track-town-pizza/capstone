@@ -1,35 +1,51 @@
 import React from "react"
 import Link from "next/link"
+import fetch from "isomorphic-unfetch"
+import { format } from "date-fns"
+import { Router } from "next/router"
 
 const BlogManagementListItem = ({ postInfo }) => {
 
     let blogInfo = postInfo
     let postLink = "/blog/" + blogInfo._id
     let editLink = "/blog/" + blogInfo._id + "/edit"
+    const formattedDate = format(new Date(blogInfo.date), "MM/dd/yyyy")
 
      // This function controls what happens when the user hits the delete button
-    function onClickDelete(event) {
+    async function onClickDelete(event) {
         let confirmText = "Are you sure you want to delete this post? Post ID: " + blogInfo.id
-        const { name, type } = event.target
-        if(type === 'submit' || type === 'click') {
-            if (confirm(confirmText)) {
-                // Remove post from database
-                alert("Post deleted.")
+        if (confirm(confirmText)) {
+            // Remove post from database
+            const res = await fetch(`${process.env.URL_ROOT}/api/posts`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ postId: blogInfo._id })
+            }).then(_ => _.json())
+            
+            if (res.err) {
+                // Display error toast if error message is returned from DB API
+                alert("An error occurred while deleting post. Try again later.")
+            } else if (res.message === "OK") {
+                // Display success toast if OK message is returned from DB API
+                alert("Post has been successfully deleted.")
+                Router.push("/admin/manageBlog")
             }
         }
     }
 
     return (
-        <div>
+        <form onSubmit={onClickDelete}>
             <li>
-                <span className="datePart">{blogInfo.date}</span>
+                <span className="datePart">{formattedDate}</span>
                 <span className="titlePart">
                     <Link href={postLink}>
                         <a>{blogInfo.title}</a>
                     </Link>
                 </span>
                 <span className="buttonsPart">
-                    <span className="deleteButtonPart" button name={blogInfo.id} onClick={onClickDelete}><button>Delete</button></span>
+                    <button className="deleteButtonPart" type="submit" name={blogInfo.id}>Delete</button>
                     <span className="editButtonPart">
                         <Link href={editLink}>
                             <button>Edit</button>
@@ -70,10 +86,9 @@ const BlogManagementListItem = ({ postInfo }) => {
                     float: right;
                     margin-right: 10px;
                 }
-
-
             `}</style>
-        </div>
+        </form>
     )
 }
+
 export default BlogManagementListItem

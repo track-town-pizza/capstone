@@ -1,63 +1,92 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
+import Router from "next/router"
 import Link from "next/link"
 import fetch from "isomorphic-unfetch"
-import { useRouter } from "next/router"
-import { format } from "date-fns"
+import { format, formatISO, addDays } from "date-fns"
 
 import Layout from "../../../components/Layout"
-import SubmitButton from "../../../components/admin/SubmitPricesBtn"
+import Modal from "../../../components/Modal"
 
-// This function controls what happens when the user hits the submit button
-function onClick(event) {
-    const { type } = event
-    let success = true
-    if(type === 'click') {
-        if(success) {
-            // push new data (newBeverageInfo) into database
-            alert("Blog post has been updated")
+const Post = ({ post, info }) => {
+    const [ postNum, setPostNum ] = useState(post.id)
+    const [ postTitle, setPostTitle ] = useState(post.title)
+    const [ postDate, setPostDate ] = useState(format(new Date(post.date), "yyyy-MM-dd"))
+    const [ postContent, setPostContent ] = useState(post.content)
+    const [ postImageLink, setPostImageLink ] = useState(post.imageLink)
+    const [ displayModal, setDisplayModal ] = useState(false)
+    const [ modalMessage, setModalMessage ] = useState("")
+
+    // Display modal for 3 seconds
+	function displayToast() {
+		setDisplayModal(true)
+		setTimeout(() => setDisplayModal(false), 3000)
+	}
+
+    // This function controls what happens when the user hits the submit button
+    async function onSubmit(event) {
+        event.preventDefault()
+
+        // Add one day to postDate because it's one day behind for some reason
+        let correctDate = addDays(new Date(postDate), 1)
+
+        // Format date in ISO format for DB
+        let unformattedDateISO = formatISO(new Date(correctDate))
+
+        // Grab valid part of string
+        const formattedDateISO = unformattedDateISO.slice(0, unformattedDateISO.lastIndexOf("-"))
+        
+        // updated values for updating the database
+        let updatedPost = {
+            _id: post._id,
+            id: post.id,
+            title: postTitle,
+            date: formattedDateISO,
+            content: postContent,
+            imageLink: postImageLink
+        }
+
+        // push new data into database
+        const res = await fetch(`${process.env.URL_ROOT}/api/posts/${post.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ post: updatedPost })
+        }).then(_ => _.json())
+
+        if (res.err) {
+            // Display error toast if error message is returned from DB API
+            setModalMessage("An error occurred. Post could not be updated. Please try again later.")
+            displayToast()
+        } else if (res.message === "OK") {
+            // Display success toast if OK message is returned from DB API
+            setModalMessage("Post has successfully been updated.")
+            displayToast()
+
+            // Redirect the user to the blog post's page upon updating it
+            Router.push("/admin/manageBlog")
         }
     }
-}
-
-function correctImageLink(link) {
-    const findString = "https://drive.google.com/open?id="
-    const replacementString = "https://drive.google.com/uc?id="
-
-    return link.replace(findString, replacementString)
-}
-
-const Post = ({ info }) => {
-    const router = useRouter()
-    let { id } = router.query
     
-    const [ post, setPost ] = useState(null)
-    const [ postNum, setPostNum ] = useState(0)
-    const [ postTitle, setPostTitle ] = useState("")
-    const [ postDate, setPostDate ] = useState(format(new Date(), "MM/dd/yyyy"))
-    const [ postContent, setPostContent ] = useState("")
-    const [ postImageLink, setPostImageLink ] = useState("")
-
-    useEffect(() => {
-        async function getPost() {
-            const res = await fetch(`${process.env.URL_ROOT}/api/posts/${id}`).then(_ => _.json())
-            setPost(res)
-        }
-        getPost()
-        setPostTitle(post.title)
-        setPostDate(format(new Date(post.date), "MM/dd/yyyy"))
-        setPostContent(post.content)
-        setPostImageLink(post.imageLink)
-    }, [])
+    function correctImageLink(link) {
+        const findString = "https://drive.google.com/open?id="
+        const replacementString = "https://drive.google.com/uc?id="
+    
+        return link.replace(findString, replacementString)
+    }
 
     return (
         <div>
             <Layout info={info}>
-                <div className="blog-container">
+                {displayModal &&
+                    <Modal message={modalMessage} onClick={() => setDisplayModal(false)} />
+                }
+                <form className="blog-container" onSubmit={onSubmit}>
 
-                <h2>Editing Post #{postNum}</h2>
+                    <h2>Editing Post #{postNum}</h2>
 
                     <div className="forms mt-4">
-                        <form className="form-spacing">
+                        <div className="form-spacing">
                             <div className="form-group">
 
                                 <label htmlFor="postTitle">Title</label>
@@ -81,9 +110,8 @@ const Post = ({ info }) => {
                                 <p/>
 
                             </div>
-                        </form>
+                        </div>
                     </div>
-
 
                     <h2>Post Preview:</h2>
 
@@ -91,19 +119,19 @@ const Post = ({ info }) => {
                         <div key={post.id}>
                             <div className="d-flex justify-content-between align-items-center" id="blog-header">
                                 <h3>
-                                    <Link href="/blog/[id]" as={`/blog/${post.id}`}>
+                                    <Link href="/blog/[id]" as={`/blog/${post._id}`}>
                                         <a className="text-success">{postTitle}</a>
                                     </Link>
                                 </h3>
-                                <h4>{postDate}</h4>
+                                <h4>{format(addDays(new Date(postDate), 1), "MM/dd/yyyy")}</h4>
                             </div>
                             <img src={postImageLink} className="mw-100" />
                             <p>{postContent}</p>
                         </div>
                     </div>
 
-                    <SubmitButton words="Save Edits" onClick={onClick} />
-                </div>
+                    <button type="submit" className="btn btn-green">Save Edits</button>
+                </form>
             </Layout>
 
             <style jsx>{`
@@ -165,6 +193,19 @@ const Post = ({ info }) => {
                     white-space: pre-wrap;
                 }
 
+                .btn-green {
+                    background-color: #42a86e;
+                    border: 1px solid #3f855d;
+                    color: white;
+                    float: right;
+                    margin-right: 15%;
+                    margin-top: 3%;
+                }
+                
+                .btn-green:hover {
+                    background-color: #3f855d;
+                }
+
                 @media only screen and (max-width: 700px) {
                     .blog-container {
                         margin-left: 10%;
@@ -177,10 +218,15 @@ const Post = ({ info }) => {
     )
 }
 
-Post.getInitialProps = async () => {
+Post.getInitialProps = async (context) => {
+    const id = context.query.id
+    const postJson = await fetch(`${process.env.URL_ROOT}/api/posts/${id}`).then(_ => _.json())
     const infoJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
 
-    return { info: infoJson }
+    return {
+        post: postJson,
+        info: infoJson
+    }
 }
 
 export default Post

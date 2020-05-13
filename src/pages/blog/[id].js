@@ -1,30 +1,20 @@
-import React, { useState, useEffect } from "react"
-import { useRouter } from "next/router"
+import React from "react"
 import fetch from "isomorphic-unfetch"
 
 import Layout from "../../components/Layout"
 import SinglePost from "../../components/SinglePost.js"
 
-const Post = ({ info }) => {
-    const router = useRouter()
-    const [ post, setPost ] = useState(null)
-    let id = router.query.id
-
-    useEffect(() => {
-        console.log("== Router.Query:", router.query)
-        console.log("== ID:", id)
-
-        async function getPost() {
-            const res = await fetch(`${process.env.URL_ROOT}/api/posts/${id}`).then(_ => _.json())
-            setPost(res)
-        }
-        getPost()
-    }, [])
+const Post = ({ post, info }) => {
+    // Set ID value to post's ID value only if post exists
+    let id = undefined
+    if (post) {
+        id = post.id
+    }
 
     return (
         <Layout info={info}>
             {id == undefined ? (
-                <p>The requested post does not exist. {window.location.href}</p>
+                <p>The requested post does not exist.</p>
             ) : post != null ? (
                 <div className="blog-container">
                     <SinglePost post={post} key={post._id}/>
@@ -51,10 +41,22 @@ const Post = ({ info }) => {
     )
 }
 
-Post.getInitialProps = async () => {
+Post.getInitialProps = async context => {
+    // Fetch blog post with ID provided in URL route
+    const id = context.query.id
+    let postJson = await fetch(`${process.env.URL_ROOT}/api/posts/${id}`).then(_ => _.json())
+
+    // Set postJson to null if an error was returned
+    if (postJson.err) {
+        postJson = null
+    }
+
     const infoJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
 
-    return { info: infoJson }
+    return {
+        post: postJson,
+        info: infoJson
+    }
 }
 
 export default Post
