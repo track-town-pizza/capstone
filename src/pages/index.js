@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Link from "next/link"
 import fetch from "isomorphic-unfetch"
 
@@ -49,9 +49,7 @@ const Index = ({ info, events, post }) => {
 							<br />
 							<span className="responsive-phone"><PhoneNumber phoneNumber={info.phone} linkColor="white"/></span>
 						</p>
-						<Link href={info.onlineOrderLink}>
-							<a className="btn btn-yellow btn-responsive">Order Online!</a>
-						</Link>
+						<a href={info.onlineOrderLink} className="btn btn-yellow btn-responsive">Order Online!</a>
 					</div>
 				</div>
 			</div>
@@ -94,6 +92,7 @@ const Index = ({ info, events, post }) => {
 						<h3>{post.title}</h3>
 					</Link>
 					<small>{format(new Date(post.date), "MM/dd/yyyy")}</small>
+					<br />
 					<img src={post.imageLink} alt="" />
 				</div>
 				<div className="blog-right-column">

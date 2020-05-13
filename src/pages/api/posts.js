@@ -13,8 +13,8 @@ handler.get(async (req, res) => {
 			// Convert cursor to a documents array if found and no errors occur
 			cursor.toArray((err, posts) => {
 				if (!err && posts) {
-					// Store blog posts as JSON in result body if cursor-to-array conversion is successful and no errors occur
-					res.json(JSON.stringify(posts))
+					// Store sorted blog posts as JSON in result body if cursor-to-array conversion is successful and no errors occur
+					res.json(JSON.stringify(posts.sort((a, b) => (new Date(b.date) - new Date(a.date)))))
 				} else {
 					console.log("== Error: either no blog posts were found or an error occurred while converting the cursor to an array")
 					res.status(500).json({ err })

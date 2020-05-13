@@ -9,10 +9,10 @@ handler.use(middleware)
 handler.get(async (req, res) => {
 	const { id } = req.query
 
-	let doc = null
 	if (ObjectId.isValid(id)) {
-		doc = await req.db.collection("posts").findOne({ _id: ObjectId(id) })
+		let doc = await req.db.collection("posts").findOne({ _id: ObjectId(id) })
 		res.json(doc)
+	} else {
 		res.status(400).json({
 			err: "The given ID is invalid."
 		})

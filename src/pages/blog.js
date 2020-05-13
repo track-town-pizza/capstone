@@ -1,244 +1,137 @@
-import React, { useState } from "react"
+import React from "react"
+import Router from "next/router"
 import fetch from "isomorphic-unfetch"
-import { parse, isAfter } from "date-fns"
 
 import Layout from "../components/Layout"
 import SinglePost from "../components/SinglePost"
 
-const Blog = ({ postData, info }) => {
-    function setPostCount() {
-        // Fetch the amount of posts that exist
-        return 8; // <- placeholder value for now
-    }
-    
-    function comparePostsForDateSort(postA, postB) {
-        let date1 = parse(postA.date, 'MM/dd/yyyy', new Date()) // date of oldest post, placeholder value for now
-        let date2 = parse(postB.date, 'MM/dd/yyyy', new Date()) // date of newest post, placeholder value for now
-    
-        if (isAfter(date2, date1)) {
-            return true
-        }
-        else {
-            return false
-        }
-    }
-    
-    // sorts an array of posts to be ordered most recent to oldest
-    function orderPostsByDate(posts) {
-        posts.sort(comparePostsForDateSort)
-        return posts
-    }
-    
-    function getOldestPostID() {
-        // Fetch the oldest post's id from the database
-        // Will require different logic for the database
-    
-        let posts = orderPostsByDate(postData)
-        return parseInt(posts[posts.length-1].id)
-    }
-    
-    function getNewestPostID() {
-        // Fetch the newest post's id from the database
-        // Will require different logic for the database
-    
-        let posts = orderPostsByDate(postData)
-        return parseInt(posts[0].id)
-    }
-    
-    function getSinglePost(id) {
-        // Will require different logic for the database
-    
-        let posts = orderPostsByDate(postData)
-        let postIDs = posts.map(a => a.id)
-        let index = parseInt(postIDs.indexOf(id.toString()))
-    
-        return posts[index]
-    }
-    
-    function getInitialPosts(amountOfPosts) {
-        let firstPost = getSinglePost(getNewestPostID())
-        let afterPosts = getPostsBefore(firstPost.id, amountOfPosts - 1)
-        afterPosts.unshift(firstPost)
-        return afterPosts
-    }
-    
-    // This function fetches a specified amount of posts that were posted after given post(identified with id)
-    function getPostsAfter(leadingPostID, amountOfPosts) {
-        // Fetch the posts posted after post with id [leadingPostID] from the database, LIMIT amountOfPosts
-        let posts = orderPostsByDate(postData)
-        let postIDs = posts.map(a => a.id)
-        let lastIndex= parseInt(postIDs.indexOf(leadingPostID.toString()))
-        let firstIndex = parseInt(lastIndex) - parseInt(amountOfPosts)
-    
-        const returnPosts = posts.slice(firstIndex, lastIndex)
-        return returnPosts // Needs to be replaced with database call
-    }
-    
-    // This function fetches a specified amount of posts that were posted before given post(identified with id)
-    function getPostsBefore(leadingPostID, amountOfPosts) {
-        // Fetch the posts posted before post with id [leadingPostID] from the database, LIMIT amountOfPosts
-        let posts = orderPostsByDate(postData)
-        let postIDs = posts.map(a => a.id)
-        let firstIndex = parseInt(postIDs.indexOf(leadingPostID.toString()))
-        let lastIndex = parseInt(firstIndex) + parseInt(amountOfPosts)
-    
-        const returnPosts = posts.slice(firstIndex + 1, lastIndex + 1)
-        return returnPosts // Needs to be replaced with database call
-    }
-    
-    function containsPostID(posts, postID) {
-        // Logic for checking if post id is in given array of posts
-        let postIDs = posts.map(a => a.id)
-        return postIDs.includes(postID, 0)
-    }
+const Blog = ({ posts, page, numPages, info }) => {
+	// Handles blog navigation when a navigation button is clicked
+	function handleClick(event) {
+		const { name, type } = event.target
+		if (type === "submit") {
+			if (name === "New Posts") {
+				// Navigate to previous page to view newer posts
+				Router.push(`/blog?page=${page - 1}`)
+			} else if (name === "Old Posts") {
+				// Navigate to next page to view older posts
+				Router.push(`/blog?page=${page + 1}`)
+			}
+		}
+	}
 
-    const postRenderLimit = 3
-    const postCount = setPostCount() // Need to query database on how many posts there are
+	let blogNav = <div></div>
+	// Add blog navigation if there is >1 page of posts
+	if (numPages > 1) {
+		if (page === 1) {
+			// Add older posts navigation button if on the first page and theres >1 page
+			blogNav = (
+				<div>
+					<button name="Old Posts" onClick={handleClick}>Older Posts &rsaquo;</button>
+					<style jsx> {`
+						.blog-nav {
+							margin-top: 10px;
+							text-align: center;
+							color: #007030;
+						}
 
-    const [blogState, setBlog] = useState({
-        newestPostID: getNewestPostID(),
-        oldestPostID: getOldestPostID(),
-        posts: getInitialPosts(postRenderLimit)
-    })
+						button {
+							background: none!important;
+							border: none;
+							padding: 0!important;
+							color: #007030;
+							cursor: pointer;
+						}
 
-    // handles when user clicks on blog nav
-    function handleClick(event) {
-        const {name, type} = event.target
-        if (type === 'submit') {
-            if (name === "New Posts") {
-                // Fetch most recent posts from after oldestPostDate
-                setBlog({
-                    newestPostID: blogState.newestPostID,
-                    oldestPostID: blogState.oldestPostID,
-                    posts: getPostsAfter(blogState.posts[0].id, postRenderLimit)
-                })
-            }
-            else if (name === "Old Posts") {
-                // Fetch most recent posts from before oldestPostDate
-                setBlog({
-                    newestPostID: blogState.newestPostID,
-                    oldestPostID: blogState.oldestPostID,
-                    posts: getPostsBefore(blogState.posts[blogState.posts.length - 1].id, postRenderLimit)
-                })
-            }
-            window.scrollTo(0, 0)
-        }
-    }
+						button:hover {
+							text-decoration: underline;
+						}
+					`}</style>
+				</div>
+			)
+		} else if (page > 1 && page < numPages) {
+			// Add both newer and older posts navigation buttons due to not being
+			// on the first page but also not on the last
+			blogNav = (
+				<div>
+					<button name="New Posts" onClick={handleClick}>&lsaquo; Newer Posts</button>
+					<div id="blogNavSeperator"> | </div>
+					<button name="Old Posts" onClick={handleClick}>Older Posts &rsaquo;</button>
+					<style jsx> {`
+						#blogNavSeperator {
+							margin: 7px;
+							display: inline;
+						}
 
-    let blogNav;
-    if (postCount <= postRenderLimit) {
-        blogNav = <div></div>
-    }
-    else if (!(Array.isArray(blogState.posts) && blogState.posts.length)) {
-        blogNav = <div></div>
-        blogNav = <h2>Something went wrong :(</h2>
-    }
-    else if (parseInt(blogState.posts[0].id) === blogState.newestPostID) {
-        blogNav =
-        <div>
-            <button name="Old Posts" onClick={handleClick}>Older Posts &rsaquo;</button>
-            <style jsx> {`
-                .blog-nav {
-                    margin-top: 10px;
-                    text-align: center;
-                    color: #007030;
-                }
+						.blog-nav {
+							margin-top: 10px;
+							text-align: center;
+							color: #007030;
+						}
 
-                button {
-                    background: none!important;
-                    border: none;
-                    padding: 0!important;
-                    color: #007030;
-                    cursor: pointer;
-                }
+						button {
+							background: none!important;
+							border: none;
+							padding: 0!important;
+							color: #007030;
+							cursor: pointer;
+						}
 
-                button:hover {
-                    text-decoration: underline;
-                }
-            `}</style>
-       </div>
-     }
-     else if (parseInt(blogState.posts[blogState.posts.length-1].id) === blogState.oldestPostID) {
-        blogNav =
-        <div>
-            <button name="New Posts" onClick={handleClick}>&lsaquo; Newer Posts</button>
-            <style jsx> {`
-                .blog-nav {
-                    margin-top: 10px;
-                    text-align: center;
-                    color: #007030;
-                }
+						button:hover {
+							text-decoration: underline;
+						}
+					`}</style>
+				</div>
+			)
+		} else if (page === numPages) {
+			// Add newer posts navigation button if on the last page and there's >1 page
+			blogNav = (
+				<div>
+					<button name="New Posts" onClick={handleClick}>&lsaquo; Newer Posts</button>
+					<style jsx> {`
+						.blog-nav {
+							margin-top: 10px;
+							text-align: center;
+							color: #007030;
+						}
 
-                button {
-                    background: none!important;
-                    border: none;
-                    padding: 0!important;
-                    color: #007030;
-                    cursor: pointer;
-                }
+						button {
+							background: none!important;
+							border: none;
+							padding: 0!important;
+							color: #007030;
+							cursor: pointer;
+						}
 
-                button:hover {
-                    text-decoration: underline;
-                }
-            `}</style>
-       </div>
-    }
-    else {
-        blogNav =
-        <div>
-            <button name="New Posts" onClick={handleClick}>&lsaquo; Newer Posts</button>
-            <div id="blogNavSeperator"> | </div>
-            <button name="Old Posts" onClick={handleClick}>Older Posts &rsaquo;</button>
-            <style jsx> {`
-                #blogNavSeperator {
-                    margin: 7px;
-                    display: inline;
-                }
+						button:hover {
+							text-decoration: underline;
+						}
+					`}</style>
+				</div>
+			)
+		}
+	}
 
-                .blog-nav {
-                    margin-top: 10px;
-                    text-align: center;
-                    color: #007030;
-                }
+	return (
+		<Layout info={info}>
+			<div className="blog-container">
+				{posts.map(post => (
+					<SinglePost post={post} key={post._id} />
+				))}
+			</div>
+			<div id="bottom-bar"></div>
 
-                button {
-                    background: none!important;
-                    border: none;
-                    padding: 0!important;
-                    color: #007030;
-                    cursor: pointer;
-                }
-
-                button:hover {
-                    text-decoration: underline;
-                }
-            `}</style>
-       </div>
-    }
-
-    return (
-        <div>
-            <Layout info={info}>
-                <div className="blog-container">
-                    {blogState.posts.map(post => (
-                        <SinglePost post={post} key={post.id}/>
-                    ))}
-                </div>
-                <div id="bottom-bar"/>
-
-                <nav className="blog-nav">
-                    {blogNav}
-                </nav>
-            </Layout>
-
-            <style jsx>{`
-                .blog-container {
+			<nav className="blog-nav">
+				{blogNav}
+			</nav>
+			<style jsx>{`
+				.blog-container {
                     margin-left: 20%;
                     margin-right: 20%;
                     width: 60%;
-                }
-
-                #bottom-bar {
+				}
+				
+				#bottom-bar {
                     margin-left: 20%;
                     margin-right: 20%;
                     width: 60%;
@@ -247,9 +140,9 @@ const Blog = ({ postData, info }) => {
                     top: 771px;
                     background: #007030;
                     transform: matrix(1, 0, 0, -1, 0, 0);
-                }
+				}
 
-                .blog-nav {
+				.blog-nav {
                     margin-top: 10px;
                     text-align: center;
                     color: #007030;
@@ -267,21 +160,39 @@ const Blog = ({ postData, info }) => {
                         margin-right: 10%;
                         width: 80%;
                     }
-
                 }
-            `}</style>
-        </div>
-    )
+			`}</style>
+		</Layout>
+	)
 }
 
-Blog.getInitialProps = async (req, res) => {
-    const resJson = await fetch(`${process.env.URL_ROOT}/api/posts`).then(_ => _.json())
-    const info = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
+Blog.getInitialProps = async context => {
+	// Fetch posts in ascending order of date
+	const postsJson = await fetch(`${process.env.URL_ROOT}/api/posts`).then(_ => _.json())
 
-    return {
-        postData: resJson,
-        info: info
-    }
+	// Prepare pagination
+	const count = postsJson.length
+	const pageSize = 3
+	const lastPage = Math.ceil(count / pageSize)
+
+	// Calculate current page with boundaries
+	let page = parseInt(context.query.page) || 1
+	page = page > lastPage ? lastPage : page
+	page = page < 1 ? 1 : page
+
+	// Grab current page's posts based on page size and requested page number
+	const start = (page - 1) * pageSize
+	const end = start + pageSize
+	let pagePosts = postsJson.slice(start, end)
+
+	const infoJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
+
+	return {
+		posts: pagePosts,
+		page: page,
+		numPages: lastPage,
+		info: infoJson
+	}
 }
 
 export default Blog
