@@ -31,8 +31,10 @@ function setup_environment_variables {
 		echo setup environment for windows
 	else
 		eval "export URL_ROOT=http://localhost:3000"
-		eval "export MONGODB_URL=$mongodb_env_var"
+
+		eval "export MONGODB_URL=\"$mongodb_env_var\""
 	fi
+	eval printenv
 }
 
 
