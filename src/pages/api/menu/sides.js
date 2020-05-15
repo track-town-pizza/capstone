@@ -36,7 +36,7 @@ handler.post(async (req, res) => {
 		// Update document in DB
 		try {
 			await req.db.collection("sides").updateOne(
-				{ "key": side.key },
+				{ key: side.key },
 				{ $set: side },
 				{ upsert: true }
 			)

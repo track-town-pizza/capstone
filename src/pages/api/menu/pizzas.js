@@ -26,4 +26,30 @@ handler.get(async (req, res) => {
 	})
 })
 
+handler.post(async (req, res) => {
+	const { pizzas } = req.body
+
+	for (let pizza of pizzas) {
+		// Remove _id attributes to prevent attempts to update them in DB
+		delete pizza["_id"]
+
+		// Update document in DB
+		try {
+			await req.db.collection("pizzas").updateOne(
+				{ key: pizza.key },
+				{ $set: pizza },
+				{ upsert: true }
+			)
+		} catch (err) {
+			// An error occurred, exit API
+			res.status(500).json({ err })
+			return
+		}
+	}
+
+	// If the for loop completes without returning, then no
+	// errors occurred while updating all of the documents.
+	res.status(200).json({ message: "OK" })
+})
+
 export default handler
