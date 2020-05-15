@@ -25,7 +25,7 @@ function check_node_version {
 
 function check_next_version {
 	# No v character included in below variable
-	desired_next_version="6.1.2"
+	desired_next_version="9.4.0"
 	echo Checking if next $desired_next_version is installed...
 	installed_next_version=$(eval npm list next | tr -d '\n' | sed 's/.*└── next\@//g')
 
