@@ -1,7 +1,6 @@
 ## Config File for Web Application
 ## IMPORTANT: Indentation in this file must be 2 spaces!
 
-
 ## credentials
 credentials:
   mongoDB_username: "placeholder_text_for_username"
@@ -10,13 +9,19 @@ credentials:
 ## build settings
 build:
   ## Can be set to dev or prod ->
-  option: "prod"
+  option: "dev"
 
   ## Can be set to unix or windows ->
-  platform: "windows"
+  platform: "unix"
 
+  ## Each below can be set to yes or no ->
+  run_application: "yes"
+  build_for_production: "no"
+
+## dependency checking and installation
+dependencies:
   ## Each below can be set to yes or no ->
   check_npm_version: "no"
   check_next_version: "no"
-  run_application: "yes"
-  build_for_production: "yes"
+  force_npm_reinstall: "no"
+  force_next_reinstall: "no"

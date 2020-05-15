@@ -21,6 +21,55 @@ function parse_yaml {
 	}'
 }
 
+# $1 : platform (unix or windows)
+# $2 : mongodb username
+# $3 : mongodb password
+function setup_environment_variables {
+	mongodb_env_var="mongodb+srv://$2:$3@tracktownpizzacluster-lhgnu.mongodb.net/test?retryWrites=true&w=majority"
+	if [[ $1 == "windows" ]]
+	then
+		echo setup environment for windows
+	else
+		eval "export URL_ROOT=http://localhost:3000"
+		eval "export MONGODB_URL=$mongodb_env_var"
+	fi
+}
+
+
+# $1 : platform (unix or windows)
+# $2 : force reinstall (yes or no)
+function install_node {
+	if [[ $1 == "windows" ]]
+	then
+		echo You will need to install this manually. Please review the documentation on how to do this.
+	else
+		echo Will now attempt to install node $desired_node_version ...
+		echo Clearing cache...
+		eval sudo npm cache clean -f
+		echo Installing n \(node version manager\)...
+		eval sudo npm install -g n
+		echo Upgrading node...
+		eval sudo n $desired_node_version
+	fi
+}
+
+
+# $1 : platform (unix or windows)
+# $2 : force reinstall (yes or no)
+function install_next {
+	if [[ $1 == "windows" ]]
+	then
+		echo You will need to install this manually. Please review the documentation on how to do this.
+	else
+		echo Will now attempt to install next $desired_next_version ...
+		echo Clearing cache...
+		eval sudo npm cache clean -f
+		echo Upgrading next...
+		eval npm install next@$desired_next_version
+	fi
+}
+
+
 function check_node_version {
 	desired_node_version="v12.16.3"
 	installed_node_version=$(eval node --version)
@@ -28,21 +77,14 @@ function check_node_version {
 	if [ $installed_node_version = $desired_node_version ]
 	then
 		echo Node $desired_node_version is installed.
+		if [[ $2 == yes ]]
+		then
+			install_node $1
+		fi
 	else
 		echo Node $desired_node_version is not installed or could not be found.
-		if [[ $1 == "windows" ]]
-		then
-			echo You will need to install this manually. Please review the documentation on how to do this.
-		else
-			echo Will now attempt to install node $desired_node_version ...
+		install_node $1
 
-			echo Clearing cache...
-			eval sudo npm cache clean -f
-			echo Installing n \(node version manager\)...
-			eval sudo npm install -g n
-			echo Upgrading node...
-			eval sudo n $desired_node_version
-		fi
 	fi
 }
 
@@ -55,39 +97,38 @@ function check_next_version {
 	if [ $installed_next_version = $desired_next_version ]
 	then
 		echo next $desired_next_version is installed.
+		if [[ $2 == yes ]]
+		then
+			install_next $1
+		fi
 	else
 		echo next $desired_next_version is not installed or could not be found.
-		if [[ $1 == "windows" ]]
-		then
-			echo You will need to install this manually. Please review the documentation on how to do this.
-		else
-			echo Will now attempt to install next $desired_next_version ...
-			echo Clearing cache...
-			eval sudo npm cache clean -f
-			echo Upgrading next...
-			eval npm install next@$desired_next_version
-		fi
+		install_next $1
 	fi
 }
 
 
 #### SETUP PROCEDURE ####
 
+echo "If problems occur with setup check installed npm and next versions."
 echo "Running setup..."
 echo " "
 echo "Reading config.yml"
 eval $(parse_yaml config.yml)
 
+echo "Setting environment variables..."
+setup_environment_variables $build_platform $credentials_mongoDB_username $credentials_mongoDB_password
+
 # Make sure correct version of node is installed
-if [[ $build_check_npm_version == "yes" ]]
+if [[ $dependencies_check_npm_version == "yes" ]]
 then
-	check_node_version $build_platform
+	check_node_version $build_platform $dependencies_force_npm_reinstall
 fi
 
 # Make sure correct version of next is installed
-if [[ $build_check_next_version == "yes" ]]
+if [[ $dependencies_check_next_version == "yes" ]]
 then
-	check_next_version $build_platform
+	check_next_version $build_platform $dependencies_force_next_reinstall
 fi
 
 # Create production build
