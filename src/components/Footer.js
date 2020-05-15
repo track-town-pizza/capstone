@@ -1,3 +1,4 @@
+import React from "react"
 import Link from "next/link"
 
 const Footer = () => (
@@ -22,16 +23,13 @@ const Footer = () => (
                 <a className="text-white mr-3 my-2">About</a>
             </Link>
 
-            <Link href="https://www.facebook.com/TrackTownPizza/">
-                <a className="text-white mr-3 my-2">
-                    <i className="fab fa-facebook-square"></i>
-                </a>
-            </Link>
-            <Link href="https://www.instagram.com/tracktownpizza/">
-                <a className="text-white mr-3 my-2">
-                    <i className="fab fa-instagram"></i>
-                </a>
-            </Link>
+            <a href="https://www.facebook.com/TrackTownPizza/" className="text-white mr-3 my-2">
+                <i className="fab fa-facebook-square"></i>
+            </a>
+
+            <a href="https://www.instagram.com/tracktownpizza/" className="text-white mr-3 my-2">
+                <i className="fab fa-instagram"></i>
+            </a>
 
         </footer>
 

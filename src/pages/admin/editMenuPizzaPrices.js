@@ -1,6 +1,8 @@
 import React, {useState} from "react"
-import allPizzas from "../../../data/pizzas.json"
+import fetch from "isomorphic-unfetch"
+
 import Layout from "../../components/Layout"
+import Modal from "../../components/Modal"
 import EditFoodItem from "../../components/admin/EditFoodItem"
 import SubmitButton from "../../components/admin/SubmitPricesBtn"
 // This is a regular expression that tells is used for checking that the 
@@ -9,7 +11,7 @@ const MONEY_PATTERN = /^\$(\d{1,3}(\,\d{3})*|(\d+))(\.[0-9]{2})$/
 
 // This function takes the original data and modifies two arrays of data that 
 // can be udpated
-function parseJsonToUsableObj() {
+function parseJsonToUsableObj(allPizzas) {
     const infoForReturn = []
     const sizes = ["Small", "Medium", "Large", "Giant"]
     let counter = 0
@@ -24,9 +26,11 @@ function parseJsonToUsableObj() {
     return infoForReturn
 }
 
-const editMenuPizzaPrices = () => {
-    const infoForState = parseJsonToUsableObj()
+const EditMenuPizzaPrices = ({ allPizzas, info }) => {
+    const infoForState = parseJsonToUsableObj(allPizzas)
     const [ namePriceInfo, setNamePriceInfo ] = useState(infoForState)
+    const [ displayModal, setDisplayModal ] = useState(false)
+    const [ modalMessage, setModalMessage ] = useState("")
 
     // use state to make the elements the user will see
     let counter = 0
@@ -44,6 +48,12 @@ const editMenuPizzaPrices = () => {
         }
     }
 
+    // Display modal for 3 seconds
+	function displayToast() {
+		setDisplayModal(true)
+		setTimeout(() => setDisplayModal(false), 3000)
+	}
+
     // This function updates the text that the user sees as they change the price
     function onChange(event) {
         const { id } = event.target
@@ -57,7 +67,7 @@ const editMenuPizzaPrices = () => {
     }
 
     // This function controls what happens when the user hits the submit button
-    function onClick(event) {
+    async function onClick(event) {
         const { type } = event
         let success = true
         if(type === 'click') {
@@ -71,7 +81,6 @@ const editMenuPizzaPrices = () => {
             }
              // the all the elements are in the correct format, the prices can be updated
             if(success) {
-                alert("The information has been updated")
                 // A new object is created that matches the original format of the object for the database
                 // The new information is merged with the unchanged information
                 const newPizzaInfo = JSON.parse(JSON.stringify(allPizzas))
@@ -90,19 +99,40 @@ const editMenuPizzaPrices = () => {
                         counter++
                     }
                 }
+
                 // push newPizzaInfo into database
+                const res = await fetch(`${process.env.URL_ROOT}/api/menu/pizzas`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ pizzas: newPizzaInfo })
+                }).then(_ => _.json())
+
+                if (res.err) {
+                    // Display error toast if error message is returned from DB API
+                    setModalMessage(`Pizzas could not be updated. The following error occurred:\n${res.err}`)
+                    displayToast()
+                } else if (res.message === "OK") {
+                    // Display success toast if no error message is returned from DB API
+                    setModalMessage("Pizzas have successfully been updated.")
+                    displayToast()
+                }
             }
 
         }
     }
 
     return (
-        <Layout>
+        <Layout info={info}>
+            {displayModal && (
+                <Modal message={modalMessage} onClick={() => setDisplayModal(false)} />
+            )}
             <h2 className="text-center">Edit Menu Pizza Prices</h2>
             <div className="text-center">
                {EditItems}
             </div>
-            <SubmitButton words="Submit Topping Prices" onClick={onClick} />
+            <SubmitButton words="Submit Pizza Prices" onClick={onClick} />
             <style jsx>{`
                 .box {
                     text-align:center;
@@ -112,4 +142,15 @@ const editMenuPizzaPrices = () => {
         </Layout>
     )
 }
-export default editMenuPizzaPrices
+
+EditMenuPizzaPrices.getInitialProps = async () => {
+    const pizzasJson = await fetch(`${process.env.URL_ROOT}/api/menu/pizzas`).then(_ => _.json())
+    const infoJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
+
+    return {
+        allPizzas: pizzasJson,
+        info: infoJson
+    }
+}
+
+export default EditMenuPizzaPrices

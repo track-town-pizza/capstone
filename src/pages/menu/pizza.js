@@ -1,13 +1,12 @@
-import Layout from "../../components/Layout"
 import React, {useState} from "react"
-import MenuItems from "../../components/menu/MenuItem"
-import pizzasInfo from "../../../data/pizzas.json"
-import prices from "../../../data/prices.json"
+import fetch from "isomorphic-unfetch"
 import Link from "next/link"
+
+import Layout from "../../components/Layout"
+import MenuItems from "../../components/menu/MenuItem"
 import Modal from "../../components/Modal"
 
-
-const Pizzas = () => {
+const Pizzas = ({ pizzasInfo, prices, info }) => {
     const [infoToDisplayModal, setInfoToDisplayModal] = useState({
         toppings: false,
         toppingsMessage: "",
@@ -31,21 +30,25 @@ const Pizzas = () => {
                     const ele = pizzasInfo.find(obj => {
                         return obj.key === whatToDisplayArr[0]
                     })
+
                     setInfoToDisplayModal({
-                        ...infoToDisplayModal,
                         toppings: true,
-                        toppingsMessage: ele.toppings.toString().replace(/,/g, ", ")
+                        toppingsMessage: ele.toppings.toString().replace(/,/g, ", "),
+                        prices: false,
+                        pricesMessage: ""
                     })
                 }
                 else if(whatToDisplayArr.length >= 2 && whatToDisplayArr[1] === "prices") {
                     const ele = pizzasInfo.find(obj => {
                         return obj.key === whatToDisplayArr[0]
                     })
+
                     const strToDisplay = "Small: " + ele.prices[0] + ", Medium: " + ele.prices[1] + ", Large: " + ele.prices[2] + ", Giant: " + ele.prices[3]
                     setInfoToDisplayModal({
-                        ...infoToDisplayModal,
                         prices: true,
-                        pricesMessage: strToDisplay
+                        pricesMessage: strToDisplay,
+                        toppings: false,
+                        toppingsMessage: ""
                     })
                 }
             }
@@ -54,7 +57,7 @@ const Pizzas = () => {
 
     const MenuItemsComponents = pizzasInfo.map(pizzaInfo => (<MenuItems itemInfo={pizzaInfo} page="pizza" onClick={handleClick}/>))
     return (
-        <Layout>
+        <Layout info={info}>
             {infoToDisplayModal.toppings ? <Modal message={infoToDisplayModal.toppingsMessage} onClick={handleClick} /> : null}
             {infoToDisplayModal.prices ? <Modal message={infoToDisplayModal.pricesMessage} onClick={handleClick} /> : null}
             <div className="text-center">
@@ -109,4 +112,17 @@ const Pizzas = () => {
         </Layout>
     )
 }
+
+Pizzas.getInitialProps = async () => {
+    const pizzasRes = await fetch(`${process.env.URL_ROOT}/api/menu/pizzas`).then(_ => _.json())
+    const pricesRes = await fetch(`${process.env.URL_ROOT}/api/menu/prices`).then(_ => _.json())
+    const infoRes = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
+
+    return {
+        pizzasInfo: pizzasRes,
+        prices: pricesRes,
+        info: infoRes
+    }
+}
+
 export default Pizzas

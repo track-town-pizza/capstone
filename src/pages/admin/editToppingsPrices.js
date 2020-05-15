@@ -1,16 +1,18 @@
 import React, {useState} from "react"
-import allToppingsInfo from "../../../data/prices.json"
-import pizzaInfo from "../../../data/pizzaInfo.json"
+import fetch from "isomorphic-unfetch"
+
 import Layout from "../../components/Layout"
+import Modal from "../../components/Modal"
 import EditFoodItem from "../../components/admin/EditFoodItem"
 import SubmitButton from "../../components/admin/SubmitPricesBtn"
+
 // This is a regular expression that tells is used for checking that the 
 // new price is in the correct format. 
 const MONEY_PATTERN = /^\d{1,5}\.\d\d$/
 
 // This function takes the original data and modifies two arrays of data that 
 // can be udpated
-function parseJsonToUsableObj(toppingsPriceInfo, sizePriceInfo) {
+function parseJsonToUsableObj(pizzaInfo, allToppingsInfo, toppingsPriceInfo, sizePriceInfo) {
     for(const size of pizzaInfo.sizes) {
         sizePriceInfo.push({prices: allToppingsInfo[size], description: size})
     }
@@ -24,29 +26,38 @@ function parseJsonToUsableObj(toppingsPriceInfo, sizePriceInfo) {
     }
 }
 
-const editToppingsPrices = () => {
+const EditToppingsPrices = ({ pizzaInfo, allToppingsInfo, info }) => {
     const toppingsPriceInfo = []
     const sizePriceInfo = []
-    parseJsonToUsableObj(toppingsPriceInfo, sizePriceInfo)
-    const menuLink = {menu_link: allToppingsInfo.Menu_Link}
+    parseJsonToUsableObj(pizzaInfo, allToppingsInfo, toppingsPriceInfo, sizePriceInfo)
     const [ toppings, setToppings ] = useState(toppingsPriceInfo)
     const [ sizes, setSizes ] = useState(sizePriceInfo)
-    const [ newLink, setLink ] = useState(menuLink)
+    const [ newLink, setLink ] = useState(allToppingsInfo.Menu_Link)
+
+    // Modal UI variables
+	const [ displayModal, setDisplayModal ] = useState(false)
+	const [ modalMessage, setModalMessage ] = useState("")
+
+	// Display modal for 3 seconds
+	function displayToast() {
+		setDisplayModal(true)
+		setTimeout(() => setDisplayModal(false), 3000)
+	}
 
     // use state to make the elements the user will see
-    const EditToppingItems = []
-    const EditPizzaItems = []
+    const editToppingItems = []
+    const editPizzaItems = []
     for(const topping of toppings) {
         const toppingStr = topping.description.replace(/_/g, " ")
-        EditToppingItems.push(<h3 className="mt-4 mb-0">{toppingStr}</h3>)
+        editToppingItems.push(<h3 className="mt-4 mb-0">{toppingStr}</h3>)
         for(const size of sizes) {
-            EditToppingItems.push(<EditFoodItem id={topping.description+"*"+size.description} name={size.description} defaultValue={topping.prices[size.description]} onChange={onChange}/>)
+            editToppingItems.push(<EditFoodItem id={topping.description+"*"+size.description} name={size.description} defaultValue={topping.prices[size.description]} onChange={onChange}/>)
         }
     }
     for(const size of sizes) {
-        EditPizzaItems.push(<EditFoodItem id={size.description} name={size.description} defaultValue={size.prices} onChange={onChange}/>)
+        editPizzaItems.push(<EditFoodItem id={size.description} name={size.description} defaultValue={size.prices} onChange={onChange}/>)
     }
-    EditPizzaItems.push(<EditFoodItem id={"newLink"} name={"New Menu Link"} defaultValue={newLink.menu_link} onChange={onChange} width={"600px"}/>)
+    editPizzaItems.push(<EditFoodItem id={"newLink"} name={"New Menu Link"} defaultValue={newLink} onChange={onChange} width={"600px"}/>)
 
     // This function updates the text that the user sees as they change the price
     function onChange(event) {
@@ -57,7 +68,7 @@ const editToppingsPrices = () => {
             const replacementString = "https://drive.google.com/uc?id="
             const link = event.target.value
             const goodLink = link.replace(findString, replacementString)
-            setLink({menu_link: goodLink})
+            setLink(goodLink)
         }
         else if(id === "Individual" || id === "Small" || id === "Medium" || id === "Large" || id === "Giant") {
             setSizes(sizes.map(currSize => (
@@ -84,7 +95,7 @@ const editToppingsPrices = () => {
     }
 
     // This function controls what happens when the user hits the submit button
-    function onClick(event) {
+    async function onClick(event) {
         const { type } = event
         let success = true
         if(type === 'click') {
@@ -94,19 +105,20 @@ const editToppingsPrices = () => {
                     // before the prices can be updated
                     if(!MONEY_PATTERN.test(topping.prices[size.description])) {
                         success = false
-                        alert(size.description + " " + topping.description + " price was not done correctly. It must be in the form X.XX or XX.XX. Please fix it before this form can be submitted")
+                        setModalMessage(size.description + " price was not done correctly. It must be in the form X.XX or XX.XX. Please fix it before this form can be submitted")
+			            displayToast()
                     }
                 }
             }
             for(const size of sizes) {
                 if(!MONEY_PATTERN.test(size.prices)) {
                     success = false
-                    alert(size.description + " price was not done correctly. It must be in the form X.XX or XX.XX. Please fix it before this form can be submitted")
+                    setModalMessage(size.description + " price was not done correctly. It must be in the form X.XX or XX.XX. Please fix it before this form can be submitted")
+			        displayToast()
                 }
             }
             // the all the elements are in the correct format, the prices can be updated
             if(success) {
-                alert("The information has been updated")
                 // A new object is created that matches the original format of the object for the database
                 // The new information is merged with the unchanged information
                 const newPricesInfo = JSON.parse(JSON.stringify(allToppingsInfo))
@@ -116,19 +128,42 @@ const editToppingsPrices = () => {
                 for(const topping of toppings) {
                     newPricesInfo[topping.description] = topping.prices
                 }
-                newPricesInfo.Menu_Link = newLink.menu_link
-                // push newly updated information into the database
+                newPricesInfo.Menu_Link = newLink
+
+                // Push newly updated information into the database
+                const res = await fetch(`${process.env.URL_ROOT}/api/menu/prices`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ prices: newPricesInfo })
+                }).then(_ => _.json())
+
+                if (res.err) {
+                    // Display error toast if error message is returned from DB API
+                    setModalMessage(`Prices and info could not be updated. The following error occurred:\n${res.err}`)
+                    displayToast()
+                } 
+                
+                if (res.message === "OK") {
+                    // Display success toast if no error message is returned from DB API
+                    setModalMessage("Prices and info have successfully been updated.")
+                    displayToast()
+                }
             }
         }
     }
 
     return (
-        <Layout>
+        <Layout info={info}>
+            {displayModal && (
+				<Modal message={modalMessage} onClick={() => setDisplayModal(false)} />
+			)}
             <h2 className="text-center">Edit Topping Prices</h2>
             <div className="text-center">
-               {EditToppingItems}
+                {editToppingItems}
                 <h3 className="mt-4 mb-0">Pizza Sizes</h3>
-                {EditPizzaItems}
+                {editPizzaItems}
             </div>
             <SubmitButton words="Submit Topping Prices" onClick={onClick} />
             <style jsx>{`
@@ -140,4 +175,17 @@ const editToppingsPrices = () => {
         </Layout>
     )
 }
-export default editToppingsPrices
+
+EditToppingsPrices.getInitialProps = async () => {
+    const pizzasRes = await fetch(`${process.env.URL_ROOT}/api/menu/pizzaInfo`).then(_ => _.json())
+    const pricesRes = await fetch(`${process.env.URL_ROOT}/api/menu/prices`).then(_ => _.json())
+    const infoRes = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
+
+    return {
+        pizzaInfo: pizzasRes,
+        allToppingsInfo: pricesRes,
+        info: infoRes
+    }
+}
+
+export default EditToppingsPrices

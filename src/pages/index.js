@@ -1,19 +1,17 @@
-import React from "react"
+import React, { useState } from "react"
 import Link from "next/link"
+import fetch from "isomorphic-unfetch"
 
 import {
 	format,
 	setHours,
 	setMinutes,
-	setSeconds
+	setSeconds,
+	closestIndexTo
 } from "date-fns"
 
 import Layout from "../components/Layout"
 import EventListing from "../components/EventListing"
-
-import info from '../../data/info.json'
-import events from "../../data/events.json"
-import postData from "../../data/PostData.json"
 import PhoneNumber from "../components/PhoneNumber"
 
 function parseTime(time) {
@@ -29,16 +27,14 @@ function parseTime(time) {
 	return format(date, "h:mm a")
 }
 
-const Index = () => {
-	const post = postData.posts[0]
-
+const Index = ({ info, events, post }) => {
 	const openHourSunThur = parseTime(info.openHourSunThur)
 	const closeHourSunThur = parseTime(info.closeHourSunThur)
 	const openHourFriSat = parseTime(info.openHourFriSat)
 	const closeHourFriSat = parseTime(info.closeHourFriSat)
 
 	return (
-		<Layout>
+		<Layout info={info}>
 			<div className="home-order-photo home-font">
 				<div className="home-photo">
 					<img src="https://drive.google.com/uc?id=1cxQfj33F6lRIwRn6Vsm3Whoh4SFuJjBb" alt="Track Town Front" />
@@ -53,9 +49,7 @@ const Index = () => {
 							<br />
 							<span className="responsive-phone"><PhoneNumber phoneNumber={info.phone} linkColor="white"/></span>
 						</p>
-						<Link href={info.onlineOrderLink}>
-							<a className="btn btn-yellow btn-responsive">Order Online!</a>
-						</Link>
+						<a href={info.onlineOrderLink} className="btn btn-yellow btn-responsive">Order Online!</a>
 					</div>
 				</div>
 			</div>
@@ -85,7 +79,7 @@ const Index = () => {
 						<table className="table-sm table-font w-100">
 							<tbody>
 								{events.map(event => (
-									<EventListing key={event.id} {...event} />
+									<EventListing key={event.key} {...event} />
 								))}
 							</tbody>
 						</table>
@@ -93,11 +87,12 @@ const Index = () => {
 				</div>
 			</div>
 			<div className="blog-container home-font">
-				<div className="blog-left-column">
-					<Link href={`/blog/post/${post.id}`} className="blog-title">
+				<div className="blog-left-column blog-title">
+					<Link href={`/blog/post/${post.id}`}>
 						<h3>{post.title}</h3>
 					</Link>
-					<small>{post.date}</small>
+					<small>{format(new Date(post.date), "MM/dd/yyyy")}</small>
+					<br />
 					<img src={post.imageLink} alt="" />
 				</div>
 				<div className="blog-right-column">
@@ -380,6 +375,28 @@ const Index = () => {
 			`}</style>
 		</Layout>
 	);
+}
+
+Index.getInitialProps = async () => {
+	const infoResJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
+	const eventsResJson = await fetch(`${process.env.URL_ROOT}/api/events`).then(_ => _.json())
+	const postsResJson = await fetch(`${process.env.URL_ROOT}/api/posts`).then(_ => _.json())
+
+	// Grab all event dates from JSON
+	let postDates = []
+	for (let post of postsResJson) {
+		postDates.push(new Date(post.date))
+	}
+
+	// Find the most recently-published post to send to the client side
+	const idx = closestIndexTo(new Date(), postDates)
+	const post = postsResJson[idx]
+
+	return {
+		info: infoResJson,
+		events: eventsResJson,
+		post: post
+	}
 }
 
 export default Index

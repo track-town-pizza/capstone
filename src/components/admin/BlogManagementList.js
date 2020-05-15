@@ -1,113 +1,99 @@
-import React, {useState} from "react"
-import Link from "next/link"
-import postData from "../../../data/PostData.json" // will be removed with backend implementation
-import { format } from "date-fns"
-import { parse } from "date-fns"
-import { isAfter } from "date-fns"
+import React, { useState } from "react"
+import { parse, isAfter } from "date-fns"
 
 import BlogManagementListItem from "./BlogManagementListItem"
 
-
-
-function setPostCount() {
-    // Fetch the amount of posts that exist
-    return 8; // <- placeholder value for now
-}
-
-function comparePostsForDateSort(postA, postB) {
-    let date1 = parse(postA.date, 'MM/dd/yyyy', new Date()) // date of oldest post, placeholder value for now
-    let date2 = parse(postB.date, 'MM/dd/yyyy', new Date()) // date of newest post, placeholder value for now
-
-    if (isAfter(date2, date1)) {
-        return true
+const BlogManagementList = ({ postData }) => {
+    function setPostCount() {
+        // Fetch the amount of posts that exist
+        return 8; // <- placeholder value for now
     }
-    else {
-        return false
+
+    function comparePostsForDateSort(postA, postB) {
+        let date1 = parse(postA.date, 'MM/dd/yyyy', new Date()) // date of oldest post, placeholder value for now
+        let date2 = parse(postB.date, 'MM/dd/yyyy', new Date()) // date of newest post, placeholder value for now
+
+        if (isAfter(date2, date1)) {
+            return true
+        }
+        else {
+            return false
+        }
     }
-}
 
-// sorts an array of posts to be ordered most recent to oldest
-function orderPostsByDate(posts) {
-    posts.sort(comparePostsForDateSort)
-    return posts
-}
+    // sorts an array of posts to be ordered most recent to oldest
+    function orderPostsByDate(posts) {
+        posts.sort(comparePostsForDateSort)
+        return posts
+    }
 
-function getOldestPostID() {
-    // Fetch the oldest post's id from the database
-    // Will require different logic for the database
+    function getOldestPostID() {
+        // Fetch the oldest post's id from the database
+        // Will require different logic for the database
 
-    let posts = orderPostsByDate(postData.posts)
-    return parseInt(posts[posts.length-1].id)
-}
+        let posts = orderPostsByDate(postData)
+        return parseInt(posts[posts.length-1].id)
+    }
 
-function getNewestPostID() {
-    // Fetch the newest post's id from the database
-    // Will require different logic for the database
+    function getNewestPostID() {
+        // Fetch the newest post's id from the database
+        // Will require different logic for the database
 
-    let posts = orderPostsByDate(postData.posts)
-    return parseInt(posts[0].id)
-}
+        let posts = orderPostsByDate(postData)
+        return parseInt(posts[0].id)
+    }
 
-function getSinglePost(id) {
-    // Will require different logic for the database
+    function getSinglePost(id) {
+        // Will require different logic for the database
 
-    let posts = orderPostsByDate(postData.posts)
-    let postIDs = posts.map(a => a.id)
-    let index = parseInt(postIDs.indexOf(id.toString()))
+        let posts = orderPostsByDate(postData)
+        let postIDs = posts.map(a => a.id)
+        let index = parseInt(postIDs.indexOf(id.toString()))
 
-    return posts[index]
-}
+        return posts[index]
+    }
 
-function getInitialPosts(amountOfPosts) {
-    let firstPost = getSinglePost(getNewestPostID())
-    let afterPosts = getPostsBefore(firstPost.id, amountOfPosts - 1)
-    afterPosts.unshift(firstPost)
-    return afterPosts
-}
+    function getInitialPosts(amountOfPosts) {
+        let firstPost = getSinglePost(getNewestPostID())
+        let afterPosts = getPostsBefore(firstPost.id, amountOfPosts - 1)
+        afterPosts.unshift(firstPost)
+        return afterPosts
+    }
 
-// This function fetches a specified amount of posts that were posted after given post(identified with id)
-function getPostsAfter(leadingPostID, amountOfPosts) {
-    // Fetch the posts posted after post with id [leadingPostID] from the database, LIMIT amountOfPosts
-    let posts = orderPostsByDate(postData.posts)
-    let postIDs = posts.map(a => a.id)
-    let lastIndex= parseInt(postIDs.indexOf(leadingPostID.toString()))
-    let firstIndex = parseInt(lastIndex) - parseInt(amountOfPosts)
+    // This function fetches a specified amount of posts that were posted after given post(identified with id)
+    function getPostsAfter(leadingPostID, amountOfPosts) {
+        // Fetch the posts posted after post with id [leadingPostID] from the database, LIMIT amountOfPosts
+        let posts = orderPostsByDate(postData)
+        let postIDs = posts.map(a => a.id)
+        let lastIndex= parseInt(postIDs.indexOf(leadingPostID.toString()))
+        let firstIndex = parseInt(lastIndex) - parseInt(amountOfPosts)
 
-    //console.log("Fetching (before) posts index ", firstIndex," to index ", lastIndex)
-    const returnPosts = posts.slice(firstIndex, lastIndex)
-    return returnPosts // Needs to be replaced with database call
-}
+        const returnPosts = posts.slice(firstIndex, lastIndex)
+        return returnPosts // Needs to be replaced with database call
+    }
 
-// This function fetches a specified amount of posts that were posted before given post(identified with id)
-function getPostsBefore(leadingPostID, amountOfPosts) {
-    //console.log("leadingPostID: ", leadingPostID)
-    //console.log("GET BEFORE")
-    // Fetch the posts posted before post with id [leadingPostID] from the database, LIMIT amountOfPosts
-    let posts = orderPostsByDate(postData.posts)
-    let postIDs = posts.map(a => a.id)
-    let firstIndex = parseInt(postIDs.indexOf(leadingPostID.toString()))
-    let lastIndex = parseInt(firstIndex) + parseInt(amountOfPosts)
+    // This function fetches a specified amount of posts that were posted before given post(identified with id)
+    function getPostsBefore(leadingPostID, amountOfPosts) {
+        // Fetch the posts posted before post with id [leadingPostID] from the database, LIMIT amountOfPosts
+        let posts = orderPostsByDate(postData)
+        let postIDs = posts.map(a => a.id)
+        let firstIndex = parseInt(postIDs.indexOf(leadingPostID.toString()))
+        let lastIndex = parseInt(firstIndex) + parseInt(amountOfPosts)
 
-    //console.log("Fetching (before) posts index ", firstIndex," to index ", lastIndex)
-    const returnPosts = posts.slice(firstIndex + 1, lastIndex + 1)
-    return returnPosts // Needs to be replaced with database call
-}
+        const returnPosts = posts.slice(firstIndex + 1, lastIndex + 1)
+        return returnPosts // Needs to be replaced with database call
+    }
 
-function containsPostID(posts, postID) {
-    // Logic for checking if post id is in given array of posts
-    let postIDs = posts.map(a => a.id)
-    return postIDs.includes(postID, 0)
-}
-
-
-
-
-const BlogManagementList = props => {
+    function containsPostID(posts, postID) {
+        // Logic for checking if post id is in given array of posts
+        let postIDs = posts.map(a => a.id)
+        return postIDs.includes(postID, 0)
+    }
 
     const blogPostInfo = {
         "id": "0",
-        "date": "MM/dd/yyyy", // "MM/dd/yyyy"
-        "title": "yya sure yes ok fine this is the excellenceya sure yes ok fine this is the excellenceya yes ok ",
+        "date": "MM/dd/yyyy",
+        "title": "yya sure yes ok fine this is the excellenceya sure yes ok fine this is the excellenceya yes ok "
     }
 
     let postInfoList = [blogPostInfo, blogPostInfo, blogPostInfo]
@@ -281,4 +267,5 @@ const BlogManagementList = props => {
         </div>
     )
 }
+
 export default BlogManagementList

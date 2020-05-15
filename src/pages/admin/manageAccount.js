@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react"
+import fetch from "isomorphic-unfetch"
 
 import Layout from "../../components/Layout"
 
-const ManageAccount = () => (
-	<Layout>
+const ManageAccount = ({ info }) => (
+	<Layout info={info}>
 		<div className="container mx-auto mt-3 dark-green-text d-flex flex-wrap">
 			<h2 className="text-uppercase page-title">My Account</h2>
 			<div className="forms mt-4">
@@ -127,5 +128,11 @@ const ManageAccount = () => (
 		`}</style>
 	</Layout>
 )
+
+ManageAccount.getInitialProps = async () => {
+	const infoJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
+
+	return { info: infoJson }
+}
 
 export default ManageAccount
