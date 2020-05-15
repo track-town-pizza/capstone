@@ -80,7 +80,7 @@ const Login = ({ info }) => (
 	</Layout>
 )
 
-Login.getInitialProps = async () {
+Login.getInitialProps = async () => {
 	const infoJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
 
 	return { info: infoJson }

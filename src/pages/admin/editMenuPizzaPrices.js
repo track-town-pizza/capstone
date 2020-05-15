@@ -100,8 +100,6 @@ const EditMenuPizzaPrices = ({ allPizzas, info }) => {
                     }
                 }
 
-                console.log("== New Pizza Info:", newPizzaInfo)
-
                 // push newPizzaInfo into database
                 const res = await fetch(`${process.env.URL_ROOT}/api/menu/pizzas`, {
                     method: "POST",
@@ -113,11 +111,11 @@ const EditMenuPizzaPrices = ({ allPizzas, info }) => {
 
                 if (res.err) {
                     // Display error toast if error message is returned from DB API
-                    setModalMessage(`Sides could not be updated. The following error occurred:\n${res.err}`)
+                    setModalMessage(`Pizzas could not be updated. The following error occurred:\n${res.err}`)
                     displayToast()
                 } else if (res.message === "OK") {
                     // Display success toast if no error message is returned from DB API
-                    setModalMessage("Sides have successfully been updated.")
+                    setModalMessage("Pizzas have successfully been updated.")
                     displayToast()
                 }
             }
@@ -134,7 +132,7 @@ const EditMenuPizzaPrices = ({ allPizzas, info }) => {
             <div className="text-center">
                {EditItems}
             </div>
-            <SubmitButton words="Submit Topping Prices" onClick={onClick} />
+            <SubmitButton words="Submit Pizza Prices" onClick={onClick} />
             <style jsx>{`
                 .box {
                     text-align:center;
