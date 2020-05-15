@@ -29,9 +29,10 @@ function setup_environment_variables {
 	if [[ $1 == "windows" ]]
 	then
 		echo setup environment for windows
+		eval [Environment]::SetEnvironmentVariable("URL_ROOT", "http://localhost:3000", "User")
+		eval [Environment]::SetEnvironmentVariable("MONGODB_URL", "\"$mongodb_env_var\"", "User")
 	else
 		eval "export URL_ROOT=http://localhost:3000"
-
 		eval "export MONGODB_URL=\"$mongodb_env_var\""
 	fi
 	eval printenv
