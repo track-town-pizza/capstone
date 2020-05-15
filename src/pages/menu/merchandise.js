@@ -1,12 +1,13 @@
-import Layout from "../../components/Layout"
 import React from "react"
-import MenuItems from "../../components/menu/MenuItem"
-import allMerchInfo from "../../../data/merchandise.json"
+import fetch from "isomorphic-unfetch"
 
-const Merchandise = () => {
+import Layout from "../../components/Layout"
+import MenuItems from "../../components/menu/MenuItem"
+
+const Merchandise = ({ allMerchInfo, info }) => {
     const MenuItemsComponents = allMerchInfo.map(merchInfo => (<MenuItems itemInfo={merchInfo} page="merchandise"/>))
     return (
-        <Layout>
+        <Layout info={info}>
             <h1 className="text-center mb-4">Merchandise</h1>
             <div className="sides-container">
                 {MenuItemsComponents}
@@ -23,4 +24,15 @@ const Merchandise = () => {
         </Layout>
     )
 }
+
+Merchandise.getInitialProps = async () => {
+    const resJson = await fetch(`${process.env.URL_ROOT}/api/menu/merchandise`).then(_ => _.json())
+    const infoJson = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
+    
+    return {
+        allMerchInfo: resJson,
+        info: infoJson
+    }
+}
+
 export default Merchandise

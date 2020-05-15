@@ -1,28 +1,26 @@
 import Layout from "../components/Layout"
 import Link from "next/link"
-import aboutData from "../../data/about.json"
+import fetch from "isomorphic-unfetch"
 import React from "react"
 
-const About = () => {
+const About = ({ about, info }) => {
     return (
-        <Layout>
+        <Layout info={info}>
             <div className="w-75 mx-auto">
                 <h1 className="text-center">About Track Town Pizza</h1>
                 <div className="text-center">
-                    <img src={aboutData.imgLink} className="w-75 img-fluid rounded" alt="Track Town Pizza" />
+                    <img src={about.imgLink} className="w-75 img-fluid rounded" alt="Track Town Pizza" />
                 </div>
                 <br/>
                 <div className="mx-auto">
-                    <p className="about-text">{aboutData.p1}</p>
-                    <p className="about-text">{aboutData.p2}</p>
-                    <p className="about-text">{aboutData.p3}</p>
-                    <p className="about-text">{aboutData.p4}</p>   
+                    <p className="about-text">{about.p1}</p>
+                    <p className="about-text">{about.p2}</p>
+                    <p className="about-text">{about.p3}</p>
+                    <p className="about-text">{about.p4}</p>   
                 </div>
                 <div className="text-center">
                     <h3>Check out the rest of Track Town USA</h3>
-                    <Link href={aboutData.pdfLink}>
-                        <a className="text-success"><h5>Track Town USA Map</h5></a>
-                    </Link>
+                    <a href={about.pdfLink} className="text-success"><h5>Track Town USA Map</h5></a>
                     <Link href="/blog">
                         <a className="text-success"><h5>Track Town Pizza Blog</h5></a>
                     </Link>
@@ -30,6 +28,16 @@ const About = () => {
             </div>
         </Layout>
     )
+}
+
+About.getInitialProps = async (req, res) => {
+    const resJson = await fetch(`${process.env.URL_ROOT}/api/about`).then(_ => _.json())
+    const info = await fetch(`${process.env.URL_ROOT}/api/info`).then(_ => _.json())
+
+    return {
+        about: resJson,
+        info: info
+    }
 }
 
 export default About
