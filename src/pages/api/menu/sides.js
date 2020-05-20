@@ -1,11 +1,12 @@
 import nextConnect from "next-connect"
+import cors from "cors"
 import middleware from "../../../utils/database"
 
 const handler = nextConnect()
 
 handler.use(middleware)
 
-handler.get(async (req, res) => {
+handler.get(cors, async (req, res) => {
 	// Find all documents in the sides collection
 	await req.db.collection("sides").find({}, (err, cursor) => {
 		if (!err && cursor) {
