@@ -1,12 +1,16 @@
 import nextConnect from "next-connect"
-import cors from "cors"
 import middleware from "../../../utils/database"
 
 const handler = nextConnect()
 
 handler.use(middleware)
 
-handler.get(cors, async (req, res) => {
+handler.get(async (req, res) => {
+	// Set CORS headers in advance
+	res.setHeader("Access-Control-Allow-Origin", "*")
+	res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With")
+	
 	// Find all documents in the sides collection
 	await req.db.collection("sides").find({}, (err, cursor) => {
 		if (!err && cursor) {
@@ -29,6 +33,11 @@ handler.get(cors, async (req, res) => {
 
 handler.post(async (req, res) => {
 	const { sides } = req.body
+
+	// Set CORS headers in advance
+	res.setHeader("Access-Control-Allow-Origin", "*")
+	res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With")
 
 	for (let side of sides) {
 		// Remove _id attributes to prevent attempts to update them in DB

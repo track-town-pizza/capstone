@@ -9,6 +9,11 @@ handler.use(middleware)
 handler.get(async (req, res) => {
 	const { id } = req.query
 
+	// Set CORS headers in advance
+	res.setHeader("Access-Control-Allow-Origin", "*")
+	res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With")
+
 	if (ObjectId.isValid(id)) {
 		let doc = await req.db.collection("posts").findOne({ _id: ObjectId(id) })
 		res.json(doc)
@@ -21,6 +26,11 @@ handler.get(async (req, res) => {
 
 handler.post(async (req, res) => {
 	const { post } = req.body
+
+	// Set CORS headers in advance
+	res.setHeader("Access-Control-Allow-Origin", "*")
+	res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With")
 
 	try {
 		const res = await req.db.collection("posts").insertOne(post).then(_ => _.json())
@@ -36,6 +46,11 @@ handler.post(async (req, res) => {
 
 handler.put(async (req, res) => {
 	const { post } = req.body
+
+	// Set CORS headers in advance
+	res.setHeader("Access-Control-Allow-Origin", "*")
+	res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With")
 
 	// Remove _id attribute to prevent attempts to update it in DB
 	delete post["_id"]

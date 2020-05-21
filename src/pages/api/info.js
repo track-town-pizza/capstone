@@ -16,6 +16,11 @@ handler.get(async (req, res) => {
 handler.post(async (req, res) => {
 	const { info } = req.body
 
+	// Set CORS headers in advance
+	res.setHeader("Access-Control-Allow-Origin", "*")
+	res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With")
+
 	// Remove _id attribute to prevent attempts to update it in DB
 	delete info["_id"]
 	
@@ -25,9 +30,6 @@ handler.post(async (req, res) => {
 			{ $set: info },
 			{ upsert: true }		// PUTs if document found, POSTs otherwise
 		)
-		res.setHeader('Access-Control-Allow-Origin', '*');
-		res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-		res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 		res.status(200).json({ message: "OK" })
 	} catch (err) {
 		// Return error with 500 status code if update fails
