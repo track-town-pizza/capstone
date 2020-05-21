@@ -88,7 +88,7 @@ const Index = ({ info, events, post }) => {
 			</div>
 			<div className="blog-container home-font">
 				<div className="blog-left-column blog-title">
-					<Link href={`/blog/post/${post.id}`}>
+					<Link href={`/blog/${post._id}`}>
 						<h3>{post.title}</h3>
 					</Link>
 					<small>{format(new Date(post.date), "MM/dd/yyyy")}</small>
