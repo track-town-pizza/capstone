@@ -96,7 +96,6 @@ const NavBar = ({ info }) => {
 				.navbar-hamburger {
 					font-size: 1em;
 					color: #ffec65;
-					transform-origin: 0 0;
 				}
 
 				#navbar-content {
@@ -130,6 +129,8 @@ const NavBar = ({ info }) => {
 				@media (max-width: 600px) {
 					.navbar-toggler {
 						margin-right: 10%;
+						height: 50px;
+						margin-top: -12px;
 					}
 					#navbar-image {
 						width: 200px;
@@ -137,6 +138,9 @@ const NavBar = ({ info }) => {
 					#navbar-content {
 						font-size: 1.5em;
 						width: 40%;
+					}
+					.navbar-hamburger {
+						font-size: 1.5em;
 					}
 				}
 
