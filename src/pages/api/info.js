@@ -7,11 +7,19 @@ handler.use(middleware)
 
 handler.get(async (req, res) => {
 	const info = await req.db.collection("info").findOne({ "key": "info" })
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+	res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 	res.json(info)
 })
 
 handler.post(async (req, res) => {
 	const { info } = req.body
+
+	// Set CORS headers in advance
+	res.setHeader("Access-Control-Allow-Origin", "*")
+	res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With")
 
 	// Remove _id attribute to prevent attempts to update it in DB
 	delete info["_id"]
