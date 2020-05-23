@@ -11,7 +11,7 @@ const EndPizzaBuilderSection = (props) => {
                 <div>
                     <p className="mb-0 d-inline">Call <PhoneNumber phoneNumber={props.phoneNumber} linkColor="green"/> or </p>
                     <Link href={props.onlineOrderingLink} className="d-inline">
-                        <a className="text-success">Order Online</a>
+                        <a target="_blank" className="text-success">Order Online</a>
                     </Link>
                 </div>
             </div>
@@ -23,7 +23,7 @@ const EndPizzaBuilderSection = (props) => {
             <div className="text-center mr-3 ml-3">
                 <p className="d-inline">To see specific prices, check out our paper </p>
                 <Link href={props.menuLink} className="d-inline">
-                    <a className="text-success">menu</a>
+                    <a target="_blank" className="text-success">menu</a>
                 </Link>
             </div>
         </div>

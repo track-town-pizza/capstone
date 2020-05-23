@@ -49,7 +49,7 @@ const Index = ({ info, events, post }) => {
 							<br />
 							<span className="responsive-phone"><PhoneNumber phoneNumber={info.phone} linkColor="white"/></span>
 						</p>
-						<a href={info.onlineOrderLink} className="btn btn-yellow btn-responsive">Order Online!</a>
+						<a href={info.onlineOrderLink} target="_blank" className="btn btn-yellow btn-responsive">Order Online!</a>
 					</div>
 				</div>
 			</div>
