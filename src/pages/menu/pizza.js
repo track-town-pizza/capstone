@@ -74,12 +74,6 @@ const Pizzas = ({ pizzasInfo, prices, info }) => {
             <div className="pizzas-container">
                 {MenuItemsComponents}
             </div>
-            <div className="text-center overflow-hidden">
-                <h4 className="d-inline">To see specific prices, check out our paper </h4>
-                <Link href={prices.Menu_Link}>
-                    <a target="_blank" className="text-success"><h4 className="menu-cursor d-inline">menu</h4></a>
-                </Link>
-            </div>
 
             <style jsx>{`
                 .pizzas-container {
