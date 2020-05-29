@@ -14,7 +14,7 @@ const NavBar = ({ info }) => {
 					</a>
 				</Link>
 				<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-expanded="false" aria-label="Toggle navigation">
-						&#9776;
+					<span className="navbar-hamburger">&#9776;</span>
 				</button>
 			</div>
 
@@ -62,7 +62,6 @@ const NavBar = ({ info }) => {
 					font-family: 'Oswald', sans-serif;
 					font-size: 20px;
 					margin-right: 20px;
-					//color: #ffec65;
 					max-width: 265px;
 				}
 
@@ -90,10 +89,13 @@ const NavBar = ({ info }) => {
 					right: 0;
 					float: right;
 					position: absolute;
-					background-color: red;
 					background-color: #005530;
-					font-size: 1em;
 					margin-right: 2.5%;
+				}
+
+				.navbar-hamburger {
+					font-size: 1em;
+					color: #ffec65;
 				}
 
 				#navbar-content {
@@ -127,6 +129,8 @@ const NavBar = ({ info }) => {
 				@media (max-width: 600px) {
 					.navbar-toggler {
 						margin-right: 10%;
+						height: 50px;
+						margin-top: -12px;
 					}
 					#navbar-image {
 						width: 200px;
@@ -134,6 +138,9 @@ const NavBar = ({ info }) => {
 					#navbar-content {
 						font-size: 1.5em;
 						width: 40%;
+					}
+					.navbar-hamburger {
+						font-size: 1.5em;
 					}
 				}
 

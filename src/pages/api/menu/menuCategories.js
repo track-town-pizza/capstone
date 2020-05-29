@@ -6,6 +6,11 @@ const handler = nextConnect()
 handler.use(middleware)
 
 handler.get(async (req, res) => {
+	// Set CORS headers in advance
+	res.setHeader("Access-Control-Allow-Origin", "*")
+	res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With")
+
 	// Find all documents in the menu categories collection
 	await req.db.collection("menuCategories").find({}, (err, cursor) => {
 		if (!err && cursor) {

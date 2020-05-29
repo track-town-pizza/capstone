@@ -6,6 +6,11 @@ const handler = nextConnect()
 handler.use(middleware)
 
 handler.get(async (req, res) => {
+	// Set CORS headers in advance
+	res.setHeader("Access-Control-Allow-Origin", "*")
+	res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With")
+	
 	// Find all documents in the pizzas collection
 	await req.db.collection("pizzas").find({}, (err, cursor) => {
 		if (!err && cursor) {
@@ -28,6 +33,11 @@ handler.get(async (req, res) => {
 
 handler.post(async (req, res) => {
 	const { pizzas } = req.body
+
+	// Set CORS headers in advance
+	res.setHeader("Access-Control-Allow-Origin", "*")
+	res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With")
 
 	for (let pizza of pizzas) {
 		// Remove _id attributes to prevent attempts to update them in DB

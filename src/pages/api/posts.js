@@ -7,6 +7,11 @@ const handler = nextConnect()
 handler.use(middleware)
 
 handler.get(async (req, res) => {
+	// Set CORS headers in advance
+	res.setHeader("Access-Control-Allow-Origin", "*")
+	res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With")
+
 	// Find all documents in the blog posts collection
 	await req.db.collection("posts").find({}, (err, cursor) => {
 		if (!err && cursor) {
@@ -30,6 +35,11 @@ handler.get(async (req, res) => {
 handler.post(async (req, res) => {
 	const { post } = req.body
 
+	// Set CORS headers in advance
+	res.setHeader("Access-Control-Allow-Origin", "*")
+	res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With")
+
 	try {
 		let doc = await req.db.collection("posts").insertOne(post)
 		res.status(201).json({
@@ -45,6 +55,11 @@ handler.post(async (req, res) => {
 handler.delete(async (req, res) => {
 	const { postId } = req.body
 	
+	// Set CORS headers in advance
+	res.setHeader("Access-Control-Allow-Origin", "*")
+	res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With")
+
 	try {
 		await req.db.collection("posts").deleteOne({ _id: ObjectId(postId) })
 		res.status(200).json({ message: "OK" })
