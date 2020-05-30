@@ -27,11 +27,26 @@ function parseTime(time) {
 	return format(date, "h:mm a")
 }
 
+function setBlogLength(origContent) {
+	let spaces = 0
+	let iter = 0
+	let content = ""
+	while(spaces < 150 && origContent[iter] !== undefined) {
+		if(origContent[iter] === " ") {
+			spaces++
+		}
+		content = content.concat(origContent[iter])
+		iter++
+	}
+	return content
+}
+
 const Index = ({ info, events, post }) => {
 	const openHourSunThur = parseTime(info.openHourSunThur)
 	const closeHourSunThur = parseTime(info.closeHourSunThur)
 	const openHourFriSat = parseTime(info.openHourFriSat)
 	const closeHourFriSat = parseTime(info.closeHourFriSat)
+	const blogContent = setBlogLength(post.content)
 
 	return (
 		<Layout info={info}>
@@ -96,7 +111,10 @@ const Index = ({ info, events, post }) => {
 					<img src={post.imageLink} alt="" />
 				</div>
 				<div className="blog-right-column">
-					<p>{post.content}</p>
+					<p>{blogContent}</p>
+					<Link href="/blog" className="float-right">
+						<button type="button" className="btn btn-light">Read More</button>
+					</Link>
 				</div>
 			</div>
 			<style jsx>{`
@@ -345,7 +363,6 @@ const Index = ({ info, events, post }) => {
 				.blog-right-column {
 					width: 60%;
 					padding: 20px;
-					display: flex;
 					align-items: center;
 				}
 
