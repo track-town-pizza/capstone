@@ -5,7 +5,7 @@ const MenuItem = props => {
     if(props.page === "sides") {
         return (
             <div className="item">
-                <img src={props.itemInfo.imgLink} alt="Track Town Pizza"/>
+                <img src={props.itemInfo.imgLink} alt={props.itemInfo.altText}/>
                 <ItemInfo itemInformation={props.itemInfo.information} page={props.page} onClick={props.onClick}/>
                 <style jsx>{`
                         .item {
@@ -31,7 +31,7 @@ const MenuItem = props => {
     }
     return (
         <div className="item">
-            <img src={props.itemInfo.imgLink} alt="Track Town Pizza"/>
+            <img src={props.itemInfo.imgLink} alt={props.itemInfo.altText}/>
             <ItemInfo itemInformation={props.itemInfo.information} page={props.page} onClick={props.onClick}/>
             <style jsx>{`
                     .item {
