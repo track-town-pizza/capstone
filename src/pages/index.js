@@ -79,12 +79,12 @@ const Index = ({ info, events, post }) => {
 					<h3>We're open all week! Come visit us:</h3>
 					<br />
 					<div className="hours-container">
-						<h4>Sun - Thur</h4>
+						<h4>Sunday - Thursday</h4>
 						<h4 className="no-margin-top">{openHourSunThur} - {closeHourSunThur}</h4>
 					</div>
 					<br />
 					<div className="hours-container">
-						<h4>Fri - Sat</h4>
+						<h4>Friday - Saturday</h4>
 						<h4 className="no-margin-top">{openHourFriSat} - {closeHourFriSat}</h4>
 					</div>
 				</div>
@@ -113,7 +113,7 @@ const Index = ({ info, events, post }) => {
 				<div className="blog-right-column">
 					<p>{blogContent}</p>
 					<Link href="/blog" className="float-right">
-						<button type="button" className="btn btn-light">Read More</button>
+						<button type="button" className="btn btn-light">Read More on the Blog</button>
 					</Link>
 				</div>
 			</div>
