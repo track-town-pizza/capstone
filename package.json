@@ -10,6 +10,7 @@
     "cors": "^2.8.5",
     "date-fns": "^2.10.0",
     "dotenv-load": "^2.0.0",
+    "focus-trap-react": "^8.5.0",
     "google-map-react": "^1.1.5",
     "isomorphic-unfetch": "^3.0.0",
     "mongodb": "^3.5.5",
