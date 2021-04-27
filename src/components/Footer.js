@@ -23,11 +23,11 @@ const Footer = () => (
                 <a className="text-white mr-3 my-2">About</a>
             </Link>
 
-            <a href="https://www.facebook.com/TrackTownPizza/" target="_blank" className="text-white mr-3 my-2">
+            <a href="https://www.facebook.com/TrackTownPizza/" aria-label="Track Town Pizza Facebook (opens a new window)" target="_blank" className="text-white mr-3 my-2">
                 <i className="fab fa-facebook-square"></i>
             </a>
 
-            <a href="https://www.instagram.com/tracktownpizza/" target="_blank" className="text-white mr-3 my-2">
+            <a href="https://www.instagram.com/tracktownpizza/" aria-label="Track Town Pizza Instagram (opens a new window)" target="_blank" className="text-white mr-3 my-2">
                 <i className="fab fa-instagram"></i>
             </a>
 
