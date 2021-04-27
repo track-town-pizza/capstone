@@ -115,6 +115,7 @@ const Blog = ({ posts, page, numPages, info }) => {
 
 	return (
 		<Layout info={info}>
+			<h1 className="text-center">Track Town Pizza Blog</h1>
 			<div className="blog-container">
 				{posts.map(post => (
 					<SinglePost post={post} key={post._id} />

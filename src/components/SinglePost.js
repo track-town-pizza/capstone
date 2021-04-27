@@ -8,24 +8,24 @@ const SinglePost = ({ post }) => {
         <div className="SinglePost">
             <div key={post.id}>
                 <div className="d-flex justify-content-between align-items-center" id="blog-header">
-                    <h3>
+                    <h2>
                         <Link href="/blog/[id]" as={`/blog/${post._id}`}>
                             <a className="text-success">{post.title}</a>
                         </Link>
-                    </h3>
-                    <h4>{formattedDate}</h4>
+                    </h2>
+                    <h3>{formattedDate}</h3>
                 </div>
                 <img src={post.imageLink} className="mw-100" />
                 <p>{post.content}</p>
             </div>
 
             <style jsx>{`
-                h3 {
+                h2 {
                     display: inline-block;
                     float: left;
                 }
 
-                h4 {
+                h3 {
                     display: block;
                     float: right;
                     font-size: 1em;
