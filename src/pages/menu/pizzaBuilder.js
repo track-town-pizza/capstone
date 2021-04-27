@@ -286,7 +286,6 @@ const PizzaBuilder = ({ phone, onlineOrderLink, sizes, crusts, cheeses, sauces, 
                                 ...pizza,
                                 displayModal: true
                             })
-                            // alert("Gluten free crust is only available in size small")
                         }
                         else {
                             setPizza({
