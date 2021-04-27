@@ -63,23 +63,28 @@ function getPriceOfPizza(size, halfNHalf, firstHalf, secondHalf, totalPrice, cur
 // pSize is a string of the pizza size
 function buildCrustString(pCrust, pThinCrust, pSize) {
     let crust = null
-    if(pCrust === "Gluten Free" && pSize !== "Small") {
-        return null
+    if(pCrust === "Gluten Free"){
+        if(pSize === "Small") {
+            crust = "Gluten Free Crust"
+        }
     }
-    if(pCrust === "Cauliflower" && pSize !== "Small") {
-        return null
+    else if(pCrust === "Cauliflower"){
+        if(pSize === "Small") {
+            crust = "Cauliflower Crust"
+        }
     }
-    if(pCrust !== "White" && pCrust !== null) {
+    else if(pCrust === "Wheat") {
         if(pThinCrust) {
-             crust = pCrust + " Thin Crust"
+             crust = "Wheat Thin Crust"
         }
         else {
-            crust = pCrust + " Crust"
+            crust = "Wheat Crust"
         }
     }
-    // if it is white crust, it is not specified since that is default
-    else if(pCrust === "White" && pThinCrust) {
-        crust = "Thin Crust"
+    else if(pCrust === "White") {
+        if(pThinCrust) {
+             crust = "Thin Crust"
+        }
     }
 
     return crust
