@@ -9,7 +9,7 @@ const About = ({ about, info }) => {
             <div className="w-75 mx-auto">
                 <h1 className="text-center">About Track Town Pizza</h1>
                 <div className="text-center">
-                    <img src={about.imgLink} className="w-75 img-fluid rounded" alt="Track Town Pizza" />
+                    <img src={about.imgLink} className="w-75 img-fluid rounded" alt="Track Town Pizza restaurant front sign" />
                 </div>
                 <br/>
                 <div className="mx-auto">
@@ -20,7 +20,7 @@ const About = ({ about, info }) => {
                 </div>
                 <div className="text-center">
                     <h3>Check out the rest of Track Town USA</h3>
-                    <a href={about.pdfLink} target="_blank" className="text-success"><h5>Track Town USA Map</h5></a>
+                    <a href={about.pdfLink} target="_blank" className="text-success" aria-label="Map of Track Town USA (opens a new window)"><h5>Track Town USA Map</h5></a>
                     <Link href="/blog">
                         <a className="text-success"><h5>Track Town Pizza Blog</h5></a>
                     </Link>
