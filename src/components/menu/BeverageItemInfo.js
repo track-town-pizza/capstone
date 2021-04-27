@@ -4,7 +4,7 @@ function ItemPriceDescription (description, price) {
     if(price === "none") {
         return (
             <div className="item-price-description">
-                <p className="item-description">{description}:</p>
+                <h3 className="item-description">{description}:</h3>
                 <style jsx>{`
                     .item-price-description {
                         overflow: auto;
@@ -14,6 +14,8 @@ function ItemPriceDescription (description, price) {
                         margin-bottom: .5rem;
                         margin-left: .5rem;
                         margin-top: .5rem;
+                        font-size: 18px;
+                        font-weight: bold;
                     }
                 `}</style>
             </div>
