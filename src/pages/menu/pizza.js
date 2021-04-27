@@ -63,13 +63,13 @@ const Pizzas = ({ pizzasInfo, prices, info }) => {
             <div className="text-center">
                 <h1 className="text-center mb-4">Track Town Pizzas</h1>
                     <Link href="./pizzaBuilder">
-                        <div className="build-pizza-link">
-                            <a>
-                                <h4 className="text-center mt-2 mb-2">Build Your Own</h4>
-                            </a>
-                        </div>
+                        <a>
+                            <div className="build-pizza-link">
+                                <p className="text-center h4 mt-2 mb-2">Build Your Own</p>
+                            </div>
+                        </a>
                     </Link>
-                <h3 className="text-center mb-4 mr-2 ml-2">Or Check Out Our Delicious Menu Pizzas</h3>
+                <h2 className="text-center mb-4 mr-2 ml-2">Or Check Out Our Delicious Menu Pizzas</h2>
             </div>
             <div className="pizzas-container">
                 {MenuItemsComponents}
