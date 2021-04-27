@@ -470,7 +470,7 @@ const PizzaBuilder = ({ phone, onlineOrderLink, sizes, crusts, cheeses, sauces, 
     }
     return (
         <Layout info={{ phone }}>
-            {pizza.displayModal ? <Modal message="Gluten Free and Cauliflower crust is only available in size small" onClick={handleClick} /> : null }
+            {pizza.displayModal ? <Modal message="Gluten Free and Cauliflower crust are only available in size small" onClick={handleClick} /> : null }
             <h1 className="text-center mb-3">Pizza Builder</h1>
             <NotOnlineOrdering phoneNumber={phone} onlineOrderingLink={onlineOrderLink} />
             <FirstHalfOptions sizes={sizes} handleClick={handleClick} clickedSize={pizza.size} second="" 

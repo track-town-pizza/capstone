@@ -7,7 +7,7 @@ const PizzaCustomOpts  = (props) => {
     let foodButtonComponents = null
     let title = null
     let checkboxComponents = null
-    const glutenFreeWarning = "Gluten Free and Cauliflower crust is only available in small and is not available as thin crust"
+    const glutenFreeWarning = "Gluten Free and Cauliflower crust are only available in small and are not available as thin crust"
     if (props.sizes) {
         title = "Size"
         foodButtonComponents = props.sizes.map(size =>
