@@ -7,7 +7,7 @@ const PizzaCustomOpts  = (props) => {
     let foodButtonComponents = null
     let title = null
     let checkboxComponents = null
-    const glutenFreeWarning = "Gluten free crust is only available in small and is not available as thin crust"
+    const glutenFreeWarning = "Gluten Free and Cauliflower crust is only available in small and is not available as thin crust"
     if (props.sizes) {
         title = "Size"
         foodButtonComponents = props.sizes.map(size =>
@@ -25,6 +25,15 @@ const PizzaCustomOpts  = (props) => {
                 return <GreenFoodButton buttonWord={crust} key={crust} handleClick={props.handleClick} color="#007030" second={props.second}/>
             }
             else if(crust === "Gluten Free" && props.size !== "Small") {
+                return <GreenFoodButton buttonWord={crust} key={crust} handleClick={props.handleClick} color="rgba(0, 112, 48, 0.53)" second={props.second}/>
+            }
+            else if(crust === "Cauliflower" && props.size === "Small" && crust === props.clicked) {
+                return <GreenFoodButton buttonWord={crust} key={crust} handleClick={props.handleClick} color="#01471f" boxShadow="5px 5px 5px rgba(0, 0, 0, .5)" second={props.second}/>
+            }
+            else if(crust === "Cauliflower" && props.size === "Small") {
+                return <GreenFoodButton buttonWord={crust} key={crust} handleClick={props.handleClick} color="#007030" second={props.second}/>
+            }
+            else if(crust === "Cauliflower" && props.size !== "Small") {
                 return <GreenFoodButton buttonWord={crust} key={crust} handleClick={props.handleClick} color="rgba(0, 112, 48, 0.53)" second={props.second}/>
             }
             else if(crust === props.clicked) {

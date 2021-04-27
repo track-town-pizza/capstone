@@ -66,6 +66,9 @@ function buildCrustString(pCrust, pThinCrust, pSize) {
     if(pCrust === "Gluten Free" && pSize !== "Small") {
         return null
     }
+    if(pCrust === "Cauliflower" && pSize !== "Small") {
+        return null
+    }
     if(pCrust !== "White" && pCrust !== null) {
         if(pThinCrust) {
              crust = pCrust + " Thin Crust"
@@ -278,7 +281,7 @@ const PizzaBuilder = ({ phone, onlineOrderLink, sizes, crusts, cheeses, sauces, 
                 }
                 for(let crust of crusts){
                     if(name === crust){
-                        if (name === "Gluten Free" && pizza.size !== "Small") {
+                        if ((name === "Gluten Free" && pizza.size !== "Small") || (name === "Cauliflower" && pizza.size !== "Small")) {
                             setPizza({
                                 ...pizza,
                                 displayModal: true
@@ -463,7 +466,7 @@ const PizzaBuilder = ({ phone, onlineOrderLink, sizes, crusts, cheeses, sauces, 
     }
     return (
         <Layout info={{ phone }}>
-            {pizza.displayModal ? <Modal message="Gluten free crust is only available in size small" onClick={handleClick} /> : null }
+            {pizza.displayModal ? <Modal message="Gluten Free and Cauliflower crust is only available in size small" onClick={handleClick} /> : null }
             <h1 className="text-center mb-3">Pizza Builder</h1>
             <NotOnlineOrdering phoneNumber={phone} onlineOrderingLink={onlineOrderLink} />
             <FirstHalfOptions sizes={sizes} handleClick={handleClick} clickedSize={pizza.size} second="" 
