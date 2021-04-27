@@ -4,14 +4,14 @@ import Link from "next/link"
 const MenuCategory = props => (
     <div className="outer-menu-element">
         <Link href={props.menuInfo.linkToPage}>
-            <div className="menu-item">
-                <a>
+            <a>
+                <div className="menu-item">
                     <img src={props.menuInfo.imgLink} alt="Track Town Pizza" />
                     <div className="green-box">
                         <p className="menu-text p-2 m-0 text-center">{props.menuInfo.item}</p>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
         </Link>
         <style jsx>{`
             .outer-menu-element {
