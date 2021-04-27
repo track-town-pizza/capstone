@@ -44,7 +44,7 @@ const PizzaCustomOpts  = (props) => {
             }
         })
         if (props.clicked === "White" || props.clicked === "Wheat") {
-            checkboxComponents = <OptionsCheckbox name="thinCrust" shownWords="Thin Crust" onChange={props.onChange} checked={props.thinCrust} second={props.second} />
+            checkboxComponents = <OptionsCheckbox name="thinCrust" shownWords="Thin Crust" onChange={props.onChange} checked={props.thinCrust} second={props.second} alt={"Thin Crust"}/>
         }
     }
     else if (props.cheeses) {
@@ -54,7 +54,7 @@ const PizzaCustomOpts  = (props) => {
                                     : <YellowFoodButton buttonWord={cheese} key={cheese} handleClick={props.handleClick} color="#FFEC65" second={props.second}/>
         )
         if (props.clicked !== "No Cheese") {
-            checkboxComponents = <OptionsCheckbox name="extraCheese" shownWords = "Extra Cheese" onChange={props.onChange} checked={props.extraCheese} second={props.second}/>
+            checkboxComponents = <OptionsCheckbox name="extraCheese" shownWords = "Extra Cheese" onChange={props.onChange} checked={props.extraCheese} second={props.second} alt="Extra Cheese" />
         }
     }
     else if (props.sauces) {
@@ -64,8 +64,8 @@ const PizzaCustomOpts  = (props) => {
                                     : <GreenFoodButton buttonWord={sauce} key={sauce} handleClick={props.handleClick} color="#007030" second={props.second}/>
         )
         if (props.clicked !== "No Sauce") {
-            checkboxComponents = [<OptionsCheckbox name="lightSauce" shownWords = "Light Sauce" onChange={props.onChange} checked={props.lightSauce}  second={props.second}/>, 
-                                  <OptionsCheckbox name="extraSauce" shownWords = "Extra Sauce" onChange={props.onChange} checked={props.extraSauce}  second={props.second} />]
+            checkboxComponents = [<OptionsCheckbox name="lightSauce" shownWords = "Light Sauce" onChange={props.onChange} checked={props.lightSauce} second={props.second} alt="Light Sauce" />, 
+                                  <OptionsCheckbox name="extraSauce" shownWords = "Extra Sauce" onChange={props.onChange} checked={props.extraSauce} second={props.second} alt="Extra Sauce" />]
         }
     }
     return (

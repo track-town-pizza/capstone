@@ -9,6 +9,7 @@ const OptionsCheckbox = (props) => {
                 className="checkbox"
                 onChange={props.onChange}
                 checked={props.checked}
+                aria-label={props.alt}
             />{props.shownWords}
             <style jsx>{`
                 label {
