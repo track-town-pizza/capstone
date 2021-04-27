@@ -15,14 +15,34 @@ const Layout = props => (
 		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossOrigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossOrigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossOrigin="anonymous"></script>
+		<title>Track Town Pizza</title>
 
-		<NavBar info={props.info} />
-		<main className="main mx-auto overflow-auto">
+		<header>
+			<a className="skip-link" href="#main">Skip to main content</a>
+			<NavBar info={props.info} />
+		</header>
+
+		<main className="main mx-auto overflow-auto" id="main" tabIndex="-1">
 			{props.children}
 		</main>
 		<Footer />
 
 		<style jsx>{`
+			.skip-link {
+				background: #ffec65;
+				color: #000;
+				font-weight: 500;
+				padding: 4px;
+				position: absolute;
+				transform: translateY(-100%);
+				transition: transform 0.3s;
+			}
+
+			.skip-link:focus {
+				left: 10px;
+				transform: translateY(220%);
+			}
+
 			.main {
 				width: 75%;
 				margin-top: 80px;
