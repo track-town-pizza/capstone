@@ -142,7 +142,7 @@ const Index = ({ info, events, post }) => {
 					height: 100%;
 					border-top-left-radius: 2%;
 					border-bottom-left-radius: 2%;
-					background-color: rgba(0, 112, 48, 0.6);
+					background-color: rgba(0, 112, 48, 0.8);
 				}
 
 				@media only screen and (max-width: 900px) {
