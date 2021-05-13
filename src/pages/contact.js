@@ -22,11 +22,11 @@ const Contact = ({ info }) => {
 			</div>
 			<div className="info-box mx-auto">
 				<div className="location">
-					<h2>Location</h2>
+					<h2 className="h3">Location</h2>
 					<p>{info.address}</p>
 				</div>
 				<div className="phone">
-					<h2>Phone</h2>
+					<h2 className="h3">Phone</h2>
 					<p><PhoneNumber phoneNumber={info.phone} linkColor="black"/></p>
 				</div>
 			</div>
