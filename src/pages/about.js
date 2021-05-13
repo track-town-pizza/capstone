@@ -19,10 +19,10 @@ const About = ({ about, info }) => {
                     <p className="about-text">{about.p4}</p>   
                 </div>
                 <div className="text-center">
-                    <h3>Check out the rest of Track Town USA</h3>
-                    <a href={about.pdfLink} target="_blank" className="text-success" aria-label="Map of Track Town USA (opens a new window)"><h5>Track Town USA Map</h5></a>
+                    <h2 className="h3">Check out the rest of Track Town USA</h2>
+                    <a href={about.pdfLink} target="_blank" className="text-success" aria-label="Map of Track Town USA (opens a new window)"><p className="h5">Track Town USA Map</p></a>
                     <Link href="/blog">
-                        <a className="text-success"><h5>Track Town Pizza Blog</h5></a>
+                        <a className="text-success"><p className="h5">Track Town Pizza Blog</p></a>
                     </Link>
                 </div>
             </div>
