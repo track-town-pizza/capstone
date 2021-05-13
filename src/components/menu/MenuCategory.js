@@ -6,7 +6,7 @@ const MenuCategory = props => (
         <Link href={props.menuInfo.linkToPage}>
             <a>
                 <div className="menu-item">
-                    <img src={props.menuInfo.imgLink} alt="Track Town Pizza" />
+                    <img src={props.menuInfo.imgLink} aria-hidden="true" alt={props.menuInfo.altText} />
                     <div className="green-box">
                         <p className="menu-text p-2 m-0 text-center">{props.menuInfo.item}</p>
                     </div>
