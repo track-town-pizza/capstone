@@ -64,7 +64,7 @@ const Index = ({ info, events, post }) => {
 							<br />
 							<span className="responsive-phone"><PhoneNumber phoneNumber={info.phone} linkColor="white"/></span>
 						</p>
-						<a href={info.onlineOrderLink} target="_blank" className="btn btn-yellow btn-responsive">Order Online!</a>
+						<a href={info.onlineOrderLink} target="_blank" aria-label="Order Online (opens a new window)" className="btn btn-yellow btn-responsive">Order Online!</a>
 					</div>
 				</div>
 			</div>
@@ -113,7 +113,9 @@ const Index = ({ info, events, post }) => {
 				<div className="blog-right-column">
 					<p>{blogContent}</p>
 					<Link href="/blog" className="float-right">
-						<button type="button" className="btn btn-light">Read More on the Blog</button>
+						<a>
+							<div className="btn btn-light">Read More on the Blog</div>
+						</a>
 					</Link>
 				</div>
 			</div>
