@@ -70,26 +70,26 @@ const Index = ({ info, events, post }) => {
 			</div>
 			<div className="info-containers home-font">
 				<div className="yellow-container extra-padding location-container">
-					<h4>Located at {info.address}</h4>
+					<h2 className="h4">Located at {info.address}</h2>
 					<span className="responsive-break"><br /></span>
-					<h4>Across from Matthew Knight Arena</h4>
+					<p className="h4">Across from Matthew Knight Arena</p>
 					<img src="https://drive.google.com/uc?id=1WqcZOcLvjuxH117FO0emq7Mg7viWCW65" alt="Matthew Knight Arena Front" className="rounded"/>
 				</div>
 				<div className="yellow-container extra-padding">
-					<h3>We're open all week! Come visit us:</h3>
+					<h2 className="h3">We're open all week! Come visit us:</h2>
 					<br />
 					<div className="hours-container">
-						<h4>Sunday - Thursday</h4>
-						<h4 className="no-margin-top">{openHourSunThur} - {closeHourSunThur}</h4>
+						<p className="h4">Sunday - Thursday</p>
+						<p className="no-margin-top h4">{openHourSunThur} - {closeHourSunThur}</p>
 					</div>
 					<br />
 					<div className="hours-container">
-						<h4>Friday - Saturday</h4>
-						<h4 className="no-margin-top">{openHourFriSat} - {closeHourFriSat}</h4>
+						<p className="h4">Friday - Saturday</p>
+						<p className="no-margin-top h4">{openHourFriSat} - {closeHourFriSat}</p>
 					</div>
 				</div>
 				<div className="yellow-container events-size">
-					<h3>Events</h3>
+					<h2 className="h3">Events</h2>
 					<div className="table-responsive-sm mx-auto table-width">
 						<table className="table-sm table-font w-100">
 							<tbody>
@@ -104,7 +104,7 @@ const Index = ({ info, events, post }) => {
 			<div className="blog-container home-font">
 				<div className="blog-left-column blog-title">
 					<Link href={`/blog/${post._id}`}>
-						<h3>{post.title}</h3>
+						<h2 className="h3">{post.title}</h2>
 					</Link>
 					<small>{format(new Date(post.date), "MM/dd/yyyy")}</small>
 					<br />
