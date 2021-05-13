@@ -13,7 +13,7 @@ const SinglePost = ({ post }) => {
                             <a className="text-success">{post.title}</a>
                         </Link>
                     </h2>
-                    <h3>{formattedDate}</h3>
+                    <p className="date">{formattedDate}</p>
                 </div>
                 <img src={post.imageLink} className="mw-100" />
                 <p>{post.content}</p>
@@ -25,7 +25,7 @@ const SinglePost = ({ post }) => {
                     float: left;
                 }
 
-                h3 {
+                .date {
                     display: block;
                     float: right;
                     font-size: 1em;
