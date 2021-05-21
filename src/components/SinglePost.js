@@ -15,7 +15,7 @@ const SinglePost = ({ post }) => {
                     </h2>
                     <p className="date">{formattedDate}</p>
                 </div>
-                <img src={post.imageLink} className="mw-100" />
+                <img src={post.imageLink} className="mw-100" aria-hidden="true"/>
                 <p>{post.content}</p>
             </div>
 
