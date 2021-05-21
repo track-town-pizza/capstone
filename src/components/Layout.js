@@ -18,7 +18,7 @@ const Layout = props => (
 		<title>Track Town Pizza</title>
 
 		<header>
-			<a className="skip-link" href="#main">Skip to main content</a>
+			<a className="skip-link" href="#main">Skip to Content</a>
 			<NavBar info={props.info} />
 		</header>
 
